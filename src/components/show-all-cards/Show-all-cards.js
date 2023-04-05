@@ -89,14 +89,16 @@ function ShowAllCards(props) {
     const stoatLines = ["Good Luck.", "Good Luck...", "This again?", 
     "Fingers crossed.", "Are you seriou-", "Wow... seriously?",
     "Again?", "Oh come on!"];
+    let stoatName = Math.floor(Math.random() * 4);
+
     const stinkBugLines = ["Salutations.", "Shall we?", "Masterful.",
     "Death take me!", "That stings!", "My flesh..."];
+    let stinkBugName = Math.floor(Math.random() * 3);
+
     const stuntedWolfLines = ["We meet again.", "Greetings.", "Hello again.",
     "Betrayal.", "Farewell.", "Ahem."];
-    let stoatName = Math.floor(Math.random() * 4);
-    let stinkBugName = Math.floor(Math.random() * 3);
     let stuntedWolfName = Math.floor(Math.random() * 3);
-
+    
     const updatedCards = cards.map((card) => {
         if (card.imageType === "STOAT") {
             stoatName = stoatLines[stoatName];
@@ -122,16 +124,16 @@ function ShowAllCards(props) {
         }
     })
     
-
-    useEffect(() => {
-        setTimeout(() => {
-            setCards(updatedCards);
-        }, 1000);
-    }, []);
-
+    
     const [showModal, setShowModal] = useState(false);
     const [cardIdToDelete, setCardIdToDelete] = useState(null);
 
+    useEffect(() => {
+            setTimeout(() => {
+                setCards(updatedCards);
+            }, 1000);
+        }, []);
+    
     function deleteCard(id) {
         const updatedCards = cards.filter((card) => card.id !== id);
         setCards(updatedCards);
@@ -142,7 +144,7 @@ function ShowAllCards(props) {
         setShowModal(true);
     }
     
-      function handleConfirmDelete() {
+    function handleConfirmDelete() {
         setShowModal(false);
         const updatedCards = cards.map((card) => {
             if (card.id === cardIdToDelete && card.imageType === "STOAT") {
@@ -167,16 +169,18 @@ function ShowAllCards(props) {
                     name: stuntedWolfName
                 };
             }
-        return card;
+            return {
+                ...card,
+            };
         });
+        
+        // let element = document.getElementById("cardNameSpecial");
+        // void element.classList.remove("cardNameSpecial");
+        // void element.offsetWidth; 
+        // void element.classList.add("cardNameSpecial");
         setTimeout(() => {
             deleteCard(cardIdToDelete);
         }, 500);
-    //         useEffect(() => {
-    //     setTimeout(() => {
-    //         setCards(updatedCards);
-    //     }, 1000);
-    // }, []);
         setCards(updatedCards);
         setCardIdToDelete(null)
     }
@@ -192,23 +196,19 @@ function ShowAllCards(props) {
         };
 
         function getCardName() {
-            if (card.imageType ===  "STOAT" && 
-                (stoatLines.some(function(e) {
+            if ((card.imageType ===  "STOAT" && 
+                (stoatLines.some((e) => {
                     return card.name === e
-                }))) {
-                return "stoat";
-            } else if (card.imageType ===  "STINKBUG" && 
-                (stinkBugLines.some(function(e) {
-                return card.name === e
-            }))) {
-                return "stinkBug";
-            } else if (card.imageType ===  "STUNTEDWOLF" && 
-                (stuntedWolfLines.some(function(e) {
-                return card.name === e
-            }))) {
-                return "stuntedWolf";
-            } else {
-                return card.name;
+                }))) || 
+                (card.imageType ===  "STINKBUG" && 
+                (stinkBugLines.some((e) => {
+                    return card.name === e
+                }))) || 
+                (card.imageType ===  "STUNTEDWOLF" && 
+                (stuntedWolfLines.some((e) => {
+                    return card.name === e
+                })))) {
+                return "cardNameSpecial";
             }
         }
 
@@ -218,7 +218,7 @@ function ShowAllCards(props) {
             <div className="card_edit_delete" key={id}>
                 <div className="card" style={cardStyle}>
                     <div className="header">
-                        <div id={cardName}>
+                        <div className="cardName" id={cardName}>
                             <h2 style={nameStyle}>{card.name}</h2>
                         </div>
                     </div>

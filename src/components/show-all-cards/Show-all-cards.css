@@ -45,7 +45,7 @@ h1 {
     align-items: center;
 }
 
-#stoat h2, #stinkBug h2, #stuntedWolf h2 {
+#cardNameSpecial h2 {
     overflow: hidden;
     white-space: nowrap;
     animation: typing 0.3s steps(10) forwards;

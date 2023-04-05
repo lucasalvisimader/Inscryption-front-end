@@ -1,39 +1,55 @@
-import {Button, Form} from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
+import { UserService } from '../../service';
+import { useState } from 'react';
 import "./User-register.css";
 
 function UserRegister() {
-    function validatePassword() {
-        if(document.getElementById("password").value !== document.getElementById("confirm_password").value) {
+    const [user, setUser] = useState({
+        "name": "",
+        "password": "",
+        "cards": []
+    });
+
+    
+    const updateUser = (event) => {
+        setUser({...user, [event.target.name] : event.target.value})
+    }
+    
+    const submitUser = (event) => {
+        let name = document.getElementById("name").value;
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirm_password").value;
+        if(password !== confirmPassword) {
             document.getElementById("confirm_password").setCustomValidity("Passwords don't match");
         } else {
             document.getElementById("confirm_password").setCustomValidity('');
+            event.preventDefault();
+            alert(name + "\n" + password)
+            console.log(user);
+            UserService.save(user);
         }
-        getRegistration();
-    }
-
-    function getRegistration(event) {
-        event.preventDefault();
-        alert("Email: " + document.getElementById("email").value + 
-        "\nPassword: " + document.getElementById("password").value)
     }
 
     return (
         <Form id="login">
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" required/>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword" min="8">
-            <Form.Label>Password</Form.Label>
-            <Form.Control id="password" type="password" placeholder="Password" minLength='8' required/>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control id="confirm_password" type="password" placeholder="Password" minLength='8' required/>
-        </Form.Group>
-        <Button id='user_register_button' variant="primary" type="submit" onClick={validatePassword}>
-            Submit
-        </Button>
+            <Form.Group className="mb-3">
+                <Form.Label>Name</Form.Label>
+                <Form.Control id="name" type="text" placeholder="Name" 
+                name='name' onChange={updateUser} value={user.name} required/>
+            </Form.Group>
+            <Form.Group className="mb-3" min="8">
+                <Form.Label>Password</Form.Label>
+                <Form.Control id="password" type="password" placeholder="Password" 
+                name='password' onChange={updateUser} value={user.password} minLength='8' required/>
+            </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control id="confirm_password" type="password" placeholder="Password" 
+                minLength='8' required/>
+            </Form.Group>
+            <Button id='user_register_button' variant="primary" type="submit" onClick={submitUser}>
+                Submit
+            </Button>
         </Form>
     );
 }
