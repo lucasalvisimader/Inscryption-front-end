@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Heavyweight Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Heavyweight Regular'), url('/public/fonts/HEAVYWEI.woff') format('woff');
+}
+
+* {
+    font-family: 'Heavyweight Regular';
+    font-size: 1.1rem;
+}
+

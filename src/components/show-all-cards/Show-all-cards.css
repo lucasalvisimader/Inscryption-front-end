@@ -1,0 +1,194 @@
+#page_cards {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+}
+
+.card {
+    background-size: cover;
+    height: 20rem;
+    width: 13rem;
+    border: none;
+    margin: 1rem;
+    color: black;
+}
+
+.header {
+    margin-top: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    margin: 1.2rem;
+    margin-top: 13rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+#power {
+    margin-top: 0rem;
+}
+
+#health {
+    margin-top: 2rem;
+}
+
+h1 {
+    font-size: 3.7rem;
+}
+
+.card_edit_delete {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+#stoat h2, #stinkBug h2, #stuntedWolf h2 {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 0.3s steps(10) forwards;
+    /* STOAT */
+    /* Good luck. */
+    /* Good Luck... */
+    /* This again? */
+    /* Fingers crossed. */
+
+    /* Lucky draw. */
+    /* Nice topdeck. */
+    /* Me again. */
+    /* Yep. */
+
+    /* Back on the board. */
+    /* Here we go. */
+    /* Me again. */
+    /* Keep me alive. */
+    /* Total misplay. */
+
+    /* Ow. */
+    /* Ouch. */
+    /* Enough. */
+    /* Ack. */
+
+    /* Are you seriou- */
+    /* Wow... seriously? */
+    /* Again? */
+    /* Oh come on! */
+
+    /* STINKBUG */
+    /* A lucky draw. */
+    /* Great draw.  */
+    /* Back in the game. */
+
+    /* Salutations. */
+    /* Masterful. */
+    /* Shall we? */
+
+    /* Cracking! */
+    /* Good play. */
+
+    /* Death take me! */
+    /* That stings! */
+    /* My flesh... */
+
+    /* STUNTED WOLF */
+    /* We meet again. */
+    /* Greetings. */
+    /* Hello again. */
+
+    /* Here we are. */
+    /* Are you sure? */
+    /* I must trust you. */
+    /* Use me wisely. */
+
+    /* Careful now. */
+    /* Oof. */
+    /* Good lord! */
+
+    /* Betrayal. */
+    /* Farewell. */
+    /* Ahem. */
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.edit_delete_card {
+    display: flex;
+    justify-content: space-around;
+    background-image: url('/public/images/others/navbar_background.png');
+    margin: 1rem;
+    margin-top: -1rem;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+button {
+    border: none;
+}
+
+#delete_button_card, #edit_button_card {
+    background-color: transparent !important;
+    color: #bb7c39;
+}
+
+#delete_button_card:hover, #edit_button_card:hover {
+    color: #a5a5a5;
+    transition: 0.3s;
+}
+
+#modal {
+    max-width: 600px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    padding: 1rem;
+    color: #bb7c39;
+    max-width: 20rem;
+    border: #bb7c39 2px solid;
+    background: url("/public/images/others/navbar_background.png");
+}
+
+.modal-content span, .modal-content b{
+    font-size: 1.2rem;
+}
+
+.modal-content button {
+    background-color: transparent;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.modal-content button:hover {
+    background-color: transparent;
+    color: #a5a5a5;
+    transition: 0.3s;
+}
+
+#content_editable_h1 {
+    font-size: 3.7rem;
+}
+
+#content_editable_h2 {
+    font-size: 2rem;
+}

@@ -1,0 +1,51 @@
+.title {
+    font-size: 1.5rem !important;
+    color: #e18234;
+    padding: 0.5rem;
+    cursor: context-menu;
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.login {
+    font-size: 1.5rem !important;
+    color: #bb7c39 !important;
+}
+
+.dropdown button, a.nav-link {
+    font-size: 1.5rem !important;
+    background-color: transparent !important;
+    border: none !important;
+    color: white;
+}
+
+.dropdown button:hover, a.nav-link:hover {
+    color: rgb(165, 165, 165) !important;
+    background-color: transparent !important;
+}
+
+.dropdown button:focus {
+    color: rgb(165, 165, 165);
+    background-color: transparent !important;
+}
+
+#nav {
+    background: url(/public/images/others/navbar_background.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    min-width: 40rem;
+}
+
+/* #nav:after {
+    content: '';
+    background: linear-gradient(transparent 0%, black 100%)
+} */
+
+.dropdown button, a.nav-link {
+    color: #bb7c39 !important;
+    border: none !important;
+}
+

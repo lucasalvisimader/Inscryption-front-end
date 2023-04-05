@@ -1,0 +1,10 @@
+#user_register_button {
+    background-color: #572007 !important;
+    color: #bb7c39 !important;
+    border: none !important;
+}
+
+#user_register_button:hover {
+    background-color: #220d03 !important;
+    color: #6e4e2c !important;
+}

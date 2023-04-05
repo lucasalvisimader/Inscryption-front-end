@@ -1,0 +1,21 @@
+#login {
+    padding: 7rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    color: #ac3602;
+}
+
+input, select, option {
+    font-family: Arial;
+}
+
+#button_login {
+    background-color: #572007 !important;
+    color: #bb7c39 !important;
+    border: none !important;
+}
+
+#button_login:hover {
+    background-color: #220d03 !important;
+    color: #6e4e2c !important;
+}
