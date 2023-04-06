@@ -53,7 +53,7 @@ export const CardService = {
     },
 
     addImage : () => {
-        return axios.put(url + "/addImage").then(response => {
+        return axios.get(url + "/addImage").then(response => {
             return response;
         }).catch(error => {
             console.error(error);
