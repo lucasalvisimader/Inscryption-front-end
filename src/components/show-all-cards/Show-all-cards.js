@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { ContentEditable } from "react-contenteditable";
+// import { ContentEditable } from "react-contenteditable";
 import "./Show-all-cards.css";
 
 function ShowAllCards(props) {

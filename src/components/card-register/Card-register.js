@@ -96,16 +96,27 @@ function CardRegister() {
     { value: 'WORKERANT', label: 'Worker Ant' }
   ]
 
+  const [card, setCard] = useState({
+    "name" : "",
+    "power": 0,
+    "health": 0,
+    "sigilsTypes": [],
+    "imageType": ""
+  });
+
+  const updateCard = (event) => {
+    setCard({...card, [event.target.name] : event.target.value})
+}
+
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [noneSelected, setNoneSelected] = useState(false);
+  let sigilText = "";
+  selectedOptions.forEach(option => {
+    sigilText += option.value + ", ";
+  })
+  sigilText = sigilText.slice(0, -2);
 
   function getCard(event) {
-    let sigilText = "";
-    selectedOptions.forEach(option => {
-      sigilText += option.value + ", ";
-    })
-    sigilText = sigilText.slice(0, -2);
-
     event.preventDefault();
     alert("Name: " + nameRef.current.value + 
     "\nPower: " + powerRef.current.value +
@@ -116,6 +127,7 @@ function CardRegister() {
 
 
   const handleSelectChange = (selectedOptions) => {
+    setCard({...card, [selectedOptions.target.name] : selectedOptions.target.value})
     if (selectedOptions.length === 0) {
       setSelectedOptions(selectedOptions);
       setNoneSelected(false);
@@ -134,15 +146,15 @@ function CardRegister() {
     <Form id="login" className='card_register'>
       <Form.Group className="mb-3">
         <Form.Label>Enter the card's name</Form.Label>
-        <Form.Control ref={nameRef} type="text" placeholder="Name" required/>
+        <Form.Control onChange={updateCard} ref={nameRef} type="text" placeholder="Name" required/>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Power</Form.Label>
-        <Form.Control ref={powerRef} type="number" placeholder="Power" min="0" required/>
+        <Form.Control onChange={updateCard} ref={powerRef} type="number" placeholder="Power" min="0" required/>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Health</Form.Label>
-        <Form.Control ref={healthRef} type="number" placeholder="Health" min="1" required/>
+        <Form.Control onChange={updateCard} ref={healthRef} type="number" placeholder="Health" min="1" required/>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Sigils</Form.Label>
@@ -168,6 +180,7 @@ function CardRegister() {
         options={image_options} 
         onChange={(selected) => {
           imageRef.current.value = selected.value;
+          updateCard();
         }} />
       </Form.Group>
       <Button id='card_register_button' variant="primary" type="submit" onClick={getCard}>

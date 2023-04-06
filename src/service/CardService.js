@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import axios from "axios";
 
 
@@ -50,5 +50,13 @@ export const CardService = {
             console.error(error);
         });
         return "Ok";
+    },
+
+    addImage : () => {
+        return axios.put(url + "/addImage").then(response => {
+            return response;
+        }).catch(error => {
+            console.error(error);
+        });
     }
 }

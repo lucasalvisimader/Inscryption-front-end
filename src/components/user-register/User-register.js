@@ -9,23 +9,19 @@ function UserRegister() {
         "password": "",
         "cards": []
     });
-
     
     const updateUser = (event) => {
         setUser({...user, [event.target.name] : event.target.value})
     }
     
-    const submitUser = (event) => {
-        let name = document.getElementById("name").value;
+    const submitUser = () => {
         let password = document.getElementById("password").value;
         let confirmPassword = document.getElementById("confirm_password").value;
+
         if(password !== confirmPassword) {
             document.getElementById("confirm_password").setCustomValidity("Passwords don't match");
         } else {
             document.getElementById("confirm_password").setCustomValidity('');
-            event.preventDefault();
-            alert(name + "\n" + password)
-            console.log(user);
             UserService.save(user);
         }
     }
