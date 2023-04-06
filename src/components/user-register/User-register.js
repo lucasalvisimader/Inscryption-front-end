@@ -1,10 +1,11 @@
+import { UserService } from '../../service/Service-index';
 import { Button, Form } from 'react-bootstrap';
-import { UserService } from '../../service';
 import { useState } from 'react';
 import "./User-register.css";
 
 function UserRegister() {
     const [user, setUser] = useState({
+        "userType" : "USER",
         "name": "",
         "password": "",
         "cards": []

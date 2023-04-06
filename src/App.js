@@ -1,12 +1,13 @@
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import Navbar from "./components/nav/Nav";
 import Login from "./components/login/Login"
-import CardRegister from "./components/card-register/Card-register"
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {Routes, BrowserRouter, Route} from "react-router-dom";
 import UserRegister from "./components/user-register/User-register";
-import ShowAllCards from "./components/show-all-cards/Show-all-cards";
+import ShowOneCard from './components/admin/show-one-card/Show-one-card';
+import CardRegister from './components/admin/card-register/Card-register';
+import ShowAllCards from './components/admin/show-all-cards/Show-all-cards';
 
 function App() {
     return(

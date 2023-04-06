@@ -52,11 +52,19 @@ export const CardService = {
         return "Ok";
     },
 
-    addImage : () => {
-        return axios.get(url + "/addImage").then(response => {
+    getImages : () => {
+        return axios.get(url + "/getImageTypes").then(response => {
             return response;
         }).catch(error => {
             console.error(error);
         });
-    }
+    },
+
+    getSigils : () => {
+        return axios.get(url + "/getSigilsTypes").then(response => {
+            return response;
+        }).catch(error => {
+            console.error(error);
+        });
+    },
 }

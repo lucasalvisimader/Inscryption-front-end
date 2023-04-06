@@ -49,6 +49,5 @@ export const UserService = {
         }).catch(error => {
             console.error(error);
         });
-        return "Ok";
-    }
+    },
 }
