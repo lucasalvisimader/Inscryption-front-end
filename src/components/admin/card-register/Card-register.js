@@ -26,7 +26,7 @@ function CardRegister() {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [noneSelected, setNoneSelected] = useState(false);
 
-  function getCard(event) {
+  function getCard() {
     // setCard({
     //   ...card, 
     //   imageType: selectedImage,

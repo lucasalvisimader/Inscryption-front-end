@@ -48,7 +48,7 @@ h1 {
 #cardNameSpecial h2 {
     overflow: hidden;
     white-space: nowrap;
-    animation: typing 0.3s steps(10) forwards;
+    animation: typing 0.2s steps(10) forwards;
     /* STOAT */
     /* Good luck. */
     /* Good Luck... */
