@@ -1,4 +1,4 @@
-import { CardService } from '../../../service/CardService';
+import { CardService } from '../../../service';
 import {Button, Form} from 'react-bootstrap';
 import {useRef, useState, useEffect } from 'react';
 import Select from 'react-select';
@@ -11,34 +11,12 @@ function CardRegister() {
   const sigilsRef = useRef();
   const imageRef = useRef();
 
-  const sigil_options = [
-    { value: 'AIRBORNE', label: 'Airborne' },
-    { value: 'BIFURCATEDSTRIKE', label: 'Bifurcated Strike' },
-    { value: 'BONEKING', label: 'Bone King' },
-    { value: 'FLEDGELING', label: 'Fledgeling' },
-    { value: 'GUARDIAN', label: 'Guardian' },
-    { value: 'HOARDER', label: 'Hoarder' },
-    { value: 'LEADER', label: 'Leader' },
-    { value: 'MANYLIVES', label: 'Many Lives' },
-    { value: 'MIGHTYLEAP', label: 'Mighty Leap' },
-    { value: 'NONE', label: 'None' },
-    { value: 'REPULSIVE', label: 'Repulsive' },
-    { value: 'SHARPQUILLS', label: 'Sharp Quills' },
-    { value: 'STEELTRAP', label: 'Steel Trap' },
-    { value: 'STINKY', label: 'Stinky' },
-    { value: 'TOUCHOFDEATH', label: 'Touch of Death' },
-    { value: 'TRIFURCATEDSTRIKE', label: 'Trifurcated Strike' },
-    { value: 'UNKILLABLE', label: 'Unkillable' },
-    { value: 'WATERBORNE', label: 'Waterborne' },
-    { value: 'WORTHYSACRIFICE', label: 'Worthy Sacrifice' }
-  ]
-
   const [card, setCard] = useState({
     "name" : "",
     "power": 0,
     "health": 0,
     "sigilsTypes": [],
-    "imageType": ""
+    "imageType": {}
   });
 
   const updateCard = (event) => {
@@ -47,30 +25,38 @@ function CardRegister() {
 
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [noneSelected, setNoneSelected] = useState(false);
-  let sigilText = "";
-  selectedOptions.forEach(option => {
-    sigilText += option.value + ", ";
-  })
-  sigilText = sigilText.slice(0, -2);
 
   function getCard(event) {
+    // setCard({
+    //   ...card, 
+    //   imageType: selectedImage,
+    // });
     console.log(card);
-    event.preventDefault();
+    // event.preventDefault();
     CardService.save(card);
   }
 
   const [imageOptions, setimageOptions] = useState([]);
+  const [sigilOptions, setsigilOptions] = useState([]);
+  const [selectedImage, setselectedImage] = useState("");
 
   useEffect(() => {
-    CardService.getImages()
-      .then(response => {
-        setimageOptions(response.data.map(user => ({
-          value: user,
-          label: user
-        }))
-      )}).catch(e => {
-        console.log(e);
-      })
+    CardService.getImages().then(response => {
+      setimageOptions(response.data.map(user => ({
+        value: user,
+        label: user
+      })))
+    }).catch(e => {
+      console.log(e);
+    })
+    CardService.getSigils().then(response => {
+      setsigilOptions(response.data.map(user => ({
+        value: user,
+        label: user
+      })))
+    }).catch(e => {
+      console.log(e);
+    })
   }, [])
 
   const handleSelectChange = (selectedOptions) => {
@@ -86,17 +72,21 @@ function CardRegister() {
         setNoneSelected(false);
       }
     }
-    setCard({...card, [selectedOptions.target.name] : selectedOptions.target.value})
+    setCard({
+      ...card, 
+      sigilsTypes: selectedOptions.map((option) => option.value),
+    });
   };
 
-  const handleImageType = (selected) => {
-    if (selected !== undefined) {
-      imageRef.current.value = selected[0].value;
-      setCard({
-        ...card, 
-        sigilsTypes: selected[0].map((option) => option.value),
-      });
+  const handleImageType = (selectedImage) => {
+    setselectedImage(selectedImage);
+    if (selectedImage !== undefined) {
+      imageRef.current.value = selectedImage.value;
     }
+    setCard({
+      ...card,
+      imageType: selectedImage.value,
+    });
   }
   
   return (
@@ -122,7 +112,7 @@ function CardRegister() {
         isMulti required name='sigilsTypes'
         placeholder="Sigils" 
         value={selectedOptions}
-        onChange={ handleSelectChange}
+        onChange={handleSelectChange}
         isOptionDisabled={() => {
           if (selectedOptions.length >= 4 || noneSelected) {
             return true;
@@ -131,14 +121,15 @@ function CardRegister() {
         }}
         className="basic-multi-select"
         classNamePrefix="select"
-        options={sigil_options} />
+        options={sigilOptions} />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>IMAGE</Form.Label>
         <Select ref={imageRef} required
         placeholder="Image" name='imageType'
-        options={imageOptions} 
-        onChange={handleImageType()} />
+        options={imageOptions}
+        value={selectedImage}
+        onChange={handleImageType} />
       </Form.Group>
       <Button id='card_register_button' variant="primary" type="submit" onClick={getCard}>
         Submit

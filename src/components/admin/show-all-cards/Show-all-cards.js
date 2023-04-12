@@ -1,90 +1,93 @@
 import { React, useState, useEffect } from "react";
+import { CardService } from "../../../service";
 // import { ContentEditable } from "react-contenteditable";
 import "./Show-all-cards.css";
 
 function ShowAllCards(props) {
-    let [cards, setCards] = useState([
-        {
-            id: 1,
-            name: "SQUIRREL",
-            power: 0,
-            health: 1,
-            sigils: ["NONE"],
-            imageType: "SQUIRREL",
-        },
-        {
-            id: 2,
-            name: "RAT KING",
-            power: 2,
-            health: 1,
-            sigils: ["BONE KING"],
-            imageType: "RATKING",
-        },
-        {
-            id: 3,
-            name: "FIELD MICE",
-            power: 2,
-            health: 2,
-            sigils: ["FECUNDITY", "FECUNDITY"],
-            imageType: "FIELDMICE",
-        },
-        {
-            id: 4,
-            name: "BEAVER",
-            power: 4,
-            health: 1,
-            sigils: ["NONE"],
-            imageType: "BEAVER",
-        },
-        {
-            id: 5,
-            name: "RABBIT",
-            power: 0,
-            health: 1,
-            sigils: ["NONE"],
-            imageType: "RABBIT",
-        },
-        {
-            id: 6,
-            name: "PORCUPINE",
-            power: 1,
-            health: 2,
-            sigils: ["SHARPQUILLS"],
-            imageType: "PORCUPINE",
-        },
-        {
-            id: 7,
-            name: "STOAT",
-            power: 1,
-            health: 3,
-            sigils: ["NONE"],
-            imageType: "STOAT",
-        },
-        {
-            id: 8,
-            name: "STINKBUG",
-            power: 1,
-            health: 2,
-            sigils: ["STINKY"],
-            imageType: "STINKBUG",
-        },
-        {
-            id: 9,
-            name: "STUNTED WOLF",
-            power: 2,
-            health: 2,
-            sigils: ["NONE"],
-            imageType: "STUNTEDWOLF",
-        },
-        {
-            id: 10,
-            name: "WOLF CUB",
-            power: 1,
-            health: 1,
-            sigils: ["FLEDGELING"],
-            imageType: "WOLFCUB",
-        },
-    ]);
+    // let [cards, setCards] = useState([
+    //     {
+    //         id: 1,
+    //         name: "SQUIRREL",
+    //         power: 0,
+    //         health: 1,
+    //         sigils: ["NONE"],
+    //         imageType: "SQUIRREL",
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "RAT KING",
+    //         power: 2,
+    //         health: 1,
+    //         sigils: ["BONE KING"],
+    //         imageType: "RATKING",
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "FIELD MICE",
+    //         power: 2,
+    //         health: 2,
+    //         sigils: ["FECUNDITY", "FECUNDITY"],
+    //         imageType: "FIELDMICE",
+    //     },
+    //     {
+    //         id: 4,
+    //         name: "BEAVER",
+    //         power: 4,
+    //         health: 1,
+    //         sigils: ["NONE"],
+    //         imageType: "BEAVER",
+    //     },
+    //     {
+    //         id: 5,
+    //         name: "RABBIT",
+    //         power: 0,
+    //         health: 1,
+    //         sigils: ["NONE"],
+    //         imageType: "RABBIT",
+    //     },
+    //     {
+    //         id: 6,
+    //         name: "PORCUPINE",
+    //         power: 1,
+    //         health: 2,
+    //         sigils: ["SHARPQUILLS"],
+    //         imageType: "PORCUPINE",
+    //     },
+    //     {
+    //         id: 7,
+    //         name: "STOAT",
+    //         power: 1,
+    //         health: 3,
+    //         sigils: ["NONE"],
+    //         imageType: "STOAT",
+    //     },
+    //     {
+    //         id: 8,
+    //         name: "STINKBUG",
+    //         power: 1,
+    //         health: 2,
+    //         sigils: ["STINKY"],
+    //         imageType: "STINKBUG",
+    //     },
+    //     {
+    //         id: 9,
+    //         name: "STUNTED WOLF",
+    //         power: 2,
+    //         health: 2,
+    //         sigils: ["NONE"],
+    //         imageType: "STUNTEDWOLF",
+    //     },
+    //     {
+    //         id: 10,
+    //         name: "WOLF CUB",
+    //         power: 1,
+    //         health: 1,
+    //         sigils: ["FLEDGELING"],
+    //         imageType: "WOLFCUB",
+    //     },
+    // ]);
+
+    const [cards, setCards] = useState([]);
 
     const stoatLines = ["Good Luck.", "Good Luck...", "This again?", 
     "Fingers crossed.", "Are you seriou-", "Wow... seriously?",
@@ -99,40 +102,45 @@ function ShowAllCards(props) {
     "Betrayal.", "Farewell.", "Ahem."];
     let stuntedWolfName = Math.floor(Math.random() * 3);
     
-    const updatedCards = cards.map((card) => {
-        if (card.imageType === "STOAT") {
-            stoatName = stoatLines[stoatName];
-            return {
-                ...card,
-                name: stoatName
-            };
-        }  else if (card.imageType === "STINKBUG") {
-            stinkBugName = stinkBugLines[stinkBugName];
-            return {
-                ...card,
-                name: stinkBugName
-            };
-        } else if (card.imageType === "STUNTEDWOLF") {
-            stuntedWolfName = stuntedWolfLines[stuntedWolfName];
-            return {
-                ...card,
-                name: stuntedWolfName
-            };
-        }
-        return {
-            ...card
-        }
-    })
+    // const updatedCards = cards.map((card) => {
+    //     if (card.imageType === "STOAT") {
+    //         stoatName = stoatLines[stoatName];
+    //         setCards({
+    //             ...card,
+    //             name: stoatName
+    //         })
+    //     } else if (card.imageType === "STINKBUG") {
+    //         stinkBugName = stinkBugLines[stinkBugName];
+    //         setCards({
+    //             ...card,
+    //             name: stinkBugName
+    //         });
+    //     } else if (card.imageType === "STUNTEDWOLF") {
+    //         stuntedWolfName = stuntedWolfLines[stuntedWolfName];
+    //         setCards({
+    //             ...card,
+    //             name: stuntedWolfName
+    //         });
+    //     }
+    //     return {
+    //         ...card
+    //     }
+    // })
     
     
     const [showModal, setShowModal] = useState(false);
     const [cardIdToDelete, setCardIdToDelete] = useState(null);
 
     useEffect(() => {
-            setTimeout(() => {
-                setCards(updatedCards);
-            }, 1000);
-        }, []);
+        CardService.listAll().then(response => {
+            setCards(response.data);
+        }).catch(e => {
+            console.log(e);
+        })
+        // setTimeout(() => {
+        //     setCards(updatedCards);
+        // }, 1000);
+    }, []);
     
     function deleteCard(id) {
         const updatedCards = cards.filter((card) => card.id !== id);

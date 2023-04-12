@@ -1,4 +1,4 @@
-import { UserService } from '../../service/Service-index';
+import { UserService } from '../../service';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import "./User-register.css";
