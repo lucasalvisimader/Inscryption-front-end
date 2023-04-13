@@ -30,13 +30,15 @@
 }
 
 #nav {
-    background: url(/public/images/others/navbar_background.png);
+    background-image:
+    linear-gradient(to right, transparent, black),
+    url(/public/images/others/navbar_background.png);
     background-repeat: no-repeat;
     background-size: contain;
     padding: 3rem;
     display: flex;
     align-items: center;
-    min-width: 40rem;
+    min-width: 70rem;
 }
 
 /* #nav:after {
