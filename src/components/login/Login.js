@@ -1,48 +1,48 @@
-// import { UserService } from '../../service/UserService';
 import {Button, Form} from 'react-bootstrap';
-// import { useState, useRef, useEffect } from 'react';
-// import Select from 'react-select';
+import { UserService } from '../../service';
+import { useState } from 'react';
+import Cookies from 'js-cookie';
 import "./Login.css";
 
-function Login() {
-  function getLogin() {
-    alert("Name: " + document.getElementById("name").value + 
-    "\nPassword: " + document.getElementById("password").value)
-    // "\nTypeUser: " + userRef.current.value)
+function Login(props) {
+
+  // const [user, setUser] = useState({
+  //   "name" : "",
+  //   "password": ""
+  // });
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  // const updateUser = (event) => {
+  //   setUser({...user, [event.target.name] : event.target.value})
+  // }
+
+  function handleLogin() {
+    try {
+      const user = UserService.listLogin(username, password);
+      Cookies.set('isLoggedIn', true);
+      props.setIsLoggedIn(true);
+      if (user === 1) {
+        Cookies.set('isAdmin', true);
+        props.setIsAdmin(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  // const userRef = useRef();
-
-  // const [userOptions, setUserOptions] = useState([]);
-
-  // useEffect(() => {
-  //   UserService.getUsers()
-  //     .then(response => {
-  //       setUserOptions(response.data.map(user => ({
-  //         value: user,
-  //         label: user
-  //       }))
-  //     )}).catch(e => {
-  //       console.log(e);
-  //     })
-  // }, [])
-
   return (
-    <Form id="login" onSubmit={getLogin}>
-      {/* <Form.Group className="mb-3">
-        <Form.Label>User</Form.Label>
-        <Select ref={userRef} required 
-        placeholder="user" options={userOptions}
-        onChange={(option) => 
-        userRef.current.value = option.value}/>
-      </Form.Group> */}
+    <Form id="login" onSubmit={handleLogin}>
       <Form.Group className="mb-3">
         <Form.Label>Name</Form.Label>
-        <Form.Control id="name" type="text" placeholder="Name" required/>
+        <Form.Control id="name" name='name' type="text"
+         placeholder="Name" value={username} onChange={(event) => setUsername(event.target.value)} required/>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Password</Form.Label>
-        <Form.Control id="password" type="password" placeholder="Password" required/>
+        <Form.Control id="password" name='password' type="password"
+         placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} required/>
       </Form.Group>
       <Button id='button_login' variant="primary" type="submit">
         Submit
