@@ -5,7 +5,6 @@ import "./User-register.css";
 
 function UserRegister() {
     const [user, setUser] = useState({
-        "userType" : "USER",
         "name": "",
         "password": "",
         "cards": []

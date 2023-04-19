@@ -18,15 +18,20 @@ function Login(props) {
   //   setUser({...user, [event.target.name] : event.target.value})
   // }
 
-  function handleLogin() {
+  async function handleLogin() {
     try {
-      const user = UserService.listLogin(username, password);
-      Cookies.set('isLoggedIn', true);
-      props.setIsLoggedIn(true);
-      if (user === 1) {
+      const [loginResponse] = await Promise.all([
+        UserService.listLogin(username, password)
+      ]);
+      if (loginResponse.data.id === 1) {
         Cookies.set('isAdmin', true);
         props.setIsAdmin(true);
+      } else {
+        Cookies.set('isAdmin', false);
+        props.setIsAdmin(false);
       }
+      Cookies.set('isLoggedIn', true);
+      props.setIsLoggedIn(true);
     } catch (error) {
       console.log(error);
     }

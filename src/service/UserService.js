@@ -46,10 +46,10 @@ export const UserService = {
             console.error(error);
         }
     },
-    
-    listType : async (id) => {
+
+    listId : async (name) => {
         try {
-            const response = await axios.get(url + "/listType/" + id);
+            const response = await axios.get(url + "/listId/" + name);
             return response;
         } catch (error) {
             console.error(error);
