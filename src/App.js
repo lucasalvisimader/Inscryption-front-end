@@ -24,7 +24,7 @@ function App() {
                 <Route path="/card-register" element={<CardRegister />}/>
                 <Route path="/user-register" element={<UserRegister />}/>
                 <Route path="/show-all-cards" element={<ShowAllCards card={{}} />}/>
-                {/* <Route path="/show-one-card" element={<ShowOneCard />}/> */}
+                <Route path="/show-one-card" element={<ShowOneCard />}/>
             </Routes>
         </BrowserRouter>
     )

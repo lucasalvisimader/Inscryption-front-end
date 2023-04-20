@@ -6,7 +6,6 @@ import "./Show-all-cards.css";
 function ShowAllCards() {
 
     const [cards, setCards] = useState([]);
-    // css from cards needs to be updated from Card.js
 
     const stoatLines = ["Good Luck.", "Good Luck...", "This again?", 
     "Fingers crossed.", "Are you seriou-", "Wow... seriously?",
@@ -21,31 +20,6 @@ function ShowAllCards() {
     "Betrayal.", "Farewell.", "Ahem."];
     let stuntedWolfName = Math.floor(Math.random() * 3);
     
-    // const updatedCards = cards.map((card) => {
-    //     if (card.imageType === "STOAT") {
-    //         stoatName = stoatLines[stoatName];
-    //         setCards({
-    //             ...card,
-    //             name: stoatName
-    //         })
-    //     } else if (card.imageType === "STINKBUG") {
-    //         stinkBugName = stinkBugLines[stinkBugName];
-    //         setCards({
-    //             ...card,
-    //             name: stinkBugName
-    //         });
-    //     } else if (card.imageType === "STUNTEDWOLF") {
-    //         stuntedWolfName = stuntedWolfLines[stuntedWolfName];
-    //         setCards({
-    //             ...card,
-    //             name: stuntedWolfName
-    //         });
-    //     }
-    //     return {
-    //         ...card
-    //     }
-    // })
-    
     
     const [showModal, setShowModal] = useState(false);
     const [cardIdToDelete, setCardIdToDelete] = useState(null);
@@ -56,9 +30,6 @@ function ShowAllCards() {
         }).catch(e => {
             console.log(e);
         })
-        // setTimeout(() => {
-        //     setCards(updatedCards);
-        // }, 1000);
     }, []);
     
     function deleteCard(id) {
@@ -100,15 +71,11 @@ function ShowAllCards() {
                 ...card,
             };
         });
-        
-        // let element = document.getElementById("cardNameSpecial");
-        // void element.classList.remove("cardNameSpecial");
-        // void element.offsetWidth; 
-        // void element.classList.add("cardNameSpecial");
         setTimeout(() => {
             deleteCard(cardIdToDelete);
         }, 300);
         setCards(updatedCards);
+        CardService.remove(cardIdToDelete);
         setCardIdToDelete(null)
     }
 
@@ -118,7 +85,7 @@ function ShowAllCards() {
         };
 
         const nameStyle = {
-            fontSize: `calc(2.5rem - ${card.name.length}px)`,
+            fontSize: `calc(3rem - ${card.name.length}px)`,
             marginBottom: `calc(${card.name.length}px - 120px)`
         };
 

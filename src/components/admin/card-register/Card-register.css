@@ -1,7 +1,7 @@
 .card_register {
     margin-left: 5rem;
     margin-right: 5rem;
-    min-width: 40rem;
+    min-width: 40rem !important;
 }
 
 #card_register_button {

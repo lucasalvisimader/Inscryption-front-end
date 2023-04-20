@@ -6,8 +6,8 @@
 
 .card {
     background-size: cover;
-    height: 20rem;
-    width: 13rem;
+    height: fit-content;
+    width: 16rem;
     border: none;
     margin: 1rem;
     color: black;
@@ -21,22 +21,23 @@
 }
 
 .footer {
-    margin: 1.2rem;
+    margin: 1.3rem;
+    margin-right: 1.5rem;
     margin-top: 13rem;
     display: flex;
     justify-content: space-between;
 }
 
 #power {
-    margin-top: 0rem;
+    margin-top: 2.5rem;
 }
 
 #health {
-    margin-top: 2rem;
+    margin-top: 4rem;
 }
 
 h1 {
-    font-size: 3.7rem;
+    font-size: 3.7rem !important;
 }
 
 .card_edit_delete {
@@ -121,7 +122,7 @@ h1 {
     justify-content: space-around;
     background-image: url('/public/images/others/navbar_background.png');
     margin: 1rem;
-    margin-top: -1rem;
+    margin-top: -10rem;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
@@ -163,7 +164,7 @@ button {
 
 .modal-content {
     padding: 1rem;
-    color: #bb7c39;
+    color: #bb7c39 !important;
     max-width: 20rem;
     border: #bb7c39 2px solid;
     background: url("/public/images/others/navbar_background.png");

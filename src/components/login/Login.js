@@ -25,13 +25,15 @@ function Login(props) {
       ]);
       if (loginResponse.data.id === 1) {
         Cookies.set('isAdmin', true);
+        Cookies.set('isLoggedIn', true);
         props.setIsAdmin(true);
+        props.setIsLoggedIn(true);
       } else {
         Cookies.set('isAdmin', false);
+        Cookies.set('isLoggedIn', true);
         props.setIsAdmin(false);
+        props.setIsLoggedIn(true);
       }
-      Cookies.set('isLoggedIn', true);
-      props.setIsLoggedIn(true);
     } catch (error) {
       console.log(error);
     }

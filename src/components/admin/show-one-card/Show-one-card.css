@@ -1,0 +1,10 @@
+.cardAndSearch {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+#modal {
+    margin: 2rem;
+    min-width: 20rem;
+}
