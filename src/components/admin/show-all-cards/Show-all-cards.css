@@ -21,23 +21,34 @@
 }
 
 .footer {
-    margin: 1.3rem;
+    margin: -0.5rem;
     margin-right: 1.5rem;
-    margin-top: 13rem;
+    margin-top: 11rem;
     display: flex;
     justify-content: space-between;
 }
 
 #power {
     margin-top: 2.5rem;
+    margin-right: 3rem;
 }
 
 #health {
     margin-top: 4rem;
 }
 
-h1 {
+.h1 {
     font-size: 3.7rem !important;
+}
+
+#inputsShowAllCards {
+    font-family: inherit;
+    background-color: transparent;
+    border: none;
+    color: black;
+    max-width: 7rem;
+    max-height: 4rem;
+    text-align: center;
 }
 
 .card_edit_delete {
@@ -49,7 +60,7 @@ h1 {
 #cardNameSpecial h2 {
     overflow: hidden;
     white-space: nowrap;
-    animation: typing 0.2s steps(10) forwards;
+    animation: typing 0.25s steps(10) forwards;
     /* STOAT */
     /* Good luck. */
     /* Good Luck... */
@@ -193,3 +204,7 @@ button {
 #content_editable_h2 {
     font-size: 2rem;
 }
+
+::placeholder {
+    color: black;
+  }

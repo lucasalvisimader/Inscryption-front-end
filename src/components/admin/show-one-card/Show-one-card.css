@@ -8,3 +8,7 @@
     margin: 2rem;
     min-width: 20rem;
 }
+
+.card {
+    height: 24rem !important;
+}

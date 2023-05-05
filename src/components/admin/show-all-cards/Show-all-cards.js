@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from "react";
 import { CardService } from "../../../service";
-// import { ContentEditable } from "react-contenteditable";
 import "./Show-all-cards.css";
 
 function ShowAllCards() {
@@ -20,9 +19,15 @@ function ShowAllCards() {
     "Betrayal.", "Farewell.", "Ahem."];
     let stuntedWolfName = Math.floor(Math.random() * 3);
     
-    
     const [showModal, setShowModal] = useState(false);
     const [cardIdToDelete, setCardIdToDelete] = useState(null);
+    const [disabledEdit, setDisabledEdit] = useState(true);
+
+    const [card, setCard] = useState({
+        "name" : "",
+        "power": 0,
+        "health": 0,
+      });
 
     useEffect(() => {
         CardService.listAll().then(response => {
@@ -79,6 +84,18 @@ function ShowAllCards() {
         setCardIdToDelete(null)
     }
 
+    function handleEdit (id) {
+        setDisabledEdit(!disabledEdit);
+        if (!disabledEdit) {
+            editCard(id);
+        }
+    }
+
+    function editCard(id) {
+        CardService.edit(id, card);
+        window.location.reload();
+    }
+
     const PageCards = cards.map((card, id) => {
         const cardStyle = {
             backgroundImage: `url('/images/imageType/${card.imageType}.png')`
@@ -113,21 +130,38 @@ function ShowAllCards() {
                 <div className="card" style={cardStyle}>
                     <div className="header">
                         <div className="cardName" id={cardName}>
-                            <h2 style={nameStyle}>{card.name}</h2>
+                            <input name='name' style={nameStyle}
+                            id="inputsShowAllCards" disabled={disabledEdit}
+                            onChange={(event) => setCard({...card, name : event.target.value})} 
+                            placeholder={card.name}
+                            type="text"
+                            />
                         </div>
                     </div>
                     <div className="footer">
                         <div id="power">
-                        <h1>{card.power}</h1>
+                            <input name='power' id="inputsShowAllCards"
+                            className="h1"
+                            disabled={disabledEdit}
+                            onChange={(event) => setCard({...card, power : event.target.value})} 
+                            placeholder={card.power}
+                            type="number"
+                            />
                         </div>
                         <div id="health">
-                        <h1>{card.health}</h1>
+                            <input name='health' id="inputsShowAllCards"
+                            className="h1"
+                            disabled={disabledEdit}
+                            onChange={(event) => setCard({...card, health : event.target.value})} 
+                            placeholder={card.health}
+                            type="number"
+                            />
                         </div>
                     </div>
                 </div>
                 <div className="edit_delete_card">
                     <div id="edit">
-                        <button id="edit_button_card">EDIT</button>
+                        <button id="edit_button_card" onClick={() => handleEdit(card.id)}>EDIT</button>
                     </div>
                     <div className="delete">
                         <button id="delete_button_card" onClick={() => handleDelete(card.id)}>DELETE</button>

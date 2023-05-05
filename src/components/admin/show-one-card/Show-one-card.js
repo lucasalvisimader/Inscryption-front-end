@@ -1,5 +1,5 @@
 import { CardService } from '../../../service';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './Show-one-card.css';
 
 function ShowOneCard() {
@@ -7,12 +7,6 @@ function ShowOneCard() {
     const [id, setId] = useState(0);
     const [cardStyle, setCardStyle] = useState({backgroundImage: `url('/images/imageType/blank.png')`});
     const [nameStyle, setNameStyle] = useState({});
-    const [max, setMax] = useState(0);
-    useEffect(() => {
-        CardService.listAll().then(response => {
-            setMax(response.data.length);
-        })
-    }, []);
 
     async function handleOneCard() {
         const [loginResponse] = await Promise.all([
@@ -26,11 +20,12 @@ function ShowOneCard() {
             marginBottom: `calc(${loginResponse.data.name.length}px - 120px)`
         });
     }
+
     return <div className='cardAndSearch'>
         <div className='oneCard'>
             <div id="modal">
                 <div className="modal-content">
-                    <input type={'number'} min={1} max={max} placeholder={"Search by ID"} 
+                    <input type={'number'} placeholder={"Search by ID"} 
                     onChange={(event) => setId(event.target.value)} required />
                     <div>
                         <button type='submit' onClick={handleOneCard}>Submit</button>
@@ -47,19 +42,11 @@ function ShowOneCard() {
                 </div>
                 <div className="footer">
                     <div id="power">
-                    <h1>{card.power}</h1>
+                        <h1>{card.power}</h1>
                     </div>
                     <div id="health">
-                    <h1>{card.health}</h1>
+                        <h1>{card.health}</h1>
                     </div>
-                </div>
-            </div>
-            <div className="edit_delete_card">
-                <div id="edit">
-                    <button id="edit_button_card">EDIT</button>
-                </div>
-                <div className="delete">
-                    {/* <button id="delete_button_card" onClick={() => handleDelete(card.id)}>DELETE</button> */}
                 </div>
             </div>
         </div>

@@ -37,6 +37,7 @@ function Login(props) {
     } catch (error) {
       console.log(error);
     }
+    Window.location.reload();
   }
 
   return (
