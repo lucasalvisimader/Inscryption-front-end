@@ -14,13 +14,17 @@ import './App.css';
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(Cookies.get('isLoggedIn') === 'true');
     const [isAdmin, setIsAdmin] = useState(Cookies.get('isAdmin') === 'true');
+    const [username, setUsername] = useState(Cookies.get('username'));
+    const [password, setPassword] = useState(Cookies.get('password'));
     
     return(
         <BrowserRouter>
-            <Navbar isLoggedIn={isLoggedIn} isAdmin={isAdmin}/>
+            <Navbar username={username} password={password} isLoggedIn={isLoggedIn} isAdmin={isAdmin}/>
             <Routes>
-                <Route index element={<Login setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin}/>} />
-                <Route path="/login" element={<Login />}/>
+                <Route index element={<Login setUsername={setUsername} setPassword={setPassword} 
+                setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin}/>} />
+                <Route path="/login" element={<Login setUsername={setUsername} setPassword={setPassword} 
+                setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin}/>}/>
                 <Route path="/card-register" element={<CardRegister />}/>
                 <Route path="/user-register" element={<UserRegister />}/>
                 <Route path="/show-all-cards" element={<ShowAllCards card={{}} />}/>

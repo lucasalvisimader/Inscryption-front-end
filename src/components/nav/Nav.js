@@ -1,8 +1,22 @@
 import {Dropdown} from 'react-bootstrap';
 import {Nav} from 'react-bootstrap';
 import "./Nav.css";
+import { UserService } from '../../service';
+import Cookies from 'js-cookie';
 
 function Navbar(props) {
+  async function deleteAccount() {
+    const [user] = await Promise.all([
+      UserService.listLogin(props.username, props.password)
+    ]);
+    UserService.remove(user.data.id);
+    Cookies.set('isAdmin', false);
+    Cookies.set('isLoggedIn', false);
+    Cookies.set('username', '');
+    Cookies.set('password', '');
+    window.location.reload();
+  }
+
   if (props.isAdmin) {
     return (
       <Nav id="nav">
@@ -62,6 +76,11 @@ function Navbar(props) {
               <Dropdown.Item href="Play-player">Player</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Item>
+            <button className='deleteAccount' onClick={deleteAccount}>Delete Account</button>
+          </Nav.Item>
         </Nav.Item>
       </Nav>
     );

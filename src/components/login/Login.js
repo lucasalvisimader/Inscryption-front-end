@@ -26,18 +26,26 @@ function Login(props) {
       if (loginResponse.data.id === 1) {
         Cookies.set('isAdmin', true);
         Cookies.set('isLoggedIn', true);
+        Cookies.set('username', username);
+        Cookies.set('password', password);
+        props.username(username);
+        props.password(password);
         props.setIsAdmin(true);
         props.setIsLoggedIn(true);
       } else {
         Cookies.set('isAdmin', false);
         Cookies.set('isLoggedIn', true);
+        Cookies.set('username', username);
+        Cookies.set('password', password);
+        props.username(username);
+        props.password(password);
         props.setIsAdmin(false);
         props.setIsLoggedIn(true);
       }
     } catch (error) {
       console.log(error);
     }
-    Window.location.reload();
+    window.location.reload();
   }
 
   return (

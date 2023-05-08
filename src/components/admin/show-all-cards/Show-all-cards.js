@@ -5,30 +5,45 @@ import "./Show-all-cards.css";
 function ShowAllCards() {
 
     const [cards, setCards] = useState([]);
-
-    const stoatLines = ["Good Luck.", "Good Luck...", "This again?", 
-    "Fingers crossed.", "Are you seriou-", "Wow... seriously?",
-    "Again?", "Oh come on!"];
-    let stoatName = Math.floor(Math.random() * 4);
-
-    const stinkBugLines = ["Salutations.", "Shall we?", "Masterful.",
-    "Death take me!", "That stings!", "My flesh..."];
-    let stinkBugName = Math.floor(Math.random() * 3);
-
-    const stuntedWolfLines = ["We meet again.", "Greetings.", "Hello again.",
-    "Betrayal.", "Farewell.", "Ahem."];
-    let stuntedWolfName = Math.floor(Math.random() * 3);
+    const [card, setCard] = useState({});
     
     const [showModal, setShowModal] = useState(false);
     const [cardIdToDelete, setCardIdToDelete] = useState(null);
     const [disabledEdit, setDisabledEdit] = useState(true);
 
-    const [card, setCard] = useState({
-        "name" : "",
-        "power": 0,
-        "health": 0,
-      });
+    const stoatLines = [
+        "Good Luck.", 
+        "Good Luck...", 
+        "This again?", 
+        "Fingers crossed.", 
+        "Are you seriou-", 
+        "Wow... seriously?",
+        "Again?", 
+        "Oh come on!"
+    ];
+    let stoatName = Math.floor(Math.random() * 4);
 
+    const stinkBugLines = [
+        "Salutations.", 
+        "Shall we?", 
+        "Masterful.",
+        "Death take me!", 
+        "That stings!", 
+        "My flesh..."
+    ];
+    let stinkBugName = Math.floor(Math.random() * 3);
+
+    const stuntedWolfLines = [
+        "We meet again.", 
+        "Greetings.", 
+        "Hello again.",
+        "Betrayal.", 
+        "Farewell.", 
+        "Ahem."
+    ];
+    let stuntedWolfName = Math.floor(Math.random() * 3);
+    
+    
     useEffect(() => {
         CardService.listAll().then(response => {
             setCards(response.data);
@@ -36,16 +51,6 @@ function ShowAllCards() {
             console.log(e);
         })
     }, []);
-    
-    function deleteCard(id) {
-        const updatedCards = cards.filter((card) => card.id !== id);
-        setCards(updatedCards);
-    }
-
-    function handleDelete(id) {
-        setCardIdToDelete(id);
-        setShowModal(true);
-    }
     
     function handleConfirmDelete() {
         setShowModal(false);
@@ -82,6 +87,16 @@ function ShowAllCards() {
         setCards(updatedCards);
         CardService.remove(cardIdToDelete);
         setCardIdToDelete(null)
+    }
+
+    function handleDelete(id) {
+        setCardIdToDelete(id);
+        setShowModal(true);
+    }
+
+    function deleteCard(id) {
+        const updatedCards = cards.filter((card) => card.id !== id);
+        setCards(updatedCards);
     }
 
     function handleEdit (id) {
@@ -132,7 +147,7 @@ function ShowAllCards() {
                         <div className="cardName" id={cardName}>
                             <input name='name' style={nameStyle}
                             id="inputsShowAllCards" disabled={disabledEdit}
-                            onChange={(event) => setCard({...card, name : event.target.value})} 
+                            onChange={(event) => setCard({...card, "name" : event.target.value})} 
                             placeholder={card.name}
                             type="text"
                             />
@@ -143,7 +158,7 @@ function ShowAllCards() {
                             <input name='power' id="inputsShowAllCards"
                             className="h1"
                             disabled={disabledEdit}
-                            onChange={(event) => setCard({...card, power : event.target.value})} 
+                            onChange={(event) => setCard({...card, "power" : event.target.value})} 
                             placeholder={card.power}
                             type="number"
                             />
@@ -152,7 +167,7 @@ function ShowAllCards() {
                             <input name='health' id="inputsShowAllCards"
                             className="h1"
                             disabled={disabledEdit}
-                            onChange={(event) => setCard({...card, health : event.target.value})} 
+                            onChange={(event) => setCard({...card, "health" : event.target.value})} 
                             placeholder={card.health}
                             type="number"
                             />
