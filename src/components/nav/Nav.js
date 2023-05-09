@@ -43,13 +43,10 @@ function Navbar(props) {
           </Dropdown>
         </Nav.Item>
         <Nav.Item>
-          <Dropdown>
-            <Dropdown.Toggle className='play_dropdown' variant="success" id="dropdown-basic">Play</Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item href="Play-computer">Computer</Dropdown.Item>
-              <Dropdown.Item href="Play-player">Player</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+          <button className='play_dropdown' href="Play">Play</button>
+        </Nav.Item>
+        <Nav.Item>
+            <button className='delete_account' onClick={deleteAccount}>Delete Account</button>
         </Nav.Item>
       </Nav>
     );
@@ -64,23 +61,15 @@ function Navbar(props) {
           <Dropdown>
             <Dropdown.Toggle className='register_dropdown' variant="success" id="dropdown-basic">Register</Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item href="User-register">User</Dropdown.Item>
+              <Dropdown.Item href="user-register">User</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Nav.Item>
         <Nav.Item>
-          <Dropdown>
-            <Dropdown.Toggle className='play_dropdown' variant="success" id="dropdown-basic">Play</Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item href="Play-computer">Computer</Dropdown.Item>
-              <Dropdown.Item href="Play-player">Player</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+          <Nav.Link className='play' href="play">Play</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Item>
-            <button className='deleteAccount' onClick={deleteAccount}>Delete Account</button>
-          </Nav.Item>
+            <button className='delete_account' onClick={deleteAccount}>Delete Account</button>
         </Nav.Item>
       </Nav>
     );

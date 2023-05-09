@@ -1,4 +1,4 @@
-.title {
+.title, .delete_account, .play {
     font-size: 1.5rem !important;
     color: #e18234;
     padding: 0.5rem;
@@ -7,25 +7,24 @@
     margin-right: 0.5rem;
 }
 
+.play {
+    cursor: pointer;
+}
+
 .login {
     font-size: 1.5rem !important;
     color: #bb7c39 !important;
 }
 
-.dropdown button, a.nav-link {
+.dropdown button, a.nav-link, .delete_account, .play {
     font-size: 1.5rem !important;
     background-color: transparent !important;
     border: none !important;
     color: white;
 }
 
-.dropdown button:hover, a.nav-link:hover {
+.dropdown button:hover, a.nav-link:hover, .delete_account:hover, .play:hover {
     color: rgb(165, 165, 165) !important;
-    background-color: transparent !important;
-}
-
-.dropdown button:focus {
-    color: rgb(165, 165, 165);
     background-color: transparent !important;
 }
 
@@ -41,12 +40,7 @@
     min-width: 70rem;
 }
 
-/* #nav:after {
-    content: '';
-    background: linear-gradient(transparent 0%, black 100%)
-} */
-
-.dropdown button, a.nav-link {
+.dropdown button, a.nav-link, .delete_account, .play {
     color: #bb7c39 !important;
     border: none !important;
 }

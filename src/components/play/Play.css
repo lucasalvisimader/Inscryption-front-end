@@ -1,0 +1,5 @@
+.game {
+    width: 100vw;
+    height: calc(100vh - 9.3rem);
+    background: aqua;
+}
