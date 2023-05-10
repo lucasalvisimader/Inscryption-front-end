@@ -21,7 +21,8 @@ function App() {
     
     return(
         <BrowserRouter>
-            <Navbar isVisible={isVisible} username={username} password={password} isLoggedIn={isLoggedIn} isAdmin={isAdmin}/>
+            <Navbar isVisible={isVisible} username={username} password={password} 
+            isLoggedIn={isLoggedIn} isAdmin={isAdmin}/>
             <Routes>
                 <Route index element={<Login setUsername={setUsername} setPassword={setPassword} 
                     setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin}/>} />
@@ -31,7 +32,7 @@ function App() {
                 <Route path="/user-register" element={<UserRegister />}/>
                 <Route path="/show-all-cards" element={<ShowAllCards card={{}} />}/>
                 <Route path="/show-one-card" element={<ShowOneCard />}/>
-                <Route path="/play" setIsVisible={setIsVisible} element={<Play />}/>
+                <Route path="/play" element={<Play setIsVisible={setIsVisible} />}/>
             </Routes>
         </BrowserRouter>
     )
