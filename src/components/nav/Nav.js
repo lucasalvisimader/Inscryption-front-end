@@ -16,19 +16,24 @@ function Navbar(props) {
     Cookies.set('password', '');
     window.location.reload();
   }
+
+  function exitAccount() {
+    Cookies.set('isAdmin', false);
+    Cookies.set('isLoggedIn', false);
+    Cookies.set('username', '');
+    Cookies.set('password', '');
+    window.location.reload();
+  }
+
   if (props.isVisible) {
     if (props.isAdmin) {
       return (
         <Nav id="nav">
           <Nav.Item className='title'>Inscryption Trump</Nav.Item>
           <Nav.Item>
-            <Nav.Link className='login' href="login">Login</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
             <Dropdown>
               <Dropdown.Toggle className='register_dropdown' variant="success" id="dropdown-basic">Register</Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item href="User-register">User</Dropdown.Item>
                 <Dropdown.Item href="Card-register">Card</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
@@ -46,6 +51,9 @@ function Navbar(props) {
             <button className='play_dropdown' href="Play">Play</button>
           </Nav.Item>
           <Nav.Item>
+              <button className='exit_account' onClick={exitAccount}>Exit Account</button>
+          </Nav.Item>
+          <Nav.Item>
               <button className='delete_account' onClick={deleteAccount}>Delete Account</button>
           </Nav.Item>
         </Nav>
@@ -55,18 +63,10 @@ function Navbar(props) {
         <Nav id="nav">
           <Nav.Item className='title'>Inscryption Trump</Nav.Item>
           <Nav.Item>
-            <Nav.Link className='login' href="login">Login</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Dropdown>
-              <Dropdown.Toggle className='register_dropdown' variant="success" id="dropdown-basic">Register</Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item href="user-register">User</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Nav.Item>
-          <Nav.Item>
             <Nav.Link className='play' href="play">Play</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+              <button className='exit_account' onClick={exitAccount}>Exit Account</button>
           </Nav.Item>
           <Nav.Item>
               <button className='delete_account' onClick={deleteAccount}>Delete Account</button>

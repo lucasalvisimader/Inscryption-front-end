@@ -1,4 +1,4 @@
-.title, .delete_account, .play {
+.title, .delete_account, .exit_account, .play {
     font-size: 1.5rem !important;
     color: #e18234;
     padding: 0.5rem;
@@ -16,14 +16,14 @@
     color: #bb7c39 !important;
 }
 
-.dropdown button, a.nav-link, .delete_account, .play {
+.dropdown button, a.nav-link, .delete_account, .exit_account, .play {
     font-size: 1.5rem !important;
     background-color: transparent !important;
     border: none !important;
     color: white;
 }
 
-.dropdown button:hover, a.nav-link:hover, .delete_account:hover, .play:hover {
+.dropdown button:hover, a.nav-link:hover, .delete_account:hover, .exit_account:hover, .play:hover {
     color: rgb(165, 165, 165) !important;
     background-color: transparent !important;
 }
@@ -40,7 +40,7 @@
     min-width: 70rem;
 }
 
-.dropdown button, a.nav-link, .delete_account, .play {
+.dropdown button, a.nav-link, .delete_account, .exit_account, .play {
     color: #bb7c39 !important;
     border: none !important;
 }
