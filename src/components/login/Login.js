@@ -18,7 +18,8 @@ function Login(props) {
   //   setUser({...user, [event.target.name] : event.target.value})
   // }
 
-  async function handleLogin() {
+  async function handleLogin(e) {
+    e.preventDefault();
     try {
       const [loginResponse] = await Promise.all([
         UserService.listLogin(username, password)
@@ -49,7 +50,7 @@ function Login(props) {
   }
 
   return (
-    <Form id="login" onSubmit={handleLogin}>
+    <Form id="login" onSubmit={(e) => handleLogin(e)}>
       <Form.Group className="mb-3">
         <Form.Label>Name</Form.Label>
         <Form.Control id="name" name='name' type="text"
