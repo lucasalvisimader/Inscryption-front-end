@@ -45,7 +45,7 @@ function Login(props) {
     } catch (error) {
       console.log(error);
     }
-    window.location.reload();
+    window.location.href = "/";
   }
 
   return (

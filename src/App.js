@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "./components/login/Login"
 import Play from './components/play/Play';
 import Navbar from "./components/nav/Nav";
+import Main from './components/main/Main';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
 import React from "react";
@@ -24,8 +25,7 @@ function App() {
             <Navbar isVisible={isVisible} username={username} password={password} 
             isLoggedIn={isLoggedIn} isAdmin={isAdmin}/>
             <Routes>
-                <Route index element={<Login setUsername={setUsername} setPassword={setPassword} 
-                    setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin}/>} />
+                <Route index element={<Main />} />
                 <Route path="/login" element={<Login setUsername={setUsername} setPassword={setPassword} 
                     setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin}/>}/>
                 <Route path="/card-register" element={<CardRegister />}/>

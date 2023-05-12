@@ -22,7 +22,7 @@ function Navbar(props) {
     Cookies.set('isLoggedIn', false);
     Cookies.set('username', '');
     Cookies.set('password', '');
-    window.location.reload();
+    window.location.href = "/";
   }
 
   if (props.isVisible) {
@@ -46,9 +46,6 @@ function Navbar(props) {
                 <Dropdown.Item href="Show-one-card">One card</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-          </Nav.Item>
-          <Nav.Item>
-            <button className='play_dropdown' href="Play">Play</button>
           </Nav.Item>
           <Nav.Item>
               <button className='exit_account' onClick={exitAccount}>Exit Account</button>

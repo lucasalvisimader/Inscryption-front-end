@@ -6,7 +6,7 @@
 
 .card {
     background-size: cover;
-    height: fit-content;
+    height: 24rem !important;
     width: 16rem;
     border: none;
     margin: 1rem;

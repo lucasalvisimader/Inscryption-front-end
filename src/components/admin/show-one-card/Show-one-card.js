@@ -23,28 +23,28 @@ function ShowOneCard() {
 
     return <div className='cardAndSearch'>
         <div className='oneCard'>
-            <div id="modal">
+            <div id="modal_one_card">
                 <div className="modal-content">
                     <input type={'number'} placeholder={"Search by ID"} 
                     onChange={(event) => setId(event.target.value)} required />
                     <div>
-                        <button type='submit' onClick={handleOneCard}>Submit</button>
+                        <button id='show_one_card_submit' type='submit' onClick={handleOneCard}>Submit</button>
                     </div>
                 </div>
             </div>
         </div>
         <div className="card_edit_delete">
-            <div className="card" style={cardStyle}>
-                <div className="header">
-                    <div className="cardName">
+            <div className="card_one_card" style={cardStyle}>
+                <div className="header_one_card">
+                    <div className="cardName_one_card">
                         <h2 style={nameStyle}>{card.name}</h2>
                     </div>
                 </div>
-                <div className="footer">
-                    <div id="power">
+                <div className="footer_one_card">
+                    <div id="power_one_card">
                         <h1>{card.power}</h1>
                     </div>
-                    <div id="health">
+                    <div id="health_one_card">
                         <h1>{card.health}</h1>
                     </div>
                 </div>

@@ -1,14 +1,58 @@
 .cardAndSearch {
+    margin-top: 2rem;
     width: 100vw;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-#modal {
+#modal_one_card {
     margin: 2rem;
     min-width: 20rem;
 }
 
-.card {
-    height: 24rem !important;
+#show_one_card_submit {
+    color:#bb7c39;;
+}
+
+#show_one_card_submit:hover {
+    color: #a5a5a5;
+    transition: 0.3s;
+}
+
+.card_one_card {
+    background-size: cover;
+    height: 24rem;
+    width: 16rem;
+    border: none;
+    margin: 1rem;
+    color: black;
+}
+
+h1 {
+    font-size: 3.7rem !important;
+}
+
+.header_one_card {
+    margin-top: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_one_card {
+    margin: 1.5rem;
+    margin-right: 1.5rem;
+    margin-top: 14rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+#power_one_card {
+    margin-top: 2.5rem;
+    margin-right: 3rem;
+}
+
+#health_one_card {
+    margin-top: 4rem;
 }
