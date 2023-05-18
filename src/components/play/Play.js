@@ -9,7 +9,11 @@ function Play(props) {
     
     return (
         <div className='game'>
-            <p>OI</p>
+            <div className='main_game'>
+            </div>
+            <div className='footer_game'>
+                
+            </div>
         </div>
     );
 }

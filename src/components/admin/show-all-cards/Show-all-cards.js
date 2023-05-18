@@ -117,8 +117,12 @@ function ShowAllCards() {
         };
 
         const nameStyle = {
-            fontSize: `calc(3rem - ${card.name.length}px)`,
-            marginBottom: `calc(${card.name.length}px - 120px)`
+            fontSize: `calc(3rem - (${card.name.length}px) * 2)`,
+            marginBottom: `calc(${card.name.length}px - 20px)`
+        };
+
+        const footerStyle = {
+            marginTop: `calc(12rem + (${card.name.length}px - 20px))`
         };
 
         function getCardName() {
@@ -146,14 +150,14 @@ function ShowAllCards() {
                     <div className="header">
                         <div className="cardName" id={cardName}>
                             <input name='name' style={nameStyle}
-                            id="inputsShowAllCards" disabled={disabledEdit}
+                            id="inputsShowAllCards" className="inputName" disabled={disabledEdit}
                             onChange={(event) => setCard({...card, "name" : event.target.value})} 
                             placeholder={card.name}
                             type="text"
                             />
                         </div>
                     </div>
-                    <div className="footer">
+                    <div className="footer" style={footerStyle}>
                         <div id="power">
                             <input name='power' id="inputsShowAllCards"
                             className="h1"

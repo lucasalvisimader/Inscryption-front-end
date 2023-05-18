@@ -1,5 +1,25 @@
 .game {
+    background: url('/public/images/others/game_background.jpg');
+    background-size: 15rem;
     width: 100vw;
     height: 100vh;
-    background: aqua;
+    border-radius: 15rem;
+    position: absolute;
+}
+
+.main_game {
+    border-top-left-radius: 15rem;
+    border-top-right-radius: 15rem;
+    width: 100%;
+    height: 60%;
+    border-bottom: solid #fea02a 5px;
+}
+
+.footer_game {
+    border-bottom-left-radius: 10rem;
+    border-bottom-right-radius: 10rem;
+    width: 100%;
+    height: 40%;
+    background-color: #332827;
+    border-top: solid 4px black;
 }

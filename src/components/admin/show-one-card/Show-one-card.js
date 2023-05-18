@@ -14,7 +14,6 @@ function ShowOneCard() {
         ])
         setCard(loginResponse.data);
         setCardStyle({backgroundImage: `url('/images/imageType/${loginResponse.data.imageType}.png')`});
-        console.log({backgroundImage: `url('/images/imageType/${loginResponse.data.imageType}.png')`})
         setNameStyle({
             fontSize: `calc(3rem - ${loginResponse.data.name.length}px)`,
             marginBottom: `calc(${loginResponse.data.name.length}px - 120px)`

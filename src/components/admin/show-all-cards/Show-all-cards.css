@@ -46,9 +46,13 @@
     background-color: transparent;
     border: none;
     color: black;
-    max-width: 7rem;
+    max-width: 7.5rem;
     max-height: 4rem;
     text-align: center;
+}
+
+.inputName {
+    max-width: 14rem !important;
 }
 
 .card_edit_delete {
@@ -133,7 +137,7 @@
     justify-content: space-around;
     background-image: url('/public/images/others/navbar_background.png');
     margin: 1rem;
-    margin-top: -10rem;
+    margin-top: 0;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
