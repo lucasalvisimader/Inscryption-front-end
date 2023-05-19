@@ -49,7 +49,7 @@ function Play(props) {
                         };
                     
                         const nameStyle = {
-                            fontSize: `calc(2.5rem - (${card.name.length}px) * 2)`,
+                            fontSize: `calc(2.3rem - (${card.name.length}px) * 2)`,
                             marginBottom: `calc(${card.name.length}px - 20px)`
                         };
                     
