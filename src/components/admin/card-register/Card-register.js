@@ -49,6 +49,7 @@ function CardRegister() {
     }).catch(e => {
       console.log(e);
     })
+
     CardService.getSigils().then(response => {
       setsigilOptions(response.data.map(user => ({
         value: user,
@@ -109,7 +110,9 @@ function CardRegister() {
       <Form.Group className="mb-3">
         <Form.Label>Sigils</Form.Label>
         <Select ref={sigilsRef} 
+        id="sigils"
         isMulti required name='sigilsTypes'
+        data-test="sigils"
         placeholder="Sigils" 
         value={selectedOptions}
         onChange={handleSelectChange}

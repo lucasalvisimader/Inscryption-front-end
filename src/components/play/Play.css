@@ -1,6 +1,4 @@
 .game {
-    background: url('/public/images/others/game_background.jpg');
-    background-size: 15rem;
     width: 100vw;
     height: 100vh;
     border-radius: 15rem;
@@ -16,10 +14,69 @@
 }
 
 .footer_game {
-    border-bottom-left-radius: 10rem;
-    border-bottom-right-radius: 10rem;
     width: 100%;
     height: 40%;
-    background-color: #332827;
+    background: url("/public/images/others/game_background.jpg");
+    background-size: 15rem;
     border-top: solid 4px black;
+    display: flex;
+    justify-content: center;
+}
+
+.cards {
+    display: flex;
+}
+
+.card_play {
+    background-size: cover;
+    height: 13rem !important;
+    width: 8.5rem;
+    border: none;
+    margin: 1rem;
+    color: black;
+    cursor: pointer;
+}
+
+.card_play:hover {
+    margin-top: -3rem;
+    height: 16rem !important;
+    width: 10.5rem; 
+    transition: 0.2s;
+}
+
+.header_play {
+    margin-top: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputName_play {
+    margin-top: 0.2rem;
+}
+
+.card_play:hover .inputName_play {
+    margin-top: 0.1rem !important;
+}
+
+.footer_play {
+    margin: -0.5rem;
+    margin-right: 1.5rem;
+    margin-top: 11rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+#power_play {
+    margin-top: -3.5rem;
+    margin-left: 1.5rem;
+    margin-right: 5rem;
+}
+
+#health_play {
+    margin-top: -2.5rem;
+}
+
+.h1 {
+    font-size: 2rem !important;
 }

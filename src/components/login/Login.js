@@ -24,24 +24,26 @@ function Login(props) {
       const [loginResponse] = await Promise.all([
         UserService.listLogin(username, password)
       ]);
-      if (loginResponse.data.id === 1) {
-        Cookies.set('isAdmin', true);
-        Cookies.set('isLoggedIn', true);
-        Cookies.set('username', username);
-        Cookies.set('password', password);
-        props.username(username);
-        props.password(password);
-        props.setIsAdmin(true);
-        props.setIsLoggedIn(true);
-      } else {
-        Cookies.set('isAdmin', false);
-        Cookies.set('isLoggedIn', true);
-        Cookies.set('username', username);
-        Cookies.set('password', password);
-        props.username(username);
-        props.password(password);
-        props.setIsAdmin(false);
-        props.setIsLoggedIn(true);
+      if (loginResponse.data) {
+        if (loginResponse.data.id === 1) {
+          Cookies.set('isAdmin', true);
+          Cookies.set('isLoggedIn', true);
+          Cookies.set('username', username);
+          Cookies.set('password', password);
+          props.username(username);
+          props.password(password);
+          props.setIsAdmin(true);
+          props.setIsLoggedIn(true);
+        } else {
+          Cookies.set('isAdmin', false);
+          Cookies.set('isLoggedIn', true);
+          Cookies.set('username', username);
+          Cookies.set('password', password);
+          props.username(username);
+          props.password(password);
+          props.setIsAdmin(false);
+          props.setIsLoggedIn(true);
+        }
       }
     } catch (error) {
       console.log(error);

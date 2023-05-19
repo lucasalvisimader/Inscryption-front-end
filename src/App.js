@@ -32,7 +32,8 @@ function App() {
                 <Route path="/user-register" element={<UserRegister />}/>
                 <Route path="/show-all-cards" element={<ShowAllCards card={{}} />}/>
                 <Route path="/show-one-card" element={<ShowOneCard />}/>
-                <Route path="/play" element={<Play setIsVisible={setIsVisible} />}/>
+                <Route path="/play" element={<Play setIsVisible={setIsVisible} 
+                username={username} password={password}/>}/>
             </Routes>
         </BrowserRouter>
     )

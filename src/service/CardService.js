@@ -21,6 +21,15 @@ export const CardService = {
             console.error(error);
         }
     },
+
+    listFromUser : async (name, password) => {
+        try {
+            const response = await axios.get(url + "/listFromUser/" + name + "/" + password);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
     
     listAll : async () => {
         try {
