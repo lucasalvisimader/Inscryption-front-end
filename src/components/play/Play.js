@@ -81,7 +81,7 @@ function Play(props) {
                                         <div id="power_play">
                                             <h1
                                                 name='power'
-                                                className="h1"
+                                                className="h1_play"
                                                 onChange={(event) => setCard({...card, "power" : event.target.value})}
                                                 type="number"
                                             >
@@ -91,7 +91,7 @@ function Play(props) {
                                         <div id="health_play">
                                             <h1
                                                 name='health'
-                                                className="h1"
+                                                className="h1_play"
                                                 onChange={(event) => setCard({...card, "health" : event.target.value})} 
                                                 type="number"
                                             >
