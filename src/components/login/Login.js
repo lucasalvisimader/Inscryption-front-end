@@ -52,7 +52,7 @@ function Login(props) {
   }
 
   return (
-    <Form id="login" onSubmit={(e) => handleLogin(e)}>
+    <Form id="login">
       <Form.Group className="mb-3">
         <Form.Label>Name</Form.Label>
         <Form.Control id="name" name='name' type="text"
@@ -63,7 +63,7 @@ function Login(props) {
         <Form.Control id="password" name='password' type="password"
          placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} required/>
       </Form.Group>
-      <Button id='button_login' variant="primary" type="submit">
+      <Button id='button_login' variant="primary" onClick={(e) => handleLogin(e)}>
         Submit
       </Button>
     </Form>

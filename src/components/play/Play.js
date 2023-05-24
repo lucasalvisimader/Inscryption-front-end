@@ -5,9 +5,9 @@ import { CardService } from "../../service";
 function Play(props) {
 
     const [cards, setCards] = useState([]);
-    const [card, setCard] = useState({});
     const [FirstCards, setFirstCards] = useState([]);
     const [remainingCards, setRemainingCards] = useState([]);
+    const [currentCard, setCurrentCard] = useState(null);
     
     useEffect(() => {
         props.setIsVisible(false); 
@@ -39,6 +39,14 @@ function Play(props) {
         }
     }, [cards]);
 
+    function getCardFromDeck() {
+        if (remainingCards.length > 0) {
+          const nextCard = remainingCards[0];
+          setRemainingCards(remainingCards.slice(1));
+          setCurrentCard(nextCard);
+        }
+    }      
+
     return (
         <div className='game'>
             <div className='main_game'>
@@ -52,7 +60,7 @@ function Play(props) {
                         };
                     
                         const nameStyle = {
-                            fontSize: `calc(2.3rem - (${card.name.length}px) * 2)`,
+                            fontSize: `calc(2rem - (${card.name.length}px))`,
                             marginBottom: `calc(${card.name.length}px - 20px)`
                         };
                     
@@ -65,36 +73,27 @@ function Play(props) {
                                 <div className="card_play" style={cardStyle}>
                                     <div className="header_play">
                                         <div className="cardName_play">
-                                            <h2
-                                                name='name'
+                                            <h2 name='name'
                                                 style={nameStyle}
                                                 id="inputsShowAllCards"
-                                                className="inputName_play"
-                                                onChange={(event) => setCard({...card, "name" : event.target.value})} 
-                                                type="text"
-                                            >
+                                                className="name_play"
+                                                type="text">
                                                 {card.name}
                                             </h2>
                                         </div>
                                     </div>
                                     <div className="footer_play" style={footerStyle}>
                                         <div id="power_play">
-                                            <h1
-                                                name='power'
+                                            <h1 name='power'
                                                 className="h1_play"
-                                                onChange={(event) => setCard({...card, "power" : event.target.value})}
-                                                type="number"
-                                            >
+                                                type="number">
                                                 {card.power}
                                             </h1>
                                         </div>
                                         <div id="health_play">
-                                            <h1
-                                                name='health'
+                                            <h1 name='health'
                                                 className="h1_play"
-                                                onChange={(event) => setCard({...card, "health" : event.target.value})} 
-                                                type="number"
-                                            >
+                                                type="number">
                                                 {card.health}
                                             </h1>
                                         </div>
@@ -104,65 +103,42 @@ function Play(props) {
                         );
                     })}
                 </div>
-                <div className='remaining-cards'>
-                {remainingCards.map((card, id) => {
-                    const cardStyle = {
-                        backgroundImage: `url('/images/imageType/${card.imageType}.png')`
-                    };
-                
-                    const nameStyle = {
-                        fontSize: `calc(2.3rem - (${card.name.length}px) * 2)`,
-                        marginBottom: `calc(${card.name.length}px - 20px)`
-                    };
-                
-                    const footerStyle = {
-                        marginTop: `calc(12rem + (${card.name.length}px - 20px))`
-                    };
-                
-                    return (
-                        <div className="card_play_id" key={id}>
-                            <div className="card_play" style={cardStyle}>
-                                <div className="header_play">
-                                    <div className="cardName_play">
-                                        <h2
-                                            name='name'
-                                            style={nameStyle}
-                                            id="inputsShowAllCards"
-                                            className="inputName_play"
-                                            onChange={(event) => setCard({...card, "name" : event.target.value})} 
-                                            type="text"
-                                        >
-                                            {card.name}
-                                        </h2>
-                                    </div>
-                                </div>
-                                <div className="footer_play" style={footerStyle}>
-                                    <div id="power_play">
-                                        <h1
-                                            name='power'
-                                            className="h1"
-                                            onChange={(event) => setCard({...card, "power" : event.target.value})}
-                                            type="number"
-                                        >
-                                            {card.power}
-                                        </h1>
-                                    </div>
-                                    <div id="health_play">
-                                        <h1
-                                            name='health'
-                                            className="h1"
-                                            onChange={(event) => setCard({...card, "health" : event.target.value})} 
-                                            type="number"
-                                        >
-                                            {card.health}
-                                        </h1>
-                                    </div>
-                                </div>
+                <div className='remaining_cards'>
+                {currentCard && (
+                <div className="card_play_id" key={currentCard.id}>
+                    <div className="card_play" style={`backgroundImage: url('/images/imageType/${currentCard.imageType}.png')`}>
+                        <div className="header_play">
+                            <div className="cardName_play">
+                                <h2 name='name'
+                                    style={nameStyle}
+                                    id="inputsShowAllCards"
+                                    className="name_play"
+                                    type="text">
+                                    {currentCard.name}
+                                </h2>
                             </div>
                         </div>
-                    );
-                })}
+                        <div className="footer_play" style={`marginTop: calc(12rem + (${currentCard.name.length}px - 20px))`}>
+                            <div id="power_play">
+                                <h1 name='power'
+                                    className="h1"
+                                    type="number">
+                                    {currentCard.power}
+                                </h1>
+                            </div>
+                            <div id="health_play">
+                                <h1 name='health'
+                                    className="h1"
+                                    type="number">
+                                    {currentCard.health}
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                )}
+                </div>
+                <button className='deck' onClick={getCardFromDeck}></button>
             </div>
         </div>
     );

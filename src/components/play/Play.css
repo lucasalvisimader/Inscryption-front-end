@@ -51,11 +51,11 @@
     align-items: center;
 }
 
-.inputName_play {
-    margin-top: 0.2rem;
+.name_play {
+    margin-top: 0.4rem;
 }
 
-.card_play:hover .inputName_play {
+.card_play:hover .name_play {
     transition: 0.2s;
     margin-top: 0.5rem !important;
 }
@@ -87,4 +87,19 @@
 
 .h1_play {
     font-size: 2rem !important;
+}
+
+.deck {
+    height: 13rem !important;
+    min-width: 8.5rem;
+    background: url("/public/images/others/backcard.png");
+    background-repeat: no-repeat;
+    background-size: 7.7em;
+    margin: 1rem;
+    position: absolute;
+    right: 0;
+}
+
+.cards_deck {
+    display: none;
 }
