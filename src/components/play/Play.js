@@ -7,7 +7,6 @@ function Play(props) {
     const [cards, setCards] = useState([]);
     const [FirstCards, setFirstCards] = useState([]);
     const [remainingCards, setRemainingCards] = useState([]);
-    const [currentCard, setCurrentCard] = useState(null);
     
     useEffect(() => {
         props.setIsVisible(false); 
@@ -41,9 +40,11 @@ function Play(props) {
 
     function getCardFromDeck() {
         if (remainingCards.length > 0) {
-          const nextCard = remainingCards[0];
-          setRemainingCards(remainingCards.slice(1));
-          setCurrentCard(nextCard);
+            let array = FirstCards;
+            const nextCard = remainingCards[0];
+            array.push(nextCard);
+            setFirstCards(array);
+            setRemainingCards(remainingCards.slice(1));
         }
     }      
 
@@ -56,7 +57,9 @@ function Play(props) {
                 <div className='cards'>
                     {FirstCards.map((card, id) => {
                         const cardStyle = {
-                            backgroundImage: `url('/images/imageType/${card.imageType}.png')`
+                            backgroundImage: `url('/images/imageType/${card.imageType}.png')`,
+                            marginRight: `calc(3rem - (${cards.length}px * 12))`,
+                            marginTop: `3rem`
                         };
                     
                         const nameStyle = {
@@ -103,42 +106,9 @@ function Play(props) {
                         );
                     })}
                 </div>
-                <div className='remaining_cards'>
-                {currentCard && (
-                <div className="card_play_id" key={currentCard.id}>
-                    <div className="card_play" style={`backgroundImage: url('/images/imageType/${currentCard.imageType}.png')`}>
-                        <div className="header_play">
-                            <div className="cardName_play">
-                                <h2 name='name'
-                                    style={nameStyle}
-                                    id="inputsShowAllCards"
-                                    className="name_play"
-                                    type="text">
-                                    {currentCard.name}
-                                </h2>
-                            </div>
-                        </div>
-                        <div className="footer_play" style={`marginTop: calc(12rem + (${currentCard.name.length}px - 20px))`}>
-                            <div id="power_play">
-                                <h1 name='power'
-                                    className="h1"
-                                    type="number">
-                                    {currentCard.power}
-                                </h1>
-                            </div>
-                            <div id="health_play">
-                                <h1 name='health'
-                                    className="h1"
-                                    type="number">
-                                    {currentCard.health}
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                )}
-                </div>
-                <button className='deck' onClick={getCardFromDeck}></button>
+                {remainingCards.length > 0 &&
+                    <button className='deck' onClick={getCardFromDeck}></button>
+                }
             </div>
         </div>
     );

@@ -28,17 +28,18 @@
 }
 
 .card_play {
+    position: relative;
     background-size: cover;
     height: 13rem !important;
     width: 8.5rem;
     border: none;
-    margin: 1rem;
     color: black;
     cursor: pointer;
 }
 
 .card_play:hover {
-    margin-top: -3rem;
+    z-index: 100;
+    margin-top: -3rem !important;
     height: 16rem !important;
     width: 10.5rem; 
     transition: 0.2s;
@@ -70,8 +71,8 @@
 
 .card_play:hover .footer_play {
     transition: 0.2s;
-    margin: -0.4rem;
-    margin-right: 1.2rem;
+    margin: -0.4rem !important;
+    margin-right: 1.2rem !important;
     margin-top: 13.5rem !important;
 }
 
