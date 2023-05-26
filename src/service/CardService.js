@@ -31,19 +31,13 @@ export const CardService = {
         }
     },
     
-    listAll : async () => {
+    listAll : async (page) => {
         try {
-            const response = await axios.get(url + "/listAll");
+            const response = await axios.get(url + "/listAll?page=" + page);
             return response;
         } catch (error) {
             console.error(error);
         }
-        // try {
-        //     const response = await axios.get(url + "/listAll");
-        //     return response;
-        // } catch (error) {
-        //     console.error(error);
-        // }
     },
 
     edit : async (id, card) => {

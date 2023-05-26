@@ -8,6 +8,11 @@ function Play(props) {
     const [FirstCards, setFirstCards] = useState([]);
     const [remainingCards, setRemainingCards] = useState([]);
     
+    const randomizeCards = (cards) => {
+        let randomizedCards = [...cards];
+        return randomizedCards.sort(() => Math.random() - 0.5);
+    };
+    
     useEffect(() => {
         props.setIsVisible(false); 
         return(() => props.setIsVisible(true));
@@ -15,7 +20,15 @@ function Play(props) {
 
     useEffect(() => {
         CardService.listFromUser(props.username, props.password).then(response => {
-            setCards(response.data);
+            let arr = response.data;
+            arr.forEach(card => {
+                if (card.imageType === "SQUIRREL") {
+                    for (let i = 0; i < 20; i++) {
+                        arr.push(card);
+                    }
+                }
+            });
+            setCards(randomizeCards(arr));
         }).catch(e => {
             console.log(e);
         });
@@ -46,7 +59,7 @@ function Play(props) {
             setFirstCards(array);
             setRemainingCards(remainingCards.slice(1));
         }
-    }      
+    }
 
     return (
         <div className='game'>
@@ -54,13 +67,16 @@ function Play(props) {
                 <div className='hammer'>
                     <button className='hammer_button'></button>
                 </div>
+                {remainingCards.length > 0 &&
+                    <button className='deck' onClick={getCardFromDeck}></button>
+                }
             </div>
             <div className='footer_game'>
                 <div className='cards'>
                     {FirstCards.map((card, id) => {
                         const cardStyle = {
                             backgroundImage: `url('/images/imageType/${card.imageType}.png')`,
-                            marginRight: `calc(3rem - (${cards.length}px * 12))`
+                            marginRight: `calc(3rem - (${Math.min(FirstCards.length, 14)}px * 10))`
                         };
                     
                         const nameStyle = {
@@ -107,9 +123,6 @@ function Play(props) {
                         );
                     })}
                 </div>
-                {remainingCards.length > 0 &&
-                    <button className='deck' onClick={getCardFromDeck}></button>
-                }
             </div>
         </div>
     );

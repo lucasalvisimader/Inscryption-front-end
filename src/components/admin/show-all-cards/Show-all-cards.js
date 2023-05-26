@@ -6,6 +6,8 @@ function ShowAllCards() {
 
     const [cards, setCards] = useState([]);
     const [card, setCard] = useState({});
+
+    const [page, setPage] = useState(0);
     
     const [showModal, setShowModal] = useState(false);
     const [cardIdToDelete, setCardIdToDelete] = useState(null);
@@ -45,12 +47,12 @@ function ShowAllCards() {
     
     
     useEffect(() => {
-        CardService.listAll().then(response => {
-            setCards(response.data);
+        CardService.listAll(page).then(response => {
+            setCards(response.data.content);
         }).catch(e => {
             console.log(e);
         })
-    }, []);
+    }, [page]);
     
     function handleConfirmDelete() {
         setShowModal(false);
@@ -192,6 +194,9 @@ function ShowAllCards() {
 
     return <div>
         <div id="page_cards">{PageCards}</div>
+        <div className="nav_pages">
+            <button className="next_page" onClick={() => setPage(card + 1)}>a</button>
+        </div>
         {showModal && (
             <div id="modal">
                 <div className="overlay">
