@@ -51,15 +51,16 @@ function Play(props) {
     return (
         <div className='game'>
             <div className='main_game'>
-
+                <div className='hammer'>
+                    <button className='hammer_button'></button>
+                </div>
             </div>
             <div className='footer_game'>
                 <div className='cards'>
                     {FirstCards.map((card, id) => {
                         const cardStyle = {
                             backgroundImage: `url('/images/imageType/${card.imageType}.png')`,
-                            marginRight: `calc(3rem - (${cards.length}px * 12))`,
-                            marginTop: `3rem`
+                            marginRight: `calc(3rem - (${cards.length}px * 12))`
                         };
                     
                         const nameStyle = {

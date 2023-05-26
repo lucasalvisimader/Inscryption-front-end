@@ -23,6 +23,13 @@
     justify-content: center;
 }
 
+.hammer {
+    position: absolute;
+    bottom: 15rem;
+    left: 15rem;
+    background: e18234;
+}
+
 .cards {
     display: flex;
 }
