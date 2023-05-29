@@ -5,8 +5,14 @@ import { CardService } from "../../service";
 function Play(props) {
 
     const [cards, setCards] = useState([]);
-    const [FirstCards, setFirstCards] = useState([]);
+    const [FirstCards, setFirstCards] = useState(
+        cards.map((card) => ({
+          ...card,
+          isActive: false
+        }))
+    );
     const [remainingCards, setRemainingCards] = useState([]);
+    const [isActive, setIsActive] = useState(false);
     
     const randomizeCards = (cards) => {
         let randomizedCards = [...cards];
@@ -61,6 +67,14 @@ function Play(props) {
         }
     }
 
+    const handleActive = (id) => {
+        setFirstCards((prevCards) =>
+            prevCards.map((card) =>
+            card.id === id ? { ...card, isActive: !card.isActive } : card
+            )
+        );
+    };
+
     return (
         <div className='game'>
             <div className='main_game'>
@@ -90,7 +104,8 @@ function Play(props) {
                     
                         return (
                             <div className="card_play_id" key={id}>
-                                <div className="card_play" style={cardStyle}>
+                                <div className={"card_play " + (card.isActive ? 'active' : 'inactive')} 
+                                style={cardStyle} onClick={() => handleActive(card.id)}>
                                     <div className="header_play">
                                         <div className="cardName_play">
                                             <h2 name='name'

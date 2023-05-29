@@ -78,6 +78,10 @@
     transition: 0.2s;
 }
 
+.active{
+    color:red;
+}
+
 .header_play {
     margin-top: 0.7rem;
     display: flex;
@@ -109,6 +113,14 @@
     margin-top: 13.5rem !important;
 }
 
+.card_play:focus {
+    z-index: 100;
+    margin-top: -3rem !important;
+    height: 16rem !important;
+    width: 10.5rem; 
+    transition: 0.2s;
+}
+
 #power_play {
     margin-top: -3.5rem;
     margin-left: 1.5rem;
@@ -133,6 +145,14 @@
     position: absolute;
     right: 0;
     top: 5rem
+}
+
+.deck:hover {
+    background-size: 10em;
+    margin-top: -1rem !important;
+    height: 19rem !important;
+    width: 11rem; 
+    transition: 0.2s;
 }
 
 .cards_deck {
