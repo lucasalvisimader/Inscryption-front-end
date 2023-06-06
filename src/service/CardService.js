@@ -75,4 +75,22 @@ export const CardService = {
             console.error(error);
         }
     },
+
+    sendImage : (img) => {
+        axios.post(url + "/sendImage", img).then(response => {
+            return response;
+        }).catch(error => {
+            console.error(error);
+        });
+        return "Ok";
+    },
+
+    listImage : async (bucketName, keyName) => {
+        try {
+            const response = await axios.get(url + "/listImage/" + bucketName + "/" + keyName);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
