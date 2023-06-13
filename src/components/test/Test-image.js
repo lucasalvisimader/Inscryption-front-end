@@ -1,44 +1,53 @@
 import { toPng } from 'html-to-image';
 import { useState } from 'react';
 import { CardService } from '../../service';
-
-const converterParaImagem = async () => {
-    const element = document.getElementById('testImage');
-    try {
-      const dataUrl = await toPng(element);
-      const blob = dataURLToBlob(dataUrl);
-  
-      const formData = new FormData();
-      formData.append('img', blob, 'image.png');
-      
-      CardService.sendImage(formData);
-    } catch (error) {
-      console.error('Erro ao converter HTML para imagem', error);
-    }
-};
-
-
-function dataURLToBlob(dataUrl) {
-    const arr = dataUrl.split(',');
-    const mime = arr[0].match(/:(.*?);/)[1];
-    const base64 = arr[1];
-
-    const byteCharacters = atob(base64);
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    const byteArray = new Uint8Array(byteNumbers);
-
-    const blob = new Blob([byteArray], { type: mime });
-    return blob;
-}
+import { ImageCardService } from '../../service';
 
 function TestImage() {
     const [card, setCard] = useState({})
     const [id, setId] = useState(0);
     const [cardStyle, setCardStyle] = useState({backgroundImage: `url('/images/imageType/blank.png')`});
     const [nameStyle, setNameStyle] = useState({});
+
+    const converterParaImagem = async () => {
+        const element = document.getElementById('testImage').firstChild;
+        try {
+            const dataUrl = await toPng(element);
+            const blob = dataURLToBlob(dataUrl);
+        
+            const formData = new FormData();
+            formData.append('img', blob, 'image.png');
+        
+            ImageCardService.sendImage(formData, document.getElementById("test_image_input").value);
+            const listImage = await ImageCardService.listImage("bucket-romario", document.getElementById("test_image_input").value);
+            const imageURL = listImage.data;
+
+            const imgElement = document.createElement('img');
+            imgElement.src = imageURL;
+            if (document.getElementById('testImage').firstChild !== document.getElementById('testImage').lastChild) {
+                 document.getElementById('testImage').removeChild(document.getElementById('testImage').lastChild);
+            }
+            document.getElementById('testImage').appendChild(imgElement);
+        } catch (error) {
+          console.error('Erro ao converter HTML para imagem', error);
+        }
+    };
+    
+    function dataURLToBlob(dataUrl) {
+        const arr = dataUrl.split(',');
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const base64 = arr[1];
+    
+        const byteCharacters = atob(base64);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+    
+        const blob = new Blob([byteArray], { type: mime });
+        return blob;
+    }
 
     async function handleOneCard() {
         const [loginResponse] = await Promise.all([
@@ -52,12 +61,13 @@ function TestImage() {
         });
     }
 
-    return <div className='cardAndSearch'>
+    return <>
+    <div className='cardAndSearch'>
         <div className='oneCard'>
             <div id="modal_one_card">
                 <div className="modal-content">
                     <input type={'number'} placeholder={"Search by ID"} 
-                    onChange={(event) => setId(event.target.value)} required />
+                    onChange={(event) => setId(event.target.value)} id="test_image_input" required />
                     <div>
                         <button id='show_one_card_submit' type='submit' onClick={handleOneCard}>Submit</button>
                         <button id='show_one_card_send_image' type='submit' onClick={converterParaImagem}>Send Image</button>
@@ -83,6 +93,7 @@ function TestImage() {
             </div>
         </div>
     </div>
+    </>
 }
 
 export default TestImage;
