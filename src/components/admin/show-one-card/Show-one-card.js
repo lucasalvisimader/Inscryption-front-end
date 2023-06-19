@@ -11,37 +11,51 @@ function ShowOneCard() {
 
     // Converte o conteúdo de um elemento HTML para uma imagem e a envia para o servidor.
     const convertToImage = async () => {
-        const element = document.getElementById('testImage').firstChild; // Obtém o primeiro 
-        // filho do elemento com o ID 'testImage'.
+        const element = document.getElementById('card_show_one_card').firstChild; 
+        // Obtém o primeiro filho do elemento do ID 'card_show_one_card'.
         try {
-            const dataUrl = await toPng(element); // Converte o elemento para uma imagem 
+            const dataUrl = await toPng(element); 
+            // Converte o elemento para uma imagem 
             // em formato de URL.
-            const blob = dataURLToBlob(dataUrl); // Converte a URL em um objeto Blob.
+            const blob = dataURLToBlob(dataUrl);
+            // Converte a URL em um objeto Blob.
         
-            const formData = new FormData(); // Cria um objeto FormData.
-            formData.append('img', blob, 'image.png'); // Adiciona o objeto Blob ao FormData 
-            // com o nome 'img' e o nome de arquivo 'image.png'.
+            const formData = new FormData(); 
+            // Cria um objeto FormData.
+            formData.append('img', blob, 'image.png'); 
+            // Adiciona o objeto Blob ao FormData com o nome 'img' e o nome de arquivo 'image.png'.
         
-            ImageCardService.sendImage(formData, document.getElementById("test_image_input").value); 
-            // Envia o FormData e o valor do elemento com o ID 'test_image_input' 
+            ImageCardService.sendImage(formData, id); 
+            // Envia o FormData e o valor do elemento com o ID 'show_one_card_id_input' 
             // para o serviço ImageCardService.
         } catch (error) {
-          console.error('Erro ao converter HTML para imagem', error); // Exibe um erro se 
-        //   houver problemas ao converter para imagem.
+          console.error('Erro ao converter HTML para imagem', error); 
+          // Exibe um erro se houver problemas ao converter para imagem.
         }
     };
 
     // Obtém a imagem do servidor com base no ID fornecido.
     const getImage = async () => {
-        const listImage = await ImageCardService.listImage("bucket-romario", document.getElementById("test_image_input").value); // Obtém a imagem do serviço ImageCardService com base no valor do elemento com o ID 'test_image_input'.
+        const listImage = await ImageCardService.listImage("bucket-romario", id); 
+        // Obtém a imagem do serviço ImageCardService com base no valor do elemento com o 
+        // ID 'show_one_card_id_input'.
+        
         if (listImage !== null && listImage !== undefined) {
-            const imageURL = listImage.data; // Obtém a URL da imagem retornada.
-            const imgElement = document.createElement('img'); // Cria um novo elemento de imagem.
+            const imageURL = listImage.data; 
+            // Obtém a URL da imagem retornada.
+
+            const imgElement = document.createElement('img'); 
+            // Cria um novo elemento de imagem.
+
             imgElement.src = imageURL;
-            document.getElementById('testImage').innerHTML = ''; // Limpa o conteúdo do elemento 
-            // com o ID 'testImage'.
-            document.getElementById('testImage').appendChild(imgElement); // Adiciona o elemento de 
-            // imagem ao elemento com o ID 'testImage'.
+            // Coloca a url da imagem como o valor da imageURL
+            document.getElementById('card_show_one_card').innerHTML = ''; 
+            // Limpa o conteúdo do elemento 
+            // com o ID 'card_show_one_card'.
+
+            document.getElementById('card_show_one_card').appendChild(imgElement); 
+            // Adiciona o elemento de 
+            // imagem ao elemento com o ID 'card_show_one_card'.
         }
     }
     
@@ -80,7 +94,7 @@ function ShowOneCard() {
         //Um novo objeto Blob é criado usando a 
         // matriz de bytes e o tipo MIME extraído anteriormente. 
         // O objeto Blob representa os dados em formato binário.
-        
+
         return blob;
     }
 
@@ -97,15 +111,16 @@ function ShowOneCard() {
             marginBottom: `calc(${loginResponse.data.name.length}px - 120px)`,
         });
     }
-// Executa o código dentro do useEffect quando os valores de "card", 
-// "cardStyle" ou "nameStyle" são alterados.
-    useEffect(() => {
-        const testImageElement = document.getElementById('testImage');
-        testImageElement.innerHTML = '';
 
-        const testImageContainer = document.createElement('div');
-        testImageContainer.className = 'card_edit_delete';
-        testImageContainer.id = 'testImage';
+    // Executa o código dentro do useEffect quando os valores de "card", "cardStyle" ou "nameStyle" 
+    // são alterados.
+    useEffect(() => {
+        const cardElement = document.getElementById('card_show_one_card');
+        cardElement.innerHTML = '';
+
+        const cardContainer = document.createElement('div');
+        cardContainer.className = 'card_edit_delete';
+        cardContainer.id = 'card_show_one_card';
 
         const cardOneCard = document.createElement('div');
         cardOneCard.className = 'card_one_card';
@@ -147,9 +162,9 @@ function ShowOneCard() {
         cardOneCard.appendChild(headerOneCard);
         cardOneCard.appendChild(footerOneCard);
 
-        testImageContainer.appendChild(cardOneCard);
+        cardContainer.appendChild(cardOneCard);
 
-        testImageElement.appendChild(testImageContainer);
+        cardElement.appendChild(cardContainer);
     }, [card, cardStyle, nameStyle]);
 
     return <>
@@ -158,7 +173,7 @@ function ShowOneCard() {
             <div id="modal_one_card">
                 <div className="modal-content">
                     <input type={'number'} placeholder={"Search by ID"} min={1}
-                    onChange={(event) => setId(event.target.value)} id="test_image_input" required />
+                    onChange={(event) => setId(event.target.value)} id="show_one_card_id_input" required />
                     <div>
                         <button id='show_one_card_submit' className='button_show_one_card' type='submit' 
                         onClick={handleOneCard}>Get Image Attributes</button>
@@ -170,7 +185,7 @@ function ShowOneCard() {
                 </div>
             </div>
         </div>
-        <div className="card_edit_delete" id='testImage'>
+        <div className="card_edit_delete" id='card_show_one_card'>
             <div className="card_one_card" style={cardStyle}>
                 <div className="header_one_card">
                     <div className="cardName_one_card">
