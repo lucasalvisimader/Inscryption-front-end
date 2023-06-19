@@ -146,12 +146,12 @@ button {
     border: none;
 }
 
-#delete_button_card, #edit_button_card {
+#delete_button_card, #edit_button_card, #image_button_card {
     background-color: transparent !important;
     color: #bb7c39;
 }
 
-#delete_button_card:hover, #edit_button_card:hover {
+#delete_button_card:hover, #edit_button_card:hover, #image_button_card:hover {
     color: #a5a5a5;
     transition: 0.3s;
 }
@@ -211,4 +211,11 @@ button {
 
 ::placeholder {
     color: black;
-  }
+}
+
+.imageNotFound {
+    background-image: url("/public/images/others/imageNotFound.png");
+    background-size: 16rem;
+    background-repeat: no-repeat;
+    display: inline-block;
+}

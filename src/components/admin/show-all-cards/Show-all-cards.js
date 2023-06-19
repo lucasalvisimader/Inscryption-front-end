@@ -1,5 +1,7 @@
+import { ImageCardService } from "../../../service";
 import { React, useState, useEffect } from "react";
 import { CardService } from "../../../service";
+import { toPng } from 'html-to-image';
 import "./Show-all-cards.css";
 
 function ShowAllCards() {
@@ -10,6 +12,8 @@ function ShowAllCards() {
     const [page, setPage] = useState(0);
     
     const [showModal, setShowModal] = useState(false);
+    const [showModalImage, setShowModalImage] = useState(false);
+    const [imageURL, setImageURL] = useState(null);
     const [cardIdToDelete, setCardIdToDelete] = useState(null);
     const [disabledEdit, setDisabledEdit] = useState(true);
 
@@ -112,6 +116,21 @@ function ShowAllCards() {
         CardService.edit(id, card);
         window.location.reload();
     }
+  
+    async function handleImage(id) {
+        try {
+            const listImage = await ImageCardService.listImage("bucket-romario", id);
+            setShowModalImage(true);
+            if (listImage !== null && listImage !== undefined) {
+                const imageURL = listImage.data;
+                setImageURL(imageURL);
+            } else {
+                setImageURL(null);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const PageCards = cards.map((card, id) => {
         const cardStyle = {
@@ -181,8 +200,11 @@ function ShowAllCards() {
                     </div>
                 </div>
                 <div className="edit_delete_card">
-                    <div id="edit">
+                    <div className="edit">
                         <button id="edit_button_card" onClick={() => handleEdit(card.id)}>EDIT</button>
+                    </div>
+                    <div className="image">
+                        <button id="image_button_card" onClick={() => handleImage(card.id)}>IMAGE</button>
                     </div>
                     <div className="delete">
                         <button id="delete_button_card" onClick={() => handleDelete(card.id)}>DELETE</button>
@@ -206,6 +228,27 @@ function ShowAllCards() {
                             <button onClick={handleConfirmDelete}>Yes</button>
                             <button onClick={() => setShowModal(false)}>No</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        )}
+        {showModalImage && (
+            <div id="modal">
+                <div className="overlay">
+                    <div className="modal-content">
+                    <span><b>:D</b></span>
+                    <div id="card_show_one_card_from_all">
+                        {imageURL ? (
+                            <a id="imageCardDownload" href={imageURL} download="image.png">
+                                <img src={imageURL} alt="Card" />
+                            </a>
+                        ) : (<>
+                                <div style={{ width: '16rem', height: '12rem' }} className="imageNotFound" />
+                                <h3>Image Not Found</h3>
+                            </>
+                        )}
+                    </div>
+                        <button onClick={() => setShowModalImage(false)}>Exit</button>
                     </div>
                 </div>
             </div>
