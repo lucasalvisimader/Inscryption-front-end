@@ -2,7 +2,6 @@ import ShowAllCards from './components/admin/show-all-cards/Show-all-cards';
 import CardRegister from './components/admin/card-register/Card-register';
 import ShowOneCard from './components/admin/show-one-card/Show-one-card';
 import UserRegister from './components/user-register/User-register';
-import TestImage from './components/test/Test-image';
 import {Routes, BrowserRouter, Route} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "./components/login/Login"
@@ -35,7 +34,6 @@ function App() {
                 <Route path="/show-one-card" element={<ShowOneCard />}/>
                 <Route path="/play" element={<Play setIsVisible={setIsVisible} 
                 username={username} password={password}/>}/>
-                <Route path="Test-image" element={<TestImage></TestImage>}></Route>
             </Routes>
         </BrowserRouter>
     )

@@ -8,7 +8,7 @@
 
 #modal_one_card {
     margin: 2rem;
-    min-width: 20rem;
+    min-width: 32rem;
 }
 
 #show_one_card_submit {
@@ -43,7 +43,7 @@ h1 {
 .footer_one_card {
     margin: 1.5rem;
     margin-right: 1.5rem;
-    margin-top: 14rem;
+    margin-top: 12rem;
     display: flex;
     justify-content: space-between;
 }
@@ -55,4 +55,17 @@ h1 {
 
 #health_one_card {
     margin-top: 4rem;
+}
+
+#test_image_input {
+    min-width: 20rem;
+}
+
+.modal-content {
+    min-width: 32rem;
+}
+
+.button_show_one_card {
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
