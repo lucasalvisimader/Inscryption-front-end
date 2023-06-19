@@ -116,8 +116,9 @@ function ShowOneCard() {
     // são alterados.
     useEffect(() => {
         const cardElement = document.getElementById('card_show_one_card');
+        // Faz com que não repita a carta três vezes, por algum motivo
         cardElement.innerHTML = '';
-
+        
         const cardContainer = document.createElement('div');
         cardContainer.className = 'card_edit_delete';
         cardContainer.id = 'card_show_one_card';
