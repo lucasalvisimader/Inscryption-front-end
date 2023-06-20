@@ -12,56 +12,23 @@ function ShowOneCard() {
     // Converte o conteúdo de um elemento HTML para uma imagem e a envia para o servidor.
     const convertToImage = async () => {
         const element = document.getElementById('card_show_one_card').firstChild; 
-        // Obtém o primeiro filho do elemento do ID 'card_show_one_card'.
         try {
             const dataUrl = await toPng(element); 
-            // Converte o elemento para uma imagem 
-            // em formato de URL.
             const blob = dataURLToBlob(dataUrl);
-            // Converte a URL em um objeto Blob.
         
             const formData = new FormData(); 
-            // Cria um objeto FormData.
             formData.append('img', blob, 'image.png'); 
-            // Adiciona o objeto Blob ao FormData com o nome 'img' e o nome de arquivo 'image.png'.
         
-            ImageCardService.sendImage(formData, id); 
-            // Envia o FormData e o valor do elemento com o ID 'show_one_card_id_input' 
-            // para o serviço ImageCardService.
+            ImageCardService.sendImage(formData, id);
+
         } catch (error) {
           console.error('Erro ao converter HTML para imagem', error); 
-          // Exibe um erro se houver problemas ao converter para imagem.
         }
     };
 
-    // Obtém a imagem do servidor com base no ID fornecido.
-    const getImage = async () => {
-        const listImage = await ImageCardService.listImage("bucket-romario", id); 
-        // Obtém a imagem do serviço ImageCardService com base no valor do elemento com o 
-        // ID 'show_one_card_id_input'.
-        
-        if (listImage !== null && listImage !== undefined) {
-            const imageURL = listImage.data; 
-            // Obtém a URL da imagem retornada.
-
-            const imgElement = document.createElement('img'); 
-            // Cria um novo elemento de imagem.
-
-            imgElement.src = imageURL;
-            // Coloca a url da imagem como o valor da imageURL
-            document.getElementById('card_show_one_card').innerHTML = ''; 
-            // Limpa o conteúdo do elemento 
-            // com o ID 'card_show_one_card'.
-
-            document.getElementById('card_show_one_card').appendChild(imgElement); 
-            // Adiciona o elemento de 
-            // imagem ao elemento com o ID 'card_show_one_card'.
-        }
-    }
-    
     function dataURLToBlob(dataUrl) {
         const arr = dataUrl.split(','); 
-        //  A URL de dados é dividida em duas partes com base na vírgula. 
+        // A URL de dados é dividida em duas partes com base na vírgula. 
         // A primeira parte contém o cabeçalho da URL e a segunda parte contém os dados em si.
 
         const mime = arr[0].match(/:(.*?);/)[1]; 
@@ -76,8 +43,7 @@ function ShowOneCard() {
         // que converte a string base64 em uma string ASCII.
 
         const byteNumbers = new Array(byteCharacters.length);
-        //  Uma nova matriz de comprimento igual 
-        // ao número de caracteres na string decodificada é criada. 
+        //  Uma nova matriz de comprimento igual ao número de caracteres na string decodificada é criada. 
         // Essa matriz será preenchida com os códigos ASCII dos caracteres.
 
         for (let i = 0; i < byteCharacters.length; i++) {
@@ -86,16 +52,29 @@ function ShowOneCard() {
         }
 
         const byteArray = new Uint8Array(byteNumbers); 
-        // Uma nova matriz de bytes sem sinal é criada 
-        // usando a matriz byteNumbers.
+        // Uma nova matriz de bytes sem sinal é criada usando a matriz byteNumbers.
         //  Isso é feito para garantir que os valores dos bytes sejam interpretados corretamente.
     
         const blob = new Blob([byteArray], { type: mime }); 
-        //Um novo objeto Blob é criado usando a 
-        // matriz de bytes e o tipo MIME extraído anteriormente. 
+        //Um novo objeto Blob é criado usando a matriz de bytes e o tipo MIME extraído anteriormente. 
         // O objeto Blob representa os dados em formato binário.
 
         return blob;
+    };
+
+    // Obtém a imagem do servidor com base no ID fornecido.
+    const getImage = async () => {
+        const listImage = await ImageCardService.listImage("bucket-romario", id); 
+    
+        if (listImage !== null && listImage !== undefined) {
+            const imageURL = listImage.data; 
+
+            const imgElement = document.createElement('img'); 
+
+            imgElement.src = imageURL;
+            document.getElementById('card_show_one_card').innerHTML = ''; 
+            document.getElementById('card_show_one_card').appendChild(imgElement); 
+        }
     }
 
     async function handleOneCard() {
@@ -112,8 +91,7 @@ function ShowOneCard() {
         });
     }
 
-    // Executa o código dentro do useEffect quando os valores de "card", "cardStyle" ou "nameStyle" 
-    // são alterados.
+    // Executa o código dentro do useEffect quando os valores de "card", "cardStyle" ou "nameStyle" são alterados.
     useEffect(() => {
         const cardElement = document.getElementById('card_show_one_card');
         // Faz com que não repita a carta três vezes, por algum motivo
@@ -157,6 +135,7 @@ function ShowOneCard() {
 
         powerOneCard.appendChild(power);
         healthOneCard.appendChild(health);
+        
         footerOneCard.appendChild(powerOneCard);
         footerOneCard.appendChild(healthOneCard);
 
@@ -166,6 +145,7 @@ function ShowOneCard() {
         cardContainer.appendChild(cardOneCard);
 
         cardElement.appendChild(cardContainer);
+        
     }, [card, cardStyle, nameStyle]);
 
     return <>
