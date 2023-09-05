@@ -5,7 +5,7 @@ import "./Register.css";
 
 function Register() {
     const [user, setUser] = useState({
-        "name": "",
+        "username": "",
         "password": "",
         "cards": []
     });
@@ -14,8 +14,7 @@ function Register() {
         setUser({...user, [event.target.name] : event.target.value})
     }
     
-    const submitUser = async (e) => {
-        e.preventDefault()
+    const submitUser = async () => {
         let password = document.getElementById("password").value;
         let confirmPassword = document.getElementById("confirm_password").value;
 
@@ -37,7 +36,7 @@ function Register() {
             <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
                 <Form.Control id="name" type="text" placeholder="Name" 
-                name='name' onChange={updateUser} value={user.name} required/>
+                name='username' onChange={updateUser} value={user.name} required/>
             </Form.Group>
             <Form.Group className="mb-3" min="8">
                 <Form.Label>Password</Form.Label>
@@ -49,7 +48,7 @@ function Register() {
                 <Form.Control id="confirm_password" type="password" placeholder="Password" 
                 minLength='8' required/>
             </Form.Group>
-            <Button id='user_register_button' variant="primary" type="submit" onClick={(e) => submitUser(e)}>
+            <Button id='user_register_button' variant="primary" type="submit" onClick={submitUser}>
                 Submit
             </Button>
         </Form>

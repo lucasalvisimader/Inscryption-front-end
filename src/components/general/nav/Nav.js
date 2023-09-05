@@ -7,7 +7,6 @@ import Cookies from "js-cookie";
 
 function Navbar() {
     const [user, setUser] = useState({});
-    console.log(user)
 
     async function deleteAccount() {
 
