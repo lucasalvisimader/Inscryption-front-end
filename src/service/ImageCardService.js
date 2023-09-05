@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const url = "http://localhost:8081/imageCard";
+import AxiosInstance from "./Axios";
 
 export const ImageCardService = {
     sendImage : (img, idCard) => {
-        axios.post(url + "/sendImage/" + idCard, img).then(response => {
+        AxiosInstance.post("/imageCard/sendImage/" + idCard, img).then(response => {
             return response;
         }).catch(error => {
             console.error(error);
@@ -14,8 +12,7 @@ export const ImageCardService = {
 
     listImage : async (bucketName, idCard) => {
         try {
-            const response = await axios.get(url + "/listImage/" + bucketName + "/" + idCard);
-            return response;
+            return await AxiosInstance.get("/imageCard/listImage/" + bucketName + "/" + idCard);
         } catch (error) {
             console.error(error);
         }

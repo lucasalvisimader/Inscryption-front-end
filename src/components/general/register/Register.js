@@ -1,9 +1,9 @@
-import { UserService } from '../../service';
+import { UserService } from '../../../service';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
-import "./User-register.css";
+import "./Register.css";
 
-function UserRegister() {
+function Register() {
     const [user, setUser] = useState({
         "name": "",
         "password": "",
@@ -14,7 +14,8 @@ function UserRegister() {
         setUser({...user, [event.target.name] : event.target.value})
     }
     
-    const submitUser = () => {
+    const submitUser = async (e) => {
+        e.preventDefault()
         let password = document.getElementById("password").value;
         let confirmPassword = document.getElementById("confirm_password").value;
 
@@ -22,7 +23,12 @@ function UserRegister() {
             document.getElementById("confirm_password").setCustomValidity("Passwords don't match");
         } else {
             document.getElementById("confirm_password").setCustomValidity('');
-            UserService.save(user);
+
+            try {
+                await UserService.save(user);
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 
@@ -43,11 +49,11 @@ function UserRegister() {
                 <Form.Control id="confirm_password" type="password" placeholder="Password" 
                 minLength='8' required/>
             </Form.Group>
-            <Button id='user_register_button' variant="primary" type="submit" onClick={submitUser}>
+            <Button id='user_register_button' variant="primary" type="submit" onClick={(e) => submitUser(e)}>
                 Submit
             </Button>
         </Form>
     );
 }
 
-export default UserRegister;
+export default Register;

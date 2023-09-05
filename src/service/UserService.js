@@ -1,56 +1,25 @@
-// import React from "react";
-import axios from "axios";
-
-
-const url = "http://localhost:8081/user";
+import AxiosInstance from "./Axios";
 
 export const UserService = {
     save : async (user) => {
         try {
-            const response = await axios.post(url + "/save", user);
-            return response;
+            return await AxiosInstance.post("/user/save", user);
         } catch (error) {
             console.error(error);
         }
     },
 
-    listAll : async () => {
+    getUser : async () => {
         try {
-            const response = await axios.get(url + "/listAll");
-            return response;
-        } catch (error) {
-            console.error(error);
-        }
-        // try {
-        //     const response = await axios.get(url + "/listAll");
-        //     return response;
-        // } catch (error) {
-        //     console.error(error);
-        // }
-    },
-
-    list : async (id) => {
-        try {
-            const response = await axios.get(url + "/list/" + id);
-            return response;
+            return await AxiosInstance.get("/user/getUser");
         } catch (error) {
             console.error(error);
         }
     },
 
-    listLogin : async (name, password) => {
+    login : async (userLogin) => {
         try {
-            const response = await axios.get(url + "/listLogin/" + name + "/" + password);
-            return response;
-        } catch (error) {
-            console.error(error);
-        }
-    },
-
-    listId : async (name) => {
-        try {
-            const response = await axios.get(url + "/listId/" + name);
-            return response;
+            return await AxiosInstance.post("/user/login", userLogin);
         } catch (error) {
             console.error(error);
         }
@@ -58,15 +27,14 @@ export const UserService = {
 
     edit : async (id, user) => {
         try {
-            const response = await axios.put(url + "/update/" + id, user);
-            return response;
+            return await AxiosInstance.put("/user/update/" + id, user);
         } catch (error) {
             console.error(error);
         }
     },
 
     remove : (id) => {
-        axios.delete(url + "/delete/" + id).then(response => {
+        AxiosInstance.delete("/user/delete/" + id).then(response => {
             return response;
         }).catch(error => {
             console.error(error);

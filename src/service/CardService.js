@@ -1,13 +1,9 @@
-import axios from "axios";
-
-
-const url = "http://localhost:8081/card";
+import AxiosInstance from "./Axios";
 
 export const CardService = {
     save : async (card) => {
         try {
-            const response = await axios.post(url + "/save", card);
-            return response;
+            return await AxiosInstance.post("/card/save", card);
         } catch (error) {
             console.error(error);
         }
@@ -15,8 +11,7 @@ export const CardService = {
 
     list : async (id) => {
         try {
-            const response = await axios.get(url + "/list/" + id);
-            return response;
+            return await AxiosInstance.get("/card/list/" + id);
         } catch (error) {
             console.error(error);
         }
@@ -24,8 +19,7 @@ export const CardService = {
 
     listFromUser : async (name, password) => {
         try {
-            const response = await axios.get(url + "/listFromUser/" + name + "/" + password);
-            return response;
+            return await AxiosInstance.get("/card/listFromUser/" + name + "/" + password);
         } catch (error) {
             console.error(error);
         }
@@ -33,8 +27,7 @@ export const CardService = {
     
     listAll : async (page) => {
         try {
-            const response = await axios.get(url + "/listAll?page=" + page);
-            return response;
+            return await AxiosInstance.get("/card/listAll?page=" + page);
         } catch (error) {
             console.error(error);
         }
@@ -42,15 +35,14 @@ export const CardService = {
 
     edit : async (id, card) => {
         try {
-            const response = await axios.put(url + "/update/" + id, card);
-            return response;
+            return await AxiosInstance.put("/card/update/" + id, card);
         } catch (error) {
             console.error(error);
         }
     },
 
     remove : (id) => {
-        axios.delete(url + "/delete/" + id).then(response => {
+        AxiosInstance.delete("/card/delete/" + id).then(response => {
             return response;
         }).catch(error => {
             console.error(error);
@@ -60,8 +52,7 @@ export const CardService = {
 
     getImages : async () => {
         try {
-            const response = await axios.get(url + "/getImageTypes");
-            return response;
+            return await AxiosInstance.get("/card/getImageTypes");
         } catch (error) {
             console.error(error);
         }
@@ -69,26 +60,7 @@ export const CardService = {
 
     getSigils : async () => {
         try {
-            const response = await axios.get(url + "/getSigilsTypes");
-            return response;
-        } catch (error) {
-            console.error(error);
-        }
-    },
-
-    sendImage : (img) => {
-        axios.post(url + "/sendImage", img).then(response => {
-            return response;
-        }).catch(error => {
-            console.error(error);
-        });
-        return "Ok";
-    },
-
-    listImage : async (bucketName, keyName) => {
-        try {
-            const response = await axios.get(url + "/listImage/" + bucketName + "/" + keyName);
-            return response;
+            return await AxiosInstance.get("/getSigilsTypes");
         } catch (error) {
             console.error(error);
         }

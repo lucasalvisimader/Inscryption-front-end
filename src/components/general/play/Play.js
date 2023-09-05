@@ -1,6 +1,6 @@
 import './Play.css'
 import { useEffect, useState } from 'react';
-import { CardService } from "../../service";
+import { CardService } from "../../../service";
 
 function Play(props) {
 
@@ -12,7 +12,6 @@ function Play(props) {
         }))
     );
     const [remainingCards, setRemainingCards] = useState([]);
-    const [isActive, setIsActive] = useState(false);
     
     const randomizeCards = (cards) => {
         let randomizedCards = [...cards];
