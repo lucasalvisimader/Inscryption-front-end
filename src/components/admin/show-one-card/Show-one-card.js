@@ -78,17 +78,22 @@ function ShowOneCard() {
     }
 
     async function handleOneCard() {
-        console.log('handleOneCard() called');
-        const [loginResponse] = await Promise.all([CardService.list(id)]);
-        console.log(loginResponse.data);
-        setCard(loginResponse.data);
-        setCardStyle({
-            backgroundImage: `url('/images/imageType/${loginResponse.data.imageType}.png')`,
-        });
-        setNameStyle({
-            fontSize: `calc(3rem - ${loginResponse.data.name.length}px)`,
-            marginBottom: `calc(${loginResponse.data.name.length}px - 120px)`,
-        });
+        try {
+            const loginResponse = await CardService.list(id);
+
+            if (loginResponse) {
+                setCard(loginResponse.data);
+                setCardStyle({
+                    backgroundImage: `url('/images/imageType/${loginResponse.data.imageType}.png')`,
+                });
+                setNameStyle({
+                    fontSize: `calc(3rem - ${loginResponse.data.name.length}px)`,
+                    marginBottom: `calc(${loginResponse.data.name.length}px - 120px)`,
+                });
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     // Executa o código dentro do useEffect quando os valores de "card", "cardStyle" ou "nameStyle" são alterados.

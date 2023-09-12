@@ -1,7 +1,6 @@
 import { ImageCardService } from "../../../service";
 import { React, useState, useEffect } from "react";
 import { CardService } from "../../../service";
-import { toPng } from 'html-to-image';
 import "./Show-all-cards.css";
 
 function ShowAllCards() {

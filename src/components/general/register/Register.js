@@ -25,6 +25,7 @@ function Register() {
 
             try {
                 await UserService.save(user);
+                window.location.href = "/login"
             } catch (error) {
                 console.error(error);
             }

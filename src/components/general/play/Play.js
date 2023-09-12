@@ -1,6 +1,7 @@
 import './Play.css'
 import { useEffect, useState } from 'react';
 import { CardService } from "../../../service";
+import Cookies from 'js-cookie';
 
 function Play(props) {
 
@@ -24,7 +25,8 @@ function Play(props) {
     });
 
     useEffect(() => {
-        CardService.listFromUser(props.username, props.password).then(response => {
+        const user = Cookies.get("JWT");
+        CardService.listFromUser(user.username, user.password).then(response => {
             let arr = response.data;
             arr.forEach(card => {
                 if (card.imageType === "SQUIRREL") {

@@ -33,8 +33,8 @@ export const UserService = {
         }
     },
 
-    remove : (id) => {
-        AxiosInstance.delete("/user/delete/" + id).then(response => {
+    remove : async (id) => {
+        await AxiosInstance.delete("/user/delete/" + id).then(response => {
             return response;
         }).catch(error => {
             console.error(error);
