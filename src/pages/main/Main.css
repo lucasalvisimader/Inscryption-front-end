@@ -1,5 +1,5 @@
 .background_main {
-    background-image: url(/public/images/others/main_background.jpg);
+    background-image: url(../../assets/images/others/main_background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;

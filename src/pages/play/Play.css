@@ -16,7 +16,7 @@
 .footer_game {
     width: 100%;
     height: 30%;
-    background: url("/public/images/others/game_background.jpg");
+    background: url(../../assets/images/play/game_background.jpg);
     background-size: 15rem;
     border-top: solid 4px black;
     display: flex;
@@ -38,7 +38,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    background-image: url("/public/images/others/hammer.png");
+    background-image: url(../../assets/images/play/hammer.png);
     background-color: #fea02a;
     background-repeat: no-repeat;
     background-size: 4.5rem;
@@ -138,7 +138,7 @@
 .deck {
     height: 13rem !important;
     min-width: 8.5rem;
-    background: url("/public/images/others/backcard.png");
+    background: url(../../assets/images/card/backcard.png);
     background-repeat: no-repeat;
     background-size: 7.7em;
     margin: 1rem;

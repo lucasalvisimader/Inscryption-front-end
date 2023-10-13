@@ -2,7 +2,7 @@
     font-family: 'Heavyweight Regular';
     font-style: normal;
     font-weight: normal;
-    src: local('Heavyweight Regular'), url('/public/fonts/HEAVYWEI.woff') format('woff');
+    src: local('Heavyweight Regular'), url('assets/fonts/HEAVYWEI.woff') format('woff');
 }
 
 * {

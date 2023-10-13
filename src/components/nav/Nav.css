@@ -30,7 +30,7 @@
 #nav {
     background-image:
     linear-gradient(to right, transparent, black),
-    url(/public/images/others/navbar_background.png);
+    url(../../assets/images/others/navbar_background.png);
     background-repeat: no-repeat;
     background-size: contain;
     padding: 2rem;

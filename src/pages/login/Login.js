@@ -1,17 +1,23 @@
-import {Button, Form} from 'react-bootstrap';
-import {UserService} from '../../../service';
-import {useState} from 'react';
+// css
 import "./Login.css";
 
-function Login() {
+// react
+import { useState } from 'react';
 
+// service
+import { UserService } from '../../service';
+
+// external
+import { Button, Form } from 'react-bootstrap';
+
+function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     async function handleLogin(e) {
         e.preventDefault()
         try {
-            await UserService.login({username: username, password: password})
+            await UserService.login({ username: username, password: password })
             window.location.href = "/";
         } catch (error) {
             console.log(error);
@@ -23,14 +29,14 @@ function Login() {
             <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
                 <Form.Control id="name" name='name' type="text"
-                              placeholder="Name" value={username} onChange={(event) => setUsername(event.target.value)}
-                              required/>
+                    placeholder="Name" value={username} onChange={(event) => setUsername(event.target.value)}
+                    required />
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>Password</Form.Label>
                 <Form.Control id="password" name='password' type="password"
-                              placeholder="Password" value={password}
-                              onChange={(event) => setPassword(event.target.value)} required/>
+                    placeholder="Password" value={password}
+                    onChange={(event) => setPassword(event.target.value)} required />
             </Form.Group>
             <Button id='button_login' variant="primary" onClick={(e) => handleLogin(e)}>
                 Submit

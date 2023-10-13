@@ -1,7 +1,14 @@
-import { Dropdown, Nav } from 'react-bootstrap';
+// css
 import "./Nav.css";
-import { UserService } from '../../../service';
+
+// react
 import { useEffect, useState } from "react";
+
+// service
+import { UserService } from '../../service/index';
+
+// external
+import { Dropdown, Nav } from 'react-bootstrap';
 import Cookies from "js-cookie";
 
 function Navbar() {
@@ -62,9 +69,9 @@ function Navbar() {
             ) : (
                 <>
                     {user.authorities[0] === "ADMIN" ? (
-                    <>
-                        <Nav.Item>
-                            <Dropdown>
+                        <>
+                            <Nav.Item>
+                                <Dropdown>
                                     <Dropdown.Toggle className='register_dropdown' variant="success" id="dropdown-basic">
                                         Register
                                         <Dropdown.Menu>
@@ -73,27 +80,27 @@ function Navbar() {
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown.Toggle>
-                            </Dropdown>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Dropdown>
-                                <Dropdown.Toggle className='show_dropdown' variant="success" id="dropdown-basic">
-                                    Show
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item href="Show-all-cards">
-                                        All cards
-                                    </Dropdown.Item>
-                                    <Dropdown.Item href="Show-one-card">
-                                        One card
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </Nav.Item>
-                    </>) : user.authorities[0] === "PLAYER" ? (
-                    <Nav.Link className='play' href="play">
-                        Play
-                    </Nav.Link>) : null}
+                                </Dropdown>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Dropdown>
+                                    <Dropdown.Toggle className='show_dropdown' variant="success" id="dropdown-basic">
+                                        Show
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item href="Show-all-cards">
+                                            All cards
+                                        </Dropdown.Item>
+                                        <Dropdown.Item href="Show-one-card">
+                                            One card
+                                        </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </Nav.Item>
+                        </>) : user.authorities[0] === "PLAYER" ? (
+                            <Nav.Link className='play' href="play">
+                                Play
+                            </Nav.Link>) : null}
                     <Nav.Item>
                         <button className='exit_account' onClick={exitAccount}>
                             Exit Account

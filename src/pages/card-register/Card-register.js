@@ -1,8 +1,15 @@
-import { CardService } from '../../../service';
-import {Button, Form} from 'react-bootstrap';
-import {useRef, useState, useEffect } from 'react';
-import Select from 'react-select';
+// css
 import "./Card-register.css";
+
+// react
+import { useRef, useState, useEffect } from 'react';
+
+// service
+import { CardService } from '../../service/index';
+
+// external
+import { Button, Form } from 'react-bootstrap';
+import Select from 'react-select';
 
 function CardRegister() {
   const nameRef = useRef();
@@ -12,7 +19,7 @@ function CardRegister() {
   const imageRef = useRef();
 
   const [card, setCard] = useState({
-    "name" : "",
+    "name": "",
     "power": 0,
     "health": 0,
     "sigilsTypes": [],
@@ -20,7 +27,7 @@ function CardRegister() {
   });
 
   const updateCard = (event) => {
-    setCard({...card, [event.target.name] : event.target.value})
+    setCard({ ...card, [event.target.name]: event.target.value })
   }
 
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -64,7 +71,7 @@ function CardRegister() {
     if (selectedOptions.length === 0) {
       setSelectedOptions(selectedOptions);
       setNoneSelected(false);
-    } else if (selectedOptions.length <= 4){
+    } else if (selectedOptions.length <= 4) {
       if (selectedOptions.find(option => option.value === "NONE")) {
         setSelectedOptions([{ value: "NONE", label: "None" }]);
         setNoneSelected(true);
@@ -74,7 +81,7 @@ function CardRegister() {
       }
     }
     setCard({
-      ...card, 
+      ...card,
       sigilsTypes: selectedOptions.map((option) => option.value),
     });
   };
@@ -89,50 +96,50 @@ function CardRegister() {
       imageType: selectedImage.value,
     });
   }
-  
+
   return (
     <Form id="login" className='card_register'>
       <Form.Group className="mb-3">
         <Form.Label>Enter the card's name</Form.Label>
-        <Form.Control name='name' onChange={updateCard} 
-        ref={nameRef} type="text" placeholder="Name" required/>
+        <Form.Control name='name' onChange={updateCard}
+          ref={nameRef} type="text" placeholder="Name" required />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Power</Form.Label>
-        <Form.Control name='power' onChange={updateCard} 
-        ref={powerRef} type="number" placeholder="Power" min="0" required/>
+        <Form.Control name='power' onChange={updateCard}
+          ref={powerRef} type="number" placeholder="Power" min="0" required />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Health</Form.Label>
-        <Form.Control name='health' onChange={updateCard} 
-        ref={healthRef} type="number" placeholder="Health" min="1" required/>
+        <Form.Control name='health' onChange={updateCard}
+          ref={healthRef} type="number" placeholder="Health" min="1" required />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Sigils</Form.Label>
-        <Select ref={sigilsRef} 
-        id="sigils"
-        isMulti required name='sigilsTypes'
-        data-test="sigils"
-        placeholder="Sigils" 
-        value={selectedOptions}
-        onChange={handleSelectChange}
-        isOptionDisabled={() => {
-          if (selectedOptions.length >= 4 || noneSelected) {
-            return true;
-          }
-          return false;
-        }}
-        className="basic-multi-select"
-        classNamePrefix="select"
-        options={sigilOptions} />
+        <Select ref={sigilsRef}
+          id="sigils"
+          isMulti required name='sigilsTypes'
+          data-test="sigils"
+          placeholder="Sigils"
+          value={selectedOptions}
+          onChange={handleSelectChange}
+          isOptionDisabled={() => {
+            if (selectedOptions.length >= 4 || noneSelected) {
+              return true;
+            }
+            return false;
+          }}
+          className="basic-multi-select"
+          classNamePrefix="select"
+          options={sigilOptions} />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>IMAGE</Form.Label>
         <Select ref={imageRef} required
-        placeholder="Image" name='imageType'
-        options={imageOptions}
-        value={selectedImage}
-        onChange={handleImageType} />
+          placeholder="Image" name='imageType'
+          options={imageOptions}
+          value={selectedImage}
+          onChange={handleImageType} />
       </Form.Group>
       <Button id='card_register_button' variant="primary" type="submit" onClick={getCard}>
         Submit

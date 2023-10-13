@@ -1,27 +1,33 @@
+// css
 import './Play.css'
+
+// react
 import { useEffect, useState } from 'react';
-import { CardService } from "../../../service";
+
+// service
+import { CardService } from "../../service";
+
+// external
 import Cookies from 'js-cookie';
 
 function Play(props) {
-
     const [cards, setCards] = useState([]);
     const [FirstCards, setFirstCards] = useState(
         cards.map((card) => ({
-          ...card,
-          isActive: false
+            ...card,
+            isActive: false
         }))
     );
     const [remainingCards, setRemainingCards] = useState([]);
-    
+
     const randomizeCards = (cards) => {
         let randomizedCards = [...cards];
         return randomizedCards.sort(() => Math.random() - 0.5);
     };
-    
+
     useEffect(() => {
-        props.setIsVisible(false); 
-        return(() => props.setIsVisible(true));
+        props.setIsVisible(false);
+        return (() => props.setIsVisible(true));
     });
 
     useEffect(() => {
@@ -45,16 +51,16 @@ function Play(props) {
         const squirrelCards = cards.filter(card => card.imageType === "SQUIRREL");
 
         if (squirrelCards.length >= 3 || squirrelCards.length === 0) {
-          let randomizedCards = [...cards];
-          while (randomizedCards.slice(0, 5).filter(card => card.imageType === "SQUIRREL").length >= 3) {
-            randomizedCards = [...cards].sort(() => Math.random() - 0.5);
-          }
-          setFirstCards(randomizedCards.slice(0, 5));
-          setRemainingCards(randomizedCards.slice(5));
+            let randomizedCards = [...cards];
+            while (randomizedCards.slice(0, 5).filter(card => card.imageType === "SQUIRREL").length >= 3) {
+                randomizedCards = [...cards].sort(() => Math.random() - 0.5);
+            }
+            setFirstCards(randomizedCards.slice(0, 5));
+            setRemainingCards(randomizedCards.slice(5));
         } else {
-          const randomizedCards = [...cards].sort(() => Math.random() - 0.5);
-          setFirstCards(randomizedCards.slice(0, 5));
-          setRemainingCards(randomizedCards.slice(5));
+            const randomizedCards = [...cards].sort(() => Math.random() - 0.5);
+            setFirstCards(randomizedCards.slice(0, 5));
+            setRemainingCards(randomizedCards.slice(5));
         }
     }, [cards]);
 
@@ -71,7 +77,7 @@ function Play(props) {
     const handleActive = (id) => {
         setFirstCards((prevCards) =>
             prevCards.map((card) =>
-            card.id === id ? { ...card, isActive: !card.isActive } : card
+                card.id === id ? { ...card, isActive: !card.isActive } : card
             )
         );
     };
@@ -93,20 +99,20 @@ function Play(props) {
                             backgroundImage: `url('/images/imageType/${card.imageType}.png')`,
                             marginRight: `calc(3rem - (${Math.min(FirstCards.length, 14)}px * 10))`
                         };
-                    
+
                         const nameStyle = {
                             fontSize: `calc(2rem - (${card.name.length}px))`,
                             marginBottom: `calc(${card.name.length}px - 20px)`
                         };
-                    
+
                         const footerStyle = {
                             marginTop: `calc(12rem + (${card.name.length}px - 20px))`
                         };
-                    
+
                         return (
                             <div className="card_play_id" key={id}>
-                                <div className={"card_play " + (card.isActive ? 'active' : 'inactive')} 
-                                style={cardStyle} onClick={() => handleActive(card.id)}>
+                                <div className={"card_play " + (card.isActive ? 'active' : 'inactive')}
+                                    style={cardStyle} onClick={() => handleActive(card.id)}>
                                     <div className="header_play">
                                         <div className="cardName_play">
                                             <h2 name='name'
