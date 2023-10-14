@@ -10,7 +10,7 @@ import { CardService } from "../../service";
 // external
 import Cookies from 'js-cookie';
 
-function Play(props) {
+function Play() {
     const [cards, setCards] = useState([]);
     const [FirstCards, setFirstCards] = useState(
         cards.map((card) => ({
@@ -24,11 +24,6 @@ function Play(props) {
         let randomizedCards = [...cards];
         return randomizedCards.sort(() => Math.random() - 0.5);
     };
-
-    useEffect(() => {
-        props.setIsVisible(false);
-        return (() => props.setIsVisible(true));
-    });
 
     useEffect(() => {
         const user = Cookies.get("JWT");
@@ -45,7 +40,7 @@ function Play(props) {
         }).catch(e => {
             console.log(e);
         });
-    }, [props.username, props.password]);
+    }, []);
 
     useEffect(() => {
         const squirrelCards = cards.filter(card => card.imageType === "SQUIRREL");

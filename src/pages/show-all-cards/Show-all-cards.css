@@ -135,7 +135,7 @@
 .edit_delete_card {
     display: flex;
     justify-content: space-around;
-    background-image: url(../../assets/images/others/navbar_background.png);
+    /* background-image: url(../../assets/images/others/navbar_background.png); */
     margin: 1rem;
     margin-top: 0;
     border-bottom-left-radius: 20px;
@@ -182,7 +182,7 @@ button {
     color: #bb7c39 !important;
     max-width: 20rem;
     border: #bb7c39 2px solid;
-    background: url(../../assets/images/others/navbar_background.png);
+    /* background: url(../../assets/images/others/navbar_background.png); */
 }
 
 .modal-content span, .modal-content b{
