@@ -1,6 +1,7 @@
 {
     "main": {
         "title": "inscryption title",
-        "press_to_start": "press any button to start"
+        "title_spade": "inscryption spade title",
+        "press_to_start": "PRESS ANY BUTTON TO START"
     }
 }

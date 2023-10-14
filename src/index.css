@@ -5,6 +5,13 @@
     src: local('Heavyweight Regular'), url('assets/fonts/HEAVYWEI.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'Marksman Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Marksman Regular'), url('assets/fonts/Marksman.woff') format('woff');
+}
+
 * {
     font-family: 'Heavyweight Regular';
     font-size: 1.1rem;

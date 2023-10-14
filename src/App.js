@@ -8,7 +8,6 @@ import React from "react";
 
 // pages
 import Main from './pages/main/Main';
-import Menu from './pages/menu/Menu'
 import Login from "./pages/login/Login"
 import Register from './pages/register/Register';
 import CardRegister from './pages/card-register/Card-register';
@@ -24,7 +23,6 @@ const App = () => {
         <BrowserRouter>
             <Routes>
                 <Route index element={<Main />} />
-                <Route path="/menu" element={<Menu />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/card-register" element={<CardRegister />} />
                 <Route path="/user-register" element={<Register />} />

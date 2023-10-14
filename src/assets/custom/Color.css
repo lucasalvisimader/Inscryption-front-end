@@ -1,7 +1,10 @@
 :root {
     --filter-tv: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 3px, transparent 3px, transparent 8px);
-    --background-brown: radial-gradient(circle, rgba(115,69,48,1) 0%, rgba(0,0,0,1) 100%);
+    --filter-static: url('../images/screen/static.gif');
+    --background-brown: radial-gradient(circle, #5f3a2b 60%, #2b1a13 92%, #000000 100%);
+    --background-brown-without-shadow: radial-gradient(circle, #5f3a2b 60%, #362118 100%);
     --black: #121212;
     --black-transparent: #12121299;
     --black-transparent-clicked: #12121266;
+    --background-blue: radial-gradient(circle, #1d1b21 60%, #0f0e11 92%, #000000 100%);
 }
