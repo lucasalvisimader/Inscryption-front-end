@@ -27,14 +27,13 @@ const Main = () => {
     const [isInTitleScreen, setIsInTitleScreen] = useState(true);
     const json = en.main;
 
-
     const playClickSound = () => {
         if (isFirstAction.current) {
             const audio = new Audio(titleRattle);
             audio.play();
             isFirstAction.current = false;
         }
-    };
+    }
 
     const enterMenu = () => {
         setIsInTitleScreen(false);
