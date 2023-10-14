@@ -138,7 +138,7 @@
 .deck {
     height: 13rem !important;
     min-width: 8.5rem;
-    background: url(../../assets/images/card/backcard.png);
+    background: url(../../assets/images/card/back.png);
     background-repeat: no-repeat;
     background-size: 7.7em;
     margin: 1rem;

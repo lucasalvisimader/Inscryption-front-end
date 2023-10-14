@@ -214,7 +214,7 @@ button {
 }
 
 .imageNotFound {
-    background-image: url(../../assets/images/card/imageNotFound.png);
+    background-image: url(../../assets/images/card/image_not_found.png);
     background-size: 16rem;
     background-repeat: no-repeat;
     display: inline-block;
