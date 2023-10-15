@@ -1,11 +1,20 @@
 .menu_container {
     width: 100%;
     height: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .menu_header {
     width: 100%;
     height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu_card_text_selected {
+    width: 30%;
 }
 
 .menu_body_container {
@@ -33,31 +42,32 @@
 .menu_cards {
     width: 8.48vw;
     height: 11.28vw;
+    z-index: 1;
 }
 
 #menu_input_card {
     width: 9.75vw;
     height: 12.75vw;
-    background: url('../../assets/images/menu_cards/menu_slot.png');
+    background: url('../../assets/images/menu/cards/slot.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
 
 #menu_new_game_card {
-    background: url('../../assets/images/menu_cards/menu_newgame_greyed.png');
+    background: url('../../assets/images/menu/cards/newgame_greyed.png');
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0.5;
 }
 
 #menu_continue_card {
-    background: url('../../assets/images/menu_cards/menu_continue.png');
+    background: url('../../assets/images/menu/cards/continue.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
 
 #menu_options_card {
-    background: url('../../assets/images/menu_cards/menu_options.png');
+    background: url('../../assets/images/menu/cards/options.png');
     background-size: contain;
     background-repeat: no-repeat;
 }

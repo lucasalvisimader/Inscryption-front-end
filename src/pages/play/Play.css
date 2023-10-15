@@ -16,7 +16,7 @@
 .footer_game {
     width: 100%;
     height: 30%;
-    background: url(../../assets/images/play/game_background.jpg);
+    background: url(../../assets/images/game/background.jpg);
     background-size: 15rem;
     border-top: solid 4px black;
     display: flex;
@@ -38,7 +38,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    background-image: url(../../assets/images/play/hammer.png);
+    background-image: url(../../assets/images/game/hammer.png);
     background-color: #fea02a;
     background-repeat: no-repeat;
     background-size: 4.5rem;

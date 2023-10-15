@@ -1,4 +1,5 @@
 .main_container {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,7 +9,7 @@
     background: var(--background-brown);
     position: relative;
     overflow: hidden;
-    cursor: url('../../assets/images/cursor/cursor_icons_0.png') 20 20, auto;	
+    cursor: url('../../assets/images/cursor/cursor_icons_0.png'), auto;
 }
 
 .main_blue_background {
@@ -24,6 +25,7 @@
     background: var(--filter-tv);
     top: 0;
     z-index: 1;
+    pointer-events: none;
 }
 
 .main_container::after {
@@ -35,6 +37,7 @@
     background: var(--filter-static);
     top: 0;
     z-index: 2;
+    pointer-events: none;
 }
 
 
