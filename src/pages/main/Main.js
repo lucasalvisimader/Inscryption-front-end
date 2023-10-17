@@ -22,9 +22,11 @@ import en from '../../assets/locales/en.json';
 const Main = () => {
     const navigate = useNavigate();
     const containerRef = useRef();
+    const audioRef = useRef();
     const isFirstAction = useRef(true);
     const [animationSpeed, setAnimationSpeed] = useState('');
     const [isInTitleScreen, setIsInTitleScreen] = useState(true);
+    const titleThemeSong = new Audio(titleTheme);
     const json = en.main;
 
     const playClickSound = () => {
@@ -41,14 +43,14 @@ const Main = () => {
 
     useEffect(() => {
         containerRef.current.focus();
-
+        audioRef.current.play();
         const handleUserAction = () => {
             playClickSound();
             setAnimationSpeed('fast');
             setTimeout(() => {
                 enterMenu();
             }, 2000);
-        };
+        }
 
         document.addEventListener('click', handleUserAction);
         document.addEventListener('keydown', handleUserAction);
@@ -56,12 +58,12 @@ const Main = () => {
         return () => {
             document.removeEventListener('click', handleUserAction);
             document.removeEventListener('keydown', handleUserAction);
-        };
-    }, [navigate]);
+        }
+    }, [navigate, titleThemeSong]);
 
     return (<>
         <div className={`main_container ${!isInTitleScreen ? 'main_blue_background' : ''}`} tabIndex={0} ref={containerRef}>
-            <audio src={titleTheme} autoPlay loop />
+            <audio src={titleTheme} ref={audioRef} autoPlay loop />
             {(isInTitleScreen && (<>
                 <div className='main_title_container'>
                     <img className={`main_title_image_spade_left`} src={titleSpade} alt={json.title_spade} />
