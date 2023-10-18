@@ -38,7 +38,7 @@ export function DraggableCard({ id, text, textSelected, setTextSelected }) {
         <div ref={setNodeRef} style={style} {...listeners} {...attributes} className={`menu_cards 
             ${textSelected === text ? "menu_on_hover_card_mouse" : ""} 
             ${clickedCard ? "menu_on_click_card_mouse" : ""}`}
-            id={`menu_${text === continueText ? "continue" : "options"}_card`}
+            id={`menu_${(text === continueText) ? "continue" : "options"}_card`}
             onMouseEnter={() => handleHoverCard(text)}
             onMouseLeave={() => handleExitCard()}
             onClick={() => handleClickCard(text)} />

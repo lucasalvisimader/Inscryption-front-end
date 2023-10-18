@@ -22,15 +22,15 @@ const Menu = () => {
 
     const json = en.menu;
 
-    function handleDragEnd({ over, setNodeRef }) {
+    function handleDragEnd({ over }) {
         if (over) {
             setParent(over.id);
         } else {
-            setParent(setNodeRef);
+            setParent(null);
         }
     }
 
-    return (
+    return (<>
         <DndContext onDragEnd={handleDragEnd}>
             <div className="menu_container">
                 <div className="menu_header">
@@ -41,7 +41,7 @@ const Menu = () => {
                 <div className="menu_body_container">
                     <div className="menu_body">
                         <DroppableArea id="droppable">
-                            {parent === "droppable" ? (
+                            {parent === "droppable" && (
                                 <div className="menu_cards">
                                     <DraggableCard id={parent}
                                         text={parent === "droppable" ? textSelected : ""}
@@ -49,22 +49,16 @@ const Menu = () => {
                                         setTextSelected={setTextSelected}
                                     />
                                 </div>
-                            ) : null}
+                            )}
                         </DroppableArea>
                     </div>
                 </div>
                 <div className="menu_footer">
                     {parent === "droppable" ? (<>
                         <div className="menu_cards">
-                            {/* <DraggableCard className="menu_cards"
-                                id="continue_draggable"
-                                text={continueText}
-                                textSelected={textSelected}
-                                setTextSelected={setTextSelected}
-                            /> */}
                             <DraggableCard className="menu_cards"
-                                id={"draggable"}
-                                text={optionsText}
+                                id="draggable"
+                                text={continueText}
                                 textSelected={textSelected}
                                 setTextSelected={setTextSelected}
                             />
@@ -87,7 +81,7 @@ const Menu = () => {
                 </div>
             </div>
         </DndContext>
-    );
+    </>);
 }
 
 export default Menu;
