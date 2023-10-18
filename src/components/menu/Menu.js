@@ -13,6 +13,7 @@ const Menu = () => {
 
     const handleHoverCard = (text) => {
         setTextSelected(text);
+        document.getElementsByClassName('menu_cards').classList.add("menu_on_card_mouse");
     }
 
     return (<>

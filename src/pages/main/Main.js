@@ -26,7 +26,6 @@ const Main = () => {
     const isFirstAction = useRef(true);
     const [animationSpeed, setAnimationSpeed] = useState('');
     const [isInTitleScreen, setIsInTitleScreen] = useState(true);
-    const titleThemeSong = new Audio(titleTheme);
     const json = en.main;
 
     const playClickSound = () => {
@@ -43,8 +42,8 @@ const Main = () => {
 
     useEffect(() => {
         containerRef.current.focus();
-        audioRef.current.play();
         const handleUserAction = () => {
+            audioRef.current.play();
             playClickSound();
             setAnimationSpeed('fast');
             setTimeout(() => {
@@ -59,7 +58,7 @@ const Main = () => {
             document.removeEventListener('click', handleUserAction);
             document.removeEventListener('keydown', handleUserAction);
         }
-    }, [navigate, titleThemeSong]);
+    }, [navigate, titleTheme]);
 
     return (<>
         <div className={`main_container ${!isInTitleScreen ? 'main_blue_background' : ''}`} tabIndex={0} ref={containerRef}>

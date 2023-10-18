@@ -80,3 +80,7 @@
     align-items: center;
     gap: 1.5rem;
 }
+
+.menu_on_card_mouse {
+    cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto;;
+}
