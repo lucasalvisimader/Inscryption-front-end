@@ -42,27 +42,23 @@ const Menu = () => {
                     <div className="menu_body">
                         <DroppableArea id="droppable">
                             {parent === "droppable" && (
-                                <div className="menu_cards">
-                                    <DraggableCard id={parent}
-                                        text={parent === "droppable" ? textSelected : ""}
-                                        textSelected={textSelected}
-                                        setTextSelected={setTextSelected}
-                                    />
-                                </div>
+                                <DraggableCard className="menu_cards" id={parent}
+                                    text={parent === "droppable" ? continueText : optionsText}
+                                    textSelected={textSelected}
+                                    setTextSelected={setTextSelected}
+                                />
                             )}
                         </DroppableArea>
                     </div>
                 </div>
                 <div className="menu_footer">
                     {parent === "droppable" ? (<>
-                        <div className="menu_cards">
-                            <DraggableCard className="menu_cards"
-                                id="draggable"
-                                text={continueText}
-                                textSelected={textSelected}
-                                setTextSelected={setTextSelected}
-                            />
-                        </div>
+                        <DraggableCard className="menu_cards"
+                            id="general_draggable"
+                            text={continueText}
+                            textSelected={textSelected}
+                            setTextSelected={setTextSelected}
+                        />
                     </>) : (<>
                         <DraggableCard className="menu_cards"
                             id="continue_draggable"
