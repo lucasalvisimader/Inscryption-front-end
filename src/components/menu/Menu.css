@@ -81,6 +81,10 @@
     gap: 1.5rem;
 }
 
-.menu_on_card_mouse {
-    cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto;;
+.menu_on_hover_card_mouse {
+    cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto !important;
+}
+
+.menu_on_click_card_mouse {
+    cursor: url('../../assets/images/cursor/cursor_icons_3.png'), auto !important;
 }

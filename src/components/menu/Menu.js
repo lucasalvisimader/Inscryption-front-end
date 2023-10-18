@@ -8,18 +8,34 @@ import { useState } from "react";
 import continueText from '../../assets/images/menu/texts/continue.png'
 import optionsText from '../../assets/images/menu/texts/options.png'
 
+// json
+import en from '../../assets/locales/en.json'
+
 const Menu = () => {
-    const [textSelected, setTextSelected] = useState('');
+    const [textSelected, setTextSelected] = useState();
+    const [clickedCard, setClickedCard] = useState(false);
+    const json = en.menu;
 
     const handleHoverCard = (text) => {
         setTextSelected(text);
-        document.getElementsByClassName('menu_cards').classList.add("menu_on_card_mouse");
+    }
+
+    const handleClickCard = (text) => {
+        setTextSelected(text);
+        setClickedCard(true);
+    }
+
+    const handleExitCard = () => {
+        setTextSelected();
+        setClickedCard(false);
     }
 
     return (<>
         <div className="menu_container">
             <div className="menu_header">
-                <img className="menu_card_text_selected" src={textSelected} />
+                {textSelected &&
+                    <img className="menu_card_text_selected" src={textSelected} alt={json.text_selected} />
+                }
             </div>
             <div className="menu_body_container">
                 <div className="menu_body">
@@ -28,12 +44,20 @@ const Menu = () => {
             </div>
             <div className="menu_footer">
                 <div className="menu_cards" id="menu_new_game_card" />
-                <div className="menu_cards" id="menu_continue_card"
+                <div className={`menu_cards 
+                    ${textSelected === continueText ? "menu_on_hover_card_mouse" : ""} 
+                    ${clickedCard ? "menu_on_click_card_mouse" : ""}`}
+                    id="menu_continue_card"
                     onMouseEnter={() => handleHoverCard(continueText)}
-                    onMouseLeave={() => handleHoverCard('')} />
-                <div className="menu_cards" id="menu_options_card"
+                    onMouseLeave={() => handleExitCard()}
+                    onClick={() => handleClickCard(continueText)} />
+                <div className={`menu_cards 
+                    ${textSelected === optionsText ? "menu_on_hover_card_mouse" : ""} 
+                    ${clickedCard ? "menu_on_click_card_mouse" : ""}`}
+                    id="menu_options_card"
                     onMouseEnter={() => handleHoverCard(optionsText)}
-                    onMouseLeave={() => handleHoverCard('')} />
+                    onMouseLeave={() => handleExitCard()}
+                    onClick={() => handleClickCard(optionsText)} />
             </div>
         </div>
     </>);
