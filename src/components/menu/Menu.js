@@ -63,7 +63,7 @@ const Menu = () => {
                                 setTextSelected={setTextSelected}
                             /> */}
                             <DraggableCard className="menu_cards"
-                                id={ ? "continue_draggable" : "options_draggable"}
+                                id={"draggable"}
                                 text={optionsText}
                                 textSelected={textSelected}
                                 setTextSelected={setTextSelected}
