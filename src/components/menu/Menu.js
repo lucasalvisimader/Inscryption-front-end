@@ -2,7 +2,7 @@
 import "./Menu.css"
 
 // react
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 // images
 import continueText from '../../assets/images/menu/texts/continue.png'
@@ -11,56 +11,83 @@ import optionsText from '../../assets/images/menu/texts/options.png'
 // json
 import en from '../../assets/locales/en.json'
 
+// external
+import { DraggableCard } from '../draggable_card/DraggableCard';
+import { DroppableArea } from "../droppable_area/DroppableArea";
+import { DndContext } from '@dnd-kit/core';
+
 const Menu = () => {
-    const [textSelected, setTextSelected] = useState();
-    const [clickedCard, setClickedCard] = useState(false);
+    const [textSelected, setTextSelected] = useState(null);
+    const [parent, setParent] = useState(null);
+
     const json = en.menu;
 
-    const handleHoverCard = (text) => {
-        setTextSelected(text);
+    function handleDragEnd({ over, setNodeRef }) {
+        if (over) {
+            setParent(over.id);
+        } else {
+            setParent(setNodeRef);
+        }
     }
 
-    const handleClickCard = (text) => {
-        setTextSelected(text);
-        setClickedCard(true);
-    }
-
-    const handleExitCard = () => {
-        setTextSelected();
-        setClickedCard(false);
-    }
-
-    return (<>
-        <div className="menu_container">
-            <div className="menu_header">
-                {textSelected &&
-                    <img className="menu_card_text_selected" src={textSelected} alt={json.text_selected} />
-                }
-            </div>
-            <div className="menu_body_container">
-                <div className="menu_body">
-                    <div id="menu_input_card" />
+    return (
+        <DndContext onDragEnd={handleDragEnd}>
+            <div className="menu_container">
+                <div className="menu_header">
+                    {textSelected && (
+                        <img className="menu_card_text_selected" src={textSelected} alt={json.text_selected} />
+                    )}
+                </div>
+                <div className="menu_body_container">
+                    <div className="menu_body">
+                        <DroppableArea id="droppable">
+                            {parent === "droppable" ? (
+                                <div className="menu_cards">
+                                    <DraggableCard id={parent}
+                                        text={parent === "droppable" ? textSelected : ""}
+                                        textSelected={textSelected}
+                                        setTextSelected={setTextSelected}
+                                    />
+                                </div>
+                            ) : null}
+                        </DroppableArea>
+                    </div>
+                </div>
+                <div className="menu_footer">
+                    {parent === "droppable" ? (<>
+                        <div className="menu_cards">
+                            {/* <DraggableCard className="menu_cards"
+                                id="continue_draggable"
+                                text={continueText}
+                                textSelected={textSelected}
+                                setTextSelected={setTextSelected}
+                            /> */}
+                            <DraggableCard className="menu_cards"
+                                id={ ? "continue_draggable" : "options_draggable"}
+                                text={optionsText}
+                                textSelected={textSelected}
+                                setTextSelected={setTextSelected}
+                            />
+                        </div>
+                    </>) : (<>
+                        <DraggableCard className="menu_cards"
+                            id="continue_draggable"
+                            text={continueText}
+                            textSelected={textSelected}
+                            setTextSelected={setTextSelected}
+                        />
+                        <DraggableCard
+                            className="menu_cards"
+                            id="options_draggable"
+                            text={optionsText}
+                            textSelected={textSelected}
+                            setTextSelected={setTextSelected}
+                        />
+                    </>)}
                 </div>
             </div>
-            <div className="menu_footer">
-                <div className="menu_cards" id="menu_new_game_card" />
-                <div className={`menu_cards 
-                    ${textSelected === continueText ? "menu_on_hover_card_mouse" : ""} 
-                    ${clickedCard ? "menu_on_click_card_mouse" : ""}`}
-                    id="menu_continue_card"
-                    onMouseEnter={() => handleHoverCard(continueText)}
-                    onMouseLeave={() => handleExitCard()}
-                    onClick={() => handleClickCard(continueText)} />
-                <div className={`menu_cards 
-                    ${textSelected === optionsText ? "menu_on_hover_card_mouse" : ""} 
-                    ${clickedCard ? "menu_on_click_card_mouse" : ""}`}
-                    id="menu_options_card"
-                    onMouseEnter={() => handleHoverCard(optionsText)}
-                    onMouseLeave={() => handleExitCard()}
-                    onClick={() => handleClickCard(optionsText)} />
-            </div>
-        </div>
-    </>);
+        </DndContext>
+    );
 }
 
 export default Menu;
