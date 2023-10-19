@@ -16,7 +16,7 @@ export function DroppableArea(props) {
     return (<>
         <div className="droppable_menu_body_container" ref={setNodeRef} style={style}>
             <div className="droppable_menu_body">
-                <div id="menu_input_card">
+                <div id="droppable_menu_input_card">
                     {props.children}
                 </div>
             </div>

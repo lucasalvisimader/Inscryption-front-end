@@ -30,35 +30,107 @@ const Menu = () => {
             setParent(null);
         }
     }
-    
+
     const handleClickCard = () => {
         setParent(null);
     }
 
-    const card_continue = () => {
+    const cardData = {
+        new_game: {
+            id: "menu_new_game_draggable",
+            text: "",
+            type: "new_game",
+            isDisabled: true
+        },
+        continue: {
+            id: "menu_continue_draggable",
+            text: continueText,
+            type: "continue",
+        },
+        options: {
+            id: "menu_options_draggable",
+            text: optionsText,
+            type: "options",
+        },
+    };
+
+    const generateCard = (cardKey) => {
+        const card = cardData[cardKey];
         return (
             <DraggableCard className="menu_cards"
-                id="continue_draggable"
-                text={continueText}
-                type="continue"
+                id={card.id}
+                text={card.text}
+                type={card.type}
                 textSelected={textSelected}
                 setTextSelected={setTextSelected}
                 onClick={handleClickCard}
+                disable={card.isDisabled}
             />
+        );
+    }
+
+    const card_new_game = () => {
+        <div className="menu_cards" id="menu_new_game_card" />
+        return (
+            generateCard("new_game")
+        );
+    }
+
+    const card_continue = () => {
+        return (
+            generateCard("continue")
         );
     }
 
     const card_options = () => {
         return (
-            <DraggableCard className="menu_cards"
-                id="options_draggable"
-                text={optionsText}
-                type="options"
-                textSelected={textSelected}
-                setTextSelected={setTextSelected}
-                onClick={handleClickCard}
-            />
+            generateCard("options")
         );
+    }
+
+    const cardsFromBelow = () => {
+        switch (parent) {
+            case "menu_continue_draggable":
+                return <>
+                    {card_new_game()}
+                    {card_options()}
+                </>
+            case "menu_options_draggable":
+                return <>
+                    {card_new_game()}
+                    {card_continue()}
+                </>
+            case "menu_new_game_draggable":
+                return <>
+                    {card_continue()}
+                    {card_options()}
+                </>
+            default:
+                return <>
+                    {card_new_game()}
+                    {card_continue()}
+                    {card_options()}
+                </>
+        }
+    }
+
+    const cardsFromAbove = () => {
+        switch (parent) {
+            case "menu_continue_draggable":
+                return <>
+                    {card_continue()}
+                </>
+            case "menu_options_draggable":
+                return <>
+                    {card_options()}
+                </>
+            case "menu_new_game_draggable":
+                return <>
+                    {card_new_game()}
+                </>
+            default:
+                return;
+        }
     }
 
     return (<>
@@ -71,22 +143,13 @@ const Menu = () => {
                 </div>
                 <div className="menu_body_container">
                     <div className="menu_body">
-                        <DroppableArea id="droppable">
-                            {/* card de cima */}
-                            {parent && (
-                                parent === "continue_draggable" ? card_continue() : card_options()
-                            )}
+                        <DroppableArea id="menu_droppable">
+                            {cardsFromAbove()}
                         </DroppableArea>
                     </div>
                 </div>
                 <div className="menu_footer">
-                    {/* card de baixo */}
-                    {parent ? (
-                        parent === "continue_draggable" ? card_options() : card_continue()
-                    ) : (<>
-                        {card_continue()}
-                        {card_options()}
-                    </>)}
+                    {cardsFromBelow()}
                 </div>
             </div>
         </DndContext>

@@ -5,3 +5,12 @@
     justify-content: center;
     align-items: center;
 }
+
+.droppable_menu_cards {
+    width: 8.48vw;
+    height: 11.28vw;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

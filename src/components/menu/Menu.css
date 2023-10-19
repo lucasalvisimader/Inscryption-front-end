@@ -48,17 +48,6 @@
     align-items: center;
 }
 
-#menu_input_card {
-    width: 9.75vw;
-    height: 12.75vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url('../../assets/images/menu/cards/slot.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
 #menu_new_game_card {
     background: url('../../assets/images/menu/cards/newgame_greyed.png');
     background-size: contain;
