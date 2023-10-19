@@ -82,7 +82,7 @@ const Menu = () => {
         }
     }
 
-    const cardsFromAbove = () => {
+    const cardFromAbove = () => {
         if (parent) {
             const cardKey = parent.replace("menu_", "").replace("_draggable", "");
             return generateCard([cardKey], true);
@@ -101,7 +101,7 @@ const Menu = () => {
                 <div className="menu_body_container">
                     <div className="menu_body">
                         <DroppableArea id="menu_droppable">
-                            {cardsFromAbove()}
+                            {cardFromAbove()}
                         </DroppableArea>
                     </div>
                 </div>

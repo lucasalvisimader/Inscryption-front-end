@@ -53,10 +53,11 @@ export function DraggableCard({ id, text, textSelected, setTextSelected, isDisab
 
     return (<>
         <div ref={setNodeRef} style={style} {...listeners} {...attributes}
-            className={`droppable_menu_cards 
-            ${(textSelected === text) ? "droppable_menu_on_hover_card_mouse" : ""} 
-            ${clickedCard ? "droppable_menu_on_click_card_mouse" : ""}`}
-            id={`droppable_menu_${handleIdCard()}_card`}
+            className={`draggable_menu_cards 
+            ${(textSelected === text) ? "draggable_menu_on_hover_card_mouse" : ""} 
+            ${clickedCard ? "draggable_menu_on_click_card_mouse" : ""}
+            ${isOnTop ? "draggable_menu_top_card" : ""}`}
+            id={`draggable_menu_${handleIdCard()}_card`}
             onMouseEnter={() => handleHoverCard(text)}
             onMouseLeave={() => handleExitCard()}
             onClick={() => handleClickCard(text)} />

@@ -177,29 +177,29 @@ button {
     align-items: center;
 }
 
-.modal-content {
+/* .modal-content {
     padding: 1rem;
     color: #bb7c39 !important;
     max-width: 20rem;
-    border: #bb7c39 2px solid;
+    border: #bb7c39 2px solid; */
     /* background: url(../../assets/images/others/navbar_background.png); */
-}
+/* } */
 
-.modal-content span, .modal-content b{
+/* .modal-content span, .modal-content b{
     font-size: 1.2rem;
-}
+} */
 
-.modal-content button {
+/* .modal-content button {
     background-color: transparent;
     color: white;
     font-size: 1.5rem;
-}
+} */
 
-.modal-content button:hover {
+/* .modal-content button:hover {
     background-color: transparent;
     color: #a5a5a5;
     transition: 0.3s;
-}
+} */
 
 #content_editable_h1 {
     font-size: 3.7rem;

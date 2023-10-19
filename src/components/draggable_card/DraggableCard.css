@@ -1,4 +1,4 @@
-.droppable_menu_body {
+.draggable_menu_body {
     width: 100%;
     height: 98%;
     display: flex;
@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.droppable_menu_cards {
+.draggable_menu_cards {
     width: 8.48vw;
     height: 11.28vw;
     z-index: 1;
@@ -15,29 +15,29 @@
     align-items: center;
 }
 
-#droppable_menu_new_game_card {
+#draggable_menu_new_game_card {
     background: url('../../assets/images/menu/cards/newgame_greyed.png');
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0.5;
 }
 
-#droppable_menu_continue_card {
+#draggable_menu_continue_card {
     background: url('../../assets/images/menu/cards/continue.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-#droppable_menu_options_card {
+#draggable_menu_options_card {
     background: url('../../assets/images/menu/cards/options.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.droppable_menu_on_hover_card_mouse {
+.draggable_menu_on_hover_card_mouse {
     cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto !important;
 }
 
-.droppable_menu_on_click_card_mouse {
+.draggable_menu_on_click_card_mouse {
     cursor: url('../../assets/images/cursor/cursor_icons_3.png'), auto !important;
 }

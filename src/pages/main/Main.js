@@ -58,7 +58,7 @@ const Main = () => {
             document.removeEventListener('click', handleUserAction);
             document.removeEventListener('keydown', handleUserAction);
         }
-    }, [navigate, titleTheme]);
+    }, [navigate]);
 
     return (<>
         <div className={`main_container ${!isInTitleScreen ? 'main_blue_background' : ''}`} tabIndex={0} ref={containerRef}>

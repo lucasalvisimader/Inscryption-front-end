@@ -8,3 +8,22 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+.droppable_menu_input_card_with_top_card {
+    animation: leftChangeDropped 0.5s linear;
+    margin-left: -40vw;
+}
+
+@keyframes leftChangeDropped {
+    0% {
+        margin-left: -5vw;
+    }
+
+    50% {
+        margin-left: -30vw;
+    }
+
+    100% {
+        margin-left: -40vw;
+    }
+}
