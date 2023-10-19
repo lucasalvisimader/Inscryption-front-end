@@ -3,6 +3,12 @@
     animation: slideInFromRight 1s ease-in-out;
 }
 
+.modal_options_card_language_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @keyframes slideInFromRight {
     0% {
         transform: translateX(100%);

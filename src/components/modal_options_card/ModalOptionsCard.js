@@ -2,16 +2,21 @@
 import "./ModalOptionsCard.css"
 
 // react
-import { useRef, useState } from "react";
+import { useState } from "react";
+
+// json
+import en from '../../assets/locales/en.json'
 
 // external
 import { Modal } from "react-bootstrap";
-import Select from "react-select/dist/declarations/src/Select";
 
 const ModalOptionsCard = ({ show }) => {
-    const sigilsRef = useRef();
+    const languageOptions = en.languages;
+    const [selectedOption, setSelectedOption] = useState(languageOptions[0]);
 
-    const [selectedOptions, setSelectedOptions] = useState([]);
+    const handleChangeLanguage = () => {
+        
+    }
 
     return (<>
         <Modal className="modal_options_card_container"
@@ -23,18 +28,10 @@ const ModalOptionsCard = ({ show }) => {
             centered>
             <Modal.Body>
                 <label>Aあ</label>
-                <h4>Centered Modal</h4>
-                <div >
-                    <div>-</div>
-                    <Select ref={sigilsRef}
-                        id="sigils"
-                        isMulti required name='sigilsTypes'
-                        data-test="sigils"
-                        value={selectedOptions}
-                        onChange={() => setSelectedOptions(selectedOptions)}
-                        classNamePrefix="select"
-                        options={sigilOptions} />
-                    <div>+</div>
+                <div className="modal_options_card_language_container">
+                    <button>{'<'}</button>
+                    <div>{selectedOption}</div>
+                    <button>{'>'}</button>
                 </div>
             </Modal.Body>
         </Modal>
