@@ -41,6 +41,7 @@ const Menu = () => {
                 <div className="menu_body_container">
                     <div className="menu_body">
                         <DroppableArea id="droppable">
+                            {/* card de cima */}
                             {parent === "droppable" && (
                                 <DraggableCard className="menu_cards" id={parent}
                                     text={parent === "droppable" ? continueText : optionsText}
