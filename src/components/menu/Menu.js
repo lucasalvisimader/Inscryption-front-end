@@ -5,11 +5,12 @@ import "./Menu.css"
 import { useState } from "react";
 
 // images
-import continueText from '../../assets/images/menu/texts/continue.png'
-import optionsText from '../../assets/images/menu/texts/options.png'
+import continueText from '../../assets/images/menu/texts/continue.png';
+import optionsText from '../../assets/images/menu/texts/options.png';
+import newGame from '../../assets/images/menu/texts/newgame_greyed.png';
 
 // json
-import en from '../../assets/locales/en.json'
+import en from '../../assets/locales/en.json';
 
 // external
 import { DraggableCard } from '../draggable_card/DraggableCard';
@@ -23,7 +24,6 @@ const Menu = () => {
     const json = en.menu;
 
     const handleDragEnd = (result) => {
-        console.log(result)
         if (result.active && result.over) {
             setParent(result.active.id);
         } else {
@@ -31,106 +31,63 @@ const Menu = () => {
         }
     }
 
-    const handleClickCard = () => {
-        setParent(null);
-    }
-
     const cardData = {
         new_game: {
             id: "menu_new_game_draggable",
-            text: "",
+            text: newGame,
             type: "new_game",
-            isDisabled: true
+            isDisabled: "true"
         },
         continue: {
             id: "menu_continue_draggable",
             text: continueText,
-            type: "continue",
+            type: "continue"
         },
         options: {
             id: "menu_options_draggable",
             text: optionsText,
-            type: "options",
-        },
-    };
-
-    const generateCard = (cardKey) => {
-        const card = cardData[cardKey];
-        return (
-            <DraggableCard className="menu_cards"
-                id={card.id}
-                text={card.text}
-                type={card.type}
-                textSelected={textSelected}
-                setTextSelected={setTextSelected}
-                onClick={handleClickCard}
-                disable={card.isDisabled}
-            />
-        );
+            type: "options"
+        }
     }
 
-    const card_new_game = () => {
-        <div className="menu_cards" id="menu_new_game_card" />
-        return (
-            generateCard("new_game")
-        );
-    }
-
-    const card_continue = () => {
-        return (
-            generateCard("continue")
-        );
-    }
-
-    const card_options = () => {
-        return (
-            generateCard("options")
-        );
+    const generateCard = (cardKey = [], isOnTop) => {
+        return cardKey.map((name) => {
+            const card = cardData[name];
+            return (
+                <DraggableCard className="menu_cards"
+                    id={card.id}
+                    key={name}
+                    text={card.text}
+                    type={card.type}
+                    textSelected={textSelected}
+                    setTextSelected={setTextSelected}
+                    onClick={() => setParent(null)}
+                    isDisabled={card.isDisabled}
+                    isOnTop={isOnTop}
+                />
+            );
+        })
     }
 
     const cardsFromBelow = () => {
         switch (parent) {
             case "menu_continue_draggable":
-                return <>
-                    {card_new_game()}
-                    {card_options()}
-                </>
+                return generateCard(["new_game", "options"]);
             case "menu_options_draggable":
-                return <>
-                    {card_new_game()}
-                    {card_continue()}
-                </>
+                return generateCard(["new_game", "continue"]);
             case "menu_new_game_draggable":
-                return <>
-                    {card_continue()}
-                    {card_options()}
-                </>
+                return generateCard(["continue", "options"]);
             default:
-                return <>
-                    {card_new_game()}
-                    {card_continue()}
-                    {card_options()}
-                </>
+                return generateCard(["new_game", "continue", "options"]);
         }
     }
 
     const cardsFromAbove = () => {
-        switch (parent) {
-            case "menu_continue_draggable":
-                return <>
-                    {card_continue()}
-                </>
-            case "menu_options_draggable":
-                return <>
-                    {card_options()}
-                </>
-            case "menu_new_game_draggable":
-                return <>
-                    {card_new_game()}
-                </>
-            default:
-                return;
+        if (parent) {
+            const cardKey = parent.replace("menu_", "").replace("_draggable", "");
+            return generateCard([cardKey], true);
         }
+        return null;
     }
 
     return (<>

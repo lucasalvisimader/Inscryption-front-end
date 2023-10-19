@@ -13,10 +13,10 @@ import optionsText from '../../assets/images/menu/texts/options.png'
 import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
-export function DraggableCard({ id, text, textSelected, setTextSelected, disable }) {
+export function DraggableCard({ id, text, textSelected, setTextSelected, isDisabled, isOnTop }) {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({ 
         id: id,
-        disabled: disable
+        disabled: isDisabled
      });
     const style = {
         transform: CSS.Translate.toString(transform),
@@ -34,7 +34,9 @@ export function DraggableCard({ id, text, textSelected, setTextSelected, disable
     }
 
     const handleExitCard = () => {
-        setTextSelected();
+        if (!isOnTop) {
+            setTextSelected();
+        }
         setClickedCard(false);
     }
 
@@ -52,10 +54,9 @@ export function DraggableCard({ id, text, textSelected, setTextSelected, disable
     return (<>
         <div ref={setNodeRef} style={style} {...listeners} {...attributes}
             className={`droppable_menu_cards 
-            ${textSelected === text ? "menu_on_hover_card_mouse" : ""} 
-            ${clickedCard ? "menu_on_click_card_mouse" : ""}`}
-            isDropDisabled={disable}
-            id={`menu_${handleIdCard()}_card`}
+            ${(textSelected === text) ? "droppable_menu_on_hover_card_mouse" : ""} 
+            ${clickedCard ? "droppable_menu_on_click_card_mouse" : ""}`}
+            id={`droppable_menu_${handleIdCard()}_card`}
             onMouseEnter={() => handleHoverCard(text)}
             onMouseLeave={() => handleExitCard()}
             onClick={() => handleClickCard(text)} />
