@@ -2,7 +2,7 @@
 import "./Menu.css"
 
 // react
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 // images
 import continueText from '../../assets/images/menu/texts/continue.png'
@@ -22,16 +22,47 @@ const Menu = () => {
 
     const json = en.menu;
 
-    function handleDragEnd({ over }) {
-        if (over) {
-            setParent(over.id);
+    const handleDragEnd = (result) => {
+        console.log(result)
+        if (result.active && result.over) {
+            setParent(result.active.id);
         } else {
             setParent(null);
         }
     }
+    
+    const handleClickCard = () => {
+        setParent(null);
+    }
+
+    const card_continue = () => {
+        return (
+            <DraggableCard className="menu_cards"
+                id="continue_draggable"
+                text={continueText}
+                type="continue"
+                textSelected={textSelected}
+                setTextSelected={setTextSelected}
+                onClick={handleClickCard}
+            />
+        );
+    }
+
+    const card_options = () => {
+        return (
+            <DraggableCard className="menu_cards"
+                id="options_draggable"
+                text={optionsText}
+                type="options"
+                textSelected={textSelected}
+                setTextSelected={setTextSelected}
+                onClick={handleClickCard}
+            />
+        );
+    }
 
     return (<>
-        <DndContext onDragEnd={handleDragEnd}>
+        <DndContext onDragEnd={handleDragEnd} >
             <div className="menu_container">
                 <div className="menu_header">
                     {textSelected && (
@@ -42,37 +73,19 @@ const Menu = () => {
                     <div className="menu_body">
                         <DroppableArea id="droppable">
                             {/* card de cima */}
-                            {parent === "droppable" && (
-                                <DraggableCard className="menu_cards" id={parent}
-                                    text={parent === "droppable" ? continueText : optionsText}
-                                    textSelected={textSelected}
-                                    setTextSelected={setTextSelected}
-                                />
+                            {parent && (
+                                parent === "continue_draggable" ? card_continue() : card_options()
                             )}
                         </DroppableArea>
                     </div>
                 </div>
                 <div className="menu_footer">
-                    {parent === "droppable" ? (<>
-                        <DraggableCard className="menu_cards"
-                            id="general_draggable"
-                            text={continueText}
-                            textSelected={textSelected}
-                            setTextSelected={setTextSelected}
-                        />
-                    </>) : (<>
-                        <DraggableCard className="menu_cards"
-                            id="continue_draggable"
-                            text={continueText}
-                            textSelected={textSelected}
-                            setTextSelected={setTextSelected}
-                        />
-                        <DraggableCard className="menu_cards"
-                            id="options_draggable"
-                            text={optionsText}
-                            textSelected={textSelected}
-                            setTextSelected={setTextSelected}
-                        />
+                    {/* card de baixo */}
+                    {parent ? (
+                        parent === "continue_draggable" ? card_options() : card_continue()
+                    ) : (<>
+                        {card_continue()}
+                        {card_options()}
                     </>)}
                 </div>
             </div>
