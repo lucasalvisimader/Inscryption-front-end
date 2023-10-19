@@ -13,11 +13,11 @@
 }
 
 * {
-    font-family: 'Heavyweight Regular';
     font-size: 1.1rem;
 }
 
 #root {
+    font-family: 'Heavyweight Regular';
     height: 100%;
     width: 100%;
 }

@@ -1,4 +1,5 @@
 .modal_options_card_container {
+    font-family: Marksman Regular;
     pointer-events: none;
     animation: slideInFromRight 1s ease-in-out;
 }
@@ -7,6 +8,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 3rem;
+}
+
+.modal_options_card_button {
+    /* background-color: var(); */
+}
+
+.modal_options_card_language_chosen {
+    font-size: 1.5rem;
 }
 
 @keyframes slideInFromRight {
