@@ -7,6 +7,8 @@
     },
     "menu": {
         "text_selected": "text card selected",
-        "language_text": "language text option"
+        "language_text": "language text option",
+        "plus_button": "plus_button_image",
+        "minus_button": "minus_button_image"
     }
 }

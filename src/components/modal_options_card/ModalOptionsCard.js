@@ -49,12 +49,12 @@ const ModalOptionsCard = ({ show }) => {
             <Modal.Body>
                 <img className="modal_options_card_language_text" src={languageText} alt={json.language_text}/>
                 <div className="modal_options_card_language_container">
-                    <img className="modal_options_card_button" src={minusEnable}
+                    <img className="modal_options_card_button" src={minusEnable} alt={json.minus_button}
                         onClick={() => handleChangeLanguage(false)} />
                     <span className="modal_options_card_language_chosen">
                         {languageChosen}
                     </span>
-                    <img className="modal_options_card_button" src={plusEnable}
+                    <img className="modal_options_card_button" src={plusEnable} alt={json.plus_button}
                         onClick={() => handleChangeLanguage(true)} />
                 </div>
             </Modal.Body>
