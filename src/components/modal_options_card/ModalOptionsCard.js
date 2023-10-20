@@ -4,6 +4,9 @@ import "./ModalOptionsCard.css"
 // react
 import { useState } from "react";
 
+// images
+import languageText from '../../assets/images/menu/texts/language.png'
+
 // json
 import en from '../../assets/locales/en.json'
 
@@ -14,6 +17,8 @@ const ModalOptionsCard = ({ show }) => {
     const languageOptions = en.languages;
     const [selectedOption, setSelectedOption] = useState(0);
     const [languageChosen, setLanguageChosen] = useState(languageOptions[selectedOption]);
+
+    const json = en.menu;
 
     const handleChangeLanguage = (isNext) => {
         let newSelectedOption;
@@ -37,7 +42,7 @@ const ModalOptionsCard = ({ show }) => {
             backdrop={false}
             centered>
             <Modal.Body>
-                <label>Aあ</label>
+                <img className="modal_options_card_language_text" src={languageText} alt={json.language_text}/>
                 <div className="modal_options_card_language_container">
                     <button className="modal_options_card_button"
                         onClick={() => handleChangeLanguage(false)}>

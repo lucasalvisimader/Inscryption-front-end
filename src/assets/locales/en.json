@@ -1,11 +1,12 @@
 {
+    "languages": ["English", "Portugues", "Espanol"],
     "main": {
         "title": "inscryption title",
         "title_spade": "inscryption spade title",
         "press_to_start": "PRESS ANY BUTTON TO START"
     },
     "menu": {
-        "text_selected": "text card selected"
-    },
-    "languages": ["English", "Portugues", "Espanol"]
+        "text_selected": "text card selected",
+        "language_text": "language text option"
+    }
 }
