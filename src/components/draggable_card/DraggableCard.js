@@ -13,15 +13,15 @@ import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
 export function DraggableCard({ id, text, textSelected, setTextSelected, isDisabled, isOnTop }) {
-    const { attributes, listeners, setNodeRef, transform } = useDraggable({ 
+    const { attributes, listeners, setNodeRef, transform } = useDraggable({
         id: id,
         disabled: isDisabled
-     });
+    });
     const style = {
         transform: CSS.Translate.toString(transform),
     }
-
     const [clickedCard, setClickedCard] = useState(false);
+
     const handleHoverCard = (text) => {
         setTextSelected(text);
     }
@@ -39,7 +39,7 @@ export function DraggableCard({ id, text, textSelected, setTextSelected, isDisab
     }
 
     const handleIdCard = () => {
-        switch(text) {
+        switch (text) {
             case continueText:
                 return "continue";
             case optionsText:

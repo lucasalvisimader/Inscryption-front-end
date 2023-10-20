@@ -2,17 +2,24 @@
     font-family: Marksman Regular;
     pointer-events: none;
     animation: slideInFromRight 1s ease-in-out;
+    cursor: url('../../assets/images/cursor/cursor_icons_0.png'), auto;
+    z-index: 10;
+}
+
+.modal_options_container_dialog {
+    background-color: var(--background-yellow) !important;
 }
 
 .modal_options_card_language_container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     font-size: 3rem;
 }
 
 .modal_options_card_button {
-    /* background-color: var(); */
+    cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto;
+    width: 5vw;
 }
 
 .modal_options_card_language_chosen {
