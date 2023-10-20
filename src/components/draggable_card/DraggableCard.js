@@ -2,8 +2,7 @@
 import './DraggableCard.css'
 
 // react
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 // images
 import continueText from '../../assets/images/menu/texts/continue.png';
@@ -23,7 +22,6 @@ export function DraggableCard({ id, text, textSelected, setTextSelected, isDisab
     }
 
     const [clickedCard, setClickedCard] = useState(false);
-
     const handleHoverCard = (text) => {
         setTextSelected(text);
     }
@@ -53,7 +51,7 @@ export function DraggableCard({ id, text, textSelected, setTextSelected, isDisab
 
     return (<>
         <div ref={setNodeRef} style={style} {...listeners} {...attributes}
-            className={`draggable_menu_cards 
+            className={`draggable_menu_cards
             ${(textSelected === text) ? "draggable_menu_on_hover_card_mouse" : ""} 
             ${clickedCard ? "draggable_menu_on_click_card_mouse" : ""}
             ${isOnTop ? "draggable_menu_top_card" : ""}`}

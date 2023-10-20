@@ -56,3 +56,15 @@
     align-items: center;
     gap: 1.5rem;
 }
+
+.menu_card {
+    opacity: 0;
+    transform: translateX(600%);
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.menu_card_animate {
+    opacity: 1;
+    transform: translateX(0);
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}

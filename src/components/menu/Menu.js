@@ -2,7 +2,7 @@
 import "./Menu.css"
 
 // react
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // images
 import continueText from '../../assets/images/menu/texts/continue.png';
@@ -90,6 +90,20 @@ const Menu = () => {
         return null;
     }
 
+    const animateCards = () => {
+        const menuCards = document.querySelectorAll(".menu_card");
+        menuCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add("menu_card_animate");
+                card.classList.remove("menu_card");
+            }, 500 * index);
+        });
+    }
+
+    useEffect(() => {
+        animateCards();
+    }, [parent])
+
     return (<>
         <DndContext onDragEnd={handleDragEnd} >
             <div className="menu_container">
@@ -106,7 +120,11 @@ const Menu = () => {
                     </div>
                 </div>
                 <div className="menu_footer">
-                    {cardsFromBelow()}
+                    {cardsFromBelow().map((card, index) => (
+                        <div className="menu_card" key={index}>
+                            {card}
+                        </div>
+                    ))}
                 </div>
             </div>
         </DndContext>
