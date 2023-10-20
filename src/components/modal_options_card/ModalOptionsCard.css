@@ -8,6 +8,7 @@
 
 .modal_options_container_dialog {
     background-color: var(--background-yellow) !important;
+    border-radius: 0 !important;
 }
 
 .modal_options_card_language_container {
