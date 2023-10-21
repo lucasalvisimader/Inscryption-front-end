@@ -100,12 +100,16 @@ const Menu = () => {
         });
     }
 
+    const changeColorInputCard = () => {
+        
+    }
+
     useEffect(() => {
         animateCards();
     }, [parent])
 
     return (<>
-        <DndContext onDragEnd={handleDragEnd} >
+        <DndContext onDragStart={changeColorInputCard} onDragEnd={handleDragEnd} >
             <div className="menu_container">
                 <div className="menu_header">
                     {textSelected && (
