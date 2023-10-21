@@ -3,7 +3,7 @@
     pointer-events: none;
     animation: slideInFromRight 1s ease-in-out;
     cursor: url('../../assets/images/cursor/cursor_icons_0.png'), auto;
-    z-index: 10;
+    z-index: 10 !important;
 }
 
 .modal_options_container_dialog {
