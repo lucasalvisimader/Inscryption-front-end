@@ -6,10 +6,10 @@ import { useState } from "react";
 
 // images
 import languageText from '../../assets/images/menu/texts/language.png'
-import minusEnable from '../../assets/images/menu/cards/minus_enable.png'
-import minusDisable from '../../assets/images/menu/cards/minus_disable.png'
-import plusEnable from '../../assets/images/menu/cards/plus_enable.png'
-import plusDisable from '../../assets/images/menu/cards/plus_disable.png'
+import minusEnable from '../../assets/images/menu/options/minus_enable.png'
+import minusDisable from '../../assets/images/menu/options/minus_disable.png'
+import plusEnable from '../../assets/images/menu/options/plus_enable.png'
+import plusDisable from '../../assets/images/menu/options/plus_disable.png'
 
 // json
 import en from '../../assets/locales/en.json'
@@ -41,7 +41,7 @@ const ModalOptionsCard = ({ show }) => {
         <Modal className="modal_options_card_container"
             contentClassName="modal_options_container_dialog"
             id="modal_options_card_container"
-            size="sm"
+            size="md"
             show={show}
             aria-labelledby="contained-modal-title-vcenter"
             backdrop={false}

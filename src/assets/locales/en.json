@@ -8,7 +8,8 @@
     "menu": {
         "text_selected": "text card selected",
         "language_text": "language text option",
-        "plus_button": "plus_button_image",
-        "minus_button": "minus_button_image"
+        "plus_button": "plus button image",
+        "minus_button": "minus button image",
+        "new_game_card_part": "new game card part"
     }
 }

@@ -9,6 +9,7 @@
 .modal_options_container_dialog {
     background-color: var(--background-yellow) !important;
     border-radius: 0 !important;
+    padding: 2%;
 }
 
 .modal_options_card_language_container {
@@ -18,13 +19,19 @@
     font-size: 3rem;
 }
 
+.modal_options_card_language_text {
+    width: 2vw;
+    margin: 2%;
+}
+
 .modal_options_card_button {
     cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto;
     width: 5vw;
+    height: auto;
 }
 
 .modal_options_card_language_chosen {
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 @keyframes slideInFromRight {
