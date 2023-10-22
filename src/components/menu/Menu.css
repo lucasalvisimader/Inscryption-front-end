@@ -66,3 +66,25 @@
     transform: translateX(0);
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
+
+.menu_card_fade_out {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 99;
+    background-color: var(--black);
+    animation: menuFadeOut 1s linear;
+    transition: opacity 1s ease-in-out;
+    pointer-events: all;
+}
+
+@keyframes menuFadeOut {
+    0% {
+        opacity: 0;
+    }
+    
+    100% {
+        opacity: 1;
+    }
+}

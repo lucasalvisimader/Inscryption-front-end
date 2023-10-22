@@ -40,7 +40,6 @@ const NewGameCard = ({ setIsGlitchy }) => {
         const audio = new Audio(glitch);
         audio.play();
         setIsGlitchy(true);
-
         setTimeout(() => {
             setGlitchy(false);
         }, 250);
@@ -50,7 +49,7 @@ const NewGameCard = ({ setIsGlitchy }) => {
         if (intervalId) {
             clearInterval(intervalId);
         }
-        const interval = Math.random() * 1500 + 500;
+        const interval = Math.random() * 1000 + 250;
         const intervalFunc = () => {
             const randomIndex = Math.floor(Math.random() * 10);
             setBlurImage(randomIndex + 1);
@@ -62,7 +61,6 @@ const NewGameCard = ({ setIsGlitchy }) => {
     useEffect(() => {
         if (blurImage !== 0) {
             setupInterval();
-
             return () => {
                 if (intervalId) {
                     clearInterval(intervalId);
