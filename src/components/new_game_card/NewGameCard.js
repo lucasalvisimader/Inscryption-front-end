@@ -2,7 +2,7 @@
 import './NewGameCard.css';
 
 // react
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // images
 import imageCardPart1 from '../../assets/images/menu/new_game/greyed_1.png';
@@ -16,12 +16,18 @@ import imageCardPart8 from '../../assets/images/menu/new_game/greyed_8.png';
 import imageCardPart9 from '../../assets/images/menu/new_game/greyed_9.png';
 import imageCardPart10 from '../../assets/images/menu/new_game/greyed_10.png';
 
+// sounds
+import glitch from '../../assets/sounds/glitch.wav';
+
 // json
 import en from '../../assets/locales/en.json';
 
-const NewGameCard = () => {
+const NewGameCard = ({ setIsGlitchy }) => {
+    const audioRef = useRef();
+
     const [blurImage, setBlurImage] = useState(null);
-    const [intervalId, setIntervalId] = useState(0)
+    const [intervalId, setIntervalId] = useState(0);
+    const setGlitchy = setIsGlitchy;
     const json = en.menu;
 
     const blurredImages = [
@@ -29,6 +35,16 @@ const NewGameCard = () => {
         imageCardPart5, imageCardPart6, imageCardPart7, imageCardPart8,
         imageCardPart9, imageCardPart10
     ];
+
+    const handleClickNewCardDisabled = () => {
+        const audio = new Audio(glitch);
+        audio.play();
+        setIsGlitchy(true);
+
+        setTimeout(() => {
+            setGlitchy(false);
+        }, 250);
+    }
 
     const setupInterval = () => {
         if (intervalId) {
@@ -56,7 +72,7 @@ const NewGameCard = () => {
     }, [blurImage]);
 
     return (<>
-        <div className='menu_card_new_game_images_container'>
+        <div className='menu_card_new_game_images_container' ref={audioRef} onClick={handleClickNewCardDisabled}>
             {blurredImages.map((image, index) => (
                 <img className={`menu_card_new_game_image ${blurImage === index + 1 ? 'menu_card_new_game_image_blur' : ''}`}
                     key={index}

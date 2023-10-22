@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import continueText from '../../assets/images/menu/texts/continue.png';
 import optionsText from '../../assets/images/menu/texts/options.png';
 import newGame from '../../assets/images/menu/texts/newgame_greyed.png';
+import backgroundGlitch from '../../assets/images/screen/background_new_game.gif';
 
 // json
 import en from '../../assets/locales/en.json';
@@ -20,6 +21,7 @@ import { DndContext } from '@dnd-kit/core';
 const Menu = () => {
     const [textSelected, setTextSelected] = useState(null);
     const [parent, setParent] = useState(null);
+    const [isGlitchy, setIsGlitchy] = useState(false);
 
     const json = en.menu;
 
@@ -54,7 +56,7 @@ const Menu = () => {
         return cardKey.map((name) => {
             const card = cardData[name];
             return (
-                <DraggableCard className="menu_cards card.isDisabled"
+                <DraggableCard className="menu_cards"
                     id={card.id}
                     key={name}
                     text={card.text}
@@ -64,6 +66,7 @@ const Menu = () => {
                     onClick={() => setParent(null)}
                     isDisabled={card.isDisabled}
                     isOnTop={isOnTop}
+                    setIsGlitchy={setIsGlitchy}
                 />
             );
         })
@@ -130,6 +133,9 @@ const Menu = () => {
                         </div>
                     ))}
                 </div>
+                {isGlitchy && (
+                    <img className="menu_card_new_game_image_glitch" src={backgroundGlitch} alt={json.background_glitch}/>
+                )}
             </div>
         </DndContext>
     </>);

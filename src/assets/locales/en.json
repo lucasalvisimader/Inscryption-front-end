@@ -10,6 +10,7 @@
         "language_text": "language text option",
         "plus_button": "plus button image",
         "minus_button": "minus button image",
-        "new_game_card_part": "new game card part"
+        "new_game_card_part": "new game card part",
+        "background_glitch": "background image glitch"
     }
 }

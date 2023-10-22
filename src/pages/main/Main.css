@@ -98,6 +98,16 @@
     opacity: 0;
 }
 
+.menu_card_new_game_image_glitch {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 99;
+    background-size: contain;
+    pointer-events: none;
+}
+
 @keyframes colorChange {
     0% {
         color: var(--black);

@@ -13,7 +13,7 @@ import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import NewGameCard from '../new_game_card/NewGameCard';
 
-export function DraggableCard({ id, text, textSelected, setTextSelected, isDisabled, isOnTop }) {
+export function DraggableCard({ id, text, textSelected, setTextSelected, isDisabled, isOnTop, setIsGlitchy }) {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
         id: id,
         disabled: isDisabled
@@ -61,7 +61,7 @@ export function DraggableCard({ id, text, textSelected, setTextSelected, isDisab
             onMouseLeave={() => handleExitCard()}
             onClick={() => handleClickCard(text)}>
             {isDisabled && (
-                <NewGameCard />
+                <NewGameCard setIsGlitchy={setIsGlitchy} />
             )}
         </div>
     </>);

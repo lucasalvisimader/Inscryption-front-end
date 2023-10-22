@@ -53,16 +53,17 @@ const Main = () => {
             playClickSound();
             setAnimationSpeed('fast');
             setTimeout(() => {
-                spadeLeftRef.current.id = "main_title_image_spade_left_animation";
-                titleRef.current.id = "main_title_image_animation";
-                spadeRightRef.current.id = "main_title_image_spade_right_animation";
-                subtitleRef.current.id = "main_press_to_start_text_animation"
+                if (spadeLeftRef.current && titleRef.current && spadeRightRef.current && subtitleRef.current) {
+                    spadeLeftRef.current.id = "main_title_image_spade_left_animation";
+                    titleRef.current.id = "main_title_image_animation";
+                    spadeRightRef.current.id = "main_title_image_spade_right_animation";
+                    subtitleRef.current.id = "main_press_to_start_text_animation"
+                }
                 setTimeout(() => {
                     enterMenu();
                 }, 500);
             }, 1500);
         }
-
         document.addEventListener('click', handleUserAction);
         document.addEventListener('keydown', handleUserAction);
 
