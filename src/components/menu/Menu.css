@@ -58,13 +58,11 @@
 }
 
 .menu_card {
-    opacity: 0;
-    transform: translateX(600%);
+    transform: translateX(1000%);
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
 .menu_card_animate {
-    opacity: 1;
     transform: translateX(0);
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }

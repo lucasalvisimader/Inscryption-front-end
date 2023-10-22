@@ -21,9 +21,15 @@ import en from '../../assets/locales/en.json';
 
 const Main = () => {
     const navigate = useNavigate();
+
     const containerRef = useRef();
     const audioRef = useRef();
     const isFirstAction = useRef(true);
+    const spadeLeftRef = useRef();
+    const titleRef = useRef();
+    const spadeRightRef = useRef();
+    const subtitleRef = useRef();
+
     const [animationSpeed, setAnimationSpeed] = useState('');
     const [isInTitleScreen, setIsInTitleScreen] = useState(true);
     const json = en.main;
@@ -47,8 +53,14 @@ const Main = () => {
             playClickSound();
             setAnimationSpeed('fast');
             setTimeout(() => {
-                enterMenu();
-            }, 2000);
+                spadeLeftRef.current.id = "main_title_image_spade_left_animation";
+                titleRef.current.id = "main_title_image_animation";
+                spadeRightRef.current.id = "main_title_image_spade_right_animation";
+                subtitleRef.current.id = "main_press_to_start_text_animation"
+                setTimeout(() => {
+                    enterMenu();
+                }, 500);
+            }, 1500);
         }
 
         document.addEventListener('click', handleUserAction);
@@ -65,11 +77,23 @@ const Main = () => {
             <audio src={titleTheme} ref={audioRef} autoPlay loop />
             {(isInTitleScreen && (<>
                 <div className='main_title_container'>
-                    <img className={`main_title_image_spade_left`} src={titleSpade} alt={json.title_spade} />
-                    <img className='main_title_image' src={title} alt={json.title} />
-                    <img className={`main_title_image_spade_right`} src={titleSpade} alt={json.title_spade} />
+                    <img className={`main_title_image_spade_left`}
+                        src={titleSpade}
+                        alt={json.title_spade}
+                        ref={spadeLeftRef} />
+                    <img className='main_title_image'
+                        src={title}
+                        alt={json.title}
+                        ref={titleRef} />
+                    <img className={`main_title_image_spade_right`}
+                        src={titleSpade}
+                        alt={json.title_spade}
+                        ref={spadeRightRef} />
                 </div>
-                <p className={`main_press_to_start_text main_press_to_start_text_${animationSpeed}`}>{json.press_to_start}</p>
+                <p className={`main_press_to_start_text main_press_to_start_text_${animationSpeed}`}
+                    ref={subtitleRef}>
+                    {json.press_to_start}
+                </p>
             </>)) || (<Menu />)}
         </div>
     </>);

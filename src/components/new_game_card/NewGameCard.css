@@ -10,3 +10,7 @@
     width: 100%;
     height: auto;
 }
+
+.menu_card_new_game_image_blur {
+    filter: blur(2px);
+}

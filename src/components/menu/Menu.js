@@ -53,7 +53,6 @@ const Menu = () => {
     const generateCard = (cardKey = [], isOnTop) => {
         return cardKey.map((name) => {
             const card = cardData[name];
-            console.log(card.isDisabled)
             return (
                 <DraggableCard className="menu_cards card.isDisabled"
                     id={card.id}

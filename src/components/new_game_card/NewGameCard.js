@@ -1,6 +1,9 @@
 // styles
 import './NewGameCard.css';
 
+// react
+import { useState, useEffect } from 'react';
+
 // images
 import imageCardPart1 from '../../assets/images/menu/new_game/greyed_1.png';
 import imageCardPart2 from '../../assets/images/menu/new_game/greyed_2.png';
@@ -17,20 +20,51 @@ import imageCardPart10 from '../../assets/images/menu/new_game/greyed_10.png';
 import en from '../../assets/locales/en.json';
 
 const NewGameCard = () => {
+    const [blurImage, setBlurImage] = useState(null);
+    const [intervalId, setIntervalId] = useState(0)
     const json = en.menu;
+
+    const blurredImages = [
+        imageCardPart1, imageCardPart2, imageCardPart3, imageCardPart4,
+        imageCardPart5, imageCardPart6, imageCardPart7, imageCardPart8,
+        imageCardPart9, imageCardPart10
+    ];
+
+    const setupInterval = () => {
+        if (intervalId) {
+            clearInterval(intervalId);
+        }
+        const interval = Math.random() * 1500 + 500;
+        const intervalFunc = () => {
+            const randomIndex = Math.floor(Math.random() * 10);
+            setBlurImage(randomIndex + 1);
+            setTimeout(() => setBlurImage(0), interval);
+        }
+        setIntervalId(setInterval(intervalFunc, 500));
+    }
+
+    useEffect(() => {
+        if (blurImage !== 0) {
+            setupInterval();
+
+            return () => {
+                if (intervalId) {
+                    clearInterval(intervalId);
+                }
+            }
+        }
+    }, [blurImage]);
 
     return (<>
         <div className='menu_card_new_game_images_container'>
-            <img className='menu_card_new_game_image' src={imageCardPart1} alt={json.new_game_card_part} />
-            <img className='menu_card_new_game_image' src={imageCardPart2} alt={json.new_game_card_part} />
-            <img className='menu_card_new_game_image' src={imageCardPart3} alt={json.new_game_card_part} />
-            <img className='menu_card_new_game_image' src={imageCardPart4} alt={json.new_game_card_part} />
-            <img className='menu_card_new_game_image' src={imageCardPart5} alt={json.new_game_card_part} />
-            <img className='menu_card_new_game_image' src={imageCardPart6} alt={json.new_game_card_part} />
-            <img className='menu_card_new_game_image' src={imageCardPart7} alt={json.new_game_card_part} />
-            <img className='menu_card_new_game_image' src={imageCardPart8} alt={json.new_game_card_part} />
-            <img className='menu_card_new_game_image' src={imageCardPart9} alt={json.new_game_card_part} />
-            <img className='menu_card_new_game_image' src={imageCardPart10} alt={json.new_game_card_part} />
+            {blurredImages.map((image, index) => (
+                <img className={`menu_card_new_game_image ${blurImage === index + 1 ? 'menu_card_new_game_image_blur' : ''}`}
+                    key={index}
+                    src={image}
+                    alt={json.new_game_card_part}
+                    loading='lazy'
+                />
+            ))}
         </div>
     </>);
 }
