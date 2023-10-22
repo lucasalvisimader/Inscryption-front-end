@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 // images
 import continueText from '../../assets/images/menu/texts/continue.png';
 import optionsText from '../../assets/images/menu/texts/options.png';
-import newGame from '../../assets/images/menu/texts/newgame_greyed.png';
+import newGameText from '../../assets/images/menu/texts/newgame_greyed.png';
+import quitText from '../../assets/images/menu/texts/quit.png';
 import backgroundGlitch from '../../assets/images/screen/background_new_game.gif';
 
 // json
@@ -22,10 +23,16 @@ const Menu = () => {
     const [textSelected, setTextSelected] = useState(null);
     const [parent, setParent] = useState(null);
     const [isGlitchy, setIsGlitchy] = useState(false);
+    const [clickedCard, setClickedCard] = useState(false);
 
     const json = en.menu;
 
+    const handleDragStart = () => {
+        setClickedCard(true);
+    }
+
     const handleDragEnd = (result) => {
+        setClickedCard(false);
         if (result.active && result.over) {
             setParent(result.active.id);
         } else {
@@ -36,7 +43,7 @@ const Menu = () => {
     const cardData = {
         new_game: {
             id: "menu_new_game_draggable",
-            text: newGame,
+            text: newGameText,
             type: "new_game",
             isDisabled: "true"
         },
@@ -49,6 +56,11 @@ const Menu = () => {
             id: "menu_options_draggable",
             text: optionsText,
             type: "options"
+        },
+        quit: {
+            id: "menu_quit_draggable",
+            text: quitText,
+            type: "quit"
         }
     }
 
@@ -67,6 +79,7 @@ const Menu = () => {
                     isDisabled={card.isDisabled}
                     isOnTop={isOnTop}
                     setIsGlitchy={setIsGlitchy}
+                    clickedCard={clickedCard}
                 />
             );
         })
@@ -75,13 +88,15 @@ const Menu = () => {
     const cardsFromBelow = () => {
         switch (parent) {
             case "menu_continue_draggable":
-                return generateCard(["new_game", "options"]);
+                return generateCard(["new_game", "options", "quit"]);
             case "menu_options_draggable":
-                return generateCard(["new_game", "continue"]);
+                return generateCard(["new_game", "continue", "quit"]);
             case "menu_new_game_draggable":
-                return generateCard(["continue", "options"]);
-            default:
+                return generateCard(["continue", "options", "quit"]);
+            case "menu_quit_draggable":
                 return generateCard(["new_game", "continue", "options"]);
+            default:
+                return generateCard(["new_game", "continue", "options", "quit"]);
         }
     }
 
@@ -103,16 +118,12 @@ const Menu = () => {
         });
     }
 
-    const changeColorInputCard = () => {
-        
-    }
-
     useEffect(() => {
         animateCards();
     }, [parent])
 
     return (<>
-        <DndContext onDragStart={changeColorInputCard} onDragEnd={handleDragEnd} >
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} >
             <div className="menu_container">
                 <div className="menu_header">
                     {textSelected && (

@@ -25,9 +25,14 @@
     background-repeat: no-repeat;
 }
 
+#draggable_menu_quit_card {
+    background: url('../../assets/images/menu/cards/quit.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 .menu_options_animation_new_game {
     animation: glitchAnimation 6s infinite;
-
 }
 
 .draggable_menu_on_hover_card_mouse {
@@ -36,30 +41,4 @@
 
 .draggable_menu_on_click_card_mouse {
     cursor: url('../../assets/images/cursor/cursor_icons_3.png'), auto !important;
-}
-
-@keyframes glitchAnimation {
-    /* 0% {
-        content: url('../../assets/images/menu/cards/glitch_new_game_1.png');
-    }
-
-    2% {
-        content: '';
-    }
-
-    40% {
-        content: url('../../assets/images/menu/cards/glitch_new_game_2.png');
-    }
-
-    45% {
-        content: '';
-    }
-
-    80% {
-        content: url('../../assets/images/menu/cards/glitch_new_game_3.png');
-    }
-
-    100% {
-        content:'';
-    } */
 }
