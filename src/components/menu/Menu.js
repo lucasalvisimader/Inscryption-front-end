@@ -11,9 +11,6 @@ import newGameText from '../../assets/images/menu/texts/newgame_greyed.png';
 import quitText from '../../assets/images/menu/texts/quit.png';
 import backgroundGlitch from '../../assets/images/screen/background_new_game.gif';
 
-// sounds
-import menuChosenCard from '../../assets/sounds/menu_chosen_card.wav';
-
 // json
 import en from '../../assets/locales/en.json';
 
@@ -28,7 +25,6 @@ const Menu = () => {
     const [isGlitchy, setIsGlitchy] = useState(false);
     const [isFadingOut, setIsFadingOut] = useState(false);
     const [clickedCard, setClickedCard] = useState(false);
-    const [isOnTopOptions, setIsOnTopOptions] = useState(true);
 
     const json = en.menu;
 
@@ -111,10 +107,6 @@ const Menu = () => {
             const cardKey = parent.replace("menu_", "").replace("_draggable", "");
             const cardOnTop = generateCard([cardKey], true);
 
-            if (cardOnTop[0].props.type === "options") {
-                const audioChosen = new Audio(menuChosenCard);
-                audioChosen.play();
-            }
             return cardOnTop;
         }
         return null;

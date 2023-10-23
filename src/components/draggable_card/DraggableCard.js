@@ -27,10 +27,9 @@ export function DraggableCard({ id, text, type, textSelected, setTextSelected, i
     const handleHoverCard = (text) => {
         setTextSelected(text);
         if (!isOnTop) {
-            if (type !== "options") {
-                const audioHover = new Audio(menuHoverCard);
-                audioHover.play();
-            }
+            const audioHover = new Audio(menuHoverCard);
+            audioHover.volume = 0.4;
+            audioHover.play();
         }
     }
 
@@ -46,10 +45,9 @@ export function DraggableCard({ id, text, type, textSelected, setTextSelected, i
 
     useEffect(() => {
         if (isOnTop) {
-            if (type !== "options") {
-                const audioChosen = new Audio(menuChosenCard);
-                audioChosen.play();
-            }
+            const audioChosen = new Audio(menuChosenCard);
+            audioChosen.volume = 0.3;
+            audioChosen.play();
             setTimeout(() => {
                 if (type === "continue") {
                     setIsFadingOut(true);
@@ -62,7 +60,7 @@ export function DraggableCard({ id, text, type, textSelected, setTextSelected, i
                 }
             }, 500);
         }
-    }, [textSelected])
+    }, [])
 
     return (<>
         <div ref={setNodeRef} style={style} {...listeners} {...attributes}
