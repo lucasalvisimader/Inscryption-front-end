@@ -18,11 +18,15 @@ import { Modal } from "react-bootstrap";
 const Login = () => {
     const [isPasswordType, setIsPasswordType] = useState(true);
     const navigate = useNavigate();
-    const json = en.login;
+    const json = en.login_register;
+
+    const [user, setUser] = useState({});
 
     const handleClickPasswordEye = () => {
         setIsPasswordType(!isPasswordType);
     }
+
+
 
     return (<>
         <div className="login_container">

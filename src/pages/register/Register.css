@@ -1,0 +1,133 @@
+.register_container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: var(--background-brown);
+    overflow: hidden;
+    cursor: url('../../assets/images/cursor/cursor_icons_0.png'), auto;
+}
+
+.register_container::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    background: var(--filter-tv);
+    top: 0;
+    z-index: 97;
+    pointer-events: none;
+}
+
+.register_container::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.08;
+    background: var(--filter-static);
+    top: 0;
+    z-index: 98;
+    pointer-events: none;
+}
+
+.register_modal_greeting {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 3px solid var(--black);
+}
+
+.register_modal_greeting_span {
+    font-family: 'Marksman Regular';
+    color: var(--black);
+    font-size: calc(0.5rem + 2vw);
+}
+
+.register_modal_greeting_button {
+    font-family: 'Marksman Regular';
+    font-size: calc(0.5rem + 1vw);
+    background-color: transparent;
+}
+
+.register_modal_container {
+    z-index: 10 !important;
+}
+
+.register_modal_body_container {
+    padding-top: 4%;
+}
+
+.register_modal_body_username,
+.register_modal_body_password {
+    display: flex;
+    flex-direction: column;
+}
+
+.register_modal_body_username_span,
+.register_modal_body_password_span {
+    color: var(--black);
+    font-size: calc(0.5rem + 1.5vw);
+    font-family: 'Marksman Regular';
+}
+
+.register_modal_body_password_input,
+.register_modal_body_username_input {
+    width: 100%;
+    height: auto;
+    font-family: 'Marksman Regular';
+    font-size: calc(0.5rem + 2vw);
+    padding: 0;
+    border: 2px solid var(--black);
+    outline: none;
+    padding-left: 3%;
+    background-color: var(--white);
+}
+
+.register_modal_body_password_input {
+    padding-right: 15%;
+}
+
+.register_modal_body_username_input {
+    padding-right: 3%;
+}
+
+.register_modal_body_password_input_container {
+    display: flex;
+    align-items: center;
+}
+
+.register_modal_body_password_button {
+    width: 13%;
+    height: auto;
+    position: absolute;
+    right: 1.5rem;
+    background-color: transparent;
+}
+
+.register_modal_body_password_image {
+    width: calc(1rem + 1vw);
+    height: auto;
+    display: flex;
+}
+
+.register_modal_body_submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register_modal_body_submit_button {
+    width: 100%;
+    height: auto;
+    margin-top: 2rem;
+    font-family: 'Marksman Regular';
+    font-size: calc(0.5rem + 2vw);
+    background-color: var(--white);
+    border: 2px solid var(--black);
+    border-bottom: 5px solid var(--black);
+}

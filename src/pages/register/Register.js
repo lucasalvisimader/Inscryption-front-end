@@ -19,7 +19,7 @@ const Register = () => {
     const [isPasswordType, setIsPasswordType] = useState(true);
     const [isConfirmPasswordType, setIsConfirmPasswordType] = useState(true);
     const navigate = useNavigate();
-    const json = en.login;
+    const json = en.login_register;
 
     const handleClickPasswordEye = () => {
         setIsPasswordType(!isPasswordType);
@@ -30,8 +30,8 @@ const Register = () => {
     }
 
     return (<>
-        <div className="login_container">
-            <Modal className="login_modal_container"
+        <div className="register_container">
+            <Modal className="register_modal_container"
                 contentClassName="modal_options_container_dialog"
                 id="modal_options_card_container"
                 size="lg"
@@ -40,55 +40,55 @@ const Register = () => {
                 backdrop={false}
                 centered>
                 <Modal.Body>
-                    <div className="login_modal_greeting">
-                        <span className="login_modal_greeting_span">
+                    <div className="register_modal_greeting">
+                        <span className="register_modal_greeting_span">
                             {json.good_luck}
                         </span>
-                        <button className="login_modal_greeting_button"
+                        <button className="register_modal_greeting_button"
                             onClick={() => navigate("/login")}>
                             {json.login}
                         </button>
                     </div>
-                    <div className="login_modal_body_container">
-                        <div className="login_modal_body_username">
-                            <span className="login_modal_body_username_span">
+                    <div className="register_modal_body_container">
+                        <div className="register_modal_body_username">
+                            <span className="register_modal_body_username_span">
                                 {json.username}
                             </span>
-                            <input className="login_modal_body_username_input"
+                            <input className="register_modal_body_username_input"
                                 type="text" />
                         </div>
-                        <div className="login_modal_body_password">
-                            <span className="login_modal_body_password_span">
+                        <div className="register_modal_body_password">
+                            <span className="register_modal_body_password_span">
                                 {json.password}
                             </span>
-                            <div className="login_modal_body_password_input_container">
-                                <input className="login_modal_body_password_input"
+                            <div className="register_modal_body_password_input_container">
+                                <input className="register_modal_body_password_input"
                                     type={isPasswordType ? "password" : "text"} />
-                                <button className="login_modal_body_password_button"
+                                <button className="register_modal_body_password_button"
                                     onClick={handleClickPasswordEye}>
-                                    <img className="login_modal_body_password_image"
+                                    <img className="register_modal_body_password_image"
                                         src={isPasswordType ? eye : eyeHide}
                                         alt={json.show_password} />
                                 </button>
                             </div>
                         </div>
-                        <div className="login_modal_body_password">
-                            <span className="login_modal_body_password_span">
+                        <div className="register_modal_body_password">
+                            <span className="register_modal_body_password_span">
                                 {json.confirm_password}
                             </span>
-                            <div className="login_modal_body_password_input_container">
-                                <input className="login_modal_body_password_input"
+                            <div className="register_modal_body_password_input_container">
+                                <input className="register_modal_body_password_input"
                                     type={isConfirmPasswordType ? "password" : "text"} />
-                                <button className="login_modal_body_password_button"
+                                <button className="register_modal_body_password_button"
                                     onClick={handleClickConfirmPasswordEye}>
-                                    <img className="login_modal_body_password_image"
+                                    <img className="register_modal_body_password_image"
                                         src={isConfirmPasswordType ? eye : eyeHide}
                                         alt={json.show_confirm_password} />
                                 </button>
                             </div>
                         </div>
-                        <div className="login_modal_body_submit">
-                            <button className="login_modal_body_submit_button">
+                        <div className="register_modal_body_submit">
+                            <button className="register_modal_body_submit_button">
                                 {json.submit}
                             </button>
                         </div>
