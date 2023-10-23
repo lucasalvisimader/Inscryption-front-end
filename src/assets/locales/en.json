@@ -13,5 +13,13 @@
         "new_game_card_part": "new game card part",
         "background_glitch": "background image glitch",
         "main_volume": "Main volume"
+    },
+    "login": {
+        "good_luck": "Good Luck Stranger",
+        "username": "Username",
+        "password": "Password",
+        "show_password": "Show password",
+        "submit": "Submit",
+        "register": "Register"
     }
 }

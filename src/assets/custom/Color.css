@@ -4,6 +4,7 @@
     --background-brown: radial-gradient(circle, #5f3a2b 60%, #2b1a13 92%, #000000 100%);
     --background-brown-without-shadow: radial-gradient(circle, #5f3a2b 60%, #362118 100%);
     --background-yellow: #d7dfa4;
+    --white: #f1f1f1;
     --black: #0c0c0c;
     --black-transparent: #0c0c0c99;
     --black-transparent-clicked: #0c0c0c66;

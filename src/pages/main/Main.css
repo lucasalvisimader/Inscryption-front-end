@@ -7,7 +7,6 @@
     width: 100%;
     height: 100%;
     background: var(--background-brown);
-    position: relative;
     overflow: hidden;
     cursor: url('../../assets/images/cursor/cursor_icons_0.png'), auto;
 }
@@ -47,7 +46,10 @@
     align-items: center;
 }
 
-#main_title_image_spade_left_animation, #main_title_image_spade_right_animation, #main_title_image_animation, #main_press_to_start_text_animation {
+#main_title_image_spade_left_animation,
+#main_title_image_spade_right_animation,
+#main_title_image_animation,
+#main_press_to_start_text_animation {
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 

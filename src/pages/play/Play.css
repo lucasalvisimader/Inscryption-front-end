@@ -1,160 +1,38 @@
-.game {
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    overflow-x: hidden;
-}
-
-.main_game {
-    border-top-left-radius: 15rem;
-    border-top-right-radius: 15rem;
-    width: 100%;
-    height: 70%;
-    border-bottom: solid #fea02a 5px;
-}
-
-.footer_game {
-    width: 100%;
-    height: 30%;
-    background: url(../../assets/images/screen/background.png);
-    background-size: 15rem;
-    border-top: solid 4px black;
+.play_container {
+    position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-}
-
-.hammer {
-    z-index: 1;
-    width: 5rem;
-    height: 3rem;
-    position: absolute;
-    bottom: 14rem;
-    left: 15rem;
-}
-
-.hammer_button {
-    transition: all 0.1s;
-    display: flex;
     align-items: center;
     width: 100%;
     height: 100%;
-    background-image: url(../../assets/images/game/other/hammer.png);
-    background-color: #fea02a;
+    background: url('../../assets/images/screen/background.png');
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-size: 4.5rem;
-    border: solid black 3px;
-    border-bottom: solid black 6px;
+    overflow: hidden;
+    cursor: url('../../assets/images/cursor/cursor_icons_0.png'), auto;
 }
 
-.hammer_button:hover{
-    margin-top: 2px;
-    border-bottom-width: 4px;
-}
-.hammer_button:active{
-    margin-top: 5px;
-    border-bottom-width: 3px;
-}
-
-.cards {
-    display: flex;
-}
-
-.card_play {
-    margin-top: 1rem;
-    position: relative;
-    background-size: cover;
-    height: 10rem !important;
-    width: 7rem;
-    border: none;
-    color: black;
-    cursor: pointer;
-}
-
-.card_play:hover {
-    z-index: 100;
-    margin-top: -3rem !important;
-    height: 16rem !important;
-    width: 10.5rem; 
-    transition: 0.2s;
-}
-
-.active{
-    color:red;
-}
-
-.header_play {
-    margin-top: 0.7rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.name_play {
-    margin-top: 0.4rem;
-}
-
-.card_play:hover .name_play {
-    transition: 0.2s;
-    margin-top: 0.5rem !important;
-}
-
-.footer_play {
-    margin: -0.5rem;
-    margin-right: 1.5rem;
-    margin-top: 11rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-.card_play:hover .footer_play {
-    transition: 0.2s;
-    margin: -0.4rem !important;
-    margin-right: 1.2rem !important;
-    margin-top: 13.5rem !important;
-}
-
-.card_play:focus {
-    z-index: 100;
-    margin-top: -3rem !important;
-    height: 16rem !important;
-    width: 10.5rem; 
-    transition: 0.2s;
-}
-
-#power_play {
-    margin-top: -3.5rem;
-    margin-left: 1.5rem;
-    margin-right: 5rem;
-}
-
-#health_play {
-    margin-top: -2.5rem;
-}
-
-.h1_play {
-    font-size: 2rem !important;
-}
-
-.deck {
-    height: 13rem !important;
-    min-width: 8.5rem;
-    background: url(../../assets/images/card/others/back.png);
-    background-repeat: no-repeat;
-    background-size: 7.7em;
-    margin: 1rem;
+.play_container::before {
+    content: "";
     position: absolute;
-    right: 0;
-    top: 5rem
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    background: var(--filter-tv);
+    top: 0;
+    z-index: 97;
+    pointer-events: none;
 }
 
-.deck:hover {
-    background-size: 10em;
-    margin-top: -1rem !important;
-    height: 19rem !important;
-    width: 11rem; 
-    transition: 0.2s;
-}
-
-.cards_deck {
-    display: none;
+.play_container::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.08;
+    background: var(--filter-static);
+    top: 0;
+    z-index: 98;
+    pointer-events: none;
 }

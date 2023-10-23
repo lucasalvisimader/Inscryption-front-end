@@ -47,7 +47,7 @@ export function DraggableCard({ id, text, type, textSelected, setTextSelected, i
                 if (type === "continue") {
                     setIsFadingOut(true);
                     setTimeout(() => {
-                        navigate("/play");
+                        navigate("/login");
                     }, 1500)
                 } else if (type === "quit") {
                     window.open("about:blank", "_self");
