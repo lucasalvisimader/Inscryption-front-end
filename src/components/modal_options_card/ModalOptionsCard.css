@@ -7,11 +7,21 @@
 }
 
 .modal_options_container_dialog {
+    width: 40vw !important;
+    height: auto;
+    min-width: min-content;
+    display: flex;
+    justify-content: stretch !important;
+    height: auto;
     background-color: var(--background-yellow) !important;
     border: 5px solid var(--black) !important;
     border-bottom: 15px solid var(--black) !important;
     border-radius: 0 !important;
-    padding: 2%;
+    padding: 2vw;
+}
+
+.modal-dialog-centered {
+    justify-content: center;
 }
 
 .modal_options_card_language_container_options, .modal_options_card_language_container_options {
@@ -24,25 +34,25 @@
 }
 
 .modal_options_card_language_text {
-    width: 3vw;
+    width: calc(0.8rem + 2vw);
     height: auto;
     margin: 2%;
 }
 
 .modal_options_card_main_volume_text {
-    font-size: 2.5rem;
+    font-size: calc(0.5rem + 3vw);
     color: var(--black);
     margin: 2%;
 }
 
 .modal_options_card_button {
     cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto;
-    width: 15%;
+    width: 6vw;
     height: auto;
 }
 
 .modal_options_card_language_chosen {
-    font-size: 3rem;
+    font-size: calc(0.5rem + 3vw);
     color: var(--black);
 }
 
@@ -53,7 +63,7 @@
 }
 
 .modal_options_card_volume_icon {
-    width: 20%;
+    width: 3vw;
     height: auto;
 }
 

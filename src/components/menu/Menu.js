@@ -139,7 +139,7 @@ const Menu = () => {
                 </div>
                 <div className="menu_body_container">
                     <div className="menu_body">
-                        <DroppableArea id="menu_droppable" startedDrag={startedDrag}>
+                        <DroppableArea id="menu_droppable" startedDrag={startedDrag} setStartedDrag={setStartedDrag}>
                             {cardFromAbove()}
                         </DroppableArea>
                     </div>

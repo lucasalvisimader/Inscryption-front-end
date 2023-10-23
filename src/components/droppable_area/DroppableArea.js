@@ -29,7 +29,7 @@ export function DroppableArea(props) {
         if (props.startedDrag) {
             interval = setInterval(() => {
                 setToggleBackground((prevToggle) => !prevToggle);
-            }, 1000);
+            }, 750);
         }
         return () => {
             clearInterval(interval);
@@ -38,7 +38,7 @@ export function DroppableArea(props) {
 
     useEffect(() => {
         if (inputCardRef.current) {
-            if (props.startedDrag) {
+            if (props.startedDrag && !toggleBackground) {
                 inputCardRef.current.style.background = `url(${slotHighlighted})`;
             } else if (props.startedDrag === false) {
                 inputCardRef.current.style.background = `url(${slotMediumlighted})`;
