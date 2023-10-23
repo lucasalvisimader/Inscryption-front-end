@@ -11,6 +11,7 @@
         "plus_button": "plus button image",
         "minus_button": "minus button image",
         "new_game_card_part": "new game card part",
-        "background_glitch": "background image glitch"
+        "background_glitch": "background image glitch",
+        "main_volume": "Main volume"
     }
 }

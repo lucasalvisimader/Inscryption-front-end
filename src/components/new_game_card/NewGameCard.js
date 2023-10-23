@@ -4,6 +4,9 @@ import './NewGameCard.css';
 // react
 import { useState, useEffect, useRef } from 'react';
 
+// context
+import { useAudio } from '../../context/AudioContext';
+
 // images
 import imageCardPart1 from '../../assets/images/menu/cards/new_game/greyed_1.png';
 import imageCardPart2 from '../../assets/images/menu/cards/new_game/greyed_2.png';
@@ -24,6 +27,7 @@ import en from '../../assets/locales/en.json';
 
 const NewGameCard = ({ setIsGlitchy }) => {
     const audioRef = useRef();
+    const { volume } = useAudio();
 
     const [blurImage, setBlurImage] = useState(null);
     const [intervalId, setIntervalId] = useState(0);
@@ -37,8 +41,9 @@ const NewGameCard = ({ setIsGlitchy }) => {
     ];
 
     const handleClickNewCardDisabled = () => {
-        const audio = new Audio(glitch);
-        audio.play();
+        const audioGlitch = new Audio(glitch);
+        audioGlitch.volume = volume / 100;
+        audioGlitch.play();
         setIsGlitchy(true);
         setTimeout(() => {
             setGlitchy(false);

@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 // components
 import NewGameCard from '../new_game_card/NewGameCard';
 
+// context
+import { useAudio } from '../../context/AudioContext';
+
 // sounds
 import menuHoverCard from '../../assets/sounds/menu_hover_card.wav';
 import menuChosenCard from '../../assets/sounds/menu_chosen_card.wav';
@@ -22,13 +25,15 @@ export function DraggableCard({ id, text, type, textSelected, setTextSelected, i
         disabled: isDisabled
     });
     const style = { transform: CSS.Translate.toString(transform) }
+
     const navigate = useNavigate();
+    const { volume } = useAudio();
 
     const handleHoverCard = (text) => {
         setTextSelected(text);
         if (!isOnTop) {
             const audioHover = new Audio(menuHoverCard);
-            audioHover.volume = 0.4;
+            audioHover.volume = volume / 100 * 0.4;
             audioHover.play();
         }
     }
@@ -46,7 +51,7 @@ export function DraggableCard({ id, text, type, textSelected, setTextSelected, i
     useEffect(() => {
         if (isOnTop) {
             const audioChosen = new Audio(menuChosenCard);
-            audioChosen.volume = 0.3;
+            audioChosen.volume = volume / 100 * 0.2;
             audioChosen.play();
             setTimeout(() => {
                 if (type === "continue") {

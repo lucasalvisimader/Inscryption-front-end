@@ -8,30 +8,53 @@
 
 .modal_options_container_dialog {
     background-color: var(--background-yellow) !important;
+    border: 5px solid var(--black) !important;
+    border-bottom: 15px solid var(--black) !important;
     border-radius: 0 !important;
     padding: 2%;
 }
 
-.modal_options_card_language_container {
+.modal_options_card_language_container_options, .modal_options_card_language_container_options {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     font-size: 3rem;
 }
 
 .modal_options_card_language_text {
-    width: 2vw;
+    width: 3vw;
+    height: auto;
+    margin: 2%;
+}
+
+.modal_options_card_main_volume_text {
+    font-size: 2.5rem;
+    color: var(--black);
     margin: 2%;
 }
 
 .modal_options_card_button {
     cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto;
-    width: 5vw;
+    width: 15%;
     height: auto;
 }
 
 .modal_options_card_language_chosen {
-    font-size: 2rem;
+    font-size: 3rem;
+    color: var(--black);
+}
+
+.modal_options_card_volume_options {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.modal_options_card_volume_icon {
+    width: 20%;
+    height: auto;
 }
 
 @keyframes slideInFromRight {

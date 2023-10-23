@@ -16,11 +16,15 @@ import titleRattle from '../../assets/sounds/title_rattle.wav';
 // components
 import Menu from '../../components/menu/Menu'
 
+// context
+import { useAudio } from '../../context/AudioContext';
+
 // locales
 import en from '../../assets/locales/en.json';
 
 const Main = () => {
     const navigate = useNavigate();
+    const { volume } = useAudio();
 
     const containerRef = useRef();
     const audioRef = useRef();
@@ -33,10 +37,11 @@ const Main = () => {
     const [animationSpeed, setAnimationSpeed] = useState('');
     const [isInTitleScreen, setIsInTitleScreen] = useState(true);
     const json = en.main;
-
+    
     const playClickSound = () => {
         if (isFirstAction.current) {
             const audio = new Audio(titleRattle);
+            audio.volume = volume / 100;
             audio.play();
             isFirstAction.current = false;
         }
@@ -72,6 +77,10 @@ const Main = () => {
             document.removeEventListener('keydown', handleUserAction);
         }
     }, [navigate]);
+
+    useEffect(() => {
+        audioRef.current.volume = volume / 100;
+    }, [volume])
 
     return (<>
         <div className={`main_container ${!isInTitleScreen ? 'main_blue_background' : ''}`} tabIndex={0} ref={containerRef}>

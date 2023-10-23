@@ -15,22 +15,27 @@ import ShowAllCards from './pages/show-all-cards/Show-all-cards';
 import ShowOneCard from './pages/show-one-card/Show-one-card';
 import Play from './pages/play/Play';
 
+// context
+import { AudioProvider } from './context/AudioContext';
+
 // external
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route index element={<Main />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/card-register" element={<CardRegister />} />
-                <Route path="/user-register" element={<Register />} />
-                <Route path="/show-all-cards" element={<ShowAllCards />} />
-                <Route path="/show-one-card" element={<ShowOneCard />} />
-                <Route path="/play" element={<Play />} />
-            </Routes>
-        </BrowserRouter>
+        <AudioProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route index element={<Main />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/card-register" element={<CardRegister />} />
+                    <Route path="/user-register" element={<Register />} />
+                    <Route path="/show-all-cards" element={<ShowAllCards />} />
+                    <Route path="/show-one-card" element={<ShowOneCard />} />
+                    <Route path="/play" element={<Play />} />
+                </Routes>
+            </BrowserRouter>
+        </AudioProvider>
     );
 }
 
