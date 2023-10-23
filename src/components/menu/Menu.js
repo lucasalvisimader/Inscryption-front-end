@@ -25,15 +25,18 @@ const Menu = () => {
     const [isGlitchy, setIsGlitchy] = useState(false);
     const [isFadingOut, setIsFadingOut] = useState(false);
     const [clickedCard, setClickedCard] = useState(false);
+    const [startedDrag, setStartedDrag] = useState(null);
 
     const json = en.menu;
 
     const handleDragStart = () => {
         setClickedCard(true);
+        setStartedDrag(true);
     }
 
     const handleDragEnd = (result) => {
         setClickedCard(false);
+        setStartedDrag(false);
         if (result.active && result.over) {
             setParent(result.active.id);
         } else {
@@ -136,7 +139,7 @@ const Menu = () => {
                 </div>
                 <div className="menu_body_container">
                     <div className="menu_body">
-                        <DroppableArea id="menu_droppable">
+                        <DroppableArea id="menu_droppable" startedDrag={startedDrag}>
                             {cardFromAbove()}
                         </DroppableArea>
                     </div>

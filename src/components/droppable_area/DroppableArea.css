@@ -4,9 +4,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('../../assets/images/menu/cards/slot.png');
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 .droppable_menu_input_card_with_top_card {

@@ -38,16 +38,6 @@ export function DraggableCard({ id, text, type, textSelected, setTextSelected, i
         }
     }
 
-    const handleClickCard = (text) => {
-        setTextSelected(text);
-    }
-
-    const handleExitCard = () => {
-        if (!isOnTop) {
-            setTextSelected();
-        }
-    }
-
     useEffect(() => {
         if (isOnTop) {
             const audioChosen = new Audio(menuChosenCard);
@@ -74,9 +64,7 @@ export function DraggableCard({ id, text, type, textSelected, setTextSelected, i
             ${(clickedCard) && "draggable_menu_on_click_card_mouse"} 
             ${isOnTop ? "draggable_menu_top_card" : ""}`}
             id={`draggable_menu_${type}_card`}
-            onMouseEnter={() => handleHoverCard(text)}
-            onMouseLeave={() => handleExitCard()}
-            onClick={() => handleClickCard(text)}>
+            onMouseEnter={() => handleHoverCard(text)}>
             {isDisabled && (
                 <NewGameCard setIsGlitchy={setIsGlitchy} />
             )}
