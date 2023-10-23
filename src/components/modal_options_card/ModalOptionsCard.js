@@ -2,7 +2,7 @@
 import "./ModalOptionsCard.css"
 
 // react
-import { createElement, useState } from "react";
+import { useState } from "react";
 
 // images
 import languageText from '../../assets/images/menu/texts/language.png';
