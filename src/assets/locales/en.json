@@ -20,6 +20,9 @@
         "password": "Password",
         "show_password": "Show password",
         "submit": "Submit",
-        "register": "Register"
+        "register": "Register",
+        "login": "Login",
+        "confirm_password": "Confirm Password",
+        "show_confirm_password": "Show Confirm Password"
     }
 }

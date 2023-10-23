@@ -3,6 +3,7 @@ import "./Login.css";
 
 // react
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // images
 import eye from '../../assets/images/login/eye.png';
@@ -16,6 +17,7 @@ import { Modal } from "react-bootstrap";
 
 const Login = () => {
     const [isPasswordType, setIsPasswordType] = useState(true);
+    const navigate = useNavigate();
     const json = en.login;
 
     const handleClickPasswordEye = () => {
@@ -37,7 +39,8 @@ const Login = () => {
                         <span className="login_modal_greeting_span">
                             {json.good_luck}
                         </span>
-                        <button className="login_modal_greeting_button">
+                        <button className="login_modal_greeting_button"
+                            onClick={() => navigate("/register")}>
                             {json.register}
                         </button>
                     </div>

@@ -29,7 +29,7 @@ const App = () => {
                     <Route index element={<Main />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/card-register" element={<CardRegister />} />
-                    <Route path="/user-register" element={<Register />} />
+                    <Route path="/register" element={<Register />} />
                     <Route path="/show-all-cards" element={<ShowAllCards />} />
                     <Route path="/show-one-card" element={<ShowOneCard />} />
                     <Route path="/play" element={<Play />} />

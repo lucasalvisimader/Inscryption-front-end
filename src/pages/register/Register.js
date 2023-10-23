@@ -1,66 +1,102 @@
-// css
-import "./Register.css";
+// styles
+import './Register.css';
 
 // react
-import { useState } from 'react';
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
-// service
-import { UserService } from '../../service';
+// images
+import eye from '../../assets/images/login/eye.png';
+import eyeHide from '../../assets/images/login/eye_hide.png';
+
+// json
+import en from '../../assets/locales/en.json';
 
 // external
-import { Button, Form } from 'react-bootstrap';
+import { Modal } from "react-bootstrap";
 
-function Register() {
-    const [user, setUser] = useState({
-        "username": "",
-        "password": "",
-        "cards": []
-    });
+const Register = () => {
+    const [isPasswordType, setIsPasswordType] = useState(true);
+    const [isConfirmPasswordType, setIsConfirmPasswordType] = useState(true);
+    const navigate = useNavigate();
+    const json = en.login;
 
-    const updateUser = (event) => {
-        setUser({ ...user, [event.target.name]: event.target.value })
+    const handleClickPasswordEye = () => {
+        setIsPasswordType(!isPasswordType);
     }
 
-    const submitUser = async () => {
-        let password = document.getElementById("password").value;
-        let confirmPassword = document.getElementById("confirm_password").value;
-
-        if (password !== confirmPassword) {
-            document.getElementById("confirm_password").setCustomValidity("Passwords don't match");
-        } else {
-            document.getElementById("confirm_password").setCustomValidity('');
-
-            try {
-                await UserService.save(user);
-                window.location.href = "/login"
-            } catch (error) {
-                console.error(error);
-            }
-        }
+    const handleClickConfirmPasswordEye = () => {
+        setIsConfirmPasswordType(!isConfirmPasswordType);
     }
 
-    return (
-        <Form id="login">
-            <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control id="name" type="text" placeholder="Name"
-                    name='username' onChange={updateUser} value={user.name} required />
-            </Form.Group>
-            <Form.Group className="mb-3" min="8">
-                <Form.Label>Password</Form.Label>
-                <Form.Control id="password" type="password" placeholder="Password"
-                    name='password' onChange={updateUser} value={user.password} minLength='8' required />
-            </Form.Group>
-            <Form.Group className="mb-3">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control id="confirm_password" type="password" placeholder="Password"
-                    minLength='8' required />
-            </Form.Group>
-            <Button id='user_register_button' variant="primary" type="submit" onClick={submitUser}>
-                Submit
-            </Button>
-        </Form>
-    );
+    return (<>
+        <div className="login_container">
+            <Modal className="login_modal_container"
+                contentClassName="modal_options_container_dialog"
+                id="modal_options_card_container"
+                size="lg"
+                show={true}
+                aria-labelledby="contained-modal-title-vcenter"
+                backdrop={false}
+                centered>
+                <Modal.Body>
+                    <div className="login_modal_greeting">
+                        <span className="login_modal_greeting_span">
+                            {json.good_luck}
+                        </span>
+                        <button className="login_modal_greeting_button"
+                            onClick={() => navigate("/login")}>
+                            {json.login}
+                        </button>
+                    </div>
+                    <div className="login_modal_body_container">
+                        <div className="login_modal_body_username">
+                            <span className="login_modal_body_username_span">
+                                {json.username}
+                            </span>
+                            <input className="login_modal_body_username_input"
+                                type="text" />
+                        </div>
+                        <div className="login_modal_body_password">
+                            <span className="login_modal_body_password_span">
+                                {json.password}
+                            </span>
+                            <div className="login_modal_body_password_input_container">
+                                <input className="login_modal_body_password_input"
+                                    type={isPasswordType ? "password" : "text"} />
+                                <button className="login_modal_body_password_button"
+                                    onClick={handleClickPasswordEye}>
+                                    <img className="login_modal_body_password_image"
+                                        src={isPasswordType ? eye : eyeHide}
+                                        alt={json.show_password} />
+                                </button>
+                            </div>
+                        </div>
+                        <div className="login_modal_body_password">
+                            <span className="login_modal_body_password_span">
+                                {json.confirm_password}
+                            </span>
+                            <div className="login_modal_body_password_input_container">
+                                <input className="login_modal_body_password_input"
+                                    type={isConfirmPasswordType ? "password" : "text"} />
+                                <button className="login_modal_body_password_button"
+                                    onClick={handleClickConfirmPasswordEye}>
+                                    <img className="login_modal_body_password_image"
+                                        src={isConfirmPasswordType ? eye : eyeHide}
+                                        alt={json.show_confirm_password} />
+                                </button>
+                            </div>
+                        </div>
+                        <div className="login_modal_body_submit">
+                            <button className="login_modal_body_submit_button">
+                                {json.submit}
+                            </button>
+                        </div>
+                    </div>
+                </Modal.Body>
+            </Modal>
+        </div>
+    </>);
 }
 
 export default Register;
