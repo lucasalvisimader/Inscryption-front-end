@@ -24,9 +24,9 @@
         "login": "Login",
         "confirm_password": "Confirm Password",
         "show_confirm_password": "Show Confirm Password",
-        "long_time": "It's been a long time",
-        "since_someone": "since someone got here.",
-        "only_thing": "The only thing I have to say is",
-        "be_carreful": "be careful."
+        "long_time": "It's been a long time since someone got here.",
+        "who_am_i": "You will discover who am I very soon.",
+        "only_thing": "For now, the only thing I have to say is",
+        "be_careful": "be very careful with Him."
     }
 }

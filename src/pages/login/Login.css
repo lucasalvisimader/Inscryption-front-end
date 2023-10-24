@@ -136,6 +136,9 @@
     width: 100%;
     height: 100%;
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: 0;
     z-index: 99;
     background-color: var(--black);
@@ -144,12 +147,38 @@
     pointer-events: all;
 }
 
+.login_fade_out_typing_animation {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    animation: typing 5s steps(60, end);
+}
+
+
+.login_fade_out_text {
+    font-size: calc(0.5rem + 2vw);
+    color: var(--white);
+    text-align: center;
+    position: relative;
+    transform: translateY(-50%);
+}
+
 @keyframes loginFadeOut {
     0% {
         opacity: 0;
     }
-    
+
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
     }
 }

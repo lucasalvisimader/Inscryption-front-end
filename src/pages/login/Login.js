@@ -23,8 +23,12 @@ const Login = () => {
     const navigate = useNavigate();
     const usernameRef = useRef();
     const passwordRef = useRef();
+    const afterLoginTextRef = useRef();
 
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+        "username": "",
+        "password": ""
+    });
     const [isFadingOut, setIsFadingOut] = useState(false);
     const [afterLoginText, setAfterLoginText] = useState('');
 
@@ -34,30 +38,31 @@ const Login = () => {
         setIsPasswordType(!isPasswordType);
     }
 
-    const handleChangeUsername = () => {
-        setUser((prevState) => {
-            return {
-                ...prevState,
-                "username": usernameRef.current.value
-            }
-        });
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setUser((prevState) => ({
+            ...prevState,
+            [name]: value
+        }));
     }
 
-    const handleChangePassword = () => {
-        setUser((prevState) => {
-            return {
-                ...prevState,
-                "password": passwordRef.current.value
+    const animateText = (textArray, index) => {
+        setTimeout(() => {
+            if (index < textArray.length) {
+                setAfterLoginText(textArray[index]);
+                animateText(textArray, index + 1);
+            } else {
+                navigate("/play");
             }
-        });
+        }, 5000);
     }
 
     const handleLoginAnimation = () => {
         setIsFadingOut(true);
-        setTimeout(() => {
-            setAfterLoginText();
-        }, 2000)
-    }
+
+        const textArray = [json.long_time, json.who_am_i, json.only_thing, json.be_careful, ""];
+        animateText(textArray, 0);
+    };
 
     const handleSubmit = async () => {
         const loginResult = await UserService.login(user);
@@ -70,7 +75,7 @@ const Login = () => {
     }
 
     return (<>
-        <form className="login_container" onSubmit={() => {}}>
+        <form className="login_container" onSubmit={() => { }}>
             <Modal className="login_modal_container"
                 contentClassName="modal_options_container_dialog"
                 id="modal_options_card_container"
@@ -95,9 +100,10 @@ const Login = () => {
                                 {json.username}
                             </span>
                             <input className="login_modal_body_username_input"
+                                name="username"
                                 type="text"
                                 ref={usernameRef}
-                                onChange={handleChangeUsername} />
+                                onChange={handleChange} />
                         </div>
                         <div className="login_modal_body_password">
                             <span className="login_modal_body_password_span">
@@ -105,9 +111,10 @@ const Login = () => {
                             </span>
                             <div className="login_modal_body_password_input_container">
                                 <input className="login_modal_body_password_input"
+                                    name="password"
                                     type={isPasswordType ? "password" : "text"}
                                     ref={passwordRef}
-                                    onChange={handleChangePassword} />
+                                    onChange={handleChange} />
                                 <button className="login_modal_body_password_button"
                                     onClick={handleClickPasswordEye}>
                                     <img className="login_modal_body_password_image"
@@ -128,7 +135,9 @@ const Login = () => {
         </form>
         {isFadingOut && (
             <div className="login_fade_out">
-                <span>{json.long_time}</span>
+                <span key={afterLoginText} className={`login_fade_out_text ${isFadingOut ? 'login_fade_out_typing_animation' : ''}`} ref={afterLoginTextRef}>
+                    {afterLoginText}
+                </span>
             </div>
         )}
     </>);
