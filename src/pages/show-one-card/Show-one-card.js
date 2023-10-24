@@ -5,7 +5,7 @@ import './Show-one-card.css';
 import { useState, useEffect } from 'react';
 
 // service
-import { CardService, ImageCardService } from '../../service/index';
+import { CardService } from '../../service/index';
 
 // external
 import { toPng } from 'html-to-image';
@@ -26,7 +26,7 @@ function ShowOneCard() {
             const formData = new FormData();
             formData.append('img', blob, 'image.png');
 
-            ImageCardService.sendImage(formData, id);
+            // ImageCardService.sendImage(formData, id);
 
         } catch (error) {
             console.error('Erro ao converter HTML para imagem', error);
@@ -71,17 +71,17 @@ function ShowOneCard() {
 
     // Obtém a imagem do servidor com base no ID fornecido.
     const getImage = async () => {
-        const listImage = await ImageCardService.listImage("bucket-romario", id);
+        // const listImage = await ImageCardService.listImage("bucket-romario", id);
 
-        if (listImage !== null && listImage !== undefined) {
-            const imageURL = listImage.data;
+        // if (listImage !== null && listImage !== undefined) {
+        //     const imageURL = listImage.data;
 
-            const imgElement = document.createElement('img');
+        //     const imgElement = document.createElement('img');
 
-            imgElement.src = imageURL;
-            document.getElementById('card_show_one_card').innerHTML = '';
-            document.getElementById('card_show_one_card').appendChild(imgElement);
-        }
+        //     imgElement.src = imageURL;
+        //     document.getElementById('card_show_one_card').innerHTML = '';
+        //     document.getElementById('card_show_one_card').appendChild(imgElement);
+        // }
     }
 
     async function handleOneCard() {

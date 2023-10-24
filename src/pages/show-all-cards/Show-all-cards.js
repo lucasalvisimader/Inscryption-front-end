@@ -5,7 +5,7 @@ import "./Show-all-cards.css";
 import { React, useState, useEffect } from "react";
 
 // service
-import { ImageCardService, CardService } from "../../service/index";
+import { CardService } from "../../service/index";
 
 function ShowAllCards() {
     const [cards, setCards] = useState([]);
@@ -14,8 +14,8 @@ function ShowAllCards() {
     const [page, setPage] = useState(0);
 
     const [showModal, setShowModal] = useState(false);
-    const [showModalImage, setShowModalImage] = useState(false);
-    const [imageURL, setImageURL] = useState(null);
+    // const [showModalImage, setShowModalImage] = useState(false);
+    // const [imageURL, setImageURL] = useState(null);
     const [cardIdToDelete, setCardIdToDelete] = useState(null);
     const [disabledEdit, setDisabledEdit] = useState(true);
 
@@ -121,14 +121,14 @@ function ShowAllCards() {
 
     async function handleImage(id) {
         try {
-            const listImage = await ImageCardService.listImage("bucket-romario", id);
-            setShowModalImage(true);
-            if (listImage !== null && listImage !== undefined) {
-                const imageURL = listImage.data;
-                setImageURL(imageURL);
-            } else {
-                setImageURL(null);
-            }
+            // const listImage = await ImageCardService.listImage("bucket-romario", id);
+            // setShowModalImage(true);
+            // if (listImage !== null && listImage !== undefined) {
+            //     const imageURL = listImage.data;
+            //     setImageURL(imageURL);
+            // } else {
+            //     setImageURL(null);
+            // }
         } catch (error) {
             console.log(error);
         }
@@ -234,7 +234,7 @@ function ShowAllCards() {
                 </div>
             </div>
         )}
-        {showModalImage && (
+        {/* {showModalImage && (
             <div id="modal">
                 <div className="overlay">
                     <div className="modal-content">
@@ -254,7 +254,7 @@ function ShowAllCards() {
                     </div>
                 </div>
             </div>
-        )}
+        )} */}
     </div>
 
 }

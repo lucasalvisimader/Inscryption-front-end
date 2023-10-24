@@ -23,6 +23,10 @@
         "register": "Register",
         "login": "Login",
         "confirm_password": "Confirm Password",
-        "show_confirm_password": "Show Confirm Password"
+        "show_confirm_password": "Show Confirm Password",
+        "long_time": "It's been a long time",
+        "since_someone": "since someone got here.",
+        "only_thing": "The only thing I have to say is",
+        "be_carreful": "be careful."
     }
 }

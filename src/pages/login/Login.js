@@ -2,7 +2,7 @@
 import "./Login.css";
 
 // react
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // images
@@ -12,21 +12,61 @@ import eyeHide from '../../assets/images/login/eye_hide.png';
 // json
 import en from '../../assets/locales/en.json';
 
+// services
+import { UserService } from '../../service/index';
+
 // external
 import { Modal } from "react-bootstrap";
 
 const Login = () => {
     const [isPasswordType, setIsPasswordType] = useState(true);
     const navigate = useNavigate();
-    const json = en.login_register;
+    const usernameRef = useRef();
+    const passwordRef = useRef();
 
     const [user, setUser] = useState({});
+    const [isFadingOut, setIsFadingOut] = useState(false);
+    const [afterLoginText, setAfterLoginText] = useState('');
+
+    const json = en.login_register;
 
     const handleClickPasswordEye = () => {
         setIsPasswordType(!isPasswordType);
     }
 
+    const handleChangeUsername = () => {
+        setUser((prevState) => {
+            return {
+                ...prevState,
+                "username": usernameRef.current.value
+            }
+        });
+    }
 
+    const handleChangePassword = () => {
+        setUser((prevState) => {
+            return {
+                ...prevState,
+                "password": passwordRef.current.value
+            }
+        });
+    }
+
+    const handleLoginAnimation = () => {
+        setIsFadingOut(true);
+        setTimeout(() => {
+            setAfterLoginText();
+        }, 2000)
+    }
+
+    const handleSubmit = () => {
+        console.log(user)
+        UserService.login(user).then(() => {
+            handleLoginAnimation();
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
 
     return (<>
         <div className="login_container">
@@ -54,7 +94,9 @@ const Login = () => {
                                 {json.username}
                             </span>
                             <input className="login_modal_body_username_input"
-                                type="text" />
+                                type="text"
+                                ref={usernameRef}
+                                onChange={handleChangeUsername} />
                         </div>
                         <div className="login_modal_body_password">
                             <span className="login_modal_body_password_span">
@@ -62,7 +104,9 @@ const Login = () => {
                             </span>
                             <div className="login_modal_body_password_input_container">
                                 <input className="login_modal_body_password_input"
-                                    type={isPasswordType ? "password" : "text"} />
+                                    type={isPasswordType ? "password" : "text"}
+                                    ref={passwordRef}
+                                    onChange={handleChangePassword} />
                                 <button className="login_modal_body_password_button"
                                     onClick={handleClickPasswordEye}>
                                     <img className="login_modal_body_password_image"
@@ -72,7 +116,8 @@ const Login = () => {
                             </div>
                         </div>
                         <div className="login_modal_body_submit">
-                            <button className="login_modal_body_submit_button">
+                            <button className="login_modal_body_submit_button"
+                                onClick={handleSubmit}>
                                 {json.submit}
                             </button>
                         </div>
@@ -80,6 +125,11 @@ const Login = () => {
                 </Modal.Body>
             </Modal>
         </div>
+        {isFadingOut && (
+            <div className="login_fade_out">
+                <span>{json.long_time}</span>
+            </div>
+        )}
     </>);
 }
 
