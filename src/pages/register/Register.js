@@ -2,7 +2,7 @@
 import './Register.css';
 
 // react
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 
 // images
@@ -12,13 +12,26 @@ import eyeHide from '../../assets/images/login/eye_hide.png';
 // json
 import en from '../../assets/locales/en.json';
 
+// services
+import { UserService } from '../../service';
+
 // external
 import { Modal } from "react-bootstrap";
 
 const Register = () => {
+    const navigate = useNavigate();
+
     const [isPasswordType, setIsPasswordType] = useState(true);
     const [isConfirmPasswordType, setIsConfirmPasswordType] = useState(true);
-    const navigate = useNavigate();
+    const [user, setUser] = useState({
+        username: '',
+        password: '',
+        confirmPassword: ''
+    });
+    const usernameRef = useRef();
+    const passwordRef = useRef();
+    const confirmPasswordRef = useRef();
+
     const json = en.login_register;
 
     const handleClickPasswordEye = () => {
@@ -29,8 +42,31 @@ const Register = () => {
         setIsConfirmPasswordType(!isConfirmPasswordType);
     }
 
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setUser((prevState) => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+
+    const handleSubmit = async () => {
+        console.log(user)
+        const userRegister = { "username": user.username, "password": user.password }
+        console.log(userRegister)
+        const loginResult = await UserService.save(userRegister);
+        if (loginResult) {
+            navigate("/login");
+        } else {
+            usernameRef.current.style.borderColor = "red";
+            passwordRef.current.style.borderColor = "red";
+            confirmPasswordRef.current.style.borderColor = "red";
+        }
+    }
+
     return (<>
-        <div className="register_container">
+        <form className="register_container"
+            onSubmit={handleSubmit}>
             <Modal className="register_modal_container"
                 contentClassName="modal_options_container_dialog"
                 id="modal_options_card_container"
@@ -55,7 +91,12 @@ const Register = () => {
                                 {json.username}
                             </span>
                             <input className="register_modal_body_username_input"
-                                type="text" />
+                                type="text"
+                                name="username"
+                                ref={usernameRef}
+                                value={user.username}
+                                onChange={handleChange}
+                            />
                         </div>
                         <div className="register_modal_body_password">
                             <span className="register_modal_body_password_span">
@@ -63,7 +104,12 @@ const Register = () => {
                             </span>
                             <div className="register_modal_body_password_input_container">
                                 <input className="register_modal_body_password_input"
-                                    type={isPasswordType ? "password" : "text"} />
+                                    type={isPasswordType ? "password" : "text"}
+                                    name="password"
+                                    ref={passwordRef}
+                                    value={user.password}
+                                    onChange={handleChange}
+                                />
                                 <button className="register_modal_body_password_button"
                                     onClick={handleClickPasswordEye}>
                                     <img className="register_modal_body_password_image"
@@ -78,7 +124,12 @@ const Register = () => {
                             </span>
                             <div className="register_modal_body_password_input_container">
                                 <input className="register_modal_body_password_input"
-                                    type={isConfirmPasswordType ? "password" : "text"} />
+                                    type={isConfirmPasswordType ? "password" : "text"}
+                                    name="confirmPassword"
+                                    ref={confirmPasswordRef}
+                                    value={user.confirmPassword}
+                                    onChange={handleChange}
+                                />
                                 <button className="register_modal_body_password_button"
                                     onClick={handleClickConfirmPasswordEye}>
                                     <img className="register_modal_body_password_image"
@@ -88,14 +139,16 @@ const Register = () => {
                             </div>
                         </div>
                         <div className="register_modal_body_submit">
-                            <button className="register_modal_body_submit_button">
+                            <button className="register_modal_body_submit_button"
+                                type='submit'
+                                onClick={handleSubmit}>
                                 {json.submit}
                             </button>
                         </div>
                     </div>
                 </Modal.Body>
             </Modal>
-        </div>
+        </form>
     </>);
 }
 

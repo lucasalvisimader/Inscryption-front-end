@@ -69,9 +69,8 @@ const Login = () => {
         }
     }
 
-
     return (<>
-        <div className="login_container">
+        <form className="login_container" onSubmit={() => {}}>
             <Modal className="login_modal_container"
                 contentClassName="modal_options_container_dialog"
                 id="modal_options_card_container"
@@ -126,7 +125,7 @@ const Login = () => {
                     </div>
                 </Modal.Body>
             </Modal>
-        </div>
+        </form>
         {isFadingOut && (
             <div className="login_fade_out">
                 <span>{json.long_time}</span>
