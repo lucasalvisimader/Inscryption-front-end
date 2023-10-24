@@ -59,14 +59,16 @@ const Login = () => {
         }, 2000)
     }
 
-    const handleSubmit = () => {
-        console.log(user)
-        UserService.login(user).then(() => {
+    const handleSubmit = async () => {
+        const loginResult = await UserService.login(user);
+        if (loginResult) {
             handleLoginAnimation();
-        }).catch((error) => {
-            console.error(error);
-        });
+        } else {
+            usernameRef.current.style.borderColor = "red";
+            passwordRef.current.style.borderColor = "red";
+        }
     }
+
 
     return (<>
         <div className="login_container">
