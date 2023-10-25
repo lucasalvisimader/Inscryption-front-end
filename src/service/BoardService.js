@@ -1,13 +1,6 @@
 import AxiosInstance from "./Axios";
 
 export const CardService = {
-    save : async (board) => {
-        try {
-            return await AxiosInstance.post("/board/save", board);
-        } catch (error) {
-            console.error(error);
-        }
-    },
     list : async (id) => {
         try {
             return await AxiosInstance.get("/board/list/" + id);
