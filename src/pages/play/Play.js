@@ -9,6 +9,7 @@ import { DraggableCardPlay } from '../../components/draggable_card_play/Draggabl
 
 // images
 import backDeck from '../../assets/images/card/others/back.png';
+import backSquirrelDeck from '../../assets/images/card/others/back_squirrel.png';
 
 // json
 import en from '../../assets/locales/en.json';
@@ -97,7 +98,7 @@ const Play = () => {
                         <div className='play_deck_squirrel_cards'
                             onClick={handleClickSquirrelPlayerDeck} >
                             <img className='play_deck_squirrel_cards_image'
-                                src={backDeck}
+                                src={backSquirrelDeck}
                                 alt={json.deck_image_squirrel} />
                         </div>
                     </div>

@@ -52,7 +52,8 @@
     display: flex;
     width: 85%;
     height: 45% !important;
-    margin-top: 6.5rem;
+    margin-top: calc(2rem + 7vw);
+    margin-bottom: calc(1rem + 6vw);
 }
 
 .play_general_actions {
@@ -70,7 +71,6 @@
 .play_footer {
     display: flex;
     justify-content: center;
-    margin-top: 4rem;
 }
 
 .play_player_cards {
