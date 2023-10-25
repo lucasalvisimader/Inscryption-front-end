@@ -2611,6 +2611,11 @@
   "resolved" "https://registry.npmjs.org/@types/trusted-types/-/trusted-types-2.0.3.tgz"
   "version" "2.0.3"
 
+"@types/uuid@^9.0.6":
+  "integrity" "sha512-BT2Krtx4xaO6iwzwMFUYvWBWkV2pr37zD68Vmp1CDV196MzczBRxuEpD6Pr395HAgebC/co7hOphs53r8V7jew=="
+  "resolved" "https://registry.npmjs.org/@types/uuid/-/uuid-9.0.6.tgz"
+  "version" "9.0.6"
+
 "@types/warning@^3.0.0":
   "integrity" "sha512-S/2+OjBIcBl8Kur23YLe0hG1e7J5m2bHfB4UuMNoLZjIFhQWhTf1FeS+WFoXHUC6QsCEfk4pftj4J1KIKC1glA=="
   "resolved" "https://registry.npmjs.org/@types/warning/-/warning-3.0.2.tgz"

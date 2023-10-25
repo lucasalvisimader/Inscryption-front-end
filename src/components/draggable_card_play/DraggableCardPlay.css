@@ -1,6 +1,7 @@
 .draggable_card_play_container {
     width: calc(2rem + 4vw);
     height: auto;
+    margin-right: -1vw;
 }
 
 .draggable_card_play_image {
