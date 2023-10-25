@@ -82,6 +82,7 @@
     position: absolute;
     display: flex;
     margin-left: calc(8rem + 50vw);
+    z-index: -1;
 }
 
 .play_deck_cards {
@@ -105,4 +106,8 @@
 .play_deck_squirrel_cards_image {
     width: 100%;
     height: auto;
+}
+
+.play_player_cards, .play_deck_cards, .play_deck_squirrel_cards {
+    cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto !important;
 }

@@ -17,6 +17,9 @@ import en from '../../assets/locales/en.json';
 // services
 import { CardService } from '../../service/CardService';
 
+// external
+import { v4 as uuidV4 } from 'uuid';
+
 const Play = () => {
     const [cards, setCards] = useState([]);
     const [playerCards, setPlayerCards] = useState([]);
@@ -84,10 +87,9 @@ const Play = () => {
 
                 <div className='play_footer'>
                     <div className='play_player_cards'>
-                        
                         {playerCards?.map((card) => {
-                            card.length = playerCards.length
-                            return  DraggableCardPlay(card);
+                            card.length = playerCards.length;
+                            return <DraggableCardPlay key={uuidV4()} {...card} />;
                         })}
                     </div>
                     <div className='play_decks'>

@@ -2,25 +2,39 @@
 import './DraggableCardPlay.css';
 
 // react
-import { Fragment } from 'react';
+import { useState, useRef } from 'react';
 
 // json
 import en from '../../assets/locales/en.json';
 
-// external
-import {v4 as uuidV4} from 'uuid';
-
 export function DraggableCardPlay(card) {
+    const [isHovered, setIsHovered] = useState(false);
     const length = card.length;
-    const cardStyle = { backgroundImage: `url('/images/imageType/${card?.imageType}.png')`,
-                        marginLeft: `calc(${length} * -0.16rem - 0.4vw)` };
+    const cardStyle = {
+        backgroundImage: `url('/images/imageType/${card.imageType}.png')`,
+        marginLeft: `calc(${length} * -0.16rem - 0.4vw)`
+    }
     const json = en.play;
 
-    return (<Fragment key={uuidV4()}>
-        <div className='draggable_card_play_container' style={cardStyle}>
+    const containerRef = useRef();
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    }
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    }
+
+    return (
+        <div className={`draggable_card_play_container${isHovered ? '_hovered' : ''}`}
+            ref={containerRef}
+            style={cardStyle}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}>
             <img className='draggable_card_play_image'
-            src={require(`../../assets/images/card/image_type/${card.imageType.toLowerCase()}.png`)}
-            alt={json.card_image} />
+                src={require(`../../assets/images/card/image_type/${card.imageType.toLowerCase()}.png`)}
+                alt={json.card_image} />
         </div>
-    </Fragment>);
+    );
 }

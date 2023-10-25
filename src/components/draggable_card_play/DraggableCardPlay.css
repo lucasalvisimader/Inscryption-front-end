@@ -7,3 +7,9 @@
     width: 100%;
     height: auto;
 }
+
+.draggable_card_play_container_hovered {
+    width: calc(3rem + 4vw);
+    height: auto;
+    z-index: 10;
+}
