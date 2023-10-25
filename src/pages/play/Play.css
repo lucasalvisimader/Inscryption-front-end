@@ -6,7 +6,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    background: url('../../assets/images/screen/background.png');
+    background-image: url('../../assets/images/screen/background.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     overflow: hidden;
@@ -30,9 +30,80 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 0.08;
+    opacity: 0.06;
     background: var(--filter-static);
     top: 0;
     z-index: 98;
     pointer-events: none;
+}
+
+.play_content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-brown);
+    z-index: 98;
+}
+
+.play_table_content {
+    display: flex;
+    width: 85%;
+    height: 45% !important;
+    margin-top: 6.5rem;
+}
+
+.play_general_actions {
+    width: 25%;
+}
+
+.play_board {
+    width: 50%;
+}
+
+.play_card_description {
+    width: 25%;
+}
+
+.play_footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.play_player_cards {
+    display: flex;
+    justify-content: center;
+    gap: 0.5vw;
+}
+
+.play_decks {
+    position: absolute;
+    display: flex;
+    margin-left: calc(8rem + 50vw);
+}
+
+.play_deck_cards {
+    width: calc(2rem + 4vw);
+    height: auto;
+    margin-left: 12vw;
+    margin-right: 0.5vw;
+}
+
+.play_deck_cards_image {
+    width: 100%;
+    height: auto;
+}
+
+.play_deck_squirrel_cards {
+    width: calc(2rem + 4vw);
+    height: auto;
+    margin-right: 8vw;
+}
+
+.play_deck_squirrel_cards_image {
+    width: 100%;
+    height: auto;
 }

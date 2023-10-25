@@ -17,9 +17,9 @@ export const CardService = {
         }
     },
 
-    listFromUser : async (name, password) => {
+    listFromUser : async () => {
         try {
-            return await AxiosInstance.get("/card/listFromUser/" + name + "/" + password);
+            return await AxiosInstance.get("/card/listFromUser");
         } catch (error) {
             console.error(error);
         }

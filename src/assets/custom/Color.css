@@ -2,6 +2,7 @@
     --filter-tv: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 3px, transparent 3px, transparent 8px);
     --filter-static: url('../images/screen/static.gif');
     --background-brown: radial-gradient(circle, #5f3a2b 60%, #2b1a13 92%, #000000 100%);
+    --background-transparent: radial-gradient(circle, rgba(0, 0, 0, 0) 60%, #2b1a13 92%, #000000 100%);
     --background-brown-without-shadow: radial-gradient(circle, #5f3a2b 60%, #362118 100%);
     --background-yellow: #d7dfa4;
     --white: #f1f1f1;

@@ -1,0 +1,9 @@
+.draggable_card_play_container {
+    width: calc(2rem + 4vw);
+    height: auto;
+}
+
+.draggable_card_play_image {
+    width: 100%;
+    height: auto;
+}

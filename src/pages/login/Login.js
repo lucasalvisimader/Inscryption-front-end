@@ -47,14 +47,16 @@ const Login = () => {
     }
 
     const animateText = (textArray, index) => {
-        setTimeout(() => {
-            if (index < textArray.length) {
+        if (index < textArray.length) {
+            setTimeout(() => {
                 setAfterLoginText(textArray[index]);
                 animateText(textArray, index + 1);
-            } else {
+            }, 5000);
+        } else {
+            setTimeout(() => {
                 navigate("/play");
-            }
-        }, 5000);
+            }, 2000);
+        }
     }
 
     const handleLoginAnimation = () => {

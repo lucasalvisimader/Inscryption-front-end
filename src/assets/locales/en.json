@@ -28,5 +28,10 @@
         "who_am_i": "You will discover who am I very soon.",
         "only_thing": "For now, the only thing I have to say is",
         "be_careful": "be very careful with Him."
+    },
+    "play": {
+        "card_image": "Card image",
+        "deck_image": "Deck image",
+        "deck_image_squirrel": "Deck image squirrel"
     }
 }
