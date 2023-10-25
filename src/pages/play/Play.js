@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 // components
 import { DraggableCardPlay } from '../../components/draggable_card_play/DraggableCardPlay';
+import { DroppableAreaPlay } from '../../components/droppable_area_play/DroppableAreaPlay';
 
 // images
 import backDeck from '../../assets/images/card/others/back.png';
@@ -19,6 +20,7 @@ import { CardService } from '../../service/CardService';
 
 // external
 import { v4 as uuidV4 } from 'uuid';
+import { DndContext } from '@dnd-kit/core';
 
 const Play = () => {
     const [cards, setCards] = useState([]);
@@ -60,6 +62,12 @@ const Play = () => {
         setDeckSquirrelCards(updatedDeckSquirrelCards);
     }
 
+    const renderDroppableArea = () => {
+        return [1, 2, 3].map((name) => {
+            return (<DroppableAreaPlay id="menu_droppable" />);
+        });
+    }
+
     useEffect(() => {
         if (cards.data) {
             if (cards.data.length > 0) {
@@ -71,44 +79,50 @@ const Play = () => {
     }, [cards]);
 
     return (<>
-        <div className='play_container'>
-            <div className='play_content'>
-                <div className='play_table_content'>
-                    <div className='play_general_actions'>
+        <DndContext>
+            <div className='play_container'>
+                <div className='play_content'>
+                    <div className='play_table_content'>
+                        <div className='play_general_actions'>
 
-                    </div>
-                    <div className='play_board'>
-
-                    </div>
-                    <div className='play_card_description'>
-
-                    </div>
-                </div>
-
-                <div className='play_footer'>
-                    <div className='play_player_cards'>
-                        {playerCards?.map((card) => {
-                            card.length = playerCards.length;
-                            return <DraggableCardPlay key={uuidV4()} {...card} />;
-                        })}
-                    </div>
-                    <div className='play_decks'>
-                        <div className='play_deck_cards'
-                            onClick={handleClickPlayerDeck} >
-                            <img className='play_deck_cards_image'
-                                src={backDeck}
-                                alt={json.deck_image} />
                         </div>
-                        <div className='play_deck_squirrel_cards'
-                            onClick={handleClickSquirrelPlayerDeck} >
-                            <img className='play_deck_squirrel_cards_image'
-                                src={backSquirrelDeck}
-                                alt={json.deck_image_squirrel} />
+                        <div className='play_board'>
+                            {renderDroppableArea()}
+                            <DroppableAreaPlay id="menu_droppable">
+
+                            </DroppableAreaPlay>
+                        </div>
+                        <div className='play_card_description'>
+
+                        </div>
+                    </div>
+
+                    <div className='play_footer'>
+                        <div className='play_player_cards'>
+                            {playerCards?.map((card) => {
+                                card.length = playerCards.length;
+                                card.key = uuidV4();
+                                return <DraggableCardPlay key={card.key} id={card.key} card={card} />;
+                            })}
+                        </div>
+                        <div className='play_decks'>
+                            <div className='play_deck_cards'
+                                onClick={handleClickPlayerDeck} >
+                                <img className='play_deck_cards_image'
+                                    src={backDeck}
+                                    alt={json.deck_image} />
+                            </div>
+                            <div className='play_deck_squirrel_cards'
+                                onClick={handleClickSquirrelPlayerDeck} >
+                                <img className='play_deck_squirrel_cards_image'
+                                    src={backSquirrelDeck}
+                                    alt={json.deck_image_squirrel} />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </DndContext>
     </>);
 }
 

@@ -7,16 +7,22 @@ import { useState, useRef } from 'react';
 // json
 import en from '../../assets/locales/en.json';
 
-export function DraggableCardPlay(card) {
+// external
+import { useDraggable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
+
+export function DraggableCardPlay({id, card}) {
+    const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id });
     const [isHovered, setIsHovered] = useState(false);
+
     const length = card.length;
-    const cardStyle = {
+    const style = {
         backgroundImage: `url('/images/imageType/${card.imageType}.png')`,
-        marginLeft: `calc(${length} * -0.16rem - 0.4vw)`
+        marginLeft: `calc(${length} * -0.16rem - 0.4vw)`,
+        transform: CSS.Translate.toString(transform)
     }
     const json = en.play;
 
-    const containerRef = useRef();
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -27,9 +33,8 @@ export function DraggableCardPlay(card) {
     }
 
     return (
-        <div className={`draggable_card_play_container${isHovered ? '_hovered' : ''}`}
-            ref={containerRef}
-            style={cardStyle}
+        <div ref={setNodeRef} style={style} {...listeners} {...attributes}
+            className={`draggable_card_play_container${isHovered ? '_hovered' : ''}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}>
             <img className='draggable_card_play_image'
