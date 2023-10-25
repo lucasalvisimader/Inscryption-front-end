@@ -84,8 +84,10 @@ const Play = () => {
 
                 <div className='play_footer'>
                     <div className='play_player_cards'>
+                        
                         {playerCards?.map((card) => {
-                            return DraggableCardPlay(card);
+                            card.length = playerCards.length
+                            return  DraggableCardPlay(card);
                         })}
                     </div>
                     <div className='play_decks'>

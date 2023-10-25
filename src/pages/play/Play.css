@@ -50,10 +50,9 @@
 
 .play_table_content {
     display: flex;
-    width: 85%;
+    width: 86%;
     height: 45% !important;
-    margin-top: calc(2rem + 7vw);
-    margin-bottom: calc(1rem + 6vw);
+    margin-top: calc(1.8rem + 12vh);
 }
 
 .play_general_actions {
@@ -71,6 +70,7 @@
 .play_footer {
     display: flex;
     justify-content: center;
+    margin-top: calc(1rem + 6vh);
 }
 
 .play_player_cards {

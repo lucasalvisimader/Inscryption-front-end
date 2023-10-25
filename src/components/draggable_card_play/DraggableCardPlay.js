@@ -11,8 +11,10 @@ import en from '../../assets/locales/en.json';
 import {v4 as uuidV4} from 'uuid';
 
 export function DraggableCardPlay(card) {
+    const length = card.length;
+    const cardStyle = { backgroundImage: `url('/images/imageType/${card?.imageType}.png')`,
+                        marginLeft: `calc(${length} * -0.16rem - 0.4vw)` };
     const json = en.play;
-    const cardStyle = { backgroundImage: `url('/images/imageType/${card?.imageType}.png')` };
 
     return (<Fragment key={uuidV4()}>
         <div className='draggable_card_play_container' style={cardStyle}>
