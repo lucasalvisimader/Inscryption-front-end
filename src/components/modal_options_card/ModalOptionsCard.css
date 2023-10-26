@@ -45,10 +45,14 @@
     margin: 2%;
 }
 
-.modal_options_card_button {
+.modal_options_card_button, .modal_options_card_button_inverted {
     cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto;
     width: 6vw;
     height: auto;
+}
+
+.modal_options_card_button_inverted {
+    transform: rotateY(180deg);
 }
 
 .modal_options_card_language_chosen {

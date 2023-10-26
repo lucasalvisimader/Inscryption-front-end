@@ -6,6 +6,8 @@ import { useState } from "react";
 
 // images
 import languageText from '../../assets/images/menu/texts/language.png';
+import arrowEnable from '../../assets/images/menu/options/arrow_enable.png';
+import arrowDisable from '../../assets/images/menu/options/arrow_disable.png';
 import minusEnable from '../../assets/images/menu/options/minus_enable.png';
 import minusDisable from '../../assets/images/menu/options/minus_disable.png';
 import plusEnable from '../../assets/images/menu/options/plus_enable.png';
@@ -83,12 +85,12 @@ const ModalOptionsCard = ({ show }) => {
                 <div className="modal_options_card_language_container">
                     <img className="modal_options_card_language_text" src={languageText} alt={json.language_text} />
                     <div className="modal_options_card_language_container_options">
-                        <img className="modal_options_card_button" src={minusEnable} alt={json.minus_button}
+                        <img className="modal_options_card_button" src={arrowEnable} alt={json.minus_button}
                             onClick={() => handleChangeLanguage(false)} />
                         <span className="modal_options_card_language_chosen">
                             {languageChosen}
                         </span>
-                        <img className="modal_options_card_button" src={plusEnable} alt={json.plus_button}
+                        <img className="modal_options_card_button_inverted" src={arrowEnable} alt={json.plus_button}
                             onClick={() => handleChangeLanguage(true)} />
                     </div>
                 </div>

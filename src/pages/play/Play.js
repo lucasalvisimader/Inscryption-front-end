@@ -63,7 +63,7 @@ const Play = () => {
     }
 
     const renderDroppableArea = () => {
-        return [1, 2, 3].map((name) => {
+        return [1, 2, 3, 4].map((name) => {
             return (<DroppableAreaPlay id="menu_droppable" />);
         });
     }
@@ -88,9 +88,6 @@ const Play = () => {
                         </div>
                         <div className='play_board'>
                             {renderDroppableArea()}
-                            <DroppableAreaPlay id="menu_droppable">
-
-                            </DroppableAreaPlay>
                         </div>
                         <div className='play_card_description'>
 
