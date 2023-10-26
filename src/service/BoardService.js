@@ -9,6 +9,14 @@ export const CardService = {
         }
     },
 
+    getNewBoard : async () => {
+        try {
+            return await AxiosInstance.put("/board/getNewBoard");
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
     changePlayerCardPosition : async (cardPosition) => {
         try {
             return await AxiosInstance.put("/board/changePlayerCardPosition", cardPosition);
