@@ -17,9 +17,9 @@ export const CardService = {
         }
     },
 
-    changePlayerCardPosition : async (cardPosition) => {
+    endTurn : async (cardPosition) => {
         try {
-            return await AxiosInstance.put("/board/changePlayerCardPosition", cardPosition);
+            return await AxiosInstance.put("/board/endTurn", cardPosition);
         } catch (error) {
             console.error(error);
         }
