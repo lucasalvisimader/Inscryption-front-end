@@ -107,7 +107,7 @@ const Play = () => {
                             {playerCards?.map((card) => {
                                 card.length = playerCards.length;
                                 card.key = uuidV4();
-                                return <DraggableCardPlay key={card.key} id={card.key} card={card} />;
+                                return (<DraggableCardPlay key={card.key} id={card.key} card={card} />);
                             })}
                         </div>
                         <div className='play_decks'>

@@ -12,4 +12,9 @@
     width: calc(3rem + 4vw);
     height: auto;
     z-index: 10;
+    cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto !important;
+}
+
+.draggable_card_play_on_click_card_mouse {
+    cursor: url('../../assets/images/cursor/cursor_icons_3.png'), auto !important;
 }
