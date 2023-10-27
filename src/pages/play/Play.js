@@ -24,19 +24,34 @@ import { DndContext } from '@dnd-kit/core';
 
 const Play = () => {
     const [cards, setCards] = useState([]);
+    const [parent, setParent] = useState(null);
     const [playerCards, setPlayerCards] = useState([]);
     const [deckCards, setDeckCards] = useState([]);
     const [deckSquirrelCards, setDeckSquirrelCards] = useState([]);
+    const [droppableAreas, setDroppableAreas] = useState([
+        { key: 1 },
+        { key: 2 },
+        { key: 3 },
+        { key: 4 },
+        { key: 5 },
+        { key: 6 },
+        { key: 7 },
+        { key: 8 },
+        { key: 9 },
+        { key: 10 },
+        { key: 11 },
+        { key: 12 }
+    ]);
 
     const json = en.play;
 
-    useEffect(() => {
-        const setCardsFunction = async () => {
-            const cardsGross = await CardService.listFromUser()
-            setCards(cardsGross);
+    const handleDragEnd = (result) => {
+        if (result.active && result.over) {
+            setParent(result);
+        } else {
+            setParent(null);
         }
-        setCardsFunction();
-    }, []);
+    }
 
     const handleClickPlayerDeck = () => {
         const updatedPlayerCards = [...playerCards];
@@ -62,24 +77,94 @@ const Play = () => {
         setDeckSquirrelCards(updatedDeckSquirrelCards);
     }
 
-    const renderDroppableArea = (isInverted, enemyUpComing) => {
-        return [1, 2, 3, 4].map((name) => {
-            return (<DroppableAreaPlay key={name} isInverted={isInverted} enemyUpComing={enemyUpComing} id="menu_droppable" />);
+    const cardsFromAbove = (name) => {
+        if (parent) {
+            if (parent.over.id === `play_${name}_droppable`) {
+                const cardKey = parent.active.id;
+                const cardOnTop = generateCard([cardKey]);
+                const filteredCards = playerCards.filter((card) => {
+                    return card.key !== cardKey;
+                });
+
+                if (filteredCards.length !== playerCards.length) {
+                    setPlayerCards(filteredCards);
+                }
+
+                return cardOnTop;
+            }
+        }
+        return null;
+    }
+
+
+    const generateCard = (cardKey = []) => {
+        return cardKey.map((key) => {
+            console.log(searchCard(key))
+            return (
+                <DraggableCardPlay className="play_cards"
+                    id={key}
+                    key={key}
+                    card={searchCard(key)}
+                />
+            );
+        })
+    }
+
+    const searchCard = (key) => {
+        return playerCards.find((card) => card.key === key);
+    }
+
+    const cardsFromBelow = () => {
+        return playerCards?.map((card) => {
+            card.lengthCard = playerCards.length;
+            return (
+                <DraggableCardPlay className="play_cards"
+                    key={card.key}
+                    id={card.key}
+                    card={card}
+                />
+            );
+        });
+    }
+
+    const renderDroppableArea = (rowLayer) => {
+        return droppableAreas.slice(rowLayer, rowLayer + 4).map((droppableArea) => {
+            return (
+                <DroppableAreaPlay key={droppableArea.key} id={`play_${droppableArea.key}_droppable`}
+                    isInverted={rowLayer === 4 ? true : false} enemyUpComing={rowLayer === 0 ? true : false}>
+                    {cardsFromAbove(droppableArea.key)}
+                </DroppableAreaPlay>
+            );
         });
     }
 
     useEffect(() => {
-        if (cards.data) {
-            if (cards.data.length > 0) {
-                setPlayerCards(cards.data[0]);
-                setDeckCards(cards.data[1]);
-                setDeckSquirrelCards(cards.data[2]);
-            }
+        const setCardsFunction = async () => {
+            const cardsGross = await CardService.listFromUser()
+            setCards(cardsGross);
+        }
+        setCardsFunction();
+    }, []);
+
+    useEffect(() => {
+        if (cards.data?.length > 0) {
+            cards.data[0]?.map((card) => {
+                card.key = uuidV4();
+            })
+            cards.data[1]?.map((card) => {
+                card.key = uuidV4();
+            })
+            cards.data[2]?.map((card) => {
+                card.key = uuidV4();
+            })
+            setPlayerCards(cards.data[0]);
+            setDeckCards(cards.data[1]);
+            setDeckSquirrelCards(cards.data[2]);
         }
     }, [cards]);
 
     return (<>
-        <DndContext>
+        <DndContext onDragEnd={handleDragEnd}>
             <div className='play_container'>
                 <div className='play_content'>
                     <div className='play_table_content'>
@@ -88,13 +173,13 @@ const Play = () => {
                         </div>
                         <div className='play_board'>
                             <div className='play_enemy_upcoming_cards_container'>
-                                {renderDroppableArea(false, true)}
+                                {renderDroppableArea(0)}
                             </div>
                             <div className='play_enemy_cards_container'>
-                                {renderDroppableArea(true)}
+                                {renderDroppableArea(4)}
                             </div>
                             <div className='play_player_cards_container'>
-                                {renderDroppableArea()}
+                                {renderDroppableArea(8)}
                             </div>
                         </div>
                         <div className='play_card_description'>
@@ -104,11 +189,11 @@ const Play = () => {
 
                     <div className='play_footer'>
                         <div className='play_player_cards'>
-                            {playerCards?.map((card) => {
-                                card.length = playerCards.length;
-                                card.key = uuidV4();
-                                return (<DraggableCardPlay key={card.key} id={card.key} card={card} />);
-                            })}
+                            {cardsFromBelow().map((card, index) => (
+                                <div className="play_card" key={index}>
+                                    {card}
+                                </div>
+                            ))}
                         </div>
                         <div className='play_decks'>
                             <div className='play_deck_cards'
