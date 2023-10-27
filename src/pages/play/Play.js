@@ -81,33 +81,26 @@ const Play = () => {
         if (parent) {
             if (parent.over.id === `play_${name}_droppable`) {
                 const cardKey = parent.active.id;
-                const cardOnTop = generateCard([cardKey]);
-                const filteredCards = playerCards.filter((card) => {
-                    return card.key !== cardKey;
-                });
-
-                if (filteredCards.length !== playerCards.length) {
-                    setPlayerCards(filteredCards);
-                }
-
-                return cardOnTop;
+                const card = generateCard(cardKey);
+            
+                return card;
             }
         }
         return null;
     }
 
 
-    const generateCard = (cardKey = []) => {
-        return cardKey.map((key) => {
-            console.log(searchCard(key))
+    const generateCard = (cardKey) => {
+        const card = searchCard(cardKey);
+        if (card) {
             return (
                 <DraggableCardPlay className="play_cards"
-                    id={key}
-                    key={key}
-                    card={searchCard(key)}
+                    id={cardKey}
+                    key={cardKey}
+                    card={card}
                 />
             );
-        })
+        }
     }
 
     const searchCard = (key) => {
@@ -129,10 +122,24 @@ const Play = () => {
 
     const renderDroppableArea = (rowLayer) => {
         return droppableAreas.slice(rowLayer, rowLayer + 4).map((droppableArea) => {
+            const cards = cardsFromAbove(droppableArea.key);
+            
+            // const filteredCards = playerCards.filter((card) => {
+            //     console.log(cards?.key)
+            //     return card.key !== cards?.key;
+            // });
+            // if (filteredCards.length !== playerCards.length) {
+            //     setPlayerCards(filteredCards);
+            //     console.log(playerCards)
+            //     console.log(filteredCards)
+            // }
+
             return (
-                <DroppableAreaPlay key={droppableArea.key} id={`play_${droppableArea.key}_droppable`}
-                    isInverted={rowLayer === 4 ? true : false} enemyUpComing={rowLayer === 0 ? true : false}>
-                    {cardsFromAbove(droppableArea.key)}
+                <DroppableAreaPlay key={droppableArea.key}
+                    id={`play_${droppableArea.key}_droppable`}
+                    isInverted={rowLayer === 4 ? true : false}
+                    enemyUpComing={rowLayer === 0 ? true : false}>
+                    {cards}
                 </DroppableAreaPlay>
             );
         });
@@ -149,13 +156,13 @@ const Play = () => {
     useEffect(() => {
         if (cards.data?.length > 0) {
             cards.data[0]?.map((card) => {
-                card.key = uuidV4();
+                return card.key = uuidV4();
             })
             cards.data[1]?.map((card) => {
-                card.key = uuidV4();
+                return card.key = uuidV4();
             })
             cards.data[2]?.map((card) => {
-                card.key = uuidV4();
+                return card.key = uuidV4();
             })
             setPlayerCards(cards.data[0]);
             setDeckCards(cards.data[1]);

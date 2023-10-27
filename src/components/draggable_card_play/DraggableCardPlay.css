@@ -11,6 +11,7 @@
 .draggable_card_play_container_hovered {
     width: calc(2rem + 5vw);
     height: auto;
+    position: relative;
     z-index: 10;
     cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto !important;
 }
