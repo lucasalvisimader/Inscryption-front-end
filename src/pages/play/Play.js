@@ -62,9 +62,9 @@ const Play = () => {
         setDeckSquirrelCards(updatedDeckSquirrelCards);
     }
 
-    const renderDroppableArea = () => {
+    const renderDroppableArea = (isInverted, enemyUpComing) => {
         return [1, 2, 3, 4].map((name) => {
-            return (<DroppableAreaPlay id="menu_droppable" />);
+            return (<DroppableAreaPlay key={name} isInverted={isInverted} enemyUpComing={enemyUpComing} id="menu_droppable" />);
         });
     }
 
@@ -87,7 +87,15 @@ const Play = () => {
 
                         </div>
                         <div className='play_board'>
-                            {renderDroppableArea()}
+                            <div className='play_enemy_upcoming_cards_container'>
+                                {renderDroppableArea(false, true)}
+                            </div>
+                            <div className='play_enemy_cards_container'>
+                                {renderDroppableArea(true)}
+                            </div>
+                            <div className='play_player_cards_container'>
+                                {renderDroppableArea()}
+                            </div>
                         </div>
                         <div className='play_card_description'>
 

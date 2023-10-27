@@ -60,7 +60,15 @@
 }
 
 .play_board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 50%;
+    height: 30%;
+}
+
+.play_player_cards_container, .play_enemy_cards_container, .play_enemy_upcoming_cards_container {
+    display: flex;
 }
 
 .play_card_description {

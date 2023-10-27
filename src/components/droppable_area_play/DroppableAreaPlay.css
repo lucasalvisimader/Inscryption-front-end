@@ -1,0 +1,11 @@
+.droppable_play_input_card, .droppable_play_inverted_input_card {
+    width: 6vw;
+    height: 7.85vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.droppable_play_inverted_input_card {
+    transform: rotateX(180deg);
+}
