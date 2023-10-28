@@ -82,7 +82,7 @@ const Play = () => {
             if (parent.over.id === `play_${name}_droppable`) {
                 const cardKey = parent.active.id;
                 const card = generateCard(cardKey);
-            
+
                 return card;
             }
         }
@@ -121,27 +121,32 @@ const Play = () => {
     }
 
     const renderDroppableArea = (rowLayer) => {
+        let value = [];
         return droppableAreas.slice(rowLayer, rowLayer + 4).map((droppableArea) => {
             const cards = cardsFromAbove(droppableArea.key);
-            
-            // const filteredCards = playerCards.filter((card) => {
-            //     console.log(cards?.key)
-            //     return card.key !== cards?.key;
-            // });
-            // if (filteredCards.length !== playerCards.length) {
-            //     setPlayerCards(filteredCards);
-            //     console.log(playerCards)
-            //     console.log(filteredCards)
-            // }
+            // if (value.find((card) => card.key !== cards?.props.id)) {
+                console.log(cards)
+                value.push(cards?.props.id)
 
-            return (
-                <DroppableAreaPlay key={droppableArea.key}
-                    id={`play_${droppableArea.key}_droppable`}
-                    isInverted={rowLayer === 4 ? true : false}
-                    enemyUpComing={rowLayer === 0 ? true : false}>
-                    {cards}
-                </DroppableAreaPlay>
-            );
+                // const filteredCards = playerCards.filter((card) => {
+                //     return card.key !== cards?.key;
+                // });
+
+                // if (filteredCards.length !== playerCards.length) {
+                //     setPlayerCards(filteredCards);
+                //     console.log(playerCards)
+                //     console.log(filteredCards)
+                // }
+
+                return (
+                    <DroppableAreaPlay key={droppableArea.key}
+                        id={`play_${droppableArea.key}_droppable`}
+                        isInverted={rowLayer === 4 ? true : false}
+                        enemyUpComing={rowLayer === 0 ? true : false}>
+                        {cards}
+                    </DroppableAreaPlay>
+                );
+            // }
         });
     }
 
