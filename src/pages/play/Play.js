@@ -121,12 +121,12 @@ const Play = () => {
     }
 
     const renderDroppableArea = (rowLayer) => {
-        let value = [];
+        // let value = [];
         return droppableAreas.slice(rowLayer, rowLayer + 4).map((droppableArea) => {
             const cards = cardsFromAbove(droppableArea.key);
             // if (value.find((card) => card.key !== cards?.props.id)) {
                 console.log(cards)
-                value.push(cards?.props.id)
+                // value.push(cards?.props.id)
 
                 // const filteredCards = playerCards.filter((card) => {
                 //     return card.key !== cards?.key;
