@@ -21,7 +21,7 @@ export function DroppableAreaPlay(props) {
             inputCardRef.current.style.backgroundSize = "contain";
             inputCardRef.current.style.backgroundRepeat = "no-repeat";
         }
-    }, [props.startedDrag])
+    }, [props.startedDrag]);
 
     return (<>
         <div className="droppable_play_body_container" ref={setNodeRef}>

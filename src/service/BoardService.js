@@ -19,7 +19,7 @@ export const CardService = {
 
     canPutCardOnBoard : async (canPutCardOnBoardDTO) => {
         try {
-            return await AxiosInstance.get("/board/canPutCardOnBoard");
+            return await AxiosInstance.get("/board/canPutCardOnBoard", canPutCardOnBoardDTO);
         } catch (error) {
             console.error(error);
         }

@@ -27,6 +27,7 @@ import { DndContext } from '@dnd-kit/core';
 const Play = () => {
     const [cards, setCards] = useState([]);
     const [playerCards, setPlayerCards] = useState([]);
+    const [isOnHoverCardSacrificing, setIsOnHoverCardSacrificing] = useState(false);
     const [deckCards, setDeckCards] = useState([]);
     const [deckSquirrelCards, setDeckSquirrelCards] = useState([]);
     const [droppableAreas, setDroppableAreas] = useState([
@@ -46,8 +47,13 @@ const Play = () => {
 
     const json = en.play;
 
+    const handleDragStart = () => {
+        setIsOnHoverCardSacrificing(true);
+    }
+
     const handleDragEnd = (result) => {
         if (result.active && result.over) {
+            setIsOnHoverCardSacrificing(false);
             const areaKey = parseInt(result.over.id.split("_")[1]);
             const cardKey = result.active.id;
             const card = generateCard(cardKey);
@@ -111,6 +117,7 @@ const Play = () => {
     const cardsFromBelow = () => {
         return playerCards?.map((card) => {
             card.lengthCard = playerCards.length;
+            card.isDisabled = true;
             return (
                 <DraggableCardPlay className="play_cards"
                     key={card.key}
@@ -130,6 +137,7 @@ const Play = () => {
                         id={card.key}
                         key={card.key}
                         card={card.props.card}
+                        isOnHoverCardSacrificing={isOnHoverCardSacrificing}
                     />
                 );
             });
@@ -186,7 +194,7 @@ const Play = () => {
     }, [cards]);
 
     return (<>
-        <DndContext onDragEnd={handleDragEnd}>
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
             <div className='play_container'>
                 <div className='play_content'>
                     <div className='play_table_content'>
@@ -204,11 +212,7 @@ const Play = () => {
                                 {renderDroppableArea(8)}
                             </div>
                         </div>
-                        <div className='play_card_description'>
-
-                        </div>
                     </div>
-
                     <div className='play_footer'>
                         <div className='play_player_cards'>
                             {cardsFromBelow().map((card, index) => (

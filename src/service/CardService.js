@@ -33,6 +33,14 @@ export const CardService = {
         }
     },
 
+    qtyCost : async (id) => {
+        try {
+            return await AxiosInstance.get("/card/qtyCost/" + id);
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
     edit : async (id, card) => {
         try {
             return await AxiosInstance.put("/card/update/" + id, card);

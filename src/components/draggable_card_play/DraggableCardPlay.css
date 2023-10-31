@@ -2,6 +2,7 @@
     width: calc(2rem + 3vw);
     height: auto;
     position: relative;
+    transition: transform 0.3s;
 }
 
 .draggable_card_play_image {
@@ -9,12 +10,26 @@
     height: auto;
 }
 
-.draggable_card_play_container_hovered {
+.draggable_card_play_container_active {
     width: calc(2rem + 4vw);
     height: auto;
     position: relative;
     z-index: 10;
     cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto !important;
+}
+
+.draggable_card_play_container_active_sacrificing {}
+
+.draggable_card_play_container_clicked {
+    position: absolute;
+    transition: transform 0.3s;
+    transform: translateX(-200%);
+}
+
+.draggable_card_play_container_up {
+    transition: transform 0.3s;
+    transform: translate(-200%, -100%);
+    /* transform: translateX(-50vw); */
 }
 
 .draggable_card_play_on_click_card_mouse {
@@ -35,7 +50,9 @@
     justify-content: space-between;
 }
 
-.draggable_card_play_power, .draggable_card_play_health, .draggable_card_play_name {
+.draggable_card_play_power,
+.draggable_card_play_health,
+.draggable_card_play_name {
     position: absolute;
     color: var(--black);
 }
