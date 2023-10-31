@@ -29,27 +29,40 @@ const Play = () => {
     const [deckCards, setDeckCards] = useState([]);
     const [deckSquirrelCards, setDeckSquirrelCards] = useState([]);
     const [droppableAreas, setDroppableAreas] = useState([
-        { key: 1 },
-        { key: 2 },
-        { key: 3 },
-        { key: 4 },
-        { key: 5 },
-        { key: 6 },
-        { key: 7 },
-        { key: 8 },
-        { key: 9 },
-        { key: 10 },
-        { key: 11 },
-        { key: 12 }
+        { key: 1, cards: [] },
+        { key: 2, cards: [] },
+        { key: 3, cards: [] },
+        { key: 4, cards: [] },
+        { key: 5, cards: [] },
+        { key: 6, cards: [] },
+        { key: 7, cards: [] },
+        { key: 8, cards: [] },
+        { key: 9, cards: [] },
+        { key: 10, cards: [] },
+        { key: 11, cards: [] },
+        { key: 12, cards: [] }
     ]);
 
     const json = en.play;
 
     const handleDragEnd = (result) => {
         if (result.active && result.over) {
-            setParent(result);
-        } else {
-            setParent(null);
+            const areaKey = parseInt(result.over.id.split("_")[1]);
+            const cardKey = result.active.id;
+            const card = generateCard(cardKey);
+
+            const updatedDroppableAreas = droppableAreas.map((area) => {
+                if (area.key === areaKey) {
+                    if (area.cards.length === 0) {
+                        area.cards.push(card);
+                        const updatedPlayerCards = playerCards.filter((card) => card.key !== cardKey);
+                        setPlayerCards(updatedPlayerCards);
+                    }
+                }
+                return area;
+            });
+
+            setDroppableAreas(updatedDroppableAreas);
         }
     }
 
@@ -76,19 +89,6 @@ const Play = () => {
         setPlayerCards(updatedPlayerCards);
         setDeckSquirrelCards(updatedDeckSquirrelCards);
     }
-
-    const cardsFromAbove = (name) => {
-        if (parent) {
-            if (parent.over.id === `play_${name}_droppable`) {
-                const cardKey = parent.active.id;
-                const card = generateCard(cardKey);
-
-                return card;
-            }
-        }
-        return null;
-    }
-
 
     const generateCard = (cardKey) => {
         const card = searchCard(cardKey);
@@ -121,32 +121,27 @@ const Play = () => {
     }
 
     const renderDroppableArea = (rowLayer) => {
-        // let value = [];
         return droppableAreas.slice(rowLayer, rowLayer + 4).map((droppableArea) => {
-            const cards = cardsFromAbove(droppableArea.key);
-            // if (value.find((card) => card.key !== cards?.props.id)) {
-                console.log(cards)
-                // value.push(cards?.props.id)
-
-                // const filteredCards = playerCards.filter((card) => {
-                //     return card.key !== cards?.key;
-                // });
-
-                // if (filteredCards.length !== playerCards.length) {
-                //     setPlayerCards(filteredCards);
-                //     console.log(playerCards)
-                //     console.log(filteredCards)
-                // }
-
+            const cards = droppableArea.cards.map((card) => {
+                card.props.card.isDisabled = true;
+                console.log(card)
                 return (
-                    <DroppableAreaPlay key={droppableArea.key}
-                        id={`play_${droppableArea.key}_droppable`}
-                        isInverted={rowLayer === 4 ? true : false}
-                        enemyUpComing={rowLayer === 0 ? true : false}>
-                        {cards}
-                    </DroppableAreaPlay>
+                    <DraggableCardPlay className="play_cards"
+                        id={card.key}
+                        key={card.key}
+                        card={card.props.card}
+                    />
                 );
-            // }
+            });
+
+            return (
+                <DroppableAreaPlay key={droppableArea.key}
+                    id={`play_${droppableArea.key}_droppable`}
+                    isInverted={rowLayer === 4 ? true : false}
+                    enemyUpComing={rowLayer === 0 ? true : false}>
+                    {cards}
+                </DroppableAreaPlay>
+            );
         });
     }
 

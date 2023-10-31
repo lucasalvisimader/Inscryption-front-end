@@ -12,7 +12,7 @@ import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
 export function DraggableCardPlay({ id, card }) {
-    const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id });
+    const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id, disabled: card.isDisabled });
     const [isHovered, setIsHovered] = useState(false);
 
     const length = card.lengthCard;
