@@ -1,6 +1,7 @@
 .draggable_card_play_container {
     width: calc(2rem + 4vw);
     height: auto;
+    position: relative;
 }
 
 .draggable_card_play_image {
@@ -18,4 +19,37 @@
 
 .draggable_card_play_on_click_card_mouse {
     cursor: url('../../assets/images/cursor/cursor_icons_3.png'), auto !important;
+}
+
+.draggable_card_play_header {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.draggable_card_play_footer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.draggable_card_play_power, .draggable_card_play_health, .draggable_card_play_name {
+    position: absolute;
+    color: var(--black);
+}
+
+.draggable_card_play_name {
+    top: 2%;
+}
+
+.draggable_card_play_power {
+    left: 10%;
+    bottom: 6%;
+}
+
+.draggable_card_play_health {
+    right: 10%;
+    bottom: 9%;
 }

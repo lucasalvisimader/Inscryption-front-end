@@ -26,7 +26,6 @@ import { DndContext } from '@dnd-kit/core';
 
 const Play = () => {
     const [cards, setCards] = useState([]);
-    const [parent, setParent] = useState(null);
     const [playerCards, setPlayerCards] = useState([]);
     const [deckCards, setDeckCards] = useState([]);
     const [deckSquirrelCards, setDeckSquirrelCards] = useState([]);

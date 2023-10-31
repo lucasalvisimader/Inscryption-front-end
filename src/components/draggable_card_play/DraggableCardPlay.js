@@ -23,7 +23,6 @@ export function DraggableCardPlay({ id, card }) {
     }
     const json = en.play;
 
-
     const handleMouseEnter = () => {
         setIsHovered(true);
     }
@@ -37,9 +36,22 @@ export function DraggableCardPlay({ id, card }) {
             className={`draggable_card_play_container${isHovered ? '_hovered' : ''}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}>
-                <img className='draggable_card_play_image'
-                    src={require(`../../assets/images/card/image_type/${card.imageType.toLowerCase()}.png`)}
-                    alt={json.card_image} />
+            <div className='draggable_card_play_header'>
+                <span className='draggable_card_play_name' style={{fontSize: `calc(1.1rem - ${card.name.length / 2}px`}}>
+                    {card.name}
+                </span>
+            </div>
+            <img className='draggable_card_play_image'
+                src={require(`../../assets/images/card/image_type/${card.imageType.toLowerCase()}.png`)}
+                alt={json.card_image} />
+            <div className='draggable_card_play_footer'>
+                <span className='draggable_card_play_power'>
+                    {card.power}
+                </span>
+                <span className='draggable_card_play_health'>
+                    {card.health}
+                </span>
+            </div>
         </div>
     );
 }
