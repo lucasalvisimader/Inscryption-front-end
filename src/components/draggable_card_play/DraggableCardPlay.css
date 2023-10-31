@@ -1,5 +1,5 @@
 .draggable_card_play_container {
-    width: calc(2rem + 4vw);
+    width: calc(2rem + 3vw);
     height: auto;
     position: relative;
 }
@@ -10,7 +10,7 @@
 }
 
 .draggable_card_play_container_hovered {
-    width: calc(2rem + 5vw);
+    width: calc(2rem + 4vw);
     height: auto;
     position: relative;
     z-index: 10;
@@ -41,7 +41,7 @@
 }
 
 .draggable_card_play_name {
-    top: 2%;
+    top: 1%;
 }
 
 .draggable_card_play_power {

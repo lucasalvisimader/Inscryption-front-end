@@ -37,7 +37,7 @@ export function DraggableCardPlay({ id, card }) {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}>
             <div className='draggable_card_play_header'>
-                <span className='draggable_card_play_name' style={{fontSize: `calc(1.1rem - ${card.name.length / 2}px`}}>
+                <span className='draggable_card_play_name' style={{fontSize: `calc(1rem - ${card.name.length / 3}px`}}>
                     {card.name}
                 </span>
             </div>

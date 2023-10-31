@@ -24,8 +24,8 @@ export function DroppableAreaPlay(props) {
     }, [props.startedDrag])
 
     return (<>
-        <div className="droppable_menu_body_container" ref={setNodeRef}>
-            <div className="droppable_menu_body">
+        <div className="droppable_play_body_container" ref={setNodeRef}>
+            <div className="droppable_play_body">
                 <div className={`droppable_play_${props.isInverted ? 'inverted_' : ''}input_card`}
                     ref={inputCardRef}>
                     {props.children}
