@@ -149,7 +149,8 @@ const Play = () => {
                         style={{
                             background: `url(${rowLayer === 4 ? cardSlot : cardQueue})`,
                             backgroundSize: "contain",
-                            backgroundRepeat: "no-repeat"}}
+                            backgroundRepeat: "no-repeat"
+                        }}
                         key={droppableArea.key}
                         id={`play_${droppableArea.key}_droppable`}>
                         {cards}
@@ -217,18 +218,22 @@ const Play = () => {
                             ))}
                         </div>
                         <div className='play_decks'>
-                            <div className='play_deck_cards'
-                                onClick={handleClickPlayerDeck} >
-                                <img className='play_deck_cards_image'
-                                    src={backDeck}
-                                    alt={json.deck_image} />
-                            </div>
-                            <div className='play_deck_squirrel_cards'
-                                onClick={handleClickSquirrelPlayerDeck} >
-                                <img className='play_deck_squirrel_cards_image'
-                                    src={backSquirrelDeck}
-                                    alt={json.deck_image_squirrel} />
-                            </div>
+                            {deckCards.length > 0 &&
+                                <div className='play_deck_cards'
+                                    onClick={handleClickPlayerDeck} >
+                                    <img className='play_deck_cards_image'
+                                        src={backDeck}
+                                        alt={json.deck_image} />
+                                </div>
+                            }
+                            {deckSquirrelCards.length > 0 &&
+                                <div className='play_deck_squirrel_cards'
+                                    onClick={handleClickSquirrelPlayerDeck} >
+                                    <img className='play_deck_squirrel_cards_image'
+                                        src={backSquirrelDeck}
+                                        alt={json.deck_image_squirrel} />
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
