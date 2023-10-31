@@ -11,6 +11,8 @@ import { DroppableAreaPlay } from '../../components/droppable_area_play/Droppabl
 // images
 import backDeck from '../../assets/images/card/others/back.png';
 import backSquirrelDeck from '../../assets/images/card/others/back_squirrel.png';
+import cardSlot from '../../assets/images/game/slots/card_slot.png';
+import cardQueue from '../../assets/images/game/slots/card_queue_slot.png';
 
 // json
 import en from '../../assets/locales/en.json';
@@ -124,7 +126,6 @@ const Play = () => {
         return droppableAreas.slice(rowLayer, rowLayer + 4).map((droppableArea) => {
             const cards = droppableArea.cards.map((card) => {
                 card.props.card.isDisabled = true;
-                console.log(card)
                 return (
                     <DraggableCardPlay className="play_cards"
                         id={card.key}
@@ -134,14 +135,28 @@ const Play = () => {
                 );
             });
 
-            return (
-                <DroppableAreaPlay key={droppableArea.key}
-                    id={`play_${droppableArea.key}_droppable`}
-                    isInverted={rowLayer === 4 ? true : false}
-                    enemyUpComing={rowLayer === 0 ? true : false}>
-                    {cards}
-                </DroppableAreaPlay>
-            );
+            if (rowLayer === 8) {
+                return (
+                    <DroppableAreaPlay key={droppableArea.key}
+                        id={`play_${droppableArea.key}_droppable`}
+                        isInverted={rowLayer === 4 ? true : false}
+                        enemyUpComing={rowLayer === 0 ? true : false}>
+                        {cards}
+                    </DroppableAreaPlay>
+                );
+            } else {
+                return (
+                    <div className={`play_enemy${rowLayer === 4 ? '_inverted' : ''}_input_card`}
+                        style={{
+                            background: `url(${rowLayer === 4 ? cardSlot : cardQueue})`,
+                            backgroundSize: "contain",
+                            backgroundRepeat: "no-repeat"}}
+                        key={droppableArea.key}
+                        id={`play_${droppableArea.key}_droppable`}>
+                        {cards}
+                    </div>
+                );
+            }
         });
     }
 

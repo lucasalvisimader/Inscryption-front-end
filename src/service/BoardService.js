@@ -17,6 +17,14 @@ export const CardService = {
         }
     },
 
+    canPutCardOnBoard : async (canPutCardOnBoardDTO) => {
+        try {
+            return await AxiosInstance.get("/board/canPutCardOnBoard");
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
     endTurn : async (cardPosition) => {
         try {
             return await AxiosInstance.put("/board/endTurn", cardPosition);

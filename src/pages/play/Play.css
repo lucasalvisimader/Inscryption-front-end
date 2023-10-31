@@ -119,3 +119,15 @@
 .play_player_cards, .play_deck_cards, .play_deck_squirrel_cards {
     cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto !important;
 }
+
+.play_enemy_input_card, .play_enemy_inverted_input_card {
+    width: 7.64vw;
+    height: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play_enemy_inverted_input_card {
+    transform: rotateX(180deg);
+}
