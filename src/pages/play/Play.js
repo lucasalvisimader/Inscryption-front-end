@@ -2,7 +2,7 @@
 import './Play.css';
 
 // react
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // components
 import { DraggableCardPlay } from '../../components/draggable_card_play/DraggableCardPlay';
@@ -44,6 +44,8 @@ const Play = () => {
         { key: 11, cards: [] },
         { key: 12, cards: [] }
     ]);
+
+    const boardRef = useRef();
 
     const json = en.play;
 
@@ -105,6 +107,7 @@ const Play = () => {
                     id={cardKey}
                     key={cardKey}
                     card={card}
+                    boardRef={boardRef}
                 />
             );
         }
@@ -123,6 +126,7 @@ const Play = () => {
                     key={card.key}
                     id={card.key}
                     card={card}
+                    boardRef={boardRef}
                 />
             );
         });
@@ -201,7 +205,8 @@ const Play = () => {
                         <div className='play_general_actions'>
 
                         </div>
-                        <div className='play_board'>
+                        <div className='play_board'
+                            ref={boardRef}>
                             <div className='play_enemy_upcoming_cards_container'>
                                 {renderDroppableArea(0)}
                             </div>

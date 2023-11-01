@@ -12,7 +12,7 @@ import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { CardService } from '../../service/CardService';
 
-export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing }) {
+export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef }) {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id, disabled: card.isDisabled });
     const [isHovered, setIsHovered] = useState(false);
     const [isActiveSacrificing, setIsActiveSacrificing] = useState(false);
@@ -24,28 +24,29 @@ export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing }) {
         background: `url('/images/imageType/${card.imageType}.png')`,
         marginLeft: `calc(${length} * -0.16rem - 0.4vw)`,
         transform: CSS.Translate.toString(transform),
+        left: boardRef.current.offsetLeft
     }
     const json = en.play;
 
     const handleMouseEnter = () => {
-        if (!card.isDisabled) {
-            setIsHovered(true);
-        } else if (isOnHoverCardSacrificing) {
+        setIsHovered(true);
+        if (isOnHoverCardSacrificing) {
             setIsActiveSacrificing(true);
         }
     }
 
     const handleMouseLeave = () => {
-        if (!card.isDisabled) {
-            setIsHovered(false);
-        } else if (isOnHoverCardSacrificing) {
+        setIsHovered(false);
+        if (isOnHoverCardSacrificing) {
             setIsActiveSacrificing(false);
         }
     }
 
     const handleClick = async () => {
         const cost = await CardService.qtyCost(card.id);
-        console.log(cost.data)
+        // console.log(cost.data)
+        console.log(boardRef.current.offsetLeft)
+        console.log(boardRef.current.offsetTop)
         if (!(isClicked || isUp)) {
             setIsClicked(true);
             setTimeout(() => {

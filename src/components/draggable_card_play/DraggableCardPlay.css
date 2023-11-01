@@ -1,7 +1,7 @@
 .draggable_card_play_container {
     width: calc(2rem + 3vw);
     height: auto;
-    position: relative;
+    position: absolute;
     transition: transform 0.3s;
 }
 
@@ -23,13 +23,10 @@
 .draggable_card_play_container_clicked {
     position: absolute;
     transition: transform 0.3s;
-    transform: translateX(-200%);
 }
 
 .draggable_card_play_container_up {
     transition: transform 0.3s;
-    transform: translate(-200%, -100%);
-    /* transform: translateX(-50vw); */
 }
 
 .draggable_card_play_on_click_card_mouse {
