@@ -2,7 +2,7 @@
 import './Play.css';
 
 // react
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Fragment } from 'react';
 
 // components
 import { DraggableCardPlay } from '../../components/draggable_card_play/DraggableCardPlay';
@@ -221,9 +221,9 @@ const Play = () => {
                     <div className='play_footer'>
                         <div className='play_player_cards'>
                             {cardsFromBelow().map((card, index) => (
-                                <div className="play_card" key={index}>
+                                <Fragment key={index}>
                                     {card}
-                                </div>
+                                </Fragment>
                             ))}
                         </div>
                         <div className='play_decks'>

@@ -1,7 +1,7 @@
 .draggable_card_play_container {
     width: calc(2rem + 3vw);
     height: auto;
-    position: absolute;
+    position: relative;
     transition: transform 0.3s;
 }
 
@@ -19,15 +19,6 @@
 }
 
 .draggable_card_play_container_active_sacrificing {}
-
-.draggable_card_play_container_clicked {
-    position: absolute;
-    transition: transform 0.3s;
-}
-
-.draggable_card_play_container_up {
-    transition: transform 0.3s;
-}
 
 .draggable_card_play_on_click_card_mouse {
     cursor: url('../../assets/images/cursor/cursor_icons_3.png'), auto !important;
