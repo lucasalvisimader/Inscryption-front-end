@@ -12,13 +12,15 @@ import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { CardService } from '../../service/CardService';
 
-export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef }) {
+export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef, clickedCard, setClickedCard }) {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id, disabled: card.isDisabled });
     const [isHovered, setIsHovered] = useState(false);
     const [isActiveSacrificing, setIsActiveSacrificing] = useState(false);
     const [isClicked, setIsClicked] = useState({ key: '', is: false });
     const [offsetLeft, setOffSetLeft] = useState(0);
     const [offsetTop, setOffSetTop] = useState(0);
+
+    console.log(clickedCard)
 
     const length = card.lengthCard;
     const style = {
@@ -44,15 +46,15 @@ export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef
 
     const handleClick = async () => {
         const cost = await CardService.qtyCost(card.id);
-        // console.log(cost.data)
+        console.log(cost.data)
         const cardContainer = document.getElementById(`draggable_card_play_container_${id}`);
         const bottomAnimationCard = offsetTop / 3;
         const leftAnimationCard = offsetLeft;
 
-        if (!isClicked.is || (isClicked.is && (isClicked.key === id))) {
-
+        if ((!isClicked.is && !clickedCard) || ((isClicked.is && isClicked.key === id))) {
             if (!(isClicked.is)) {
                 setIsClicked({ key: id, is: true });
+                setClickedCard(true);
                 animateCardContainer(`-${leftAnimationCard}px`, 500, true);
                 setTimeout(async () => {
                     cardContainer.style.right = `${offsetLeft}px`;
@@ -64,6 +66,7 @@ export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef
                 }, 500);
             } else {
                 setIsClicked({ key: '', is: false });
+                setClickedCard(false);
                 animateCardContainer(`${bottomAnimationCard}px`, 500, false);
                 setTimeout(async () => {
                     cardContainer.style.bottom = 0;

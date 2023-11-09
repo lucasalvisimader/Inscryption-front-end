@@ -27,7 +27,6 @@ import { DndContext } from '@dnd-kit/core';
 const Play = () => {
     const [cards, setCards] = useState([]);
     const [playerCards, setPlayerCards] = useState([]);
-    const [isOnHoverCardSacrificing, setIsOnHoverCardSacrificing] = useState(false);
     const [deckCards, setDeckCards] = useState([]);
     const [deckSquirrelCards, setDeckSquirrelCards] = useState([]);
     const [droppableAreas, setDroppableAreas] = useState([
@@ -44,6 +43,8 @@ const Play = () => {
         { key: 11, cards: [] },
         { key: 12, cards: [] }
     ]);
+    const [isOnHoverCardSacrificing, setIsOnHoverCardSacrificing] = useState(false);
+    const [clickedCard, setClickedCard] = useState(false);
 
     const boardRef = useRef();
 
@@ -127,6 +128,8 @@ const Play = () => {
                     id={card.key}
                     card={card}
                     boardRef={boardRef}
+                    clickedCard={clickedCard}
+                    setClickedCard={setClickedCard}
                 />
             );
         });
@@ -221,7 +224,9 @@ const Play = () => {
                     <div className='play_footer'>
                         <div className='play_player_cards'>
                             {cardsFromBelow().map((card, index) => (
-                                <Fragment key={index}>
+                                <Fragment key={index} 
+                                // onClick={() => setClickedCard(true)}
+                                >
                                     {card}
                                 </Fragment>
                             ))}
