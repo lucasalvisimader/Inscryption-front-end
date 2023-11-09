@@ -16,7 +16,6 @@ export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef
     const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id, disabled: card.isDisabled });
     const [isHovered, setIsHovered] = useState(false);
     const [isActiveSacrificing, setIsActiveSacrificing] = useState(false);
-    const [isClicked, setIsClicked] = useState({ key: '', is: false });
     const [offsetLeft, setOffSetLeft] = useState(0);
     const [offsetTop, setOffSetTop] = useState(0);
 
@@ -51,10 +50,9 @@ export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef
         const bottomAnimationCard = offsetTop / 3;
         const leftAnimationCard = offsetLeft;
 
-        if ((!isClicked.is && !clickedCard) || ((isClicked.is && isClicked.key === id))) {
-            if (!(isClicked.is)) {
-                setIsClicked({ key: id, is: true });
-                setClickedCard(true);
+        if ((!clickedCard.is) || ((clickedCard.is && clickedCard.key === id))) {
+            if (!(clickedCard.is)) {
+                setClickedCard({ key: id, is: true });
                 animateCardContainer(`-${leftAnimationCard}px`, 500, true);
                 setTimeout(async () => {
                     cardContainer.style.right = `${offsetLeft}px`;
@@ -65,8 +63,7 @@ export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef
                     }, 250);
                 }, 500);
             } else {
-                setIsClicked({ key: '', is: false });
-                setClickedCard(false);
+                setClickedCard({ key: '', is: false });
                 animateCardContainer(`${bottomAnimationCard}px`, 500, false);
                 setTimeout(async () => {
                     cardContainer.style.bottom = 0;
@@ -101,7 +98,7 @@ export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef
         <div ref={setNodeRef} style={style} {...listeners} {...attributes}
             className={`draggable_card_play_container${(isHovered) ? '_active' : ''} 
             ${(isActiveSacrificing) ? 'draggable_card_play_container_active_sacrificing' : ''}
-            ${(isClicked) ? 'draggable_card_play_container_clicked' : ''}`}
+            ${(clickedCard.is) ? 'draggable_card_play_container_clicked' : ''}`}
             id={`draggable_card_play_container_${id}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}

@@ -44,7 +44,7 @@ const Play = () => {
         { key: 12, cards: [] }
     ]);
     const [isOnHoverCardSacrificing, setIsOnHoverCardSacrificing] = useState(false);
-    const [clickedCard, setClickedCard] = useState(false);
+    const [clickedCard, setClickedCard] = useState({ key: '', is: false });
 
     const boardRef = useRef();
 
@@ -224,9 +224,7 @@ const Play = () => {
                     <div className='play_footer'>
                         <div className='play_player_cards'>
                             {cardsFromBelow().map((card, index) => (
-                                <Fragment key={index} 
-                                // onClick={() => setClickedCard(true)}
-                                >
+                                <Fragment key={index}>
                                     {card}
                                 </Fragment>
                             ))}
