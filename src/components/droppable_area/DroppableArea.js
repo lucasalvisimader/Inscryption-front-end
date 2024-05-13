@@ -20,9 +20,7 @@ export function DroppableArea(props) {
     const inputCardRef = useRef();
     const [toggleBackground, setToggleBackground] = useState(false);
 
-    const isOptionsCard = () => {
-        return (props?.children && (props?.children[0].props.id === "menu_options_draggable") ? true : false);
-    }
+    const [isOptionsCard, setIsOptionsCard] = useState(false);
 
     useEffect(() => {
         let interval;
@@ -48,18 +46,22 @@ export function DroppableArea(props) {
             inputCardRef.current.style.backgroundSize = "contain";
             inputCardRef.current.style.backgroundRepeat = "no-repeat";
         }
-    }, [toggleBackground, props.startedDrag])
+    }, [toggleBackground, props.startedDrag]);
+
+    useEffect(() => {
+        setIsOptionsCard(props?.children && (props?.children[0].key === "menu_options_draggable") ? true : false);
+    }, [props]);
 
     return (<>
         <div className="droppable_menu_body_container" ref={setNodeRef}>
             <div className="droppable_menu_body">
-                <div className={`${isOptionsCard() ? "droppable_menu_input_card_with_top_card" : ""}`}
+                <div className={`${isOptionsCard ? "droppable_menu_input_card_with_top_card" : ""}`}
                     id="droppable_menu_input_card"
                     ref={inputCardRef}>
                     {props.children}
                 </div>
             </div>
         </div>
-        <ModalOptionsCard show={isOptionsCard()} />
+        <ModalOptionsCard show={isOptionsCard} />
     </>);
 }

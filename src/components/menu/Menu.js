@@ -68,24 +68,28 @@ const Menu = () => {
         }
     }
 
+    const generateProps = (card, name, isOnTop) => {
+        return {
+            id: card.id,
+            key: name,
+            text: card.text,
+            type: card.type,
+            textSelected: textSelected,
+            setTextSelected: setTextSelected,
+            onClick: () => setParent(null),
+            clickedCard: clickedCard,
+            isDisabled: card.isDisabled,
+            isOnTop: isOnTop,
+            setIsGlitchy: setIsGlitchy,
+            setIsFadingOut: setIsFadingOut
+        }
+    }
+
     const generateCard = (cardKey = [], isOnTop) => {
         return cardKey.map((name) => {
-            const card = cardData[name];
+            const props = generateProps(cardData[name], name, isOnTop);
             return (
-                <DraggableCard className="menu_cards"
-                    id={card.id}
-                    key={name}
-                    text={card.text}
-                    type={card.type}
-                    textSelected={textSelected}
-                    setTextSelected={setTextSelected}
-                    onClick={() => setParent(null)}
-                    isDisabled={card.isDisabled}
-                    isOnTop={isOnTop}
-                    setIsGlitchy={setIsGlitchy}
-                    setIsFadingOut={setIsFadingOut}
-                    clickedCard={clickedCard}
-                />
+                <DraggableCard key={props.id} className="menu_cards" props={props} />
             );
         })
     }
@@ -109,7 +113,6 @@ const Menu = () => {
         if (parent) {
             const cardKey = parent.replace("menu_", "").replace("_draggable", "");
             const cardOnTop = generateCard([cardKey], true);
-
             return cardOnTop;
         }
         return null;

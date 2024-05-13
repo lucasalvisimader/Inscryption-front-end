@@ -72,21 +72,11 @@ const Title = ({setIsInTitleScreen, audioRef}) => {
 
     return (<>
         <div className='main_title_container'>
-            <img className={`main_title_image_spade_left`}
-                src={titleSpade}
-                alt={json.title_spade}
-                ref={spadeLeftRef} />
-            <img className='main_title_image'
-                src={title}
-                alt={json.title}
-                ref={titleRef} />
-            <img className={`main_title_image_spade_right`}
-                src={titleSpade}
-                alt={json.title_spade}
-                ref={spadeRightRef} />
+            <img className={`main_title_image_spade_left`} src={titleSpade} alt={json.title_spade} ref={spadeLeftRef} />
+            <img className='main_title_image' src={title} alt={json.title} ref={titleRef} />
+            <img className={`main_title_image_spade_right`} src={titleSpade} alt={json.title_spade} ref={spadeRightRef} />
         </div>
-        <p className={`main_press_to_start_text main_press_to_start_text_${animationSpeed}`}
-            ref={subtitleRef}>
+        <p className={`main_press_to_start_text main_press_to_start_text_${animationSpeed}`} ref={subtitleRef}>
             {json.press_to_start}
         </p>
     </>)

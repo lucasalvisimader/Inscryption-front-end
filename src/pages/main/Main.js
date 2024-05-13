@@ -39,7 +39,7 @@ const Main = () => {
     return (<>
         <div className={`main_container ${!isInTitleScreen ? 'main_blue_background' : ''}`} tabIndex={0} ref={containerRef}>
             <audio src={titleTheme} ref={audioRef} autoPlay loop />
-            {(isInTitleScreen && (<Title setIsInTitleScreen={setIsInTitleScreen} audioRef={audioRef}/>)) || (<Menu />)}
+            {(isInTitleScreen ? (<Title setIsInTitleScreen={setIsInTitleScreen} audioRef={audioRef} />) : (<Menu />))}
         </div>
     </>);
 }
