@@ -35,63 +35,48 @@ const ModalOptionsCard = ({ show }) => {
 
     const volumeOptions = () => {
         return [...Array(6)].map((_, i) => (
-            <img className="modal_options_card_volume_icon"
-                key={i}
-                src={volumeChosen > i ? volumeOptionEnable : volumeOptionDisable}
-                alt={`Volume Option ${i}`}
-            />
+            <img className="modal_options_card_volume_icon" key={i} src={volumeChosen > i ? volumeOptionEnable : volumeOptionDisable} alt={`Volume Option ${i}`} />
         ));
     }
 
-    const handleChangeLanguage = (isNext) => {
+    const handleChangeLanguage = (e, isNext) => {
         let newSelectedOption;
-        if (isNext) {
-            newSelectedOption = selectedOption < 2 ? selectedOption + 1 : 0;
-        } else {
-            newSelectedOption = selectedOption > 0 ? selectedOption - 1 : 2;
-        }
+        newSelectedOption = isNext ? (selectedOption < 2 ? selectedOption + 1 : 0) : (selectedOption > 0 ? selectedOption - 1 : 2);
         setSelectedOption(newSelectedOption);
         setLanguageChosen(languageOptions[newSelectedOption]);
+        e.target.src = arrowDisable;
+        setTimeout(() => {
+            e.target.src = arrowEnable;
+        }, 100);
     }
 
-    const handleChangeMainVolume = (isNext) => {
-        if (isNext) {
-            if (volume + (100 / 6) < 100) {
-                setVolume(volume + (100 / 6));
-            } else {
-                setVolume(100);
-            }
-            setVolumeChosen(volumeChosen < 6 ? volumeChosen + 1 : 6);
+    const handleChangeMainVolume = (e, isNext) => {
+        const extremeVolume = isNext ? 100 : 0;
+        const sumOrSubtraction = isNext ? (volume + (100 / 6)) : (volume - (100 / 6));
+        if ((sumOrSubtraction < extremeVolume && isNext) || (sumOrSubtraction > extremeVolume && !isNext)) {
+            setVolume(sumOrSubtraction);
         } else {
-            if (volume - (100 / 6) > 0) {
-                setVolume(volume - (100 / 6));
-            } else {
-                setVolume(0);
-            }
-            setVolumeChosen(volumeChosen > 0 ? volumeChosen - 1 : 0);
+            setVolume(extremeVolume);
         }
+        isNext ? setVolumeChosen(volumeChosen < 6 ? volumeChosen + 1 : 6) : setVolumeChosen(volumeChosen > 0 ? volumeChosen - 1 : 0);
+
+        e.target.src = (e.target.alt === json.minus_button) ? minusDisable : plusDisable;
+        setTimeout(() => {
+            e.target.src = (e.target.alt === json.minus_button) ? minusEnable : plusEnable;
+        }, 100);
     }
 
     return (<>
-        <Modal className="modal_options_card_container"
-            contentClassName="modal_options_container_dialog"
-            id="modal_options_card_container"
-            size="lg"
-            show={show}
-            aria-labelledby="contained-modal-title-vcenter"
-            backdrop={false}
-            centered>
+        <Modal className="modal_options_card_container" contentClassName="modal_options_container_dialog" id="modal_options_card_container" size="lg" show={show} aria-labelledby="contained-modal-title-vcenter" backdrop={false} centered>
             <Modal.Body>
                 <div className="modal_options_card_language_container">
                     <img className="modal_options_card_language_text" src={languageText} alt={json.language_text} />
                     <div className="modal_options_card_language_container_options">
-                        <img className="modal_options_card_button" src={arrowEnable} alt={json.minus_button}
-                            onClick={() => handleChangeLanguage(false)} />
+                        <img className="modal_options_card_button" src={arrowEnable} alt={json.minus_button} onClick={(e) => handleChangeLanguage(e, false)} />
                         <span className="modal_options_card_language_chosen">
                             {languageChosen}
                         </span>
-                        <img className="modal_options_card_button_inverted" src={arrowEnable} alt={json.plus_button}
-                            onClick={() => handleChangeLanguage(true)} />
+                        <img className="modal_options_card_button_inverted" src={arrowEnable} alt={json.plus_button} onClick={(e) => handleChangeLanguage(e, true)} />
                     </div>
                 </div>
                 <div className="modal_options_card_main_volume_container">
@@ -99,13 +84,11 @@ const ModalOptionsCard = ({ show }) => {
                         {json.main_volume}
                     </span>
                     <div className="modal_options_card_language_container_options">
-                        <img className="modal_options_card_button" src={minusEnable} alt={json.minus_button}
-                            onClick={() => handleChangeMainVolume(false)} />
+                        <img className="modal_options_card_button" src={minusEnable} alt={json.minus_button} onClick={(e) => handleChangeMainVolume(e, false)} />
                         <div className="modal_options_card_volume_options">
                             {volumeOptions()}
                         </div>
-                        <img className="modal_options_card_button" src={plusEnable} alt={json.plus_button}
-                            onClick={() => handleChangeMainVolume(true)} />
+                        <img className="modal_options_card_button" src={plusEnable} alt={json.plus_button} onClick={(e) => handleChangeMainVolume(e, true)} />
                     </div>
                 </div>
             </Modal.Body>
