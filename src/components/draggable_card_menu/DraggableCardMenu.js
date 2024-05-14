@@ -1,5 +1,5 @@
 // styles
-import './DraggableCard.css'
+import './DraggableCardMenu.css'
 
 // react
 import React, { useEffect } from 'react';
@@ -19,7 +19,7 @@ import menuChosenCard from '../../assets/sounds/menu_chosen_card.wav';
 import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
-export const DraggableCard = ({props}) => {
+export const DraggableCardMenu = ({props}) => {
     const id = props.id;
     const text = props.text;
     const type = props.type;

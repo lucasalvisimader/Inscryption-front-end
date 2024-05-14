@@ -15,8 +15,8 @@ import backgroundGlitch from '../../assets/images/screen/background_new_game.gif
 import en from '../../assets/locales/en.json';
 
 // external
-import { DraggableCard } from '../draggable_card/DraggableCard';
-import { DroppableArea } from "../droppable_area/DroppableArea";
+import { DraggableCardMenu } from '../draggable_card_menu/DraggableCardMenu';
+import { DroppableAreaMenu } from "../droppable_area_menu/DroppableAreaMenu";
 import { DndContext } from '@dnd-kit/core';
 
 const Menu = () => {
@@ -92,7 +92,7 @@ const Menu = () => {
     const generateCard = (cardKey = [], isOnTop) => {
         return cardKey.map((name) => {
             const props = generateDraggableCardProps(cardData[name], name, isOnTop);
-            return (<DraggableCard key={props.id} className="menu_cards" props={props}/>);
+            return (<DraggableCardMenu key={props.id} className="menu_cards" props={props}/>);
         })
     }
 
@@ -155,9 +155,9 @@ const Menu = () => {
                 </div>
                 <div className="menu_body_container">
                     <div className="menu_body">
-                        <DroppableArea id="menu_droppable" startedDrag={startedDrag} setStartedDrag={setStartedDrag}>
+                        <DroppableAreaMenu id="menu_droppable" startedDrag={startedDrag} setStartedDrag={setStartedDrag}>
                             {cardCenter()}
-                        </DroppableArea>
+                        </DroppableAreaMenu>
                     </div>
                 </div>
                 <div className="menu_footer">

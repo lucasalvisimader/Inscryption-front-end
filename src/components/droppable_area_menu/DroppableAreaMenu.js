@@ -1,5 +1,5 @@
 // styles
-import './DroppableArea.css'
+import './DroppableAreaMenu.css'
 
 // react
 import React, { useEffect, useRef, useState } from 'react';
@@ -15,7 +15,7 @@ import slot from '../../assets/images/menu/cards/slot.png';
 // external
 import { useDroppable } from '@dnd-kit/core';
 
-export function DroppableArea(props) {
+export const DroppableAreaMenu = (props) => {
     const { setNodeRef } = useDroppable({ id: props.id });
     const inputCardRef = useRef();
     const [toggleBackground, setToggleBackground] = useState(false);
