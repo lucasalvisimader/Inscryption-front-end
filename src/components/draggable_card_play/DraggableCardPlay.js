@@ -2,7 +2,7 @@
 import './DraggableCardPlay.css';
 
 // react
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // json
 import en from '../../assets/locales/en.json';
@@ -25,10 +25,12 @@ export const DraggableCardPlay = (props) => {
     const style = {background: `url('/images/imageType/${card.imageType}.png')`, marginLeft: `calc(${length} * -0.16rem - 0.4vw)`, transform: CSS.Translate.toString(transform)}
     const json = en.play;
 
+    // This function handles the event when a user hovers a card.
     const handleMouseEnter = () => {
         setIsHovered(true);
     }
-
+    
+    // This function handles the event when a user don't hover a card anymore.
     const handleMouseLeave = () => {
         setIsHovered(false);
     }

@@ -19,9 +19,9 @@ export function DroppableArea(props) {
     const { setNodeRef } = useDroppable({ id: props.id });
     const inputCardRef = useRef();
     const [toggleBackground, setToggleBackground] = useState(false);
-
     const [isOptionsCard, setIsOptionsCard] = useState(false);
 
+    // This use effect is responsible for toggling the background image attribute from the droppable area each 750ms.
     useEffect(() => {
         let interval;
         if (props.startedDrag) {
@@ -34,6 +34,7 @@ export function DroppableArea(props) {
         }
     }, [props.startedDrag]);
 
+    // This use effect is used to change the background image.
     useEffect(() => {
         if (inputCardRef.current) {
             if (props.startedDrag && !toggleBackground) {
@@ -48,6 +49,7 @@ export function DroppableArea(props) {
         }
     }, [toggleBackground, props.startedDrag]);
 
+    // This use effect is used to make the options modal show or disappear.
     useEffect(() => {
         setIsOptionsCard(props?.children && (props?.children[0].key === "menu_options_draggable") ? true : false);
     }, [props]);
@@ -55,9 +57,7 @@ export function DroppableArea(props) {
     return (<>
         <div className="droppable_menu_body_container" ref={setNodeRef}>
             <div className="droppable_menu_body">
-                <div className={`${isOptionsCard ? "droppable_menu_input_card_with_top_card" : ""}`}
-                    id="droppable_menu_input_card"
-                    ref={inputCardRef}>
+                <div className={`${isOptionsCard ? "droppable_menu_input_card_with_top_card" : ""}`} id="droppable_menu_input_card" ref={inputCardRef}>
                     {props.children}
                 </div>
             </div>
