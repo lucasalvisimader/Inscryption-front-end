@@ -1,0 +1,45 @@
+.main_title_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main_title_image_spade_left_animation,
+#main_title_image_spade_right_animation,
+#main_title_image_animation,
+#main_press_to_start_text_animation {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.main_title_image {
+    height: auto;
+    width: 60%;
+}
+
+#main_title_image_animation {
+    opacity: 0;
+}
+
+.main_title_image_spade_left {
+    margin-right: 3rem;
+    margin-bottom: 3%;
+    height: 15%;
+    width: auto;
+}
+
+#main_title_image_spade_left_animation {
+    transform: translateX(-100%);
+}
+
+.main_title_image_spade_right {
+    margin-left: 3rem;
+    margin-bottom: 3%;
+    height: 15%;
+    width: auto;
+    transform: rotateY(180deg);
+}
+
+#main_title_image_spade_right_animation {
+    transform: rotateY(180deg) translateX(-100%);
+}

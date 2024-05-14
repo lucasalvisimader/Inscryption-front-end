@@ -19,7 +19,18 @@ import menuChosenCard from '../../assets/sounds/menu_chosen_card.wav';
 import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
-export function DraggableCard({ id, text, type, textSelected, setTextSelected, isDisabled, isOnTop, setIsGlitchy, setIsFadingOut, clickedCard }) {
+export const DraggableCard = ({props}) => {
+    const id = props.id;
+    const text = props.text;
+    const type = props.type;
+    const textSelected = props.textSelected;
+    const setTextSelected = props.setTextSelected;
+    const isDisabled = props.isDisabled;
+    const isOnTop = props.isOnTop;
+    const setIsGlitchy = props.setIsGlitchy;
+    const setIsFadingOut = props.setIsFadingOut;
+    const clickedCard = props.clickedCard;
+
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
         id: id,
         disabled: isDisabled
