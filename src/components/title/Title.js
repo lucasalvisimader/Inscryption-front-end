@@ -22,15 +22,14 @@ const Title = ({setIsInTitleScreen, audioRef}) => {
     const navigate = useNavigate();
     const { volume } = useAudio();
     const json = en.main;
-
     const isFirstAction = useRef(true);
     const spadeLeftRef = useRef();
     const titleRef = useRef();
     const spadeRightRef = useRef();
     const subtitleRef = useRef();
-
     const [animationSpeed, setAnimationSpeed] = useState('');
 
+    // This function play the 'rattle' sound when pressed any button.
     const playClickSound = () => {
         if (isFirstAction.current) {
             const audio = new Audio(titleRattle);
@@ -40,10 +39,7 @@ const Title = ({setIsInTitleScreen, audioRef}) => {
         }
     }
 
-    const enterMenu = () => {
-        setIsInTitleScreen(false);
-    }
-
+    // This use effect was made to handle when the user presses a key, calling a click sound function and doing a animation with the title.
     useEffect(() => {
         const handleUserAction = () => {
             audioRef.current.play();
@@ -57,7 +53,7 @@ const Title = ({setIsInTitleScreen, audioRef}) => {
                     subtitleRef.current.id = "main_press_to_start_text_animation"
                 }
                 setTimeout(() => {
-                    enterMenu();
+                    setIsInTitleScreen(false);
                 }, 500);
             }, 1500);
         }

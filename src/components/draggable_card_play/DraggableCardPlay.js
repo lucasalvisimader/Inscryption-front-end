@@ -12,33 +12,25 @@ import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { CardService } from '../../service/CardService';
 
-export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef, clickedCard, setClickedCard }) {
+export const DraggableCardPlay = (props) => {
+    const id = props.id;
+    const card = props.card;
+    const boardRef = props.boardRef;
     const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id, disabled: card.isDisabled });
     const [isHovered, setIsHovered] = useState(false);
-    const [isActiveSacrificing, setIsActiveSacrificing] = useState(false);
     const [offsetLeft, setOffSetLeft] = useState(0);
     const [offsetTop, setOffSetTop] = useState(0);
-
+    const [clickedCard, setClickedCard] = useState({key:'', is: false});
     const length = card.lengthCard;
-    const style = {
-        background: `url('/images/imageType/${card.imageType}.png')`,
-        marginLeft: `calc(${length} * -0.16rem - 0.4vw)`,
-        transform: CSS.Translate.toString(transform)
-    }
+    const style = {background: `url('/images/imageType/${card.imageType}.png')`, marginLeft: `calc(${length} * -0.16rem - 0.4vw)`, transform: CSS.Translate.toString(transform)}
     const json = en.play;
 
     const handleMouseEnter = () => {
         setIsHovered(true);
-        if (isOnHoverCardSacrificing) {
-            setIsActiveSacrificing(true);
-        }
     }
 
     const handleMouseLeave = () => {
         setIsHovered(false);
-        if (isOnHoverCardSacrificing) {
-            setIsActiveSacrificing(false);
-        }
     }
 
     const handleClick = async () => {
@@ -92,22 +84,14 @@ export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef
     }, [id, boardRef])
 
     return (
-        <div ref={setNodeRef} style={style} {...listeners} {...attributes}
-            className={`draggable_card_play_container${(isHovered) ? '_active' : ''} 
-            ${(isActiveSacrificing) ? 'draggable_card_play_container_active_sacrificing' : ''}
-            ${(clickedCard.is) ? 'draggable_card_play_container_clicked' : ''}`}
-            id={`draggable_card_play_container_${id}`}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onClick={handleClick}>
+        <div ref={setNodeRef} style={style} {...listeners} {...attributes} className={`draggable_card_play_container${(isHovered) ? '_active' : ''} ${(clickedCard.is) ? 'draggable_card_play_container_clicked' : ''}`}
+            id={`draggable_card_play_container_${id}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}onClick={handleClick}>
             <div className='draggable_card_play_header'>
                 <span className='draggable_card_play_name' style={{ fontSize: `calc(1rem - ${card.name.length / 3}px` }}>
                     {card.name}
                 </span>
             </div>
-            <img className='draggable_card_play_image'
-                src={require(`../../assets/images/card/image_type/${card.imageType.toLowerCase()}.png`)}
-                alt={json.card_image} />
+            <img className='draggable_card_play_image' src={require(`../../assets/images/card/image_type/${card.imageType.toLowerCase()}.png`)} alt={json.card_image} />
             <div className='draggable_card_play_footer'>
                 <span className='draggable_card_play_power'>
                     {card.power}

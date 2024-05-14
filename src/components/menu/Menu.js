@@ -26,14 +26,15 @@ const Menu = () => {
     const [isFadingOut, setIsFadingOut] = useState(false);
     const [clickedCard, setClickedCard] = useState(false);
     const [startedDrag, setStartedDrag] = useState(null);
-
     const json = en.menu;
 
+    // This functions handle the action of the start of the dragging of a card.
     const handleDragStart = () => {
         setClickedCard(true);
         setStartedDrag(true);
     }
-
+    
+    // This functions handle the action of the end of the dragging of a card.
     const handleDragEnd = (result) => {
         setClickedCard(false);
         setStartedDrag(false);
@@ -44,6 +45,7 @@ const Menu = () => {
         }
     }
 
+    // This function gives all the information of the menu cards that are needed to render afterwards.
     const cardData = {
         new_game: {
             id: "menu_new_game_draggable",
@@ -68,7 +70,8 @@ const Menu = () => {
         }
     }
 
-    const generateProps = (card, name, isOnTop) => {
+    // This function constructs the props that will be used to make the draggable cards.
+    const generateDraggableCardProps = (card, name, isOnTop) => {
         return {
             id: card.id,
             key: name,
@@ -85,16 +88,16 @@ const Menu = () => {
         }
     }
 
+    // This function is the one responsible to make all the cards in the menu.
     const generateCard = (cardKey = [], isOnTop) => {
         return cardKey.map((name) => {
-            const props = generateProps(cardData[name], name, isOnTop);
-            return (
-                <DraggableCard key={props.id} className="menu_cards" props={props} />
-            );
+            const props = generateDraggableCardProps(cardData[name], name, isOnTop);
+            return (<DraggableCard key={props.id} className="menu_cards" props={props}/>);
         })
     }
 
-    const cardsFromBelow = () => {
+    // This function is responsible for making the switch to know which card has to be shown in the cards from below.
+    const switchGenerateCardFromBelow = () => {
         switch (parent) {
             case "menu_continue_draggable":
                 return generateCard(["new_game", "options", "quit"]);
@@ -109,7 +112,17 @@ const Menu = () => {
         }
     }
 
-    const cardFromAbove = () => {
+    // This is the function responsible for updating the cards from below.
+    const cardsFromBelow = () => {
+        return switchGenerateCardFromBelow().map((card, index) => (
+            <div className="menu_card" key={index}>
+                {card}
+            </div>
+        ))
+    }
+
+    // This is the function responsible for updating the card chosen.
+    const cardCenter = () => {
         if (parent) {
             const cardKey = parent.replace("menu_", "").replace("_draggable", "");
             const cardOnTop = generateCard([cardKey], true);
@@ -118,6 +131,7 @@ const Menu = () => {
         return null;
     }
 
+    // This is the function that animates the cards entering from the right.
     const animateCards = () => {
         const menuCards = document.querySelectorAll(".menu_card");
         menuCards.forEach((card, index) => {
@@ -128,6 +142,7 @@ const Menu = () => {
         });
     }
 
+    // This function calls the animation cards function to animate the cards every time a card comes back from the center.
     useEffect(() => {
         animateCards();
     }, [parent])
@@ -136,30 +151,20 @@ const Menu = () => {
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} >
             <div className="menu_container">
                 <div className="menu_header">
-                    {textSelected && (
-                        <img className="menu_card_text_selected" src={textSelected} alt={json.text_selected} />
-                    )}
+                    {textSelected && <img className="menu_card_text_selected" src={textSelected} alt={json.text_selected}/>}
                 </div>
                 <div className="menu_body_container">
                     <div className="menu_body">
                         <DroppableArea id="menu_droppable" startedDrag={startedDrag} setStartedDrag={setStartedDrag}>
-                            {cardFromAbove()}
+                            {cardCenter()}
                         </DroppableArea>
                     </div>
                 </div>
                 <div className="menu_footer">
-                    {cardsFromBelow().map((card, index) => (
-                        <div className="menu_card" key={index}>
-                            {card}
-                        </div>
-                    ))}
+                    {cardsFromBelow()}
                 </div>
-                {isGlitchy && (
-                    <img className="menu_card_new_game_image_glitch" src={backgroundGlitch} alt={json.background_glitch} />
-                )}
-                {isFadingOut && (
-                    <div className="menu_card_fade_out" />
-                )}
+                {isGlitchy && <img className="menu_card_new_game_image_glitch" src={backgroundGlitch} alt={json.background_glitch}/>}
+                {isFadingOut && <div className="menu_card_fade_out"/>}
             </div>
         </DndContext>
     </>);

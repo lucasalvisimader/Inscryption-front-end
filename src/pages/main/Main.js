@@ -20,13 +20,14 @@ const Main = () => {
     const containerRef = useRef();
     const audioRef = useRef();
     const { volume } = useAudio()
-
     const [isInTitleScreen, setIsInTitleScreen] = useState(true);
 
+    // This use effect was made to make possible play the songs and sounds of the game.
     useEffect(() => {
         containerRef.current.focus();
     }, [navigate])
 
+    // This use effect was made to set the audio volume to 100% by default.
     useEffect(() => {
         const setAudioVolume = () => {
             if (audioRef.current) {
