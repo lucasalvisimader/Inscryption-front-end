@@ -19,8 +19,6 @@ export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef
     const [offsetLeft, setOffSetLeft] = useState(0);
     const [offsetTop, setOffSetTop] = useState(0);
 
-    console.log(clickedCard)
-
     const length = card.lengthCard;
     const style = {
         background: `url('/images/imageType/${card.imageType}.png')`,
@@ -45,7 +43,6 @@ export function DraggableCardPlay({ id, card, isOnHoverCardSacrificing, boardRef
 
     const handleClick = async () => {
         const cost = await CardService.qtyCost(card.id);
-        console.log(cost.data)
         const cardContainer = document.getElementById(`draggable_card_play_container_${id}`);
         const bottomAnimationCard = offsetTop / 3;
         const leftAnimationCard = offsetLeft;

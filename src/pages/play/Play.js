@@ -76,40 +76,23 @@ const Play = () => {
         }
     }
 
-    const handleClickPlayerDeck = () => {
+    // This function is used to handle onClick actions on both deck cards
+    const handleClickDecks = (isSquirrelDeck) => {
         const updatedPlayerCards = [...playerCards];
-        const updatedDeckCards = [...deckCards];
+        const updatedDeckCards = isSquirrelDeck ? [...deckSquirrelCards] : [...deckCards];
 
         if (updatedDeckCards.length > 0) {
             updatedPlayerCards.push(updatedDeckCards.pop());
         }
-
         setPlayerCards(updatedPlayerCards);
-        setDeckCards(updatedDeckCards);
-    }
-
-    const handleClickSquirrelPlayerDeck = () => {
-        const updatedPlayerCards = [...playerCards];
-        const updatedDeckSquirrelCards = [...deckSquirrelCards];
-
-        if (updatedDeckSquirrelCards.length > 0) {
-            updatedPlayerCards.push(updatedDeckSquirrelCards.pop());
-        }
-
-        setPlayerCards(updatedPlayerCards);
-        setDeckSquirrelCards(updatedDeckSquirrelCards);
+        isSquirrelDeck ? setDeckSquirrelCards(updatedDeckCards) : setDeckCards(updatedDeckCards);
     }
 
     const generateCard = (cardKey) => {
         const card = searchCard(cardKey);
         if (card) {
             return (
-                <DraggableCardPlay className="play_cards"
-                    id={cardKey}
-                    key={cardKey}
-                    card={card}
-                    boardRef={boardRef}
-                />
+                <DraggableCardPlay className="play_cards" id={cardKey} key={cardKey} card={card} boardRef={boardRef}/>
             );
         }
     }
@@ -123,14 +106,7 @@ const Play = () => {
             card.lengthCard = playerCards.length;
             card.isDisabled = true;
             return (
-                <DraggableCardPlay className="play_cards"
-                    key={card.key}
-                    id={card.key}
-                    card={card}
-                    boardRef={boardRef}
-                    clickedCard={clickedCard}
-                    setClickedCard={setClickedCard}
-                />
+                <DraggableCardPlay className="play_cards" key={card.key} id={card.key} card={card} boardRef={boardRef} clickedCard={clickedCard} setClickedCard={setClickedCard}/>
             );
         });
     }
@@ -140,21 +116,14 @@ const Play = () => {
             const cards = droppableArea.cards.map((card) => {
                 card.props.card.isDisabled = true;
                 return (
-                    <DraggableCardPlay className="play_cards"
-                        id={card.key}
-                        key={card.key}
-                        card={card.props.card}
-                        isOnHoverCardSacrificing={isOnHoverCardSacrificing}
+                    <DraggableCardPlay className="play_cards" id={card.key} key={card.key} card={card.props.card} isOnHoverCardSacrificing={isOnHoverCardSacrificing}
                     />
                 );
             });
 
             if (rowLayer === 8) {
                 return (
-                    <DroppableAreaPlay key={droppableArea.key}
-                        id={`play_${droppableArea.key}_droppable`}
-                        isInverted={rowLayer === 4 ? true : false}
-                        enemyUpComing={rowLayer === 0 ? true : false}>
+                    <DroppableAreaPlay key={droppableArea.key} id={`play_${droppableArea.key}_droppable`} isInverted={rowLayer === 4 ? true : false} enemyUpComing={rowLayer === 0 ? true : false}>
                         {cards}
                     </DroppableAreaPlay>
                 );
@@ -175,9 +144,34 @@ const Play = () => {
         });
     }
 
+    // Render the deck images and actions, verifying if it is the squirrel deck or not
+    const renderDeck = (isSquirrelDeck) => {
+        const textSquirrel = isSquirrelDeck ? '_squirrel' : '';
+        return (
+            <div className={`play_deck${textSquirrel}_cards`} onClick={() => handleClickDecks(isSquirrelDeck)}>
+                <img className={`play_deck${textSquirrel}_cards_image`} src={isSquirrelDeck ? backSquirrelDeck : backDeck} alt={isSquirrelDeck ? json.deck_image_squirrel : json.deck_image} />
+            </div>
+        );
+    }
+
+    // This is an use effect to set the player cards based on which cards they have in the database
+    // useEffect(() => {
+    //     const setCardsFunction = async () => {
+    //         const cardsGross = await CardService.listFromUser()
+    //         setCards(cardsGross);
+    //     }
+    //     setCardsFunction();
+    // }, []);
+
     useEffect(() => {
         const setCardsFunction = async () => {
-            const cardsGross = await CardService.listFromUser()
+            const cardsGross = {
+                data: [
+                        [{id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 5, name: 'WOLF', power: 3, health: 2, sigilsTypes: ['NONE'], imageType: 'WOLF', priceType: -2}, {id: 6, name: 'WOLF CUB', power: 1, health: 1, sigilsTypes: ['FLEDGELING'], imageType: 'WOLFCUB', priceType: -1}],
+                        [{id: 2, name: 'STOAT', power: 1, health: 2, sigilsTypes: ['NONE'], imageType: 'STOAT', priceType: -1}, {id: 3, name: 'STINKBUG', power: 0, health: 2, sigilsTypes: ['STINKY'], imageType: 'STINKBUG', priceType: 2}, {id: 4, name: 'STUNTED WOLF', power: 2, health: 2, sigilsTypes: ['NONE'], imageType: 'STUNTEDWOLF', priceType: -1}],
+                        [{id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}]
+                    ]
+                }
             setCards(cardsGross);
         }
         setCardsFunction();
@@ -208,8 +202,7 @@ const Play = () => {
                         <div className='play_general_actions'>
 
                         </div>
-                        <div className='play_board'
-                            ref={boardRef}>
+                        <div className='play_board' ref={boardRef}>
                             <div className='play_enemy_upcoming_cards_container'>
                                 {renderDroppableArea(0)}
                             </div>
@@ -230,22 +223,8 @@ const Play = () => {
                             ))}
                         </div>
                         <div className='play_decks'>
-                            {deckCards.length > 0 &&
-                                <div className='play_deck_cards'
-                                    onClick={handleClickPlayerDeck} >
-                                    <img className='play_deck_cards_image'
-                                        src={backDeck}
-                                        alt={json.deck_image} />
-                                </div>
-                            }
-                            {deckSquirrelCards.length > 0 &&
-                                <div className='play_deck_squirrel_cards'
-                                    onClick={handleClickSquirrelPlayerDeck} >
-                                    <img className='play_deck_squirrel_cards_image'
-                                        src={backSquirrelDeck}
-                                        alt={json.deck_image_squirrel} />
-                                </div>
-                            }
+                            {deckCards.length > 0 && renderDeck(false)}
+                            {deckSquirrelCards.length > 0 && renderDeck(true)}
                         </div>
                     </div>
                 </div>
