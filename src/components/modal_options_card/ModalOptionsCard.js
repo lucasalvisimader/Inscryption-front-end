@@ -29,19 +29,18 @@ const ModalOptionsCard = ({ show }) => {
     const [selectedOption, setSelectedOption] = useState(0);
     const [languageChosen, setLanguageChosen] = useState(languageOptions[selectedOption]);
     const [volumeChosen, setVolumeChosen] = useState(6);
-
     const { volume, setVolume } = useAudio();
     const json = en.menu;
 
+    // This function returns the images that serve to show the level of volume the game is set in.
     const volumeOptions = () => {
-        return [...Array(6)].map((_, i) => (
-            <img className="modal_options_card_volume_icon" key={i} src={volumeChosen > i ? volumeOptionEnable : volumeOptionDisable} alt={`Volume Option ${i}`} />
-        ));
+        return [...Array(6)].map((_, i) => <img className="modal_options_card_volume_icon" key={i} src={volumeChosen > i ? volumeOptionEnable : volumeOptionDisable} alt={`Volume Option ${i}`}/>);
     }
 
-    const handleChangeLanguage = (e, isNext) => {
+    // This function is responsible by handling with the events when the language is changed.
+    const handleChangeLanguage = (e, isPlus) => {
         let newSelectedOption;
-        newSelectedOption = isNext ? (selectedOption < 2 ? selectedOption + 1 : 0) : (selectedOption > 0 ? selectedOption - 1 : 2);
+        newSelectedOption = isPlus ? (selectedOption < 2 ? selectedOption + 1 : 0) : (selectedOption > 0 ? selectedOption - 1 : 2);
         setSelectedOption(newSelectedOption);
         setLanguageChosen(languageOptions[newSelectedOption]);
         e.target.src = arrowDisable;
@@ -50,16 +49,16 @@ const ModalOptionsCard = ({ show }) => {
         }, 100);
     }
 
-    const handleChangeMainVolume = (e, isNext) => {
-        const extremeVolume = isNext ? 100 : 0;
-        const sumOrSubtraction = isNext ? (volume + (100 / 6)) : (volume - (100 / 6));
-        if ((sumOrSubtraction < extremeVolume && isNext) || (sumOrSubtraction > extremeVolume && !isNext)) {
+    // This function is responsible by handling with the events when the master volume is changed.
+    const handleChangeMainVolume = (e, isPlus) => {
+        const extremeVolume = isPlus ? 100 : 0;
+        const sumOrSubtraction = isPlus ? (volume + (100 / 6)) : (volume - (100 / 6));
+        if ((sumOrSubtraction < extremeVolume && isPlus) || (sumOrSubtraction > extremeVolume && !isPlus)) {
             setVolume(sumOrSubtraction);
         } else {
             setVolume(extremeVolume);
         }
-        isNext ? setVolumeChosen(volumeChosen < 6 ? volumeChosen + 1 : 6) : setVolumeChosen(volumeChosen > 0 ? volumeChosen - 1 : 0);
-
+        isPlus ? setVolumeChosen(volumeChosen < 6 ? volumeChosen + 1 : 6) : setVolumeChosen(volumeChosen > 0 ? volumeChosen - 1 : 0);
         e.target.src = (e.target.alt === json.minus_button) ? minusDisable : plusDisable;
         setTimeout(() => {
             e.target.src = (e.target.alt === json.minus_button) ? minusEnable : plusEnable;

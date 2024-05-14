@@ -68,11 +68,11 @@ const Play = () => {
 
     // This function returns the cards the player have in their hand.
     const cardsFromBelow = () => {
-        return playerCards.map((card, index) => {
+        return playerCards.map((card, i) => {
             card.lengthCard = playerCards.length;
             card.isDisabled = true;
             return (
-                <Fragment key={index}>
+                <Fragment key={i}>
                     <DraggableCardPlay className="play_cards" key={card.key} id={card.key} card={card} boardRef={boardRef}/>
                 </Fragment>
             );
@@ -116,10 +116,10 @@ const Play = () => {
 
     // This function was made to render the board area of the game.
     const renderBoardArea = () => {
-        return [1, 2, 3].map((index) => {
+        return [...Array(3)].map((_, i) => {
             return (
-                <div className={index === 1 ? 'play_enemy_upcoming_cards_container' : index === 2 ? 'play_enemy_cards_container' : 'play_player_cards_container'} key={index}>
-                    {renderRowArea(index)}
+                <div className={i + 1 === 1 ? 'play_enemy_upcoming_cards_container' : i + 1 === 2 ? 'play_enemy_cards_container' : 'play_player_cards_container'} key={i + 1}>
+                    {renderRowArea(i + 1)}
                 </div>
             );
         });

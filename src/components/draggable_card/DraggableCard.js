@@ -30,16 +30,15 @@ export const DraggableCard = ({props}) => {
     const setIsGlitchy = props.setIsGlitchy;
     const setIsFadingOut = props.setIsFadingOut;
     const clickedCard = props.clickedCard;
-
+    const navigate = useNavigate();
+    const { volume } = useAudio();
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
         id: id,
         disabled: isDisabled
     });
     const style = { transform: CSS.Translate.toString(transform) }
-
-    const navigate = useNavigate();
-    const { volume } = useAudio();
-
+    
+    // This function handles with the hover of a card from below, when not on the center. This function makes a sound play when this condition is achieved.
     const handleHoverCard = (text) => {
         setTextSelected(text);
         if (!isOnTop) {
@@ -49,6 +48,7 @@ export const DraggableCard = ({props}) => {
         }
     }
 
+    // This use effect handles with the actions chosen by the user when put a card from below on the center area. It's also responsible by the sound that's played when chosen.
     useEffect(() => {
         if (isOnTop) {
             const audioChosen = new Audio(menuChosenCard);
@@ -69,16 +69,9 @@ export const DraggableCard = ({props}) => {
     }, [])
 
     return (<>
-        <div ref={setNodeRef} style={style} {...listeners} {...attributes}
-            className={`draggable_menu_cards
-            ${(textSelected === text && !clickedCard) && "draggable_menu_on_hover_card_mouse"} 
-            ${(clickedCard) && "draggable_menu_on_click_card_mouse"} 
-            ${isOnTop ? "draggable_menu_top_card" : ""}`}
-            id={`draggable_menu_${type}_card`}
-            onMouseEnter={() => handleHoverCard(text)}>
-            {isDisabled && (
-                <NewGameCard setIsGlitchy={setIsGlitchy} />
-            )}
+        <div className={`draggable_menu_cards ${(textSelected === text && !clickedCard) && "draggable_menu_on_hover_card_mouse"} ${(clickedCard) && "draggable_menu_on_click_card_mouse"} ${isOnTop ? "draggable_menu_top_card" : ""}`}
+            ref={setNodeRef} style={style} {...listeners} {...attributes} id={`draggable_menu_${type}_card`} onMouseEnter={() => handleHoverCard(text)}>
+            {isDisabled && <NewGameCard setIsGlitchy={setIsGlitchy}/>}
         </div>
     </>);
 }

@@ -28,18 +28,16 @@ import en from '../../assets/locales/en.json';
 const NewGameCard = ({ setIsGlitchy }) => {
     const audioRef = useRef();
     const { volume } = useAudio();
-
     const [blurImage, setBlurImage] = useState(null);
     const [intervalId, setIntervalId] = useState(0);
     const setGlitchy = setIsGlitchy;
     const json = en.menu;
 
-    const blurredImages = [
-        imageCardPart1, imageCardPart2, imageCardPart3, imageCardPart4,
-        imageCardPart5, imageCardPart6, imageCardPart7, imageCardPart8,
-        imageCardPart9, imageCardPart10
+    const imageParts = [
+        imageCardPart1, imageCardPart2, imageCardPart3, imageCardPart4, imageCardPart5, imageCardPart6, imageCardPart7, imageCardPart8, imageCardPart9, imageCardPart10
     ];
 
+    // This function handles the click event when the new card is disabled. It plays a glitch sound and puts a glitch background for 250ms.
     const handleClickNewCardDisabled = () => {
         const audioGlitch = new Audio(glitch);
         audioGlitch.volume = volume / 100;
@@ -50,6 +48,7 @@ const NewGameCard = ({ setIsGlitchy }) => {
         }, 250);
     }
 
+    // This function is responsible for setting a interval of 500ms to blur an part of the new game image. It's also responsible for defining which part of the image will be blurred and how much time between each blur will occur.
     const setupInterval = () => {
         if (intervalId) {
             clearInterval(intervalId);
@@ -63,6 +62,7 @@ const NewGameCard = ({ setIsGlitchy }) => {
         setIntervalId(setInterval(intervalFunc, 500));
     }
 
+    // This use effect is responsible for calling the function to blur a part of the new card image and clearing the interval.
     useEffect(() => {
         if (blurImage !== 0) {
             setupInterval();
@@ -76,14 +76,7 @@ const NewGameCard = ({ setIsGlitchy }) => {
 
     return (<>
         <div className='menu_card_new_game_images_container' ref={audioRef} onClick={handleClickNewCardDisabled}>
-            {blurredImages.map((image, index) => (
-                <img className={`menu_card_new_game_image ${blurImage === index + 1 ? 'menu_card_new_game_image_blur' : ''}`}
-                    key={index}
-                    src={image}
-                    alt={json.new_game_card_part}
-                    loading='lazy'
-                />
-            ))}
+            {imageParts.map((image, index) => <img className={`menu_card_new_game_image ${blurImage === (index + 1) ? 'menu_card_new_game_image_blur' : ''}`} key={index} src={image} alt={json.new_game_card_part} loading='lazy'/>)}
         </div>
     </>);
 }
