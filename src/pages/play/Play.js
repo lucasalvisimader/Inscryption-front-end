@@ -25,29 +25,71 @@ import { v4 as uuidV4 } from 'uuid';
 import { DndContext } from '@dnd-kit/core';
 
 const Play = () => {
-    const [cards, setCards] = useState([]);
+    const [cardsData, setCardsData] = useState([]);
     const [playerCards, setPlayerCards] = useState([]);
     const [deckCards, setDeckCards] = useState([]);
     const [deckSquirrelCards, setDeckSquirrelCards] = useState([]);
-    const [droppableAreas, setDroppableAreas] = useState([{key:1, cards: []}, {key:2, cards: []}, {key:3, cards: []}, {key:4, cards: []}, {key:5, cards: []}, {key:6, cards: []}, {key:7, cards: []}, {key:8, cards: []}, {key:9, cards: []}, {key:10, cards: []}, {key:11, cards: []}, {key:12, cards: []}]);
+    const [droppableAreas, setDroppableAreas] = useState(Array.from({ length: 12 }, (_, index) => ({ key: index + 1, cards: [] })));
     const boardRef = useRef();
     const json = en.play;
+
+        // This is an use effect made to set the player cards based on which cards they have in the database.
+    // useEffect(() => {
+    //     const setCardsFunction = async () => {
+    //         const cardsGross = await CardService.listFromUser();
+    //         setCardsData(cardsGross);
+    //     }
+    //     setCardsFunction();
+    // }, []);
+    useEffect(() => {
+        const fetchCards = async () => {
+            const cardsGross = {
+                data: [
+                    [
+                        { id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0 },
+                        { id: 5, name: 'WOLF', power: 3, health: 2, sigilsTypes: ['NONE'], imageType: 'WOLF', priceType: -2 },
+                        { id: 6, name: 'WOLF CUB', power: 1, health: 1, sigilsTypes: ['FLEDGELING'], imageType: 'WOLFCUB', priceType: -1 }
+                    ],
+                    [
+                        { id: 2, name: 'STOAT', power: 1, health: 2, sigilsTypes: ['NONE'], imageType: 'STOAT', priceType: -1 },
+                        { id: 3, name: 'STINKBUG', power: 0, health: 2, sigilsTypes: ['STINKY'], imageType: 'STINKBUG', priceType: 2 },
+                        { id: 4, name: 'STUNTED WOLF', power: 2, health: 2, sigilsTypes: ['NONE'], imageType: 'STUNTEDWOLF', priceType: -1 }
+                    ],
+                    Array(10).fill({ id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0 })
+                ]
+            }
+            setCardsData(cardsGross.data);
+        }
+        fetchCards();
+    }, []);
+
+    // This is an use effect made to used to put an unique key in each one of the cards. It's also used to separate in different variables current player cards and deck cards.
+    useEffect(() => {
+        if (cardsData.length) {
+            const [initialPlayerCards, initialDeckCards, initialSquirrelDeckCards] = cardsData;
+            const assignKeys = (cards) => cards.map(card => ({ ...card, key: uuidV4() }));
+
+            setPlayerCards(assignKeys(initialPlayerCards));
+            setDeckCards(assignKeys(initialDeckCards));
+            setDeckSquirrelCards(assignKeys(initialSquirrelDeckCards));
+        }
+    }, [cardsData]);
 
     const handleDragStart = () => {}
 
     const handleDragEnd = (result) => {
-        if (result.active && result.over) {
-            const droppableAreaKey = parseInt(result.over.id.split("_")[1]);
-            const cardKey = result.active.id;
-            const card = (<DraggableCardPlay className="play_cards" id={cardKey} key={cardKey} card={playerCards.find((card) => card.key === cardKey)} boardRef={boardRef}/>);
-
-            const updatedDroppableAreas = droppableAreas.map((droppableArea) => {
-                if (droppableArea.key === droppableAreaKey && droppableArea.cards.length === 0) {
-                    droppableArea.cards.push(card);
-                    const updatedPlayerCards = playerCards.filter((card) => card.key !== cardKey);
-                    setPlayerCards(updatedPlayerCards);
+        const {active, over} = result;
+        if (active && over) {
+            const droppableAreaKey = parseInt(over.id.split("_")[1]);
+            const cardKey = active.id;
+            
+            const updatedDroppableAreas = droppableAreas.map((area) => {
+                if (area.key === droppableAreaKey && area.cards.length === 0) {
+                    const draggableCard = (<DraggableCardPlay className="play_cards" id={cardKey} key={cardKey} card={playerCards.find((card) => card.key === cardKey)} boardRef={boardRef}/>);
+                    area.cards.push(draggableCard);
+                    setPlayerCards(playerCards.filter((card) => card.key !== cardKey));
                 }
-                return droppableArea;
+                return area;
             });
 
             setDroppableAreas(updatedDroppableAreas);
@@ -61,23 +103,19 @@ const Play = () => {
 
         if (updatedDeckCards.length > 0) {
             updatedPlayerCards.push(updatedDeckCards.pop());
+            setPlayerCards(updatedPlayerCards);
+            isSquirrelDeck ? setDeckSquirrelCards(updatedDeckCards) : setDeckCards(updatedDeckCards);
         }
-        setPlayerCards(updatedPlayerCards);
-        isSquirrelDeck ? setDeckSquirrelCards(updatedDeckCards) : setDeckCards(updatedDeckCards);
     }
 
     // This function returns the cards the player have in their hand.
-    const cardsFromBelow = () => {
-        return playerCards.map((card, i) => {
+    const renderCards = () => {
+        return playerCards.map((card) => {
             card.lengthCard = playerCards.length;
-            card.isDisabled = true;
-            return (
-                <Fragment key={i}>
-                    <DraggableCardPlay className="play_cards" key={card.key} id={card.key} card={card} boardRef={boardRef}/>
-                </Fragment>
-            );
+            card.isDisabled = false;
+            return (<DraggableCardPlay className="play_cards" key={card.key} id={card.key} card={card} boardRef={boardRef}/>);
         });
-    }
+    };
 
     // This function generate the props that are going to the draggable cards
     const generateDraggableCardPlayProps = (card) => {
@@ -90,24 +128,25 @@ const Play = () => {
 
     // This function was made to render each row of the board, being the first 2 rows the enemy's side, which the player can't place a card there, and the last row the player side.
     const renderRowArea = (row) => {
-        return droppableAreas.slice(row, row + 4).map((droppableArea) => {
+        const startOfRow = (row - 1) * 4;
+        return droppableAreas.slice(startOfRow, startOfRow + 4).map((area) => {
             // This arrow function makes all cards inside of the board disabled, that means the card can't be taken out of the board.
-            const cards = droppableArea.cards.map((card) => {
+            const cards = area.cards.map((card) => {
                 card.props.card.isDisabled = true;
                 const props = generateDraggableCardPlayProps(card);
-                return (<DraggableCardPlay className="play_cards" props={props}/>);
+                return (<DraggableCardPlay className="play_cards" {...props} card={card.props.card}/>);
             });
 
             if (row !== 3) {
                 const styleEnemyAreaBoard = {background: `url(${row === 2 ? cardSlot : cardQueue})`, backgroundSize: "contain", backgroundRepeat: "no-repeat"};
                 return (
-                    <div className={`play_enemy${row === 2 ? '_inverted' : ''}_input_card`} style={styleEnemyAreaBoard} key={droppableArea.key} id={`play_${droppableArea.key}_droppable`}>
+                    <div className={`play_enemy${row === 2 ? '_inverted' : ''}_input_card`} style={styleEnemyAreaBoard} key={area.key} id={`play_${area.key}_droppable`}>
                         {cards}
                     </div>
                 );
             }
             return (
-                <DroppableAreaPlay key={droppableArea.key} id={`play_${droppableArea.key}_droppable`}>
+                <DroppableAreaPlay key={area.key} id={`play_${area.key}_droppable`}>
                     {cards}
                 </DroppableAreaPlay>
             );
@@ -135,38 +174,6 @@ const Play = () => {
         );
     }
 
-    // This is an use effect made to set the player cards based on which cards they have in the database.
-    // useEffect(() => {
-    //     const setCardsFunction = async () => {
-    //         const cardsGross = await CardService.listFromUser();
-    //         setCards(cardsGross);
-    //     }
-    //     setCardsFunction();
-    // }, []);
-    useEffect(() => {
-        const setCardsFunction = async () => {
-            const cardsGross = {
-                data: [
-                        [{id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 5, name: 'WOLF', power: 3, health: 2, sigilsTypes: ['NONE'], imageType: 'WOLF', priceType: -2}, {id: 6, name: 'WOLF CUB', power: 1, health: 1, sigilsTypes: ['FLEDGELING'], imageType: 'WOLFCUB', priceType: -1}],
-                        [{id: 2, name: 'STOAT', power: 1, health: 2, sigilsTypes: ['NONE'], imageType: 'STOAT', priceType: -1}, {id: 3, name: 'STINKBUG', power: 0, health: 2, sigilsTypes: ['STINKY'], imageType: 'STINKBUG', priceType: 2}, {id: 4, name: 'STUNTED WOLF', power: 2, health: 2, sigilsTypes: ['NONE'], imageType: 'STUNTEDWOLF', priceType: -1}],
-                        [{id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}, {id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0}]
-                    ]
-                }
-            setCards(cardsGross);
-        }
-        setCardsFunction();
-    }, []);
-
-    // This is an use effect made to used to put an unique key in each one of the cards. It's also used to separate in different variables current player cards and deck cards.
-    useEffect(() => {
-        if (cards.data?.length > 0) {
-            cards.data.forEach(data => data.map((card) => card.key = uuidV4()));
-            setPlayerCards(cards.data[0]);
-            setDeckCards(cards.data[1]);
-            setDeckSquirrelCards(cards.data[2]);
-        }
-    }, [cards]);
-
     return (<>
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
             <div className='play_container'>
@@ -181,7 +188,7 @@ const Play = () => {
                     </div>
                     <div className='play_footer'>
                         <div className='play_player_cards'>
-                            {cardsFromBelow()}
+                            {renderCards()}
                         </div>
                         <div className='play_decks'>
                             {deckCards.length > 0 && renderDeck(false)}
