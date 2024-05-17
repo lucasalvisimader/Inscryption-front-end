@@ -1,18 +1,19 @@
 {
-    "languages": ["English", "Portugues", "Espanol"],
+    "en": "English",
+    "pt": "Portugues",
     "main": {
         "title": "inscryption title",
         "title_spade": "inscryption spade title",
         "press_to_start": "PRESS ANY BUTTON TO START"
     },
+    "text_selected": "text card selected",
+    "language_text": "language text option",
+    "plus_button": "plus button image",
+    "minus_button": "minus button image",
+    "main_volume": "Main volume",
     "menu": {
-        "text_selected": "text card selected",
-        "language_text": "language text option",
-        "plus_button": "plus button image",
-        "minus_button": "minus button image",
         "new_game_card_part": "new game card part",
-        "background_glitch": "background image glitch",
-        "main_volume": "Main volume"
+        "background_glitch": "background image glitch"
     },
     "login_register": {
         "good_luck": "Good Luck Stranger",
