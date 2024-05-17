@@ -14,8 +14,8 @@ import backSquirrelDeck from '../../assets/images/card/others/back_squirrel.png'
 import cardSlot from '../../assets/images/game/slots/card_slot.png';
 import cardQueue from '../../assets/images/game/slots/card_queue_slot.png';
 
-// json
-import en from '../../assets/locales/en.json';
+// translation
+import { useTranslation } from 'react-i18next';
 
 // services
 // import { CardService } from '../../service/CardService';
@@ -31,7 +31,7 @@ const Play = () => {
     const [deckSquirrelCards, setDeckSquirrelCards] = useState([]);
     const [droppableAreas, setDroppableAreas] = useState(Array.from({ length: 12 }, (_, index) => ({ key: index + 1, cards: [] })));
     const boardRef = useRef();
-    const json = en.play;
+    const { t } = useTranslation();
 
         // This is an use effect made to set the player cards based on which cards they have in the database.
     // useEffect(() => {
@@ -169,7 +169,7 @@ const Play = () => {
         const textSquirrel = isSquirrelDeck ? '_squirrel' : '';
         return (
             <div className={`play_deck${textSquirrel}_cards`} onClick={() => handleClickDecks(isSquirrelDeck)}>
-                <img className={`play_deck${textSquirrel}_cards_image`} src={isSquirrelDeck ? backSquirrelDeck : backDeck} alt={isSquirrelDeck ? json.deck_image_squirrel : json.deck_image} />
+                <img className={`play_deck${textSquirrel}_cards_image`} src={isSquirrelDeck ? backSquirrelDeck : backDeck} alt={isSquirrelDeck ? t('deck_image_squirrel') : t('deck_image')} />
             </div>
         );
     }

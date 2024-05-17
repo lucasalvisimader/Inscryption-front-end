@@ -1,38 +1,31 @@
 {
     "en": "English",
     "pt": "Portugues",
-    "main": {
-        "title": "inscryption title",
-        "title_spade": "inscryption spade title",
-        "press_to_start": "PRESS ANY BUTTON TO START"
-    },
+    "title": "inscryption title",
+    "title_spade": "inscryption spade title",
+    "press_to_start": "PRESS ANY BUTTON TO START",
     "text_selected": "text card selected",
     "language_text": "language text option",
     "plus_button": "plus button image",
     "minus_button": "minus button image",
     "main_volume": "Main volume",
-    "menu": {
-        "new_game_card_part": "new game card part",
-        "background_glitch": "background image glitch"
-    },
-    "login_register": {
-        "good_luck": "Good Luck Stranger",
-        "username": "Username",
-        "password": "Password",
-        "show_password": "Show password",
-        "submit": "Submit",
-        "register": "Register",
-        "login": "Login",
-        "confirm_password": "Confirm Password",
-        "show_confirm_password": "Show Confirm Password",
-        "long_time": "It's been a long time since someone got here.",
-        "who_am_i": "You will discover who am I very soon.",
-        "only_thing": "For now, the only thing I have to say is",
-        "be_careful": "be very careful with Him."
-    },
-    "play": {
-        "card_image": "Card image",
-        "deck_image": "Deck image",
-        "deck_image_squirrel": "Deck image squirrel"
-    }
+    "volume_option": "volume option",
+    "new_game_card_part": "new game card part",
+    "background_glitch": "background image glitch",
+    "good_luck": "Good Luck Stranger",
+    "username": "Username",
+    "password": "Password",
+    "show_password": "Show password",
+    "submit": "Submit",
+    "register": "Register",
+    "login": "Login",
+    "confirm_password": "Confirm Password",
+    "show_confirm_password": "Show Confirm Password",
+    "long_time": "It's been a long time since someone got here.",
+    "who_am_i": "You will discover who am I very soon.",
+    "only_thing": "For now, the only thing I have to say is",
+    "be_careful": "be very careful with Him.",
+    "card_image": "Card image",
+    "deck_image": "Deck image",
+    "deck_image_squirrel": "Deck image squirrel"
 }

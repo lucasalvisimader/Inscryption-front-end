@@ -22,8 +22,8 @@ import imageCardPart10 from '../../assets/images/menu/cards/new_game/greyed_10.p
 // sounds
 import glitch from '../../assets/sounds/glitch.wav';
 
-// json
-import en from '../../assets/locales/en.json';
+// translation
+import { useTranslation } from 'react-i18next';
 
 const NewGameCard = ({ setIsGlitchy }) => {
     const audioRef = useRef();
@@ -31,7 +31,7 @@ const NewGameCard = ({ setIsGlitchy }) => {
     const [blurImage, setBlurImage] = useState(null);
     const [intervalId, setIntervalId] = useState(0);
     const setGlitchy = setIsGlitchy;
-    const json = en.menu;
+    const { t } = useTranslation();
 
     const imageParts = [
         imageCardPart1, imageCardPart2, imageCardPart3, imageCardPart4, imageCardPart5, imageCardPart6, imageCardPart7, imageCardPart8, imageCardPart9, imageCardPart10
@@ -76,7 +76,7 @@ const NewGameCard = ({ setIsGlitchy }) => {
 
     return (<>
         <div className='menu_card_new_game_images_container' ref={audioRef} onClick={handleClickNewCardDisabled}>
-            {imageParts.map((image, index) => <img className={`menu_card_new_game_image ${blurImage === (index + 1) ? 'menu_card_new_game_image_blur' : ''}`} key={index} src={image} alt={json.new_game_card_part} loading='lazy'/>)}
+            {imageParts.map((image, index) => <img className={`menu_card_new_game_image ${blurImage === (index + 1) ? 'menu_card_new_game_image_blur' : ''}`} key={index} src={image} alt={t('new_game_card_part')} loading='lazy'/>)}
         </div>
     </>);
 }

@@ -11,8 +11,8 @@ import newGameText from '../../assets/images/menu/texts/newgame_greyed.png';
 import quitText from '../../assets/images/menu/texts/quit.png';
 import backgroundGlitch from '../../assets/images/screen/background_new_game.gif';
 
-// json
-import en from '../../assets/locales/en.json';
+// translation
+import { useTranslation } from "react-i18next";
 
 // external
 import { DraggableCardMenu } from '../draggable_card_menu/DraggableCardMenu';
@@ -26,7 +26,7 @@ const Menu = () => {
     const [isFadingOut, setIsFadingOut] = useState(false);
     const [clickedCard, setClickedCard] = useState(false);
     const [startedDrag, setStartedDrag] = useState(null);
-    const json = en.menu;
+    const { t } = useTranslation();
 
     // This functions handle the action of the start of the dragging of a card.
     const handleDragStart = () => {
@@ -151,7 +151,7 @@ const Menu = () => {
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} >
             <div className="menu_container">
                 <div className="menu_header">
-                    {textSelected && <img className="menu_card_text_selected" src={textSelected} alt={json.text_selected}/>}
+                    {textSelected && <img className="menu_card_text_selected" src={textSelected} alt={t('text_selected')}/>}
                 </div>
                 <div className="menu_body_container">
                     <div className="menu_body">
@@ -163,7 +163,7 @@ const Menu = () => {
                 <div className="menu_footer">
                     {cardsFromBelow()}
                 </div>
-                {isGlitchy && <img className="menu_card_new_game_image_glitch" src={backgroundGlitch} alt={json.background_glitch}/>}
+                {isGlitchy && <img className="menu_card_new_game_image_glitch" src={backgroundGlitch} alt={t('background_glitch')}/>}
                 {isFadingOut && <div className="menu_card_fade_out"/>}
             </div>
         </DndContext>

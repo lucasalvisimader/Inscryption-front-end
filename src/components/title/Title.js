@@ -12,8 +12,8 @@ import titleSpade from '../../assets/images/others/title_spade.png';
 // sounds
 import titleRattle from '../../assets/sounds/title_rattle.wav';
 
-// locales
-import en from '../../assets/locales/en.json';
+// translation
+import { useTranslation } from "react-i18next";
 
 // context
 import { useAudio } from '../../context/AudioContext';
@@ -21,13 +21,13 @@ import { useAudio } from '../../context/AudioContext';
 const Title = ({setIsInTitleScreen, audioRef}) => {
     const navigate = useNavigate();
     const { volume } = useAudio();
-    const json = en.main;
     const isFirstAction = useRef(true);
     const spadeLeftRef = useRef();
     const titleRef = useRef();
     const spadeRightRef = useRef();
     const subtitleRef = useRef();
     const [animationSpeed, setAnimationSpeed] = useState('');
+    const { t } = useTranslation();
 
     // This function play the 'rattle' sound when pressed any button.
     const playClickSound = () => {
@@ -68,12 +68,12 @@ const Title = ({setIsInTitleScreen, audioRef}) => {
 
     return (<>
         <div className='main_title_container'>
-            <img className={`main_title_image_spade_left`} src={titleSpade} alt={json.title_spade} ref={spadeLeftRef} />
-            <img className='main_title_image' src={title} alt={json.title} ref={titleRef} />
-            <img className={`main_title_image_spade_right`} src={titleSpade} alt={json.title_spade} ref={spadeRightRef} />
+            <img className={`main_title_image_spade_left`} src={titleSpade} alt={t('title_spade')} ref={spadeLeftRef} />
+            <img className='main_title_image' src={title} alt={t('title')} ref={titleRef} />
+            <img className={`main_title_image_spade_right`} src={titleSpade} alt={t('title_spade')} ref={spadeRightRef} />
         </div>
         <p className={`main_press_to_start_text main_press_to_start_text_${animationSpeed}`} ref={subtitleRef}>
-            {json.press_to_start}
+            {t('press_to_start')}
         </p>
     </>)
 }

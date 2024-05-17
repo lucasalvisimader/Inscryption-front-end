@@ -1,38 +1,30 @@
 {
     "en": "English",
     "pt": "Portugues",
-    "main": {
-        "title": "título inscryption",
-        "title_spade": "título da espada inscryption",
-        "press_to_start": "PRESSIONE QUALQUER BOTÃO PARA COMEÇAR"
-    },
+    "title": "título inscryption",
+    "title_spade": "título da espada inscryption",
+    "press_to_start": "PRESSIONE QUALQUER BOTAO PARA COMECAR",
     "text_selected": "card de texto selecionado",
-    "language_text": "opção de texto linguagem",
-    "plus_button": "imagem botão adição",
-    "minus_button": "imagem botão subtração",
-    "menu": {
-        "new_game_card_part": "parte do card de novo jogo",
-        "background_glitch": "imagem de glitch de plano de fundo"
-    },
+    "language_text": "opcao de texto linguagem",
+    "plus_button": "imagem botao adicao",
+    "minus_button": "imagem botao subtracao",
     "main_volume": "Volume principal",
-    "login_register": {
-        "good_luck": "Boa Sorte Estranho",
-        "username": "Usuário",
-        "password": "Senha",
-        "show_password": "Mostrar Senha",
-        "submit": "Enviar",
-        "register": "Cadastro",
-        "login": "Login",
-        "confirm_password": "Confirmar Senha",
-        "show_confirm_password": "Mostrar Senha de Confirmação",
-        "long_time": "Já faz um bom tempo desde que alguém chegou aqui.",
-        "who_am_i": "Você vai descobrir quem eu sou logo, logo.",
-        "only_thing": "Por agora, a única coisa que eu tenho para dizer é",
-        "be_careful": "tenha cuidado com Ele."
-    },
-    "play": {
-        "card_image": "Imagem de Card",
-        "deck_image": "Imagem do Deck",
-        "deck_image_squirrel": "Imagem do Deck de Esquilo"
-    }
+    "volume_option": "opcao de volume",
+    "new_game_card_part": "parte do card de novo jogo",
+    "background_glitch": "imagem de glitch de plano de fundo",
+    "good_luck": "Boa Sorte Estranho",
+    "username": "Usuario",
+    "password": "Senha",
+    "show_password": "Mostrar Senha",
+    "submit": "Enviar",
+    "register": "Cadastro",
+    "login": "Login",
+    "confirm_password": "Confirmar Senha",
+    "show_confirm_password": "Mostrar Senha de Confirmacao",
+    "long_time": "Ja faz um bom tempo desde que alguem chegou aqui.",
+    "who_am_i": "Você vai descobrir quem eu sou logo, logo.",
+    "only_thing": "Por agora, a única coisa que eu tenho para dizer e",
+    "card_image": "Imagem de Card",
+    "deck_image": "Imagem do Deck",
+    "deck_image_squirrel": "Imagem do Deck de Esquilo"
 }

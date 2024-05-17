@@ -4,8 +4,8 @@ import './DraggableCardPlay.css';
 // react
 import { useState } from 'react';
 
-// json
-import en from '../../assets/locales/en.json';
+// translation
+import { useTranslation } from 'react-i18next';
 
 // external
 import { useDraggable } from '@dnd-kit/core';
@@ -18,12 +18,12 @@ export const DraggableCardPlay = (props) => {
     const boardRef = props.boardRef;
     const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id, disabled: card.isDisabled });
     const [isHovered, setIsHovered] = useState(false);
+    const { t } = useTranslation();
     // const [offsetLeft, setOffSetLeft] = useState(0);
     // const [offsetTop, setOffSetTop] = useState(0);
     // const [clickedCard, setClickedCard] = useState({key:'', is: false});
     const length = card.lengthCard;
     const style = {background: `url('/images/imageType/${card.imageType}.png')`, marginLeft: `calc(${length} * -0.16rem - 0.4vw)`, transform: CSS.Translate.toString(transform)}
-    const json = en.play;
 
     // This function handles the event when a user hovers a card.
     const handleMouseEnter = () => {
@@ -95,7 +95,7 @@ export const DraggableCardPlay = (props) => {
                     {card.name}
                 </span>
             </div>
-            <img className='draggable_card_play_image' src={require(`../../assets/images/card/image_type/${card.imageType.toLowerCase()}.png`)} alt={json.card_image} />
+            <img className='draggable_card_play_image' src={require(`../../assets/images/card/image_type/${card.imageType.toLowerCase()}.png`)} alt={t('card_image')} />
             <div className='draggable_card_play_footer'>
                 <span className='draggable_card_play_power'>
                     {card.power}
