@@ -47,6 +47,7 @@ const Play = () => {
     const [enemyPoints, setEnemyPoints] = useState(0);
     const [scaleTiltedSide, setScaleTiltedSide] = useState(0);
     const [currentScaleImage, setCurrentScaleImage] = useState(scaleStatic);
+    const [styleScale, setStyleScale] = useState({backgroundImage: `url(${currentScaleImage})`});
     const boardRef = useRef();
     const { t } = useTranslation();
 
@@ -85,39 +86,11 @@ const Play = () => {
         if (cardsData.length) {
             const [initialPlayerCards, initialDeckCards, initialSquirrelDeckCards] = cardsData;
             const assignKeys = (cards) => cards.map(card => ({ ...card, key: uuidV4() }));
-
             setPlayerCards(assignKeys(initialPlayerCards));
             setDeckCards(assignKeys(initialDeckCards));
             setDeckSquirrelCards(assignKeys(initialSquirrelDeckCards));
         }
     }, [cardsData]);
-
-    useEffect(() => {
-        const diff = Math.max(playerPoints, enemyPoints) - Math.min(playerPoints, enemyPoints);
-        setCurrentScaleImage(() => {
-            switch (diff) {
-                case 0: {
-                    return (scaleStatic);
-                }
-                case 1: {
-                    return (playerPoints > enemyPoints ? scalePlayer1 : scaleEnemy1);
-                }
-                case 2: {
-                    return (playerPoints > enemyPoints ? scalePlayer2 : scaleEnemy2);
-                }
-                case 3: {
-                    return (playerPoints > enemyPoints ? scalePlayer3 : scaleEnemy3);
-                }
-                case 4: {
-                    return (playerPoints > enemyPoints ? scalePlayer4 : scaleEnemy4);
-                }
-                default: {
-                    return (playerPoints > enemyPoints ? scalePlayer5 : scaleEnemy5);
-                }
-            }
-        })
-        setScaleTiltedSide(playerPoints > enemyPoints ? diff : diff * -1);
-    }, [playerPoints, enemyPoints]);
 
     const handleDragStart = () => {}
 
@@ -218,11 +191,32 @@ const Play = () => {
         );
     }
 
+    const updateScaleImage = (playerPoints, enemyPoints) => {
+        const diff = Math.max(playerPoints, enemyPoints) - Math.min(playerPoints, enemyPoints);
+        const newScaleImage = (() => {
+            switch (diff) {
+                case 0: return scaleStatic;
+                case 1: return playerPoints > enemyPoints ? scalePlayer1 : scaleEnemy1;
+                case 2: return playerPoints > enemyPoints ? scalePlayer2 : scaleEnemy2;
+                case 3: return playerPoints > enemyPoints ? scalePlayer3 : scaleEnemy3;
+                case 4: return playerPoints > enemyPoints ? scalePlayer4 : scaleEnemy4;
+                default: return playerPoints > enemyPoints ? scalePlayer5 : scaleEnemy5;
+            }
+        })();
+        setScaleTiltedSide(playerPoints > enemyPoints ? diff : diff * -1);
+        setCurrentScaleImage(newScaleImage);
+        setStyleScale({backgroundImage: `url(${newScaleImage})`});
+    }
+
     const addPointScale = (qtyPoints, isPlayerPoint) => {
-        isPlayerPoint ? setPlayerPoints(qtyPoints) : setEnemyPoints(qtyPoints);
-        console.log(playerPoints)
-        console.log(enemyPoints)
-        console.log(`url(../../assets/images/game/scale/${currentScaleImage}.png)`)
+        const newPoints = qtyPoints;
+        isPlayerPoint ? setPlayerPoints(() => {
+            updateScaleImage(newPoints, enemyPoints);
+            return newPoints;
+        }) : setEnemyPoints(() => {
+            updateScaleImage(playerPoints, newPoints);
+            return newPoints;
+        });
     }
 
     return (<>
@@ -231,7 +225,7 @@ const Play = () => {
                 <div className='play_content'>
                     <div className='play_table_content'>
                         <div className='play_general_actions'>
-                            <div className='play_scale' style={{background: currentScaleImage, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+                            <div className='play_scale' style={styleScale}>
                                 <div className='play_scale_enemy_points' style={{top:`calc(55% + ${(scaleTiltedSide * -1 * 11)}px)`}}>
                                     <span className='play_scale_enemy_points_text'>{'x' + (enemyPoints <= 10 ? enemyPoints : '10+')}</span>
                                 </div>

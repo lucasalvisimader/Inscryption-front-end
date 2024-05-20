@@ -61,15 +61,18 @@
 
 .play_scale {
     position: absolute;
-    width: 15%;
+    width: 16.1%;
+    height: 30%;
     top: 40%;
     left: 10%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .play_scale_enemy_points {
     position: absolute;
-    width: 3%;
-    left: 10.8%;
+    width: 50%;
     color: white;
     font-family: 'Marksman Regular';
 }
@@ -79,13 +82,14 @@
     font-size: 25px;
     display: flex;
     justify-content: center;
+    padding-right: 40%;
 }
 
 
 .play_scale_player_points {
     position: absolute;
-    width: 3%;
-    left: 21.3%;
+    width: 50%;
+    left: 50%;
     color: white;
     font-family: 'Marksman Regular';
 }
@@ -95,6 +99,7 @@
     font-size: 25px;
     display: flex;
     justify-content: center;
+    padding-left: 40%;
 }
 
 .play_plus_test {
