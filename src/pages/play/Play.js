@@ -2,7 +2,7 @@
 import './Play.css';
 
 // react
-import { useState, useEffect, useRef, Fragment } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // components
 import { DraggableCardPlay } from '../../components/draggable_card_play/DraggableCardPlay';
@@ -13,6 +13,19 @@ import backDeck from '../../assets/images/card/others/back.png';
 import backSquirrelDeck from '../../assets/images/card/others/back_squirrel.png';
 import cardSlot from '../../assets/images/game/slots/card_slot.png';
 import cardQueue from '../../assets/images/game/slots/card_queue_slot.png';
+import minhusTest from '../../assets/images/menu/options/minus_enable.png';
+import plusTest from '../../assets/images/menu/options/plus_enable.png';
+import scaleStatic from '../../assets/images/game/scale/scale_static.png';
+import scalePlayer1 from '../../assets/images/game/scale/scale_player_1.png';
+import scaleEnemy1 from '../../assets/images/game/scale/scale_enemy_1.png';
+import scalePlayer2 from '../../assets/images/game/scale/scale_player_2.png';
+import scaleEnemy2 from '../../assets/images/game/scale/scale_enemy_2.png';
+import scalePlayer3 from '../../assets/images/game/scale/scale_player_3.png';
+import scaleEnemy3 from '../../assets/images/game/scale/scale_enemy_3.png';
+import scalePlayer4 from '../../assets/images/game/scale/scale_player_4.png';
+import scaleEnemy4 from '../../assets/images/game/scale/scale_enemy_4.png';
+import scalePlayer5 from '../../assets/images/game/scale/scale_player_5.png';
+import scaleEnemy5 from '../../assets/images/game/scale/scale_enemy_5.png';
 
 // translation
 import { useTranslation } from 'react-i18next';
@@ -30,6 +43,10 @@ const Play = () => {
     const [deckCards, setDeckCards] = useState([]);
     const [deckSquirrelCards, setDeckSquirrelCards] = useState([]);
     const [droppableAreas, setDroppableAreas] = useState(Array.from({ length: 12 }, (_, index) => ({ key: index + 1, cards: [] })));
+    const [playerPoints, setPlayerPoints] = useState(0);
+    const [enemyPoints, setEnemyPoints] = useState(0);
+    const [scaleTiltedSide, setScaleTiltedSide] = useState(0);
+    const [currentScaleImage, setCurrentScaleImage] = useState(scaleStatic);
     const boardRef = useRef();
     const { t } = useTranslation();
 
@@ -74,6 +91,33 @@ const Play = () => {
             setDeckSquirrelCards(assignKeys(initialSquirrelDeckCards));
         }
     }, [cardsData]);
+
+    useEffect(() => {
+        const diff = Math.max(playerPoints, enemyPoints) - Math.min(playerPoints, enemyPoints);
+        setCurrentScaleImage(() => {
+            switch (diff) {
+                case 0: {
+                    return (scaleStatic);
+                }
+                case 1: {
+                    return (playerPoints > enemyPoints ? scalePlayer1 : scaleEnemy1);
+                }
+                case 2: {
+                    return (playerPoints > enemyPoints ? scalePlayer2 : scaleEnemy2);
+                }
+                case 3: {
+                    return (playerPoints > enemyPoints ? scalePlayer3 : scaleEnemy3);
+                }
+                case 4: {
+                    return (playerPoints > enemyPoints ? scalePlayer4 : scaleEnemy4);
+                }
+                default: {
+                    return (playerPoints > enemyPoints ? scalePlayer5 : scaleEnemy5);
+                }
+            }
+        })
+        setScaleTiltedSide(playerPoints > enemyPoints ? diff : diff * -1);
+    }, [playerPoints, enemyPoints]);
 
     const handleDragStart = () => {}
 
@@ -174,13 +218,29 @@ const Play = () => {
         );
     }
 
+    const addPointScale = (qtyPoints, isPlayerPoint) => {
+        isPlayerPoint ? setPlayerPoints(qtyPoints) : setEnemyPoints(qtyPoints);
+        console.log(playerPoints)
+        console.log(enemyPoints)
+        console.log(`url(../../assets/images/game/scale/${currentScaleImage}.png)`)
+    }
+
     return (<>
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
             <div className='play_container'>
                 <div className='play_content'>
                     <div className='play_table_content'>
                         <div className='play_general_actions'>
-
+                            <div className='play_scale' style={{background: currentScaleImage, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+                                <div className='play_scale_enemy_points' style={{top:`calc(55% + ${(scaleTiltedSide * -1 * 11)}px)`}}>
+                                    <span className='play_scale_enemy_points_text'>{'x' + (enemyPoints <= 10 ? enemyPoints : '10+')}</span>
+                                </div>
+                                <div className='play_scale_player_points' style={{top:`calc(55% + ${(scaleTiltedSide * 11)}px)`}}>
+                                    <span className='play_scale_player_points_text'>{'x' +( playerPoints <= 10 ? playerPoints : '10+')}</span>
+                                </div>
+                            </div>
+                            <img className='play_minus_test' src={minhusTest} alt={t('minus')}  onClick={() => addPointScale(enemyPoints + 1, false)}/>
+                            <img className='play_plus_test' src={plusTest} alt={t('plus')} onClick={() => addPointScale(playerPoints + 1, true)}/>
                         </div>
                         <div className='play_board' ref={boardRef}>
                             {renderBoardArea()}

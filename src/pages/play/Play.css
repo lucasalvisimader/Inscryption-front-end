@@ -59,6 +59,60 @@
     width: 25%;
 }
 
+.play_scale {
+    position: absolute;
+    width: 15%;
+    top: 40%;
+    left: 10%;
+}
+
+.play_scale_enemy_points {
+    position: absolute;
+    width: 3%;
+    left: 10.8%;
+    color: white;
+    font-family: 'Marksman Regular';
+}
+
+.play_scale_enemy_points_text {
+    position: relative;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.play_scale_player_points {
+    position: absolute;
+    width: 3%;
+    left: 21.3%;
+    color: white;
+    font-family: 'Marksman Regular';
+}
+
+.play_scale_player_points_text {
+    position: relative;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.play_plus_test {
+    cursor: pointer;
+    position: absolute;
+    width: 5%;
+    top: 30%;
+    left: 20%;
+}
+
+.play_minus_test {
+    cursor: pointer;
+    position: absolute;
+    width: 5%;
+    top: 30%;
+    left: 10%;
+}
+
 .play_board {
     display: flex;
     flex-direction: column;
@@ -78,7 +132,7 @@
 .play_footer {
     display: flex;
     justify-content: center;
-    margin-top: calc(3rem + 12vh);
+    margin-top: calc(5rem + 12vh);
 }
 
 .play_player_cards {
