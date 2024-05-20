@@ -200,7 +200,10 @@ const Play = () => {
                 case 2: return playerPoints > enemyPoints ? scalePlayer2 : scaleEnemy2;
                 case 3: return playerPoints > enemyPoints ? scalePlayer3 : scaleEnemy3;
                 case 4: return playerPoints > enemyPoints ? scalePlayer4 : scaleEnemy4;
-                default: return playerPoints > enemyPoints ? scalePlayer5 : scaleEnemy5;
+                default: {
+                    console.log("Você " + (playerPoints > enemyPoints ? "ganhou!" : "perdeu!"));
+                    return playerPoints > enemyPoints ? scalePlayer5 : scaleEnemy5;
+                }
             }
         })();
         setScaleTiltedSide(playerPoints > enemyPoints ? diff : diff * -1);
@@ -226,15 +229,17 @@ const Play = () => {
                     <div className='play_table_content'>
                         <div className='play_general_actions'>
                             <div className='play_scale' style={styleScale}>
-                                <div className='play_scale_enemy_points' style={{top:`calc(55% + ${((scaleTiltedSide < 5 && scaleTiltedSide > -5 ? scaleTiltedSide : 5 * (scaleTiltedSide > 0 ? 1 : -1)) * 13 * -1)}px)`}}>
-                                    <span className='play_scale_enemy_points_text'>{'x' + (enemyPoints <= 10 ? enemyPoints : '10+')}</span>
-                                </div>
-                                <div className='play_scale_player_points' style={{top:`calc(55% + ${((scaleTiltedSide < 5 && scaleTiltedSide > -5 ? scaleTiltedSide : 5 * (scaleTiltedSide > 0 ? 1 : -1)) * 13)}px)`}}>
-                                    <span className='play_scale_player_points_text'>{'x' +( playerPoints <= 10 ? playerPoints : '10+')}</span>
+                                <div className='play_scane_points'>
+                                    <div className='play_scale_enemy_points' style={{top:`100%`}}>
+                                        <span className='play_scale_enemy_points_text'>{'x' + (enemyPoints <= 10 ? enemyPoints : '10+')}</span>
+                                    </div>
+                                    <div className='play_scale_player_points' style={{top:`100%`}}>
+                                        <span className='play_scale_player_points_text'>{'x' +( playerPoints <= 10 ? playerPoints : '10+')}</span>
+                                    </div>
                                 </div>
                             </div>
-                            <img className='play_minus_test' src={minhusTest} alt={t('minus')}  onClick={() => addPointScale(enemyPoints + 1, false)}/>
-                            <img className='play_plus_test' src={plusTest} alt={t('plus')} onClick={() => addPointScale(playerPoints + 1, true)}/>
+                            <img className='play_minus_test' src={minhusTest} alt={t('minus')}  onClick={() => addPointScale(enemyPoints + 2, false)}/>
+                            <img className='play_plus_test' src={plusTest} alt={t('plus')} onClick={() => addPointScale(playerPoints + 2, true)}/>
                         </div>
                         <div className='play_board' ref={boardRef}>
                             {renderBoardArea()}
