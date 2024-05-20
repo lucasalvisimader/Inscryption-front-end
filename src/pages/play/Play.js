@@ -226,10 +226,10 @@ const Play = () => {
                     <div className='play_table_content'>
                         <div className='play_general_actions'>
                             <div className='play_scale' style={styleScale}>
-                                <div className='play_scale_enemy_points' style={{top:`calc(55% + ${(scaleTiltedSide * -1 * 11)}px)`}}>
+                                <div className='play_scale_enemy_points' style={{top:`calc(55% + ${((scaleTiltedSide < 5 && scaleTiltedSide > -5 ? scaleTiltedSide : 5 * (scaleTiltedSide > 0 ? 1 : -1)) * 13 * -1)}px)`}}>
                                     <span className='play_scale_enemy_points_text'>{'x' + (enemyPoints <= 10 ? enemyPoints : '10+')}</span>
                                 </div>
-                                <div className='play_scale_player_points' style={{top:`calc(55% + ${(scaleTiltedSide * 11)}px)`}}>
+                                <div className='play_scale_player_points' style={{top:`calc(55% + ${((scaleTiltedSide < 5 && scaleTiltedSide > -5 ? scaleTiltedSide : 5 * (scaleTiltedSide > 0 ? 1 : -1)) * 13)}px)`}}>
                                     <span className='play_scale_player_points_text'>{'x' +( playerPoints <= 10 ? playerPoints : '10+')}</span>
                                 </div>
                             </div>
