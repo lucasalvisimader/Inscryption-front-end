@@ -1,0 +1,46 @@
+.inventory_card_container {
+    width: calc(2rem + 3vw);
+    height: auto;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.inventory_card_image {
+    width: 100%;
+    height: auto;
+}
+
+.inventory_card_header {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.inventory_card_footer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.inventory_card_power,
+.inventory_card_health,
+.inventory_card_name {
+    position: absolute;
+    color: var(--black);
+}
+
+.inventory_card_name {
+    top: 1%;
+}
+
+.inventory_card_power {
+    left: 10%;
+    bottom: 6%;
+}
+
+.inventory_card_health {
+    right: 10%;
+    bottom: 9%;
+}

@@ -37,6 +37,11 @@
     pointer-events: none;
 }
 
+.play_header {
+    position: absolute;
+    top: -50%;
+}
+
 .play_content {
     position: absolute;
     display: flex;

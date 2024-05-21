@@ -3,6 +3,7 @@ import './Play.css';
 
 // react
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // components
 import { DraggableCardPlay } from '../../components/draggable_card_play/DraggableCardPlay';
@@ -36,6 +37,7 @@ import { useTranslation } from 'react-i18next';
 // external
 import { v4 as uuidV4 } from 'uuid';
 import { DndContext } from '@dnd-kit/core';
+import { Inventory } from '../../components/inventory/Inventory';
 
 const Play = () => {
     const [cardsData, setCardsData] = useState([]);
@@ -50,6 +52,7 @@ const Play = () => {
     const [styleScale, setStyleScale] = useState({backgroundImage: `url(${currentScaleImage})`});
     const boardRef = useRef();
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
         // This is an use effect made to set the player cards based on which cards they have in the database.
     // useEffect(() => {
@@ -91,6 +94,19 @@ const Play = () => {
             setDeckSquirrelCards(assignKeys(initialSquirrelDeckCards));
         }
     }, [cardsData]);
+
+    useEffect(() => {
+        const handleUserAction = (event) => {
+            if (event.key == 'ArrowUp') {
+                
+            }
+        }
+        document.addEventListener('keydown', handleUserAction);
+
+        return () => {
+            document.removeEventListener('keydown', handleUserAction);
+        }
+    }, [navigate]);
 
     const handleDragStart = () => {}
 
@@ -227,6 +243,11 @@ const Play = () => {
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
             <div className='play_container'>
                 <div className='play_content'>
+                    <div className='play_header'>
+                        <div className='play_inventory'>
+                            <Inventory />
+                        </div>
+                    </div>
                     <div className='play_table_content'>
                         <div className='play_general_actions'>
                             <div className='play_scale' style={styleScale}>

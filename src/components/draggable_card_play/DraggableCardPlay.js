@@ -15,7 +15,7 @@ import { CSS } from '@dnd-kit/utilities';
 export const DraggableCardPlay = (props) => {
     const id = props.id;
     const card = props.card;
-    const boardRef = props.boardRef;
+    // const boardRef = props.boardRef;
     const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id, disabled: card.isDisabled });
     const [isHovered, setIsHovered] = useState(false);
     const { t } = useTranslation();
@@ -84,7 +84,7 @@ export const DraggableCardPlay = (props) => {
     //     setOffSetTop(cardContainer?.top - board?.top);
     // }, [id, boardRef])
 
-    return (
+    return (<>
         <div className={`draggable_card_play_container${(isHovered) ? '_active' : ''}`}
             // ${(clickedCard.is) ? 'draggable_card_play_container_clicked' : ''}`}
             ref={setNodeRef} style={style} {...listeners} {...attributes} id={`draggable_card_play_container_${id}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
@@ -105,5 +105,5 @@ export const DraggableCardPlay = (props) => {
                 </span>
             </div>
         </div>
-    );
+    </>);
 }
