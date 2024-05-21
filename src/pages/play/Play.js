@@ -207,6 +207,7 @@ const Play = () => {
             }
         })();
         setScaleTiltedSide(playerPoints > enemyPoints ? diff : diff * -1);
+        console.log(scaleTiltedSide)
         setCurrentScaleImage(newScaleImage);
         setStyleScale({backgroundImage: `url(${newScaleImage})`});
     }
@@ -229,17 +230,17 @@ const Play = () => {
                     <div className='play_table_content'>
                         <div className='play_general_actions'>
                             <div className='play_scale' style={styleScale}>
-                                <div className='play_scane_points'>
-                                    <div className='play_scale_enemy_points' style={{top:`100%`}}>
+                                <div className='play_scale_points'>
+                                    <div className='play_scale_enemy_points' style={{top:`100%`, marginTop: `calc(${Math.abs(scaleTiltedSide) <= 5 ? scaleTiltedSide * -9.2 : (scaleTiltedSide < 0 ? -1 : 1) * 5 * -9.2}% + 10%)`}}>
                                         <span className='play_scale_enemy_points_text'>{'x' + (enemyPoints <= 10 ? enemyPoints : '10+')}</span>
                                     </div>
-                                    <div className='play_scale_player_points' style={{top:`100%`}}>
+                                    <div className='play_scale_player_points' style={{top:`100%`, marginTop: `calc(${Math.abs(scaleTiltedSide) <= 5 ? scaleTiltedSide * 9.2 : (scaleTiltedSide < 0 ? -1 : 1) * 5 * 9.2}% + 10%)`}}>
                                         <span className='play_scale_player_points_text'>{'x' +( playerPoints <= 10 ? playerPoints : '10+')}</span>
                                     </div>
                                 </div>
                             </div>
-                            <img className='play_minus_test' src={minhusTest} alt={t('minus')}  onClick={() => addPointScale(enemyPoints + 2, false)}/>
-                            <img className='play_plus_test' src={plusTest} alt={t('plus')} onClick={() => addPointScale(playerPoints + 2, true)}/>
+                            <img className='play_minus_test' src={minhusTest} alt={t('minus')}  onClick={() => addPointScale(enemyPoints + 1, false)}/>
+                            <img className='play_plus_test' src={plusTest} alt={t('plus')} onClick={() => addPointScale(playerPoints + 1, true)}/>
                         </div>
                         <div className='play_board' ref={boardRef}>
                             {renderBoardArea()}
