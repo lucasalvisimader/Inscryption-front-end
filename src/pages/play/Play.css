@@ -73,7 +73,7 @@
     position: absolute;
     width: 16.1%;
     height: 30%;
-    top: 60%;
+    top: 80%;
     left: 10%;
     background-repeat: no-repeat;
     background-size: contain;
@@ -117,19 +117,19 @@
     padding-left: 40%;
 }
 
-.play_plus_test {
-    cursor: pointer;
+.play_plus_test,
+.play_minus_test {
+    cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto !important;
     position: absolute;
     width: 5%;
-    top: 50%;
+    top: 70%;
+}
+
+.play_plus_test {
     left: 20%;
 }
 
 .play_minus_test {
-    cursor: pointer;
-    position: absolute;
-    width: 5%;
-    top: 50%;
     left: 10%;
 }
 

@@ -9,14 +9,14 @@ import { InventoryCard } from '../inventory_card/InventoryCard';
 
 export const Inventory = () => {
     const [playerCards, setPlayerCards] = useState([
-        { id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0 },
-        { id: 2, name: 'STOAT', power: 1, health: 2, sigilsTypes: ['NONE'], imageType: 'STOAT', priceType: -1 },
-        { id: 3, name: 'STINKBUG', power: 0, health: 2, sigilsTypes: ['STINKY'], imageType: 'STINKBUG', priceType: 2 },
-        { id: 4, name: 'STUNTED WOLF', power: 2, health: 2, sigilsTypes: ['NONE'], imageType: 'STUNTEDWOLF', priceType: -1 },
-        { id: 5, name: 'WOLF', power: 3, health: 2, sigilsTypes: ['NONE'], imageType: 'WOLF', priceType: -2 },
-        { id: 6, name: 'WOLF CUB', power: 1, health: 1, sigilsTypes: ['FLEDGELING'], imageType: 'WOLFCUB', priceType: -1 },
-        { id: 7, name: 'RAT KING', power: 2, health: 1, sigilsTypes: ['NONE'], imageType: 'RATKING', priceType: -2 },
-        { id: 8, name: 'URAYULI', power: 7, health: 7, sigilsTypes: ['NONE'], imageType: 'URAYULI', priceType: -4 },
+        { id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0, key: 1 },
+        { id: 2, name: 'STOAT', power: 1, health: 2, sigilsTypes: ['NONE'], imageType: 'STOAT', priceType: -1, key: 2 },
+        { id: 3, name: 'STINKBUG', power: 0, health: 2, sigilsTypes: ['STINKY'], imageType: 'STINKBUG', priceType: 2, key: 3 },
+        { id: 4, name: 'STUNTED WOLF', power: 2, health: 2, sigilsTypes: ['NONE'], imageType: 'STUNTEDWOLF', priceType: -1, key: 4 },
+        { id: 5, name: 'WOLF', power: 3, health: 2, sigilsTypes: ['NONE'], imageType: 'WOLF', priceType: -2, key: 5 },
+        { id: 6, name: 'WOLF CUB', power: 1, health: 1, sigilsTypes: ['FLEDGELING'], imageType: 'WOLFCUB', priceType: -1, key: 6 },
+        { id: 7, name: 'RAT KING', power: 2, health: 1, sigilsTypes: ['NONE'], imageType: 'RATKING', priceType: -2, key: 7 },
+        { id: 8, name: 'URAYULI', power: 7, health: 7, sigilsTypes: ['NONE'], imageType: 'URAYULI', priceType: -4, key: 8 },
     ]);
 
     const renderCards = (layer) => {
