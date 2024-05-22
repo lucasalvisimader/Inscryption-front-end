@@ -52,7 +52,8 @@ const Play = () => {
     const [styleScale, setStyleScale] = useState({backgroundImage: `url(${currentScaleImage})`});
     const boardRef = useRef();
     const inventoryRef = useRef();
-    const playTableContent = useRef();
+    const playTableContentRef = useRef();
+    const playFooterRef = useRef();
     const { t } = useTranslation();
     const navigate = useNavigate();
 
@@ -105,8 +106,8 @@ const Play = () => {
         }
         
         const handleKeyUp = (event) => {
-            if (event.key === "ArrowDown" && playTableContent.current) {
-                playTableContent.current.scrollIntoView({ behavior: 'smooth' });
+            if (event.key === "ArrowDown" && playTableContentRef.current) {
+                playTableContentRef.current.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
@@ -120,10 +121,12 @@ const Play = () => {
     }, []);
 
     useEffect(() => {
-        if (playTableContent.current) {
-            playTableContent.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
+        setTimeout(() => {
+            if (playFooterRef.current) {
+                playFooterRef.current.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 100);
+    }, [playFooterRef]);
 
     const handleDragStart = () => {}
 
@@ -265,7 +268,7 @@ const Play = () => {
                             <Inventory />
                         </div>
                     </div>
-                    <div className='play_table_content' ref={playTableContent}>
+                    <div className='play_table_content' ref={playTableContentRef}>
                         <div className='play_general_actions'>
                             <div className='play_scale' style={styleScale}>
                                 <div className='play_scale_points'>
@@ -284,7 +287,7 @@ const Play = () => {
                             {renderBoardArea()}
                         </div>
                     </div>
-                    <div className='play_footer'>
+                    <div className='play_footer' ref={playFooterRef}>
                         <div className='play_player_cards'>
                             {renderCards()}
                         </div>

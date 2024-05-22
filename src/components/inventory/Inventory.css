@@ -1,8 +1,17 @@
-.inventory_container {
-
-}
+.inventory_container {}
 
 .inventory_cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.inventory_cards_first_layer {
+    display: flex;
+    justify-content: center;
+}
+
+.inventory_cards_second_layer {
     display: flex;
     justify-content: center;
 }

@@ -19,18 +19,21 @@ export const Inventory = () => {
         { id: 8, name: 'URAYULI', power: 7, health: 7, sigilsTypes: ['NONE'], imageType: 'URAYULI', priceType: -4 },
     ]);
 
-    const renderCards = (hasSecondLayer) => {
-        let playerCardsSeparated = playerCards.slice(0, hasSecondLayer ? 5 : playerCards.length).map((card) => {
-            card.lengthCard = playerCards.length;
-            card.isDisabled = false;
-            return (<InventoryCard className="play_cards" key={card.key} id={card.key} card={card} />);
-        });
-        if (hasSecondLayer) {
-            playerCardsSeparated = playerCardsSeparated.concat(playerCards.slice(5, playerCards.length).map((card) => {
+    const renderCards = (layer) => {
+        const hasSecondLayer = playerCards.length > 5;
+        let playerCardsSeparated;
+        if (layer === 2 && hasSecondLayer) {
+            playerCardsSeparated = playerCards.slice(5, playerCards.length).map((card) => {
                 card.lengthCard = playerCards.length;
                 card.isDisabled = false;
                 return (<InventoryCard className="play_cards" key={card.key} id={card.key} card={card} />);
-            }));
+            });
+        } else if (layer === 1) {
+            playerCardsSeparated = playerCards.slice(0, hasSecondLayer ? 5 : playerCards.length).map((card) => {
+                card.lengthCard = playerCards.length;
+                card.isDisabled = false;
+                return (<InventoryCard className="play_cards" key={card.key} id={card.key} card={card} />);
+            });
         }
         return playerCardsSeparated;
     };
@@ -38,7 +41,13 @@ export const Inventory = () => {
     return (<>
         <div className='inventory_container'>
             <div className='inventory_cards'>
-                {playerCards.length > 5 ? renderCards(true) : renderCards(false)}
+                <div className='inventory_cards_first_layer'>
+                    {renderCards(1)}
+                </div>
+                <br/>
+                <div className='inventory_cards_second_layer'>
+                    {renderCards(2)}
+                </div>
             </div>
         </div>
     </>)
