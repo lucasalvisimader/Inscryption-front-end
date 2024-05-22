@@ -72,7 +72,7 @@
     position: absolute;
     width: 16.1%;
     height: 30%;
-    top: 40%;
+    top: 60%;
     left: 10%;
     background-repeat: no-repeat;
     background-size: contain;
@@ -120,7 +120,7 @@
     cursor: pointer;
     position: absolute;
     width: 5%;
-    top: 30%;
+    top: 50%;
     left: 20%;
 }
 
@@ -128,7 +128,7 @@
     cursor: pointer;
     position: absolute;
     width: 5%;
-    top: 30%;
+    top: 50%;
     left: 10%;
 }
 
@@ -152,6 +152,7 @@
     display: flex;
     justify-content: center;
     margin-top: calc(5rem + 12vh);
+    margin-bottom: calc(2rem + 5vh);
 }
 
 .play_player_cards {
