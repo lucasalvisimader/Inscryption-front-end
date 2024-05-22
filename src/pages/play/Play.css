@@ -38,8 +38,11 @@
 }
 
 .play_header {
-    position: absolute;
-    top: -50%;
+    position: relative;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+    margin-bottom: 7%;
 }
 
 .play_content {
@@ -51,6 +54,7 @@
     height: 100%;
     background-color: var(--background-brown);
     z-index: 98;
+    overflow-y: hidden;
 }
 
 .play_table_content {
@@ -97,7 +101,6 @@
     justify-content: center;
     padding-right: 40%;
 }
-
 
 .play_scale_player_points {
     width: 50%;

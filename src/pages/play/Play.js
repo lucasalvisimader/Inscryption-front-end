@@ -51,6 +51,8 @@ const Play = () => {
     const [currentScaleImage, setCurrentScaleImage] = useState(scaleStatic);
     const [styleScale, setStyleScale] = useState({backgroundImage: `url(${currentScaleImage})`});
     const boardRef = useRef();
+    const inventoryRef = useRef();
+    const playTableContent = useRef();
     const { t } = useTranslation();
     const navigate = useNavigate();
 
@@ -96,17 +98,32 @@ const Play = () => {
     }, [cardsData]);
 
     useEffect(() => {
-        const handleUserAction = (event) => {
-            if (event.key == 'ArrowUp') {
-                
+        const handleKeyDown = (event) => {
+            if (event.key === "ArrowUp" && inventoryRef.current) {
+                inventoryRef.current.scrollIntoView({ behavior: 'smooth' });
             }
         }
-        document.addEventListener('keydown', handleUserAction);
+        
+        const handleKeyUp = (event) => {
+            if (event.key === "ArrowDown" && playTableContent.current) {
+                playTableContent.current.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        document.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("keyup", handleKeyUp);
 
         return () => {
-            document.removeEventListener('keydown', handleUserAction);
+            document.removeEventListener("keydown", handleKeyDown);
+            document.removeEventListener("keyup", handleKeyUp);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (playTableContent.current) {
+            playTableContent.current.scrollIntoView({ behavior: 'smooth' });
         }
-    }, [navigate]);
+    });
 
     const handleDragStart = () => {}
 
@@ -244,11 +261,11 @@ const Play = () => {
             <div className='play_container'>
                 <div className='play_content'>
                     <div className='play_header'>
-                        <div className='play_inventory'>
+                        <div className='play_inventory' ref={inventoryRef}>
                             <Inventory />
                         </div>
                     </div>
-                    <div className='play_table_content'>
+                    <div className='play_table_content' ref={playTableContent}>
                         <div className='play_general_actions'>
                             <div className='play_scale' style={styleScale}>
                                 <div className='play_scale_points'>
