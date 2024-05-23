@@ -51,7 +51,7 @@ const Play = () => {
     const [currentScaleImage, setCurrentScaleImage] = useState(scaleStatic);
     const [styleScale, setStyleScale] = useState({backgroundImage: `url(${currentScaleImage})`});
     const boardRef = useRef();
-    const inventoryRef = useRef();
+    const playHeaderRef = useRef();
     const playTableContentRef = useRef();
     const playFooterRef = useRef();
     const { t } = useTranslation();
@@ -100,13 +100,13 @@ const Play = () => {
 
     useEffect(() => {
         const handleKeyDown = (event) => {
-            if (event.key === "ArrowUp" && inventoryRef.current) {
-                inventoryRef.current.scrollIntoView({ behavior: 'smooth' });
+            if (event.key.toLowerCase() === "w" && playHeaderRef.current) {
+                playHeaderRef.current.scrollIntoView({ behavior: 'smooth' });
             }
         }
         
         const handleKeyUp = (event) => {
-            if (event.key === "ArrowDown" && playTableContentRef.current) {
+            if (event.key.toLowerCase() === "s" && playTableContentRef.current) {
                 playTableContentRef.current.scrollIntoView({ behavior: 'smooth' });
             }
         }
@@ -260,11 +260,11 @@ const Play = () => {
     }
 
     return (<>
-        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} autoScroll={false}>
             <div className='play_container'>
                 <div className='play_content'>
-                    <div className='play_header'>
-                        <div className='play_inventory' ref={inventoryRef}>
+                    <div className='play_header' ref={playHeaderRef}>
+                        <div className='play_inventory'>
                             <Inventory />
                         </div>
                     </div>

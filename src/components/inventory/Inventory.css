@@ -1,4 +1,6 @@
-.inventory_container {}
+.inventory_container {
+    margin-top: 1%;
+}
 
 .inventory_cards {
     display: flex;
