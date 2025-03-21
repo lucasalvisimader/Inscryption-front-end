@@ -14,7 +14,7 @@ import backDeck from '../../assets/images/card/others/back.png';
 import backSquirrelDeck from '../../assets/images/card/others/back_squirrel.png';
 import cardSlot from '../../assets/images/game/slots/card_slot.png';
 import cardQueue from '../../assets/images/game/slots/card_queue_slot.png';
-import minhusTest from '../../assets/images/menu/options/minus_enable.png';
+import minusTest from '../../assets/images/menu/options/minus_enable.png';
 import plusTest from '../../assets/images/menu/options/plus_enable.png';
 import scaleStatic from '../../assets/images/game/scale/scale_static.png';
 import scalePlayer1 from '../../assets/images/game/scale/scale_player_1.png';
@@ -280,7 +280,7 @@ const Play = () => {
                                     </div>
                                 </div>
                             </div>
-                            <img className='play_minus_test' src={minhusTest} alt={t('minus')}  onClick={() => addPointScale(enemyPoints + 1, false)}/>
+                            <img className='play_minus_test' src={minusTest} alt={t('minus')}  onClick={() => addPointScale(enemyPoints + 1, false)}/>
                             <img className='play_plus_test' src={plusTest} alt={t('plus')} onClick={() => addPointScale(playerPoints + 1, true)}/>
                         </div>
                         <div className='play_board' ref={boardRef}>
