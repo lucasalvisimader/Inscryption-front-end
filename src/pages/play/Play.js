@@ -37,7 +37,7 @@ import { useTranslation } from 'react-i18next';
 // external
 import { v4 as uuidV4 } from 'uuid';
 import { DndContext } from '@dnd-kit/core';
-import { Inventory } from '../../components/inventory/Inventory';
+import { Inventory } from '../../components/inventory_container/Inventory';
 
 const Play = () => {
     const [cardsData, setCardsData] = useState([]);
