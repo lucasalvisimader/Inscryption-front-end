@@ -5,22 +5,22 @@ import './NewGameCard.css';
 import { useState, useEffect, useRef } from 'react';
 
 // context
-import { useAudio } from '../../context/AudioContext';
+import { useAudio } from '../../../context/AudioContext';
 
 // images
-import imageCardPart1 from '../../assets/images/menu/cards/new_game/greyed_1.png';
-import imageCardPart2 from '../../assets/images/menu/cards/new_game/greyed_2.png';
-import imageCardPart3 from '../../assets/images/menu/cards/new_game/greyed_3.png';
-import imageCardPart4 from '../../assets/images/menu/cards/new_game/greyed_4.png';
-import imageCardPart5 from '../../assets/images/menu/cards/new_game/greyed_5.png';
-import imageCardPart6 from '../../assets/images/menu/cards/new_game/greyed_6.png';
-import imageCardPart7 from '../../assets/images/menu/cards/new_game/greyed_7.png';
-import imageCardPart8 from '../../assets/images/menu/cards/new_game/greyed_8.png';
-import imageCardPart9 from '../../assets/images/menu/cards/new_game/greyed_9.png';
-import imageCardPart10 from '../../assets/images/menu/cards/new_game/greyed_10.png';
+import imageCardPart1 from '../../../assets/images/menu/cards/new_game/greyed_1.png';
+import imageCardPart2 from '../../../assets/images/menu/cards/new_game/greyed_2.png';
+import imageCardPart3 from '../../../assets/images/menu/cards/new_game/greyed_3.png';
+import imageCardPart4 from '../../../assets/images/menu/cards/new_game/greyed_4.png';
+import imageCardPart5 from '../../../assets/images/menu/cards/new_game/greyed_5.png';
+import imageCardPart6 from '../../../assets/images/menu/cards/new_game/greyed_6.png';
+import imageCardPart7 from '../../../assets/images/menu/cards/new_game/greyed_7.png';
+import imageCardPart8 from '../../../assets/images/menu/cards/new_game/greyed_8.png';
+import imageCardPart9 from '../../../assets/images/menu/cards/new_game/greyed_9.png';
+import imageCardPart10 from '../../../assets/images/menu/cards/new_game/greyed_10.png';
 
 // sounds
-import glitch from '../../assets/sounds/glitch.wav';
+import glitch from '../../../assets/sounds/glitch.wav';
 
 // translation
 import { useTranslation } from 'react-i18next';

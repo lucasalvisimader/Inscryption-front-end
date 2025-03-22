@@ -5,12 +5,12 @@ import './DroppableAreaMenu.css'
 import React, { useEffect, useRef, useState } from 'react';
 
 // components
-import ModalOptionsCard from '../modal_options_card/ModalOptionsCard';
+import ModalOptionsCard from '../modal_options_modal/ModalOptionsModal';
 
 // images
-import slotHighlighted from '../../assets/images/menu/cards/slot_highlighted.png';
-import slotMediumlighted from '../../assets/images/menu/cards/slot_mediumlighted.png';
-import slot from '../../assets/images/menu/cards/slot.png';
+import slotHighlighted from '../../../assets/images/menu/cards/slot_highlighted.png';
+import slotMediumlighted from '../../../assets/images/menu/cards/slot_mediumlighted.png';
+import slot from '../../../assets/images/menu/cards/slot.png';
 
 // external
 import { useDroppable } from '@dnd-kit/core';

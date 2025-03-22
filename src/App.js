@@ -8,11 +8,6 @@ import React, { useEffect } from "react";
 
 // pages
 import Main from './pages/main/Main';
-import Login from "./pages/login/Login"
-import Register from './pages/register/Register';
-import CardRegister from './pages/card-register/Card-register';
-import ShowAllCards from './pages/show-all-cards/Show-all-cards';
-import ShowOneCard from './pages/show-one-card/Show-one-card';
 import Play from './pages/play/Play';
 
 // context
@@ -43,11 +38,6 @@ const App = () => {
                 <BrowserRouter>
                     <Routes>
                         <Route index element={<Main />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/card-register" element={<CardRegister />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/show-all-cards" element={<ShowAllCards />} />
-                        <Route path="/show-one-card" element={<ShowOneCard />} />
                         <Route path="/play" element={<Play />} />
                     </Routes>
                 </BrowserRouter>

@@ -2,10 +2,10 @@
 import './DroppableAreaPlay.css';
 
 // react
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 
 // images
-import cardSlot from '../../assets/images/game/slots/card_slot.png';
+import cardSlot from '../../../assets/images/game/slots/card_slot.png';
 
 // external
 import { useDroppable } from '@dnd-kit/core';

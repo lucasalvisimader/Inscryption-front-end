@@ -17,7 +17,7 @@ export const InventoryCard = (props) => {
                     {card.name}
                 </span>
             </div>
-            <img className='inventory_card_image' src={require(`../../assets/images/card/image_type/${card.imageType.toLowerCase()}.png`)} alt={t('card_image')} />
+            <img className='inventory_card_image' src={require(`../../../assets/images/card/image_type/${card.imageType.toLowerCase()}.png`)} alt={t('card_image')} />
             <div className='inventory_card_footer'>
                 <span className='inventory_card_power'>
                     {card.power}

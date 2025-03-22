@@ -1,15 +1,15 @@
 // styles
-import "./Menu.css"
+import "./MenuOptions.css";
 
 // react
 import { useEffect, useState } from "react";
 
 // images
-import continueText from '../../assets/images/menu/texts/continue.png';
-import optionsText from '../../assets/images/menu/texts/options.png';
-import newGameText from '../../assets/images/menu/texts/newgame_greyed.png';
-import quitText from '../../assets/images/menu/texts/quit.png';
-import backgroundGlitch from '../../assets/images/screen/background_new_game.gif';
+import continueText from '../../../assets/images/menu/texts/continue.png';
+import optionsText from '../../../assets/images/menu/texts/options.png';
+import newGameText from '../../../assets/images/menu/texts/newgame_greyed.png';
+import quitText from '../../../assets/images/menu/texts/quit.png';
+import backgroundGlitch from '../../../assets/images/screen/background_new_game.gif';
 
 // translation
 import { useTranslation } from "react-i18next";

@@ -95,7 +95,7 @@ export const DraggableCardPlay = (props) => {
                     {card.name}
                 </span>
             </div>
-            <img className='draggable_card_play_image' src={require(`../../assets/images/card/image_type/${card.imageType.toLowerCase()}.png`)} alt={t('card_image')} />
+            <img className='draggable_card_play_image' src={require(`../../../assets/images/card/image_type/${card.imageType.toLowerCase()}.png`)} alt={t('card_image')} />
             <div className='draggable_card_play_footer'>
                 <span className='draggable_card_play_power'>
                     {card.power}

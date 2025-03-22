@@ -9,11 +9,11 @@ import { useNavigate } from 'react-router-dom';
 import NewGameCard from '../new_game_card/NewGameCard';
 
 // context
-import { useAudio } from '../../context/AudioContext';
+import { useAudio } from '../../../context/AudioContext';
 
 // sounds
-import menuHoverCard from '../../assets/sounds/menu_hover_card.wav';
-import menuChosenCard from '../../assets/sounds/menu_chosen_card.wav';
+import menuHoverCard from '../../../assets/sounds/menu_hover_card.wav';
+import menuChosenCard from '../../../assets/sounds/menu_chosen_card.wav';
 
 // external
 import { useDraggable } from '@dnd-kit/core';
@@ -58,7 +58,7 @@ export const DraggableCardMenu = ({props}) => {
                 if (type === "continue") {
                     setIsFadingOut(true);
                     setTimeout(() => {
-                        navigate("/login");
+                        navigate("/play");
                     }, 1500)
                 } else if (type === "quit") {
                     window.open("about:blank", "_self");

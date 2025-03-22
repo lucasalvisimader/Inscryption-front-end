@@ -9,8 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import titleTheme from '../../assets/songs/title_theme.wav';
 
 // components
-import Menu from '../../components/menu/Menu'
-import Title from '../../components/title/Title'
+import Menu from '../../components/menu/menu_options/MenuOptions';
+import Title from '../../components/menu/main_title/MainTitle';
 
 // context
 import { useAudio } from '../../context/AudioContext';

@@ -3,11 +3,10 @@ import './Play.css';
 
 // react
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 // components
-import { DraggableCardPlay } from '../../components/draggable_card_play/DraggableCardPlay';
-import { DroppableAreaPlay } from '../../components/droppable_area_play/DroppableAreaPlay';
+import { DraggableCardPlay } from '../../components/play/draggable_card_play/DraggableCardPlay';
+import { DroppableAreaPlay } from '../../components/play/droppable_area_play/DroppableAreaPlay';
 
 // images
 import backDeck from '../../assets/images/card/others/back.png';
@@ -37,7 +36,7 @@ import { useTranslation } from 'react-i18next';
 // external
 import { v4 as uuidV4 } from 'uuid';
 import { DndContext } from '@dnd-kit/core';
-import { Inventory } from '../../components/inventory_container/Inventory';
+import { Inventory } from '../../components/play/inventory_container/Inventory';
 
 const Play = () => {
     const [cardsData, setCardsData] = useState([]);
@@ -55,7 +54,6 @@ const Play = () => {
     const playTableContentRef = useRef();
     const playFooterRef = useRef();
     const { t } = useTranslation();
-    const navigate = useNavigate();
 
         // This is an use effect made to set the player cards based on which cards they have in the database.
     // useEffect(() => {

@@ -1,22 +1,22 @@
 // css
-import './Title.css';
+import './MainTitle.css';
 
 // react
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // images
-import title from '../../assets/images/others/title.png';
-import titleSpade from '../../assets/images/others/title_spade.png';
+import title from '../../../assets/images/others/title.png';
+import titleSpade from '../../../assets/images/others/title_spade.png';
 
 // sounds
-import titleRattle from '../../assets/sounds/title_rattle.wav';
+import titleRattle from '../../../assets/sounds/title_rattle.wav';
 
 // translation
 import { useTranslation } from "react-i18next";
 
 // context
-import { useAudio } from '../../context/AudioContext';
+import { useAudio } from '../../../context/AudioContext';
 
 const Title = ({setIsInTitleScreen, audioRef}) => {
     const navigate = useNavigate();
