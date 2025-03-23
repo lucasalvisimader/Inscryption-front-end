@@ -12,40 +12,29 @@ import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 // import { CardService } from '../../service/CardService';
 
-export const DraggableCardPlay = (props) => {
-    const id = props.id;
-    const card = props.card;
-    // const boardRef = props.boardRef;
-    const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id, disabled: card.isDisabled });
+export const DraggableCardPlay = ({ id, card }) => {
+    const { attributes, listeners, setNodeRef, transform } = useDraggable({ id, disabled: card.isDisabled });
     const [isHovered, setIsHovered] = useState(false);
     const { t } = useTranslation();
-    const length = card.lengthCard;
 
+    const fontSize = useMemo(() => `calc(1.3rem - ${card.name.length / 3}px)`, [card.name.length]);
     const style = useMemo(() => ({
         background: `url('/images/imageType/${card.imageType}.png')`,
-        marginLeft: `calc(${length} * -0.16rem - 0.4vw)`,
+        marginLeft: `calc(${card.lengthCard} * -0.16rem - 0.4vw)`,
         transform: CSS.Translate.toString(transform),
         transition: transform ? "none" : "transform 0.3s"
-    }), [transform, card.imageType, length]);
+    }), [transform, card.imageType, card.lengthCard]);
 
-    // This function handles the event when a user hovers a card.
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    }
-    
-    // This function handles the event when a user don't hover a card anymore.
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    }
+    const toggleHover = (state) => setIsHovered(state);
 
     return (<>
-        <div className={`draggable_card_play_container${(isHovered) ? '_active' : ''}`}
-            // ${(clickedCard.is) ? 'draggable_card_play_container_clicked' : ''}`}
-            ref={setNodeRef} style={style} {...listeners} {...attributes} id={`draggable_card_play_container_${id}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
-            // onClick={handleClick}
+         <div className={`draggable_card_play_container${isHovered ? '_active' : ''}`}
+            ref={setNodeRef} style={style} {...listeners} {...attributes} 
+            id={`draggable_card_play_container_${id}`} 
+            onMouseEnter={() => toggleHover(true)} onMouseLeave={() => toggleHover(false)}
             >
             <div className='draggable_card_play_header'>
-                <span className='draggable_card_play_name' style={{ fontSize: `calc(1rem - ${card.name.length / 3}px` }}>
+                <span className='draggable_card_play_name' style={{ fontSize }}>
                     {card.name}
                 </span>
             </div>
