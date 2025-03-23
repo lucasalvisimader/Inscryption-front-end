@@ -13,6 +13,8 @@ import backDeck from '../../assets/images/card/others/back.png';
 import backSquirrelDeck from '../../assets/images/card/others/back_squirrel.png';
 import cardSlot from '../../assets/images/game/slots/card_slot.png';
 import cardQueue from '../../assets/images/game/slots/card_queue_slot.png';
+
+// scale images
 import minusTest from '../../assets/images/menu/options/minus_enable.png';
 import plusTest from '../../assets/images/menu/options/plus_enable.png';
 import scaleStatic from '../../assets/images/game/scale/scale_static.png';
@@ -261,13 +263,13 @@ const Play = () => {
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} autoScroll={false}>
             <div className='play_container'>
                 <div className='play_content'>
-                    <div className='play_header' ref={playHeaderRef}>
+                    {/* <div className='play_header' ref={playHeaderRef}>
                         <div className='play_inventory'>
                             <Inventory />
                         </div>
-                    </div>
+                    </div> */}
                     <div className='play_table_content' ref={playTableContentRef}>
-                        <div className='play_general_actions'>
+                        {/* <div className='play_general_actions'>
                             <div className='play_scale' style={styleScale}>
                                 <div className='play_scale_points'>
                                     <div className='play_scale_enemy_points' style={{top:`100%`, marginTop: `calc(${Math.abs(scaleTiltedSide) <= 5 ? scaleTiltedSide * -9.2 : (scaleTiltedSide < 0 ? -1 : 1) * 5 * -9.2}% + 10%)`}}>
@@ -280,7 +282,7 @@ const Play = () => {
                             </div>
                             <img className='play_minus_test' src={minusTest} alt={t('minus')}  onClick={() => addPointScale(enemyPoints + 1, false)}/>
                             <img className='play_plus_test' src={plusTest} alt={t('plus')} onClick={() => addPointScale(playerPoints + 1, true)}/>
-                        </div>
+                        </div> */}
                         <div className='play_board' ref={boardRef}>
                             {renderBoardArea()}
                         </div>

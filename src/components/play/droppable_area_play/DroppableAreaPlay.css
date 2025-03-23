@@ -1,7 +1,6 @@
 .droppable_play_input_card, .droppable_play_inverted_input_card {
     width: 7.64vw;
     height: 10vw;
-    padding-left: 4%;
     display: flex;
     justify-content: center;
     align-items: center;

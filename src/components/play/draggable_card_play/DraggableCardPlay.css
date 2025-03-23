@@ -1,8 +1,8 @@
 .draggable_card_play_container {
-    width: calc(2rem + 3vw);
+    width: calc(2rem + 4vw);
     height: auto;
     position: relative;
-    transition: transform 0.3s;
+    transition: none;
 }
 
 .draggable_card_play_image {
@@ -11,7 +11,7 @@
 }
 
 .draggable_card_play_container_active {
-    width: calc(2rem + 4vw);
+    width: calc(2rem + 5vw);
     height: auto;
     position: relative;
     z-index: 10;

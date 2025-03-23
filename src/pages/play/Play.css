@@ -6,11 +6,12 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    background-image: url('../../assets/images/screen/background.png');
+    background-image: url('../../assets/images/screen/background_play.jpeg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     overflow: hidden;
     cursor: url('../../assets/images/cursor/cursor_icons_0.png'), auto;
+    filter: sepia(10%) contrast(150%) brightness(100%);
 }
 
 .play_container::before {
@@ -18,11 +19,23 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 1;
-    background: var(--filter-tv);
     top: 0;
-    z-index: 97;
+    left: 0;
     pointer-events: none;
+    z-index: 100;
+    animation: glowAnimation 1s infinite alternate ease;
+}
+
+@keyframes glowAnimation {
+    0% {
+        background: radial-gradient(circle at 55% center, rgba(255, 130, 0, 0.2) 0%, rgba(255, 130, 0, 0.2) 40%, rgba(0, 0, 0, 1) 98%);
+    }
+    50% {
+        background: radial-gradient(circle at 55% center, rgba(255, 130, 0, 0.2) 0%, rgba(255, 130, 0, 0.2) 40%, rgba(0, 0, 0, 1) 99%);
+    }
+    100% {
+        background: radial-gradient(circle at 55% center, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.2) 40%, rgba(0, 0, 0, 1) 100%);
+    }
 }
 
 .play_container::after {
@@ -30,11 +43,15 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 0.06;
-    background: var(--filter-static);
     top: 0;
-    z-index: 98;
+    left: 0;
+    z-index: 999;
     pointer-events: none;
+    background:
+        radial-gradient(circle, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 100%),
+        var(--filter-tv),
+        var(--filter-static);
+    opacity: 0.1;
 }
 
 .play_header {
@@ -59,9 +76,12 @@
 
 .play_table_content {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 86%;
-    height: 45% !important;
-    margin-top: calc(0.5rem + 6vh);
+    height: 45%;
+    margin-bottom: calc(5rem + 12vh);
+    margin-top: calc(1rem + 12vh);
 }
 
 .play_general_actions {
@@ -151,7 +171,6 @@
 .play_footer {
     display: flex;
     justify-content: center;
-    margin-top: calc(5rem + 12vh);
     margin-bottom: calc(2rem + 5vh);
 }
 

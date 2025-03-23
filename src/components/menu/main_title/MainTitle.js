@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // images
-import title from '../../../assets/images/others/title.png';
-import titleSpade from '../../../assets/images/others/title_spade.png';
+import title from '../../../assets/images/menu/title/title.png';
+import titleSpade from '../../../assets/images/menu/title/title_spade.png';
 
 // sounds
 import titleRattle from '../../../assets/sounds/title_rattle.wav';
