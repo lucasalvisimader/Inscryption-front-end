@@ -15,19 +15,19 @@ import cardSlot from '../../assets/images/game/slots/card_slot.png';
 import cardQueue from '../../assets/images/game/slots/card_queue_slot.png';
 
 // scale images
-import minusTest from '../../assets/images/menu/options/minus_enable.png';
-import plusTest from '../../assets/images/menu/options/plus_enable.png';
-import scaleStatic from '../../assets/images/game/scale/scale_static.png';
-import scalePlayer1 from '../../assets/images/game/scale/scale_player_1.png';
-import scaleEnemy1 from '../../assets/images/game/scale/scale_enemy_1.png';
-import scalePlayer2 from '../../assets/images/game/scale/scale_player_2.png';
-import scaleEnemy2 from '../../assets/images/game/scale/scale_enemy_2.png';
-import scalePlayer3 from '../../assets/images/game/scale/scale_player_3.png';
-import scaleEnemy3 from '../../assets/images/game/scale/scale_enemy_3.png';
-import scalePlayer4 from '../../assets/images/game/scale/scale_player_4.png';
-import scaleEnemy4 from '../../assets/images/game/scale/scale_enemy_4.png';
-import scalePlayer5 from '../../assets/images/game/scale/scale_player_5.png';
-import scaleEnemy5 from '../../assets/images/game/scale/scale_enemy_5.png';
+// import minusTest from '../../assets/images/menu/options/minus_enable.png';
+// import plusTest from '../../assets/images/menu/options/plus_enable.png';
+// import scaleStatic from '../../assets/images/game/scale/scale_static.png';
+// import scalePlayer1 from '../../assets/images/game/scale/scale_player_1.png';
+// import scaleEnemy1 from '../../assets/images/game/scale/scale_enemy_1.png';
+// import scalePlayer2 from '../../assets/images/game/scale/scale_player_2.png';
+// import scaleEnemy2 from '../../assets/images/game/scale/scale_enemy_2.png';
+// import scalePlayer3 from '../../assets/images/game/scale/scale_player_3.png';
+// import scaleEnemy3 from '../../assets/images/game/scale/scale_enemy_3.png';
+// import scalePlayer4 from '../../assets/images/game/scale/scale_player_4.png';
+// import scaleEnemy4 from '../../assets/images/game/scale/scale_enemy_4.png';
+// import scalePlayer5 from '../../assets/images/game/scale/scale_player_5.png';
+// import scaleEnemy5 from '../../assets/images/game/scale/scale_enemy_5.png';
 
 // translation
 import { useTranslation } from 'react-i18next';
@@ -38,7 +38,7 @@ import { useTranslation } from 'react-i18next';
 // external
 import { v4 as uuidV4 } from 'uuid';
 import { DndContext } from '@dnd-kit/core';
-import { Inventory } from '../../components/play/inventory_container/Inventory';
+// import { Inventory } from '../../components/play/inventory_container/Inventory';
 
 const Play = () => {
     const [cardsData, setCardsData] = useState([]);
@@ -46,11 +46,11 @@ const Play = () => {
     const [deckCards, setDeckCards] = useState([]);
     const [deckSquirrelCards, setDeckSquirrelCards] = useState([]);
     const [droppableAreas, setDroppableAreas] = useState(Array.from({ length: 12 }, (_, index) => ({ key: index + 1, cards: [] })));
-    const [playerPoints, setPlayerPoints] = useState(0);
-    const [enemyPoints, setEnemyPoints] = useState(0);
-    const [scaleTiltedSide, setScaleTiltedSide] = useState(0);
-    const [currentScaleImage, setCurrentScaleImage] = useState(scaleStatic);
-    const [styleScale, setStyleScale] = useState({backgroundImage: `url(${currentScaleImage})`});
+    // const [playerPoints, setPlayerPoints] = useState(0);
+    // const [enemyPoints, setEnemyPoints] = useState(0);
+    // const [scaleTiltedSide, setScaleTiltedSide] = useState(0);
+    // const [currentScaleImage, setCurrentScaleImage] = useState(scaleStatic);
+    // const [styleScale, setStyleScale] = useState({backgroundImage: `url(${currentScaleImage})`});
     const boardRef = useRef();
     const playHeaderRef = useRef();
     const playTableContentRef = useRef();
@@ -227,37 +227,37 @@ const Play = () => {
         );
     }
 
-    const updateScaleImage = (playerPoints, enemyPoints) => {
-        const diff = Math.max(playerPoints, enemyPoints) - Math.min(playerPoints, enemyPoints);
-        const newScaleImage = (() => {
-            switch (diff) {
-                case 0: return scaleStatic;
-                case 1: return playerPoints > enemyPoints ? scalePlayer1 : scaleEnemy1;
-                case 2: return playerPoints > enemyPoints ? scalePlayer2 : scaleEnemy2;
-                case 3: return playerPoints > enemyPoints ? scalePlayer3 : scaleEnemy3;
-                case 4: return playerPoints > enemyPoints ? scalePlayer4 : scaleEnemy4;
-                default: {
-                    console.log("Você " + (playerPoints > enemyPoints ? "ganhou!" : "perdeu!"));
-                    return playerPoints > enemyPoints ? scalePlayer5 : scaleEnemy5;
-                }
-            }
-        })();
-        setScaleTiltedSide(playerPoints > enemyPoints ? diff : diff * -1);
-        console.log(scaleTiltedSide)
-        setCurrentScaleImage(newScaleImage);
-        setStyleScale({backgroundImage: `url(${newScaleImage})`});
-    }
+    // const updateScaleImage = (playerPoints, enemyPoints) => {
+    //     const diff = Math.max(playerPoints, enemyPoints) - Math.min(playerPoints, enemyPoints);
+    //     const newScaleImage = (() => {
+    //         switch (diff) {
+    //             case 0: return scaleStatic;
+    //             case 1: return playerPoints > enemyPoints ? scalePlayer1 : scaleEnemy1;
+    //             case 2: return playerPoints > enemyPoints ? scalePlayer2 : scaleEnemy2;
+    //             case 3: return playerPoints > enemyPoints ? scalePlayer3 : scaleEnemy3;
+    //             case 4: return playerPoints > enemyPoints ? scalePlayer4 : scaleEnemy4;
+    //             default: {
+    //                 console.log("Você " + (playerPoints > enemyPoints ? "ganhou!" : "perdeu!"));
+    //                 return playerPoints > enemyPoints ? scalePlayer5 : scaleEnemy5;
+    //             }
+    //         }
+    //     })();
+    //     setScaleTiltedSide(playerPoints > enemyPoints ? diff : diff * -1);
+    //     console.log(scaleTiltedSide)
+    //     setCurrentScaleImage(newScaleImage);
+    //     // setStyleScale({backgroundImage: `url(${newScaleImage})`});
+    // }
 
-    const addPointScale = (qtyPoints, isPlayerPoint) => {
-        const newPoints = qtyPoints;
-        isPlayerPoint ? setPlayerPoints(() => {
-            updateScaleImage(newPoints, enemyPoints);
-            return newPoints;
-        }) : setEnemyPoints(() => {
-            updateScaleImage(playerPoints, newPoints);
-            return newPoints;
-        });
-    }
+    // const addPointScale = (qtyPoints, isPlayerPoint) => {
+    //     const newPoints = qtyPoints;
+    //     isPlayerPoint ? setPlayerPoints(() => {
+    //         updateScaleImage(newPoints, enemyPoints);
+    //         return newPoints;
+    //     }) : setEnemyPoints(() => {
+    //         updateScaleImage(playerPoints, newPoints);
+    //         return newPoints;
+    //     });
+    // }
 
     return (<>
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} autoScroll={false}>
