@@ -1,1 +1,1 @@
-This repository is the front end part of a project I'm developing to try to recreate the game Inscryption by Daniel Mullins using React.js just for fun. It was also my the first time working with React, so the code was remade several times.
+This repository is part of a project I'm developing to try to recreate the game Inscryption by Daniel Mullins using React.js just for fun. It was also my the first time working with React, so the code was remade several times.
