@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from 'react';
 // components
 import { DraggableCardPlay } from '../../components/play/draggable_card_play/DraggableCardPlay';
 import { DroppableAreaPlay } from '../../components/play/droppable_area_play/DroppableAreaPlay';
+// import { Inventory } from '../../components/play/inventory_container/Inventory';
 
 // images
 import backDeck from '../../assets/images/card/others/back.png';
@@ -32,13 +33,11 @@ import cardQueue from '../../assets/images/game/slots/card_queue_slot.png';
 // translation
 import { useTranslation } from 'react-i18next';
 
-// services
-// import { CardService } from '../../service/CardService';
-
 // external
 import { v4 as uuidV4 } from 'uuid';
 import { DndContext } from '@dnd-kit/core';
-// import { Inventory } from '../../components/play/inventory_container/Inventory';
+import Cookies from 'js-cookie';
+import CryptoJS from 'crypto-js';
 
 const Play = () => {
     const [cardsData, setCardsData] = useState([]);
@@ -57,38 +56,44 @@ const Play = () => {
     const playFooterRef = useRef();
     const { t } = useTranslation();
 
-        // This is an use effect made to set the player cards based on which cards they have in the database.
-    // useEffect(() => {
-    //     const setCardsFunction = async () => {
-    //         const cardsGross = await CardService.listFromUser();
-    //         setCardsData(cardsGross);
-    //     }
-    //     setCardsFunction();
-    // }, []);
+    const SECRET_KEY = 'chave-secreta-bem-segura';
+    
     useEffect(() => {
         const fetchCards = async () => {
-            const cardsGross = {
-                data: [
-                    [
-                        { id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0 },
-                        { id: 5, name: 'WOLF', power: 3, health: 2, sigilsTypes: ['NONE'], imageType: 'WOLF', priceType: -2 },
-                        { id: 6, name: 'WOLF CUB', power: 1, health: 1, sigilsTypes: ['FLEDGELING'], imageType: 'WOLFCUB', priceType: -1 }
-                    ],
-                    [
-                        { id: 2, name: 'STOAT', power: 1, health: 2, sigilsTypes: ['NONE'], imageType: 'STOAT', priceType: -1 },
-                        { id: 3, name: 'STINKBUG', power: 0, health: 2, sigilsTypes: ['STINKY'], imageType: 'STINKBUG', priceType: 2 },
-                        { id: 4, name: 'STUNTED WOLF', power: 2, health: 2, sigilsTypes: ['NONE'], imageType: 'STUNTEDWOLF', priceType: -1 }
-                    ],
-                    Array(10).fill({ id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0 })
-                ]
+            const encryptedCards = Cookies.get('cards');
+            if (encryptedCards) {
+                // Decrypting data
+                const bytes = CryptoJS.AES.decrypt(encryptedCards, SECRET_KEY);
+                const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+                setCardsData(decryptedData);
+            } else {
+                const cardsGross = {
+                    data: [
+                        [
+                            { id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0 },
+                            { id: 5, name: 'WOLF', power: 3, health: 2, sigilsTypes: ['NONE'], imageType: 'WOLF', priceType: -2 },
+                            { id: 6, name: 'WOLF CUB', power: 1, health: 1, sigilsTypes: ['FLEDGELING'], imageType: 'WOLFCUB', priceType: -1 }
+                        ],
+                        [
+                            { id: 2, name: 'STOAT', power: 1, health: 2, sigilsTypes: ['NONE'], imageType: 'STOAT', priceType: -1 },
+                            { id: 3, name: 'STINKBUG', power: 0, health: 2, sigilsTypes: ['STINKY'], imageType: 'STINKBUG', priceType: 2 },
+                            { id: 4, name: 'STUNTED WOLF', power: 2, health: 2, sigilsTypes: ['NONE'], imageType: 'STUNTEDWOLF', priceType: -1 }
+                        ],
+                        Array(10).fill({ id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL', priceType: 0 })
+                    ]
+                }
+                setCardsData(cardsGross.data);
+                // Encrypting data
+                const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(cardsGross.data), SECRET_KEY).toString();
+                Cookies.set('cards', encryptedData, { expires: 99999999 });
             }
-            setCardsData(cardsGross.data);
         }
         fetchCards();
     }, []);
 
     // This is an use effect made to used to put an unique key in each one of the cards. It's also used to separate in different variables current player cards and deck cards.
     useEffect(() => {
+        Cookies.get('cards') ? Cookies.get('cards') : Cookies.set(cardsData)
         if (cardsData.length) {
             const [initialPlayerCards, initialDeckCards, initialSquirrelDeckCards] = cardsData;
             const assignKeys = (cards) => cards.map(card => ({ ...card, key: uuidV4() }));
