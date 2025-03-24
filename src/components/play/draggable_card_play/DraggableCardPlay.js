@@ -20,7 +20,7 @@ export const DraggableCardPlay = ({ id, card }) => {
     const fontSize = useMemo(() => `calc(1.3rem - ${card.name.length / 3}px)`, [card.name.length]);
     const style = useMemo(() => ({
         background: `url('/images/imageType/${card.imageType}.png')`,
-        marginLeft: `calc(${card.lengthCard} * -0.16rem - 0.4vw)`,
+        marginLeft: `calc(${card.lengthCard >= 15 ? 15 + (0.02 * card.lengthCard) : card.lengthCard} * -0.25rem - 0.4vw)`,
         transform: CSS.Translate.toString(transform),
         transition: transform ? "none" : "transform 0.3s"
     }), [transform, card.imageType, card.lengthCard]);
