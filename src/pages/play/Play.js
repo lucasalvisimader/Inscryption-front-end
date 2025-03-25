@@ -10,8 +10,8 @@ import { DroppableAreaPlay } from '../../components/play/droppable_area_play/Dro
 // import { Inventory } from '../../components/play/inventory_container/Inventory';
 
 // images
-import backDeck from '../../assets/images/card/others/back.png';
-import backSquirrelDeck from '../../assets/images/card/others/back_squirrel.png';
+import backDeck from '../../assets/images/card/back/back.png';
+import backSquirrelDeck from '../../assets/images/card/back/back_squirrel.png';
 import cardSlot from '../../assets/images/game/slots/card_slot.png';
 import cardQueue from '../../assets/images/game/slots/card_queue_slot.png';
 
@@ -114,20 +114,26 @@ const Play = () => {
     const handleDragStart = () => {}
 
     const handleDragEnd = (result) => {
-        const {active, over} = result;
+        const { active, over } = result;
         if (active && over) {
             const droppableAreaKey = parseInt(over.id.split("_")[1]);
             const cardKey = active.id;
-            
+    
             const updatedDroppableAreas = droppableAreas.map((area) => {
                 if (area.key === droppableAreaKey && area.cards.length === 0) {
-                    const draggableCard = (<DraggableCardPlay className="play_cards" id={cardKey} key={cardKey} card={playerCards.find((card) => card.key === cardKey)} boardRef={boardRef}/>);
+                    const draggableCard = (
+                        <DraggableCardPlay className="play_cards" 
+                            id={cardKey} key={cardKey} 
+                            card={{ ...playerCards.find((card) => card.key === cardKey), inDroppable: true }} 
+                            boardRef={boardRef}
+                        />
+                    );
                     area.cards.push(draggableCard);
                     setPlayerCards(playerCards.filter((card) => card.key !== cardKey));
                 }
                 return area;
             });
-
+    
             setDroppableAreas(updatedDroppableAreas);
         }
     }
