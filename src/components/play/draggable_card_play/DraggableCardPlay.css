@@ -36,7 +36,6 @@
     height: 3.34rem;
     display: flex;
     justify-content: space-between;
-    background: url("../../../assets/images/card/footer/footer.png");
     background-size: cover;
 }
 

@@ -2,7 +2,7 @@
 import './DraggableCardPlay.css';
 
 // react
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 
 // translation
 import { useTranslation } from 'react-i18next';
@@ -22,7 +22,23 @@ export const DraggableCardPlay = ({ id, card }) => {
         marginLeft: `calc(${!card.inDroppable && card.lengthCard >= 15 ? 15 + (0.02 * card.lengthCard) : card.inDroppable ? 2.5 : card.lengthCard} * -0.25rem - 0.4vw)`,
         transform: CSS.Translate.toString(transform),
         transition: transform ? "none" : "transform 0.3s"
-    }), [transform, card.imageType, card.lengthCard]);
+    }), [transform, card.imageType, card.lengthCard, card.inDroppable]);
+
+    const footerStyle = useMemo(() => {
+        if (card.imageType.toLowerCase() === "amalgam") {
+            return { backgroundImage: `url(${require('../../../assets/images/card/footer/avian_canine_hooved_reptile_insect_footer_rare.png')})` };
+        } else if (card.imageType.toLowerCase() === "greatwhite") {
+            return { backgroundImage: `url(${require('../../../assets/images/card/footer/blood_footer.png')})` };
+        } else if (card.imageType.toLowerCase() === "thesmoke" || card.imageType.toLowerCase() === "greatersmoke") {
+            return { backgroundImage: `url(${require('../../../assets/images/card/footer/smoke_footer.png')})` };
+        } else if (
+            ["uruyali", "amoeba", "amalgam", "moleman", "strangelarva", "strangepupa", "mothman", "mantisgod", "geck", "ouroboros", "child13"].includes(card.imageType.toLowerCase())
+        ) {
+            return { backgroundImage: `url(${require('../../../assets/images/card/footer/footer_rare.png')})` };
+        } else {
+            return { backgroundImage: `url(${require('../../../assets/images/card/footer/footer.png')})` };
+        }
+    }, [card.imageType]);
 
     const CardHeader = ({ fontSize }) => (
         <div className={`draggable_card_play_header`}>
@@ -40,7 +56,7 @@ export const DraggableCardPlay = ({ id, card }) => {
     );
     
     const CardFooter = () => (
-        <div className={`draggable_card_play_footer`}>
+        <div className={`draggable_card_play_footer`} style={footerStyle}>
             <span className='draggable_card_play_power'>{card.power}</span>
             <span className='draggable_card_play_health'>{card.health}</span>
         </div>
