@@ -104,28 +104,6 @@ const Play = () => {
     }, [cardsData]);
 
     useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (event.key.toLowerCase() === "w" && playHeaderRef.current) {
-                playHeaderRef.current.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-        
-        const handleKeyUp = (event) => {
-            if (event.key.toLowerCase() === "s" && playTableContentRef.current) {
-                playTableContentRef.current.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        document.addEventListener("keydown", handleKeyDown);
-        document.addEventListener("keyup", handleKeyUp);
-
-        return () => {
-            document.removeEventListener("keydown", handleKeyDown);
-            document.removeEventListener("keyup", handleKeyUp);
-        };
-    }, []);
-
-    useEffect(() => {
         setTimeout(() => {
             if (playFooterRef.current) {
                 playFooterRef.current.scrollIntoView({ behavior: 'smooth' });

@@ -1,5 +1,5 @@
 .draggable_card_play_container {
-    width: calc(2rem + 4vw);
+    width: 7rem;
     height: auto;
     position: relative;
     transition: none;
@@ -11,7 +11,7 @@
 }
 
 .draggable_card_play_container_active {
-    width: calc(2rem + 5vw);
+    width: 8rem;
     height: auto;
     position: relative;
     z-index: 10;
@@ -24,35 +24,45 @@
 
 .draggable_card_play_header {
     width: 100%;
-    height: auto;
+    height: 1.7rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+    background: url("../../../assets/images/card/others/header.png");
+    background-size: cover;
 }
 
 .draggable_card_play_footer {
     width: 100%;
-    height: auto;
+    height: 3.34rem;
     display: flex;
     justify-content: space-between;
+    background: url("../../../assets/images/card/others/footer.png");
+    background-size: cover;
 }
 
+.draggable_card_play_footer_active {
+    height: 3.82rem;
+}
+
+.draggable_card_play_name,
 .draggable_card_play_power,
-.draggable_card_play_health,
-.draggable_card_play_name {
-    position: absolute;
+.draggable_card_play_health {
     color: var(--black);
 }
 
 .draggable_card_play_name {
-    top: 3%;
+    display: flex;
+    align-self: center;
+    padding-top: 10px;
 }
 
 .draggable_card_play_power {
-    left: 10%;
-    bottom: 6%;
+    margin-left: 15px;
+    margin-top: 15px;
 }
 
 .draggable_card_play_health {
-    right: 10%;
-    bottom: 9%;
+    margin-right: 15px;
+    margin-top: 15px;
 }
