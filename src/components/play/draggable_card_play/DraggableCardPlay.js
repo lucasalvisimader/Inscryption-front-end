@@ -14,7 +14,6 @@ import { CSS } from '@dnd-kit/utilities';
 
 export const DraggableCardPlay = ({ id, card }) => {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({ id, disabled: card.isDisabled });
-    const [isHovered, setIsHovered] = useState(false);
     const { t } = useTranslation();
 
     const fontSize = useMemo(() => `calc(1.1rem - ${card.name.length / 3}px)`, [card.name.length]);
@@ -24,8 +23,6 @@ export const DraggableCardPlay = ({ id, card }) => {
         transform: CSS.Translate.toString(transform),
         transition: transform ? "none" : "transform 0.3s"
     }), [transform, card.imageType, card.lengthCard]);
-
-    const toggleHover = (state) => setIsHovered(state);
 
     const CardHeader = ({ fontSize }) => (
         <div className={`draggable_card_play_header`}>
@@ -43,19 +40,17 @@ export const DraggableCardPlay = ({ id, card }) => {
     );
     
     const CardFooter = () => (
-        <div className={`draggable_card_play_footer ${isHovered ? 'draggable_card_play_footer_active' : ''}`}>
+        <div className={`draggable_card_play_footer`}>
             <span className='draggable_card_play_power'>{card.power}</span>
             <span className='draggable_card_play_health'>{card.health}</span>
         </div>
     );
 
     return (
-        <div className={`draggable_card_play_container${isHovered ? '_active' : ''}`}
+        <div className={`draggable_card_play_container`}
             ref={setNodeRef} style={style} 
             {...listeners} {...attributes} 
-            id={`draggable_card_play_container_${id}`} 
-            onMouseEnter={() => toggleHover(true)} 
-            onMouseLeave={() => toggleHover(false)}>
+            id={`draggable_card_play_container_${id}`}>
             <CardHeader fontSize={fontSize} />
             <CardImage altText={t('card_image')} />
             <CardFooter />

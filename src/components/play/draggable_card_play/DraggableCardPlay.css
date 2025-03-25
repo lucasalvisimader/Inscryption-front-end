@@ -5,21 +5,16 @@
     transition: none;
 }
 
-.draggable_card_play_image {
-    width: 100%;
-    height: auto;
-}
-
-.draggable_card_play_container_active {
+.draggable_card_play_container:hover {
     width: 8rem;
     height: auto;
-    position: relative;
     z-index: 10;
     cursor: url('../../../assets/images/cursor/cursor_icons_2.png'), auto !important;
 }
 
-.draggable_card_play.no-margin {
-    margin-left: calc(-0.25rem - 0.4vw) !important;
+.draggable_card_play_image {
+    width: 100%;
+    height: auto;
 }
 
 .draggable_card_play_on_click_card_mouse {
@@ -45,7 +40,7 @@
     background-size: cover;
 }
 
-.draggable_card_play_footer_active {
+.draggable_card_play_container:hover > .draggable_card_play_footer {
     height: 3.82rem;
 }
 
