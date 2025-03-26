@@ -5,6 +5,15 @@
     transition: none;
 }
 
+/* .draggable_card_play_container::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    background: url('../../../assets/images/card/others/ankh_sacrifice.png');
+} */
+
 .draggable_card_play_container:hover {
     width: 8rem;
     height: auto;
