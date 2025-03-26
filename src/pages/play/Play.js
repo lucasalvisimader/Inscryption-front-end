@@ -30,6 +30,9 @@ import cardQueue from '../../assets/images/game/slots/card_queue_slot.png';
 // import scalePlayer5 from '../../assets/images/game/scale/scale_player_5.png';
 // import scaleEnemy5 from '../../assets/images/game/scale/scale_enemy_5.png';
 
+// json
+import json from '../../assets/jsons/cards.json';
+
 // translation
 import { useTranslation } from 'react-i18next';
 
@@ -70,16 +73,16 @@ const Play = () => {
                 const cardsGross = {
                     data: [
                         [
-                            { id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL'},
-                            { id: 5, name: 'WOLF', power: 3, health: 2, sigilsTypes: ['NONE'], imageType: 'WOLF'},
-                            { id: 6, name: 'WOLF CUB', power: 1, health: 1, sigilsTypes: ['FLEDGELING'], imageType: 'WOLFCUB'}
+                            json[6],
+                            json[4],
+                            json[7]
                         ],
                         [
-                            { id: 2, name: 'STOAT', power: 1, health: 2, sigilsTypes: ['NONE'], imageType: 'STOAT' },
-                            { id: 3, name: 'STINKBUG', power: 0, health: 2, sigilsTypes: ['STINKY'], imageType: 'STINKBUG' },
-                            { id: 4, name: 'STUNTED WOLF', power: 2, health: 2, sigilsTypes: ['NONE'], imageType: 'STUNTEDWOLF'}
+                            json[1],
+                            json[2],
+                            json[3]
                         ],
-                        Array(10).fill({ id: 1, name: 'SQUIRREL', power: 0, health: 2, sigilsTypes: ['NONE'], imageType: 'SQUIRREL'})
+                        Array(10).fill(json[6])
                     ]
                 }
                 setCardsData(cardsGross.data);
