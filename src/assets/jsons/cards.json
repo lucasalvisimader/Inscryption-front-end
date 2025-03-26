@@ -1,0 +1,22 @@
+{
+    "1": {"id": 1, "name": "STOAT", "power": 1, "health": 3, "sigilsTypes": ["NONE"], "imageType": "STOAT"},
+    "2": {"id": 2, "name": "STINKBUG", "power": 1, "health": 2, "sigilsTypes": ["STINKY"], "imageType": "STINKBUG"},
+    "3": {"id": 3, "name": "STUNTED WOLF", "power": 2, "health": 2, "sigilsTypes": ["NONE"], "imageType": "STUNTEDWOLF"},
+    "4": {"id": 4, "name": "WOLF", "power": 3, "health": 2, "sigilsTypes": ["NONE"], "imageType": "WOLF"},
+    "5": {"id": 5, "name": "RIVER SNAPPER", "power": 1, "health": 6, "sigilsTypes": ["NONE"], "imageType": "RIVERSNAPPER"},
+    "6": {"id": 6, "name": "SQUIRREL", "power": 0, "health": 1, "sigilsTypes": ["NONE"], "imageType": "SQUIRREL"},
+    "7": {"id": 7, "name": "WOLF CUB", "power": 1, "health": 1, "sigilsTypes": ["FLEDGELING"], "imageType": "WOLFCUB"},
+    "8": {"id": 8, "name": "COYOTE", "power": 2, "health": 1, "sigilsTypes": ["NONE"], "imageType": "COYOTE"},
+    "9": {"id": 9, "name": "BLOODHOUND", "power": 2, "health": 3, "sigilsTypes": ["GUARDIAN"], "imageType": "BLOODHOUND"},
+    "10": {"id": 10, "name": "ALPHA", "power": 1, "health": 2, "sigilsTypes": ["LEADER"], "imageType": "ALPHA"},
+    "11": {"id": 11, "name": "URAYULI", "power": 7, "health": 7, "sigilsTypes": ["NONE"], "imageType": "URAYULI"},
+    "12": {"id": 12, "name": "GRIZZLY", "power": 4, "health": 6, "sigilsTypes": ["NONE"], "imageType": "GRIZZLY"},
+    "13": {"id": 13, "name": "GREAT WHITE", "power": 4, "health": 2, "sigilsTypes": ["WATERBORNE"], "imageType": "GREATWHITE"},
+    "14": {"id": 14, "name": "AMOEBA", "power": 1, "health": 2, "sigilsTypes": ["AMORPHOUS"], "imageType": "AMOEBA"},
+    "15": {"id": 15, "name": "AMALGAM", "power": 3, "health": 3, "sigilsTypes": ["NONE"], "imageType": "AMALGAM"},
+    "16": {"id": 16, "name": "MOLE MAN", "power": 0, "health": 6, "sigilsTypes": ["MIGHTYLEAP", "BURROWER"], "imageType": "MOLEMAN"},
+    "17": {"id": 17, "name": "TURKEY VULTURE", "power": 3, "health": 3, "sigilsTypes": ["AIRBORNE"], "imageType": "TURKEYVULTURE"},
+    "18": {"id": 18, "name": "SPARROW", "power": 1, "health": 2, "sigilsTypes": ["AIRBORNE"], "imageType": "SPARROW"},
+    "19": {"id": 19, "name": "RAVEN EGG", "power": 0, "health": 2, "sigilsTypes": ["FLEDGELING"], "imageType": "RAVENEGG"},
+    "20": {"id": 20, "name": "RAVEN", "power": 2, "health": 3, "sigilsTypes": ["AIRBORNE"], "imageType": "RAVEN"}
+}
