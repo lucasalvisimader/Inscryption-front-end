@@ -14,7 +14,7 @@
     background: url('../../../assets/images/card/others/ankh_sacrifice.png');
 } */
 
-.draggable_card_play_container:hover {
+.draggable_card_play_container_false:hover {
     width: 8rem;
     height: auto;
     z-index: 10;
@@ -49,7 +49,7 @@
     background-size: cover;
 }
 
-.draggable_card_play_container:hover > .draggable_card_play_footer {
+.draggable_card_play_container_false:hover > .draggable_card_play_footer {
     height: 3.82rem;
 }
 

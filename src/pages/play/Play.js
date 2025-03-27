@@ -75,7 +75,8 @@ const Play = () => {
                         [
                             json[6],
                             json[4],
-                            json[7]
+                            json[7],
+                            json[60]
                         ],
                         [
                             json[1],
