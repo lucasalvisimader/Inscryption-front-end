@@ -88,7 +88,7 @@
     width: 25%;
 }
 
-.play_scale {
+/* .play_scale {
     position: absolute;
     width: 16.1%;
     height: 30%;
@@ -150,7 +150,7 @@
 
 .play_minus_test {
     left: 10%;
-}
+} */
 
 .play_board {
     display: flex;
@@ -187,25 +187,17 @@
 }
 
 .play_deck_cards {
-    width: calc(2rem + 4vw);
-    height: auto;
     margin-left: 12vw;
     margin-right: 0.5vw;
 }
 
 .play_deck_cards_image {
-    width: 100%;
+    width: 7rem;
     height: auto;
-}
-
-.play_deck_squirrel_cards {
-    width: calc(2rem + 4vw);
-    height: auto;
-    margin-right: 8vw;
 }
 
 .play_deck_squirrel_cards_image {
-    width: 100%;
+    width: 7rem;
     height: auto;
 }
 
@@ -213,14 +205,10 @@
     cursor: url('../../assets/images/cursor/cursor_icons_2.png'), auto !important;
 }
 
-.play_enemy_input_card, .play_enemy_inverted_input_card {
-    width: 7.64vw;
-    height: 10vw;
+.play_enemy_input_card {
+    width: 6.88vw;
+    height: 9vw;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.play_enemy_inverted_input_card {
-    transform: rotateX(180deg);
 }

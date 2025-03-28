@@ -12,8 +12,8 @@ import { DroppableAreaPlay } from '../../components/play/droppable_area_play/Dro
 // images
 import backDeck from '../../assets/images/card/back/back.png';
 import backSquirrelDeck from '../../assets/images/card/back/back_squirrel.png';
-import cardSlot from '../../assets/images/game/slots/card_slot.png';
 import cardQueue from '../../assets/images/game/slots/card_queue_slot.png';
+import cardUpcoming from '../../assets/images/game/slots/card_slot_upcoming.png';
 
 // scale images
 // import minusTest from '../../assets/images/menu/options/minus_enable.png';
@@ -47,6 +47,7 @@ const Play = () => {
     const [playerCards, setPlayerCards] = useState([]);
     const [deckCards, setDeckCards] = useState([]);
     const [deckSquirrelCards, setDeckSquirrelCards] = useState([]);
+    const [deckClickedTurn, setDeckClickedTurn] = useState(false);
     const [droppableAreas, setDroppableAreas] = useState(Array.from({ length: 12 }, (_, index) => ({ key: index + 1, cards: [] })));
     // const [playerPoints, setPlayerPoints] = useState(0);
     // const [enemyPoints, setEnemyPoints] = useState(0);
@@ -144,49 +145,62 @@ const Play = () => {
 
     // This function is used to handle onClick actions on both deck cards.
     const handleClickDecks = (isSquirrelDeck) => {
-        const updatedPlayerCards = [...playerCards];
-        const updatedDeckCards = isSquirrelDeck ? [...deckSquirrelCards] : [...deckCards];
+        if (!deckClickedTurn) {
+            const updatedPlayerCards = [...playerCards];
+            const updatedDeckCards = isSquirrelDeck ? [...deckSquirrelCards] : [...deckCards];
+            
+            if (updatedDeckCards.length > 0) {
+                updatedPlayerCards.push(updatedDeckCards.pop());
+                setPlayerCards(updatedPlayerCards);
+                isSquirrelDeck ? setDeckSquirrelCards(updatedDeckCards) : setDeckCards(updatedDeckCards);
+            }
+            setDeckClickedTurn(true);
+        } else {
+            alert("Already bought!")
+        }
+    }
 
-        if (updatedDeckCards.length > 0) {
-            updatedPlayerCards.push(updatedDeckCards.pop());
-            setPlayerCards(updatedPlayerCards);
-            isSquirrelDeck ? setDeckSquirrelCards(updatedDeckCards) : setDeckCards(updatedDeckCards);
+    // This function render the props from the footer and board cards
+    const renderPropsCards = (card, isDisabled) => {
+        card.isDisabled = isDisabled;
+        return {
+            id: card.key,
+            card: card,
+            deckClickedTurn: deckClickedTurn,
+            setDeckClickedTurn: setDeckClickedTurn
         }
     }
 
     // This function returns the cards the player have in their hand.
     const renderCards = () => {
         return playerCards.map((card) => {
-            card.lengthCard = playerCards.length;
-            card.isDisabled = false;
-            return (<DraggableCardPlay className="play_cards" key={card.key} id={card.key} card={card} boardRef={boardRef}/>);
+            const props = renderPropsCards(card, false);
+            return (<DraggableCardPlay className="play_cards" {...props} key={card.key} id={card.key} card={card} boardRef={boardRef}/>);
         });
     };
-
-    // This function generate the props that are going to the draggable cards
-    const generateDraggableCardPlayProps = (card) => {
-        return {
-            id: card.key,
-            key: card.key,
-            card: card.props.card
-        }
-    }
-
+    
     // This function was made to render each row of the board, being the first 2 rows the enemy's side, which the player can't place a card there, and the last row the player side.
     const renderRowArea = (row) => {
         const startOfRow = (row - 1) * 4;
         return droppableAreas.slice(startOfRow, startOfRow + 4).map((area) => {
             // This arrow function makes all cards inside of the board disabled, that means the card can't be taken out of the board.
-            const cards = area.cards.map((card) => {
-                card.props.card.isDisabled = true;
-                const props = generateDraggableCardPlayProps(card);
-                return (<DraggableCardPlay className="play_cards" {...props} card={card.props.card}/>);
+            const cards = area.cards.map((area) => {
+                if (area && area.props && area.props.card) {
+                    const card = area.props.card
+                    const props = renderPropsCards(card, true);
+                    return (<DraggableCardPlay className="play_cards" {...props} key={card.key} card={card}/>);
+                }
             });
 
             if (row !== 3) {
-                const styleEnemyAreaBoard = {background: `url(${row === 2 ? cardSlot : cardQueue})`, backgroundSize: "contain", backgroundRepeat: "no-repeat"};
+                const styleEnemyAreaBoard = ({
+                    background: `url(${row === 2 ? cardUpcoming : cardQueue})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat'
+                });
+
                 return (
-                    <div className={`play_enemy${row === 2 ? '_inverted' : ''}_input_card`} style={styleEnemyAreaBoard} key={area.key} id={`play_${area.key}_droppable`}>
+                    <div className={`play_enemy_input_card`} style={styleEnemyAreaBoard} key={area.key} id={`play_${area.key}_droppable`}>
                         {cards}
                     </div>
                 );
@@ -218,6 +232,73 @@ const Play = () => {
                 <img className={`play_deck${textSquirrel}_cards_image`} src={isSquirrelDeck ? backSquirrelDeck : backDeck} alt={isSquirrelDeck ? t('deck_image_squirrel') : t('deck_image')} />
             </div>
         );
+    }
+
+    const populateEnemyUpcoming = () => {
+        const cardEntries = Object.entries(json); // Converte o objeto em uma lista de pares [key, value]
+    
+        if (cardEntries.length > 0) { // Garante que há cartas disponíveis
+            setDroppableAreas((prevAreas) => {
+                // Contar quantas cartas já estão na mesa
+                const totalCardsOnBoard = prevAreas.reduce((count, area) => count + area.cards.length, 0);
+    
+                if (totalCardsOnBoard >= 2) return prevAreas; // Se já tem 2 cartas, não adiciona mais
+    
+                return prevAreas.map((area, index) => {
+                    if (index < 4 && area.cards.length === 0) { // Apenas para os 4 primeiros slots
+                        const shouldPlaceCard = Math.random() < 0.5; // 50% de chance de colocar uma carta
+                        
+                        if (shouldPlaceCard && totalCardsOnBoard < 2) { // Apenas se houver espaço
+                            const randomEntry = cardEntries[Math.floor(Math.random() * cardEntries.length)];
+                            const randomCard = { ...randomEntry[1], key: uuidV4() };
+    
+                            return {
+                                ...area,
+                                cards: [
+                                    <DraggableCardPlay 
+                                        className="play_cards" 
+                                        key={randomCard.key} 
+                                        id={randomCard.key} 
+                                        card={randomCard} 
+                                        boardRef={boardRef}
+                                    />
+                                ]
+                            }
+                        }
+                    }
+                    return area;
+                });
+            });
+        }
+    }
+
+    const playPassTurn = () => {
+        setDeckClickedTurn(false);
+
+        setDroppableAreas((prevAreas) => {
+            return prevAreas.map((area, index) => {
+                if (index >= 0 && index < 4 && area.cards.length > 0) {
+                    const card = area.cards[index + 4] ? area.cards[index + 4].props.card : undefined;
+                    if (card === undefined) {
+                        console.log(area.cards);
+                        console.log(area.cards[index]);
+                        console.log(area.cards[index]?.props?.card);
+                        const updatedCards = [...area.cards];  // Atualizando as cartas corretamente
+                        updatedCards[index] = undefined;  // Assumindo que você quer limpar a carta
+                        return { ...area, cards: updatedCards };
+                    } 
+                }
+                if (index >= 4 && index < 8) {
+                    if (area.cards[index] === undefined) {
+                        const upcomingCards = prevAreas[index - 4].cards;
+                        return { ...area, cards: upcomingCards };
+                    }
+                }
+                return area;
+            });
+        });
+
+        populateEnemyUpcoming();
     }
 
     // const updateScaleImage = (playerPoints, enemyPoints) => {
@@ -264,18 +345,21 @@ const Play = () => {
                     <div className='play_table_content' ref={playTableContentRef}>
                         {/* <div className='play_general_actions'>
                             <div className='play_scale' style={styleScale}>
-                                <div className='play_scale_points'>
-                                    <div className='play_scale_enemy_points' style={{top:`100%`, marginTop: `calc(${Math.abs(scaleTiltedSide) <= 5 ? scaleTiltedSide * -9.2 : (scaleTiltedSide < 0 ? -1 : 1) * 5 * -9.2}% + 10%)`}}>
-                                        <span className='play_scale_enemy_points_text'>{'x' + (enemyPoints <= 10 ? enemyPoints : '10+')}</span>
-                                    </div>
-                                    <div className='play_scale_player_points' style={{top:`100%`, marginTop: `calc(${Math.abs(scaleTiltedSide) <= 5 ? scaleTiltedSide * 9.2 : (scaleTiltedSide < 0 ? -1 : 1) * 5 * 9.2}% + 10%)`}}>
-                                        <span className='play_scale_player_points_text'>{'x' +( playerPoints <= 10 ? playerPoints : '10+')}</span>
-                                    </div>
-                                </div>
+                            <div className='play_scale_points'>
+                            <div className='play_scale_enemy_points' style={{top:`100%`, marginTop: `calc(${Math.abs(scaleTiltedSide) <= 5 ? scaleTiltedSide * -9.2 : (scaleTiltedSide < 0 ? -1 : 1) * 5 * -9.2}% + 10%)`}}>
+                            <span className='play_scale_enemy_points_text'>{'x' + (enemyPoints <= 10 ? enemyPoints : '10+')}</span>
+                            </div>
+                            <div className='play_scale_player_points' style={{top:`100%`, marginTop: `calc(${Math.abs(scaleTiltedSide) <= 5 ? scaleTiltedSide * 9.2 : (scaleTiltedSide < 0 ? -1 : 1) * 5 * 9.2}% + 10%)`}}>
+                            <span className='play_scale_player_points_text'>{'x' +( playerPoints <= 10 ? playerPoints : '10+')}</span>
+                            </div>
+                            </div>
                             </div>
                             <img className='play_minus_test' src={minusTest} alt={t('minus')}  onClick={() => addPointScale(enemyPoints + 1, false)}/>
                             <img className='play_plus_test' src={plusTest} alt={t('plus')} onClick={() => addPointScale(playerPoints + 1, true)}/>
-                        </div> */}
+                            </div> */}
+                        <div className='play_change_turn'>
+                            <button onClick={playPassTurn}>Passar Turno</button>
+                        </div>
                         <div className='play_board' ref={boardRef}>
                             {renderBoardArea()}
                         </div>

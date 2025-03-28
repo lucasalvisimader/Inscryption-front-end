@@ -58,5 +58,5 @@
     "57": {"id": 57, "name": "SKUNK", "power": 0, "health": 3, "sigilsTypes": ["STINKY"], "imageType": "SKUNK", "typePrice": "BLOOD", "price": 1},
     "58": {"id": 58, "name": "CAT", "power": 0, "health": 1, "sigilsTypes": ["MANYLIVES"], "imageType": "CAT", "typePrice": "BLOOD", "price": 1},
     "59": {"id": 59, "name": "UNDEAD CAT", "power": 3, "health": 6, "sigilsTypes": ["NONE"], "imageType": "UNDEADCAT", "typePrice": "BLOOD", "price": 1},
-    "60": {"id": 60, "name": "SANS", "power": 10, "health": 1, "sigilsTypes": ["LOOSETAIL"], "imageType": "SANS", "typePrice": "NONE", "price": 0}
+    "60": {"id": 60, "name": "SANS", "power": 3, "health": 1, "sigilsTypes": ["TRIFURCATEDSTRIKE", "LOOSETAIL"], "imageType": "SANS", "typePrice": "NONE", "price": 0}
 }

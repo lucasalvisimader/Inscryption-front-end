@@ -12,7 +12,7 @@ import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
 
-export const DraggableCardPlay = ({ id, card }) => {
+export const DraggableCardPlay = ({ id, card, deckClickedTurn, setDeckClickedTurn }) => {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({ id, disabled: card.isDisabled });
     const { t } = useTranslation();
 
