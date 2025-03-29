@@ -2,7 +2,7 @@
 import './Play.css';
 
 // react
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 
 // components
 import { DraggableCardPlay } from '../../components/play/draggable_card_play/DraggableCardPlay';
@@ -55,12 +55,10 @@ const Play = () => {
     // const [currentScaleImage, setCurrentScaleImage] = useState(scaleStatic);
     // const [styleScale, setStyleScale] = useState({backgroundImage: `url(${currentScaleImage})`});
     const boardRef = useRef();
-    const playHeaderRef = useRef();
     const playTableContentRef = useRef();
     const playFooterRef = useRef();
     const { t } = useTranslation();
-
-    const SECRET_KEY = 'chave-secreta-bem-segura';
+    const SECRET_KEY = process.env.REACT_APP_SECRET_KEY;
     
     useEffect(() => {
         const fetchCards = async () => {
@@ -76,8 +74,7 @@ const Play = () => {
                         [
                             json[6],
                             json[4],
-                            json[7],
-                            json[60]
+                            json[7]
                         ],
                         [
                             json[1],
@@ -234,71 +231,62 @@ const Play = () => {
         );
     }
 
-    const populateEnemyUpcoming = () => {
-        const cardEntries = Object.entries(json); // Converte o objeto em uma lista de pares [key, value]
-    
-        if (cardEntries.length > 0) { // Garante que há cartas disponíveis
-            setDroppableAreas((prevAreas) => {
-                // Contar quantas cartas já estão na mesa
-                const totalCardsOnBoard = prevAreas.reduce((count, area) => count + area.cards.length, 0);
-    
-                if (totalCardsOnBoard >= 2) return prevAreas; // Se já tem 2 cartas, não adiciona mais
-    
-                return prevAreas.map((area, index) => {
-                    if (index < 4 && area.cards.length === 0) { // Apenas para os 4 primeiros slots
-                        const shouldPlaceCard = Math.random() < 0.5; // 50% de chance de colocar uma carta
-                        
-                        if (shouldPlaceCard && totalCardsOnBoard < 2) { // Apenas se houver espaço
-                            const randomEntry = cardEntries[Math.floor(Math.random() * cardEntries.length)];
-                            const randomCard = { ...randomEntry[1], key: uuidV4() };
-    
-                            return {
-                                ...area,
-                                cards: [
-                                    <DraggableCardPlay 
-                                        className="play_cards" 
-                                        key={randomCard.key} 
-                                        id={randomCard.key} 
-                                        card={randomCard} 
-                                        boardRef={boardRef}
-                                    />
-                                ]
-                            }
-                        }
-                    }
-                    return area;
-                });
-            });
-        }
-    }
-
     const playPassTurn = () => {
         setDeckClickedTurn(false);
-
+    
         setDroppableAreas((prevAreas) => {
-            return prevAreas.map((area, index) => {
-                if (index >= 0 && index < 4 && area.cards.length > 0) {
-                    const card = area.cards[index + 4] ? area.cards[index + 4].props.card : undefined;
-                    if (card === undefined) {
-                        console.log(area.cards);
-                        console.log(area.cards[index]);
-                        console.log(area.cards[index]?.props?.card);
-                        const updatedCards = [...area.cards];  // Atualizando as cartas corretamente
-                        updatedCards[index] = undefined;  // Assumindo que você quer limpar a carta
-                        return { ...area, cards: updatedCards };
-                    } 
-                }
-                if (index >= 4 && index < 8) {
-                    if (area.cards[index] === undefined) {
-                        const upcomingCards = prevAreas[index - 4].cards;
-                        return { ...area, cards: upcomingCards };
+            const newAreas = [...prevAreas];
+    
+            // === MOVIMENTAÇÃO DE CARTAS EXISTENTES ===
+            for (let i = 0; i < 4; i++) {
+                // Verifica se há carta no "upcoming" (primeira linha)
+                if (newAreas[i].cards.length > 0) {
+                    // Índice correspondente na área "enemy"
+                    const targetIndex = i + 4;
+    
+                    // Move a carta apenas se o destino estiver vazio
+                    if (newAreas[targetIndex].cards.length === 0) {
+                        newAreas[targetIndex] = {
+                            ...newAreas[targetIndex],
+                            cards: newAreas[i].cards,
+                        };
+                        newAreas[i] = { ...newAreas[i], cards: [] };
                     }
                 }
-                return area;
-            });
+            }
+    
+            // === GERAÇÃO DE NOVAS CARTAS ===
+            const maxCardsPerTurn = 2; // Limite máximo de cartas adicionadas por turno
+            const cardEntries = Object.entries(json);
+            let cardsAddedThisTurn = 0;
+    
+            for (let i = 0; i < 4 && cardsAddedThisTurn < maxCardsPerTurn; i++) {
+                // Verifica se a área está vazia antes de adicionar uma nova carta
+                if (newAreas[i].cards.length === 0) {
+                    const canPlayCard = Math.random() >= 0.6; // Probabilidade de 40% de adicionar uma carta
+                    if (canPlayCard) {
+                        const randomEntry = cardEntries[Math.floor(Math.random() * cardEntries.length)];
+                        const randomCard = { ...randomEntry[1], key: uuidV4() };
+    
+                        newAreas[i] = {
+                            ...newAreas[i],
+                            cards: [
+                                <DraggableCardPlay
+                                    className="play_cards"
+                                    key={randomCard.key}
+                                    id={randomCard.key}
+                                    card={randomCard}
+                                    boardRef={boardRef}
+                                />,
+                            ],
+                        }
+                        cardsAddedThisTurn++;
+                    }
+                }
+            }
+    
+            return newAreas;
         });
-
-        populateEnemyUpcoming();
     }
 
     // const updateScaleImage = (playerPoints, enemyPoints) => {
